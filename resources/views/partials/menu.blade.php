@@ -1,4 +1,4 @@
-@foreach (Config::get('project.menu') as $menu)
+@foreach (Config::get('mconsole.menu') as $menu)
 	<a href="#" class="menu-item">{{ $menu['name'] }}</a>
 	@if (isset($menu['children']))
 		<div class="menu-bundle">
