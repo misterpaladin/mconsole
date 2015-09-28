@@ -22,5 +22,9 @@ class MconsoleServiceProvider extends ServiceProvider
 			__DIR__ . '/../migrations/2015_09_28_140312_modify_users_table_add_admin_column.php' => base_path('database/migrations/2015_09_28_140312_modify_users_table_add_admin_column.php'),
 			__DIR__ . '/../migrations/2015_09_28_141943_create_pages_table.php' => base_path('database/migrations/2015_09_28_141943_create_pages_table.php'),
 		], 'migrations');
+		$this->publishes([
+			__DIR__ . '/../User.php' => base_path('app/User.php'),
+			__DIR__ . '/../Page.php' => base_path('app/Page.php'),
+		], 'models');
 	}
 }
