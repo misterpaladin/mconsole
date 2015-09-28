@@ -20,7 +20,7 @@ class MconsoleServiceProvider extends ServiceProvider
 		$this->loadViewsFrom(__DIR__ . '/../../resources/views', 'mconsole');
 		
 		$this->publishes([
-			__DIR__ . '/../config/project.php' => base_path('config/project.php'),
+			__DIR__ . '/../config/mconsole.php' => base_path('config/mconsole.php'),
 		], 'config');
 		
 		$this->publishes([
