@@ -9,7 +9,7 @@ use Auth;
 class MconsoleMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Check for mconsole access.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -17,8 +17,13 @@ class MconsoleMiddleware
      */
     public function handle($request, Closure $next)
     {
-// 		if (Auth::guest() || Auth::user()->type != 'admin')
-// 			return abort(404);
+	    /** Redirect if already authenticated */
+	    if (!$request->is('mconsole/login') && !Auth::guest())
+	    	return redirect('/mconsole');
+	    
+	    /** Redirect to login page */
+		if (Auth::guest() || !Auth::user()->admin)
+			return redirect('/mconsole/login');
 		
         return $next($request);
     }
