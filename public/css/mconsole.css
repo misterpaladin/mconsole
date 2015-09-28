@@ -33,7 +33,7 @@
 #sidebar .logo { text-indent: 46px;}
 #sidebar .name { left:316px; width: 644px;}
 
-#sidebar .pref-button { width: 50px; height: 44px; position: absolute; top:0; left:220px; background: url('/mconsole/img/preferences.svg') 50% 50% no-repeat; cursor: pointer;}
+#sidebar .pref-button { width: 50px; height: 44px; position: absolute; top:0; left:220px; background: url('/massets/img/preferences.svg') 50% 50% no-repeat; cursor: pointer;}
 #sidebar .pref-button:hover, #sidebar .pref-button.active { background-color: #b7bddc;}
 
 #pref-window { position: fixed; top:0; left:0; display: none; width: 270px; background-color: #b7bddc; border-bottom:5px solid #f8f9fa; -moz-box-sizing: border-box;  box-sizing: border-box; padding: 20px 46px; z-index: 7;}
@@ -53,8 +53,8 @@
 
 .menu-item { width: 100%; position: relative; display: block; -moz-box-sizing: border-box; box-sizing: border-box; padding:12px 26px 12px 46px; font-weight: 600;background-position: 20px 50%; background-repeat: no-repeat; }
 .menu-item:hover, .menu-item.active { background-color: #8290c4; text-decoration: none; color: #FFF;}
-.menu-item.menu-item-with-bundle:hover { background-image: url(/mconsole/img/arrowtoright.svg); }
-.menu-item.menu-item-with-bundle.active { background-image: url(/mconsole/img/arrowtobottom.svg); background-color: #adb5d9;}
+.menu-item.menu-item-with-bundle:hover { background-image: url(/massets/img/arrowtoright.svg); }
+.menu-item.menu-item-with-bundle.active { background-image: url(/massets/img/arrowtobottom.svg); background-color: #adb5d9;}
 
 .menu-bundle { background-color: #adb5d9; display: none;}
 .menu-bundle * { color:#fff; font-size: 12px;}

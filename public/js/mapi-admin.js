@@ -38,7 +38,7 @@ madmin.init = function () {
 	/** Ициниализация кнопки копирования координат */
 	madmin.$copyCoord.children().each(function () {
 		$(this).zclip({
-			path 			: '/mconsole/js/zeroclipboard/zclip.swf',
+			path 			: '/massets/js/zeroclipboard/zclip.swf',
 			copy 			: function () {
 				madmin.copyParam();
 				return $(this).data('copy');

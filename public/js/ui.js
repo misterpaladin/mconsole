@@ -207,7 +207,7 @@ var copybutton = function () {
 	$buttons.each(function () {
 
 		$(this).zclip({
-			path 			: '/mconsole/js/zeroclipboard/zclip.swf',
+			path 			: '/massets/js/zeroclipboard/zclip.swf',
 			copy 			: copybutton.copyButton,
 			afterCopy 		: function () { return false; }
 		});

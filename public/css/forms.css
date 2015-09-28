@@ -53,7 +53,7 @@
 	margin-left: 6px;
 	width: 9px;
 	height: 9px;
-	background: url(/mconsole/img/form-support.svg) no-repeat;
+	background: url(/massets/img/form-support.svg) no-repeat;
 }
 .field-box.has-support .field-name {
 	cursor: pointer;
@@ -133,7 +133,7 @@ fieldset.openable.hide legend::before {
 	top:3px;
 	margin-right: 9px;
 	content: "";
-	background: url(/mconsole/img/fieldset-plus.svg) no-repeat;
+	background: url(/massets/img/fieldset-plus.svg) no-repeat;
 	width: 16px;
 	height: 16px;
 	opacity: 0.33;
@@ -159,11 +159,11 @@ fieldset.openable.hide:hover legend::before {
 fieldset .field-text, fieldset .field-search, fieldset .field-select {width:500px;}
 .field-search{
 	padding-left:29px; 
-	background-image:url(/mconsole/img/search-gray.svg);
+	background-image:url(/massets/img/search-gray.svg);
 	background-position:10px 9px;
 	background-repeat:no-repeat;
 }
-.field-search:focus{background-image:url(/mconsole/img/search-purple.svg);}
+.field-search:focus{background-image:url(/massets/img/search-purple.svg);}
 /*.field-search::before{position:relative; display:block; content:"123"; width:10px; height:10px; z-index:99; background-color:#F00;}*/
 .field-textarea, .field-htmlarea{
 	width:564px;
@@ -207,7 +207,7 @@ fieldset.list-filter .field-box .preready-option {
 	content: "";
 	width: 10px;
 	height: 10px;
-	background: url(/mconsole/img/form-moreoptions.svg) no-repeat;
+	background: url(/massets/img/form-moreoptions.svg) no-repeat;
 	opacity: 0.6;
 	position: relative;
 	left: 6px;
@@ -217,7 +217,7 @@ fieldset.list-filter .field-box .preready-option {
 }
 
 .field-box .preready-option::before {
-	background: url(/mconsole/img/form-select-arrow.svg) center no-repeat;
+	background: url(/massets/img/form-select-arrow.svg) center no-repeat;
 }
 
 .field-box .more-options:hover::before,
@@ -260,7 +260,7 @@ fieldset.list-filter .field-box .preready-option {
 	width:36px;
 	background-color:#adb5d9;
 	border-radius:2px;
-	background-image:url(/mconsole/img/arrow-down-white.svg);
+	background-image:url(/massets/img/arrow-down-white.svg);
 	background-repeat:no-repeat;
 	background-position:26px 50%;
 }
@@ -336,8 +336,8 @@ fieldset.list-filter .spec-functions-box .button.submit{
 	margin-right:3px;
 	border-radius:2px;
 }
-.listnav-back{background-image:url(/mconsole/img/arrow-back.svg);}
-.listnav-next{background-image:url(/mconsole/img/arrow-next.svg);}
+.listnav-back{background-image:url(/massets/img/arrow-back.svg);}
+.listnav-next{background-image:url(/massets/img/arrow-next.svg);}
 .listnav-back:hover, .listnav-next:hover{background-color:#8290c4;}
 .listnav-page-name, .listnav-page-field, .listnav-page-total{height:20px;}
 .listnav-page-field .field-pagenow{
@@ -407,15 +407,15 @@ fieldset.list-filter .spec-functions-box .button.submit{
 .list-table tbody tr:hover .list-icon, .list-table tbody tr:hover .list-smicon{opacity:0.63;}
 .list-table tbody tr .list-icon:hover, .list-table tbody tr .list-smicon:hover{opacity:1;}
 .list-table .list-edit{
-	background:url(/mconsole/img/list-edit.svg);
+	background:url(/massets/img/list-edit.svg);
 	cursor:pointer;
 }
 .list-table .list-remove{
-	background:url(/mconsole/img/list-remove.svg);
+	background:url(/massets/img/list-remove.svg);
 	cursor:pointer;
 }
 .list-table .list-preview{
-	background:url(/mconsole/img/list-preview.svg);
+	background:url(/massets/img/list-preview.svg);
 	cursor:pointer;
 }
 /***/
@@ -485,7 +485,7 @@ fieldset.list-filter .spec-functions-box .button.submit{
 }
 .image-item-remove{
 	z-index:8;
-	background:url(/mconsole/img/list-remove.svg) center no-repeat;
+	background:url(/massets/img/list-remove.svg) center no-repeat;
 	width:20px;
 	height:20px;
 	position:absolute;
@@ -499,7 +499,7 @@ fieldset.list-filter .spec-functions-box .button.submit{
 }
 .image-item-sort{
 	z-index:8;
-	background:url(/mconsole/img/list-move.svg) center no-repeat;
+	background:url(/massets/img/list-move.svg) center no-repeat;
 	width:20px;
 	height:20px;
 	position:absolute;
@@ -536,19 +536,19 @@ fieldset.list-filter .spec-functions-box .button.submit{
 	padding:0 0 0 6px;
 }
 .attention-box.error{
-	background:#f9eeee url(/mconsole/img/notice-error.svg) 511px 20px no-repeat;
+	background:#f9eeee url(/massets/img/notice-error.svg) 511px 20px no-repeat;
 	background-color:#f9eeee;
 	border-bottom:2px solid #c22228;
 }
 .attention-box.error *,.attention-box.error{color:#c22228;}
 .attention-box.notice{
-	background:#f3f0c4 url(/mconsole/img/notice-notice.svg) 511px 20px no-repeat;
+	background:#f3f0c4 url(/massets/img/notice-notice.svg) 511px 20px no-repeat;
 	background-color:#f3f0c4;
 	border-bottom:2px solid #dcd123;
 }
 .attention-box.notice *,.attention-box.notice{color:#010101;}
 .attention-box.done{
-	background:#dfefdb url(/mconsole/img/notice-done.svg) 511px 20px no-repeat;
+	background:#dfefdb url(/massets/img/notice-done.svg) 511px 20px no-repeat;
 	border-bottom:2px solid #6bbe56;
 }
 .attention-box-buttons{
@@ -575,7 +575,7 @@ fieldset.list-filter .spec-functions-box .button.submit{
 
 .datepicker.field-text {
 	width: 260px;
-	background-image: url(/mconsole/img/form-datepicker.svg);
+	background-image: url(/massets/img/form-datepicker.svg);
 	background-position: 5px 5px;
 	background-repeat: no-repeat;
 	padding-left: 30px;
@@ -645,7 +645,7 @@ fieldset.list-filter .spec-functions-box .button.submit{
 .bottletray-plus {
 	width: 40px;
 	height: 40px;
-	background: url(/mconsole/img/fieldset-plus.svg) no-repeat;
+	background: url(/massets/img/fieldset-plus.svg) no-repeat;
 	background-size: cover;
 	margin: 0 auto 7px auto;
 	cursor: pointer;
@@ -684,7 +684,7 @@ fieldset.list-filter .spec-functions-box .button.submit{
 
 .bottletray-item-remove{
 	z-index:8;
-	background:url(/mconsole/img/list-remove.svg) center no-repeat;
+	background:url(/massets/img/list-remove.svg) center no-repeat;
 	width:20px;
 	height:20px;
 	position:absolute;
@@ -698,7 +698,7 @@ fieldset.list-filter .spec-functions-box .button.submit{
 }
 .bottletray-item-sort{
 	z-index:8;
-	background:url(/mconsole/img/list-move.svg) center no-repeat;
+	background:url(/massets/img/list-move.svg) center no-repeat;
 	width:20px;
 	height:20px;
 	position:absolute;
