@@ -6,7 +6,7 @@ This README would normally document whatever steps are necessary to get your app
 
 Download, install and configure latest [Laravel 5](http://laravel.com) application.
 
-Navigate to project directory and download this repository to `/packages/Milax/Mconsole` directory:
+Navigate to application directory and clone this repository to `/packages/Milax/Mconsole` directory:
 
 ```
 #!bash
