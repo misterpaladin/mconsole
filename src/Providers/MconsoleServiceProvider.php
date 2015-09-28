@@ -20,6 +20,10 @@ class MconsoleServiceProvider extends ServiceProvider
 		$this->loadViewsFrom(__DIR__ . '/../../resources/views', 'mconsole');
 		
 		$this->publishes([
+			__DIR__ . '/../config/project.php' => base_path('config/project.php'),
+		], 'config');
+		
+		$this->publishes([
 			__DIR__ . '/../migrations/2015_09_28_140312_modify_users_table_add_admin_column.php' => base_path('database/migrations/2015_09_28_140312_modify_users_table_add_admin_column.php'),
 			__DIR__ . '/../migrations/2015_09_28_141943_create_pages_table.php' => base_path('database/migrations/2015_09_28_141943_create_pages_table.php'),
 		], 'migrations');
