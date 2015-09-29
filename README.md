@@ -6,12 +6,29 @@ This README would normally document whatever steps are necessary to get your app
 
 Download, install and configure latest [Laravel 5](http://laravel.com) application.
 
-Navigate to application directory and clone this repository to `/packages/Milax/Mconsole` directory:
+Navigate to application directory and download latest stable mconsole package.
 
 ```
 #!bash
-$ cd laravel-project
-$ git clone git@bitbucket.org:milaxinc/mconsole-package.git .
+$ composer install milax/mconsole
+```
+
+Update your composer.json to autoload package:
+
+```
+"autoload": {
+    "psr-4": {
+		"Milax\\Mconsole\\": "vendor/milax/mconsole/src"
+    }
+},
+```
+
+Add Service Provider to config/app.php:
+
+```
+'providers' => [
+    Milax\Mconsole\Providers\MconsoleServiceProvider::class
+],
 ```
 
 Publish package files, run migrations and configure application:
@@ -62,10 +79,3 @@ class CustomUser extends User {
 }
 
 ```
-
-
-### To Do ###
-
-* Automatic updates
-* Single project configuration
-* Readme
