@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "153c8561ba3e740792fb37d29d4fb778",
-    "content-hash": "e99d5e293df005fe8d5050b29da91fa0",
+    "hash": "d6b48e8016c0263cfdbfaa4d8ded8501",
+    "content-hash": "7fe0fc284b37d58a41e33feb339f0d68",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -178,12 +178,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "b821ae46fc5f1502be168dc436091f44272e7be8"
+                "reference": "06beed7b72389ce5dbae901882d23d30f1b7b921"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/b821ae46fc5f1502be168dc436091f44272e7be8",
-                "reference": "b821ae46fc5f1502be168dc436091f44272e7be8",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/06beed7b72389ce5dbae901882d23d30f1b7b921",
+                "reference": "06beed7b72389ce5dbae901882d23d30f1b7b921",
                 "shasum": ""
             },
             "require": {
@@ -223,44 +223,13 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "http://laravel.com",
-            "time": "2015-09-26 17:45:33"
-        },
-        {
-            "name": "smottt/wideimage",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/smottt/WideImage.git",
-                "reference": "669f63f1452c7fc70120fff4bc457727714a0834"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/smottt/WideImage/zipball/669f63f1452c7fc70120fff4bc457727714a0834",
-                "reference": "669f63f1452c7fc70120fff4bc457727714a0834",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "WideImage": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0",
-                "LGPL-2.1"
-            ],
-            "description": "An open-source PHP library for image manipulation. (With namespaces, PHP 5.3+)",
-            "homepage": "http://wideimage.sourceforge.net",
-            "time": "2015-05-27 09:42:22"
+            "time": "2015-09-28 12:57:13"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "smottt/wideimage": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
