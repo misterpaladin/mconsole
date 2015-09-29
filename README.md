@@ -11,6 +11,7 @@ Navigate to application directory and download latest stable mconsole and additi
 ```sh
 $ composer require milax/mconsole
 $ composer require spatie/laravel-medialibrary
+$ composer require illuminate/html
 ```
 
 Update your composer.json to autoload package:
@@ -23,12 +24,17 @@ Update your composer.json to autoload package:
 },
 ```
 
-Add Service Provider to config/app.php:
+Add Service Providers to config/app.php:
 
-```javascript
+```php
 'providers' => [
     Milax\Mconsole\Providers\MconsoleServiceProvider::class,
     Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+    Illuminate\Html\HtmlServiceProvider::class,
+],
+'aliases' => [
+	'Form'=> 'Illuminate\Html\FormFacade',
+	'HTML'=> 'Illuminate\Html\HtmlFacade',
 ],
 ```
 
