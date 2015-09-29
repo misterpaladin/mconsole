@@ -8,24 +8,23 @@ Download, install and configure latest [Laravel 5](http://laravel.com) applicati
 
 Navigate to application directory and download latest stable mconsole package.
 
-```
-#!bash
+```sh
 $ composer install milax/mconsole
 ```
 
 Update your composer.json to autoload package:
 
-```
+```javascript
 "autoload": {
     "psr-4": {
-		"Milax\\Mconsole\\": "vendor/milax/mconsole/src"
+	"Milax\\Mconsole\\": "vendor/milax/mconsole/src"
     }
 },
 ```
 
 Add Service Provider to config/app.php:
 
-```
+```javascript
 'providers' => [
     Milax\Mconsole\Providers\MconsoleServiceProvider::class
 ],
@@ -33,21 +32,18 @@ Add Service Provider to config/app.php:
 
 Publish package files, run migrations and configure application:
 
-```
-#!bash
+```sh
 $ php artisan vendor:publish
 $ php artisan migrate
 ```
 
 Add admin user to your system:
-```
-#!bash
+
+```sh
 $ php artisan tinker
 ```
 
-```
-#!php
-<?php
+```php
 $user = new App\User();
 $user->admin = true;
 $user->email = 'admin@milax.com';
@@ -66,10 +62,7 @@ All package models using the **App** namespace.
 
 Create new model **CustomUser** by calling command `$ php artisan make:model CustomUser`, extend package published User model by yours:
 
-```
-#!php
-<?php
-
+```php
 namespace App;
 
 use App\User;
