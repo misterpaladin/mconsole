@@ -1,10 +1,19 @@
 <?php
 
-Route::group(['middleware' => 'mconsole'], function () {
+Route::group([
+	'middleware' => 'mconsole',
+	'namespace' => 'Milax\Mconsole\Http\Controllers'
+], function () {
 	
-	Route::get('mconsole/login', 'Milax\Mconsole\Http\Controllers\MconsoleController@login');
-	Route::post('mconsole/login', 'Milax\Mconsole\Http\Controllers\MconsoleController@auth');
-	Route::get('mconsole/logout', 'Milax\Mconsole\Http\Controllers\MconsoleController@logout');
+	/** Authentication */
+	Route::get('/mconsole/login', 'MconsoleController@login');
+	Route::post('/mconsole/login', 'MconsoleController@auth');
+	Route::get('/mconsole/logout', 'MconsoleController@logout');
 	
-	Route::resource('mconsole', 'Milax\Mconsole\Http\Controllers\MconsoleController');
+	/** Mconsole root */
+	Route::get('/mconsole', 'MconsoleController@index');
+	
+	/** Resources */
+	Route::resource('/mconsole/pages', 'PagesController');
+	
 });
