@@ -1,0 +1,58 @@
+.mcedit-container .cm-box * {
+	font-family: Menlo, Monaco, Consolas, 'Courier New', monospace !important;
+}
+
+.cm-box * {
+	font-weight: normal !important;
+	font-size: 13px !important;
+}
+
+.mcedit-container textarea:focus {
+	outline: none;
+}
+.mcedit-container textarea {
+	background-color: #fff !important;
+	border: 0 !important;
+	width: 100%;
+	font-size: 13px !important;
+	font-family: 'OpenSans';
+	padding: 10px;
+}
+.mcedit-tabs {
+	position: relative;
+	height: 32px;
+}
+.mcedit-tabs .tab {
+	margin-right: 2px;
+	display: inline-block;
+	width: 74px;
+	height: 26px;
+	border: 1px solid #cbd0e6;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	text-align: center;
+	font-size: 11px;
+	line-height: 26px;
+	margin-top: 5px;
+	vertical-align: top;
+	cursor: pointer;
+}
+.mcedit-tabs .tab.active {
+	height: 31px;
+	margin-top: 0px;
+	background-color: #f8f8fa;
+}
+.mcedit-container {
+	background-color: #fff;
+	border: 1px solid #cbd0e6;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
