@@ -79,20 +79,21 @@
 	<!-- maps edit -->
 	<script type="text/javascript" src="/massets/js/mapi-admin.js"></script>
 	<!-- maps edit -->
-	
 	<script>
 		/**
 		 * FIX: Открывает меню активной страницы.
 		 * (В случае, когда из-за списка суб.параметров, не распознается активный пункт)
 		 **/
 		$(document).ready(function(){
-			var Pairs	= "{Active_Menu}".split( "/" );
+			var Pairs	= "{{Request::path()}}".split( "/" );
 			for ( var i = 0; i < Pairs.length; i++ ){
-				var href	= (href||"/mconsole") + "/" + Pairs[i];
+				var href	= (href||'') + '/' + Pairs[i];
 				var Item	= $( "a.menu-item[href='"+href+"']" );
 				if ( Item.length > 0 )
-					if ( !Item.hasClass( "active" ) )
+					if ( !Item.hasClass( "active" ) ) {
 						Item.trigger( "click" ).addClass("active");
+						Item.parents('.menu-child').find('a.menu-item-with-bundle').trigger( "click" ).addClass("active");
+					}
 			}
 			$('form').on("keyup keypress", function(e) {
 			  var code = e.keyCode || e.which; 
