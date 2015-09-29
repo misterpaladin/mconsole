@@ -9,10 +9,10 @@
         }
     ],
     "autoload": {
-	    "psr-4": {
-		    "Milax\\Mconsole\\": "src/"
-	    }
-    },
+        "psr-0": {
+            "Mconsole": "src/"
+        }
+    }
     "minimum-stability": "dev",
     "require": {
 	    "illuminate/support": "~5",
