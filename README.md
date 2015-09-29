@@ -6,10 +6,11 @@ This README would normally document whatever steps are necessary to get your app
 
 Download, install and configure latest [Laravel 5](http://laravel.com) application.
 
-Navigate to application directory and download latest stable mconsole package.
+Navigate to application directory and download latest stable mconsole and additional packages.
 
 ```sh
-$ composer install milax/mconsole
+$ composer require milax/mconsole
+$ composer require spatie/laravel-medialibrary
 ```
 
 Update your composer.json to autoload package:
@@ -26,14 +27,16 @@ Add Service Provider to config/app.php:
 
 ```javascript
 'providers' => [
-    Milax\Mconsole\Providers\MconsoleServiceProvider::class
+    Milax\Mconsole\Providers\MconsoleServiceProvider::class,
+    Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
 ],
 ```
 
 Publish package files, run migrations and configure application:
 
 ```sh
-$ php artisan vendor:publish
+$ php artisan vendor:publish --provider="Milax\Mconsole\Providers\MconsoleServiceProvider"
+$ php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider"
 $ php artisan migrate
 ```
 
@@ -56,19 +59,12 @@ $user->save();
 
 Open `http://domain.com/mconsole` in your browser and log in.
 
-### Extending package classes ###
+### Updating ###
 
-All package models using the **App** namespace.
+To update package, resources and migrations:
 
-Create new model **CustomUser** by calling command `$ php artisan make:model CustomUser`, extend package published User model by yours:
-
-```php
-namespace App;
-
-use App\User;
-
-class CustomUser extends User {
-    // ...
-}
-
+```sh
+$ composer update
+$ php artisan vendor:publish --provider="Milax\Mconsole\Providers\MconsoleServiceProvider"
+$ php artisan migrate
 ```
