@@ -48,6 +48,7 @@
 	</div>
 
 	<div id="content">
+		@include('mconsole::partials.errors')
 		@yield('content', '<h1>Root User, добро пожаловать в Mconsole!</h1>')
 	</div>
 	<script type="text/javascript" src="/massets/js/jquery.ui.min.js"></script>
