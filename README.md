@@ -1,6 +1,6 @@
 # Milax Mconsole for Laravel 5.x #
 
-Still in *experimental develop*, do not use in production!
+Still in **experimental develop** and not ready for production!
 
 ### Installation ###
 
