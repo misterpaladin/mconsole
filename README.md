@@ -1,6 +1,6 @@
 # Milax Mconsole for Laravel 5.x #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Still in *experimental develop*, do not use in production!
 
 ### Installation ###
 
