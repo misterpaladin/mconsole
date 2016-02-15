@@ -4,6 +4,10 @@ Experimental content management system package for [Laravel framework](https://l
 
 In development state, not ready for production use.
 
-[See wiki](https://github.com/misterpaladin/mconsole/wiki) to install.
+## Wiki
 
-[Changelog](/misterpaladin/mconsole/blob/master/CHANGELOG.md)
+Visit [wiki page](https://github.com/misterpaladin/mconsole/wiki) to get started.
+
+## Changelog
+
+[View changelog](https://github.com/misterpaladin/mconsole/blob/master/CHANGELOG.md).
