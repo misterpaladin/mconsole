@@ -43,7 +43,7 @@
 
 	<div id="menu">
 		<div class="menu-child">
-			@include('mconsole::partials.menu')
+			@include('mconsole::mconsole.partials.menu')
 		</div>
 	</div>
 
