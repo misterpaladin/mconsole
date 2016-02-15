@@ -21,9 +21,7 @@ class MconsoleController extends CMSController
 	 */
 	public function index()
 	{
-		return $this->view('app', [
-			'userName' => (Auth::check()) ? Auth::user()->name : 'Guest',
-		]);
+		return $this->view('mconsole.app');
 	}
 	
 	/**
@@ -34,7 +32,7 @@ class MconsoleController extends CMSController
 	 */
 	public function login()
 	{
-		return $this->view('mconsole::auth.login');
+		return $this->view('mconsole.auth.login');
 	}
 	
 	/**
