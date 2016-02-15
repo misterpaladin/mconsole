@@ -25,18 +25,6 @@ class MconsoleServiceProvider extends ServiceProvider
 		$this->loadTranslationsFrom(__DIR__ . '/../../../resources/lang', 'mconsole');
 		$this->loadViewsFrom(__DIR__ . '/../../../resources/views', 'mconsole');
 		
-		// Copy or merge mconsole configuration
-/*
-		if (file_exists(base_path('config/mconsole.php')))
-			$this->mergeConfigFrom(
-				__DIR__ . '/../../../config/mconsole.php', 'mconsole'
-			);
-		else
-			$this->publishes([
-				__DIR__ . '/../../../config/mconsole.php' => base_path('config/mconsole.php'),
-			], 'config');
-*/
-		
 		// Assets
 		$this->publishes([
 			__DIR__ . '/../../../../public' => base_path('public/massets'),
