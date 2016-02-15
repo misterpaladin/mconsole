@@ -35,10 +35,10 @@
 	</div>
 	<div id="pref-window">
 		<div class="entry"><span class="capt">Проект</span>{{ Config::get('mconsole.name') }}</div>
-		<div class="entry"><span class="capt">Профиль</span>{{ Auth::user()->email }}</div>
+		<div class="entry"><span class="capt">Профиль</span>{{ (Auth::check()) ? Auth::user()->email : null }}</div>
 		<a class="change-pwd" href="/massets/admin/access/change_pass/">Сменить пароль</a>
 		<a class="exit" href="/mconsole/logout">Выход</a>
-		<div class="about">© Mconsole 3 | <a href="http://www.milax.com/" target="_blank">Студия Милакс</a></div>
+		<div class="about">&copy; Mconsole 3 @if (Storage::has('build_id')) build {{ Storage::get('build_id') }} @endif <br/><a href="http://www.milax.com/" target="_blank">Студия Милакс</a></div>
 	</div>
 
 	<div id="menu">
@@ -48,8 +48,8 @@
 	</div>
 
 	<div id="content">
-		@include('mconsole::partials.errors')
-		@yield('content', '<h1>Root User, добро пожаловать в Mconsole!</h1>')
+{{--- 		@include('mconsole::partials.errors') ---}}
+		@yield('content', '<h1>' . $userName . ', добро пожаловать в Mconsole!</h1>')
 	</div>
 	<script type="text/javascript" src="/massets/js/jquery.ui.min.js"></script>
 	<script type="text/javascript" src="/massets/js/jquery.transit.min.js"></script>

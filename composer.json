@@ -1,20 +1,23 @@
 {
     "name": "milax/mconsole",
-    "description": "Content Management System by Milax.",
-    "license": "MIT",
+    "description": "",
     "authors": [
         {
             "name": "Eugene Min",
-            "email": "e.min@miax.com"
+            "email": "e.min@milax.com"
         }
     ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "5.1.*"
+    },
     "autoload": {
-        "psr-0": {
-            "Mconsole": "src/"
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "Milax\\Mconsole\\": "src/Milax/Mconsole"
         }
     },
-    "minimum-stability": "dev",
-    "require": {
-	    "illuminate/support": "~5"
-    }
+    "minimum-stability": "stable"
 }
