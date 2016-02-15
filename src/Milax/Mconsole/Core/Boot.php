@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Core;
 
-use Milax\Mconsole\MconsoleMenu;
+use Milax\Mconsole\Models\MconsoleMenu;
 
 use Cache;
 use Auth;
