@@ -2,8 +2,9 @@
 
 namespace Milax\Mconsole\Http\Middleware;
 
-use Closure;
+use Milax\Mconsole\Core;
 
+use Closure;
 use Auth;
 
 class MconsoleMiddleware
@@ -24,6 +25,11 @@ class MconsoleMiddleware
 	    /** Redirect to login page */
 		if ((Auth::guest() || Auth::user()->role_id == 0) && !$request->is('mconsole/login'))
 			return redirect('/mconsole/login');
+		
+		// Build Mconsole UI if authenticated
+		if (Auth::check()) {
+			Core::boot();
+		}
 		
         return $next($request);
     }
