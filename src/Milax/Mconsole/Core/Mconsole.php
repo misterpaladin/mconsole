@@ -12,7 +12,7 @@ use DB;
 /**
  * Core Mconsole class.
  */
-class Boot
+class Mconsole
 {
 	
 	/**
