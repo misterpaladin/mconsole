@@ -22,7 +22,7 @@ class CMSController extends Controller
 	 */
 	protected function view($view, $args = [])
 	{
-		if (view()->exists('app'))
+		if (view()->exists('app') || starts_with($view, 'mconsole::'))
 			return view($view, $args);
 		else
 			return view('mconsole::' . $view, $args);
