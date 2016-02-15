@@ -10,7 +10,7 @@ class MconsoleRole extends Model
 	
 	public function menus()
 	{
-		return $this->belongsToMany('App\MconsoleMenu', 'mconsole_roles_menus', 'role_id', 'menu_id');
+		return $this->belongsToMany('Milax\Mconsole\MconsoleMenu', 'mconsole_roles_menus', 'role_id', 'menu_id');
 	}
 	
 	public function users()
