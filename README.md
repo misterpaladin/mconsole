@@ -10,8 +10,7 @@ Navigate to application directory and download latest stable mconsole and additi
 
 ```sh
 $ composer require milax/mconsole
-$ composer require spatie/laravel-medialibrary
-$ composer require illuminate/html
+$ composer require laravelcollective/html
 ```
 
 Update your composer.json to autoload package:
@@ -19,7 +18,7 @@ Update your composer.json to autoload package:
 ```javascript
 "autoload": {
     "psr-4": {
-		"Milax\\Mconsole\\": "vendor/milax/mconsole/src"
+		"Milax\\Mconsole\\": "vendor/milax/mconsole/src/Milax/Mconsole"
     }
 },
 ```
@@ -29,20 +28,18 @@ Add Service Providers to config/app.php:
 ```php
 'providers' => [
     Milax\Mconsole\Providers\MconsoleServiceProvider::class,
-    Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
-    Illuminate\Html\HtmlServiceProvider::class,
+    Collective\Html\HtmlServiceProvider::class,
 ],
 'aliases' => [
-	'Form'=> 'Illuminate\Html\FormFacade',
-	'HTML'=> 'Illuminate\Html\HtmlFacade',
+	'Form' => Collective\Html\FormFacade::class,
+	'Html' => Collective\Html\HtmlFacade::class,
 ],
 ```
 
-Publish package files, run migrations and configure application:
+Publish package files, run migrations and configure application (--force to overwrite default User model):
 
 ```sh
-$ php artisan vendor:publish --provider="Milax\Mconsole\Providers\MconsoleServiceProvider"
-$ php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider"
+$ php artisan vendor:publish --provider="Milax\Mconsole\Providers\MconsoleServiceProvider" --force
 $ php artisan migrate
 ```
 
