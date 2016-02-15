@@ -35,12 +35,6 @@ class MconsoleServiceProvider extends ServiceProvider
 				__DIR__ . '/../../config/mconsole.php' => base_path('config/mconsole.php'),
 			], 'config');
 		
-		// Models
-		$this->publishes([
-			__DIR__ . '/User.php' => base_path('app/User.php'),
-			__DIR__ . '/Page.php' => base_path('app/Page.php'),
-		], 'models');
-		
 		// Assets
 		$this->publishes([
 			__DIR__ . '/../../../public' => base_path('public/massets'),
