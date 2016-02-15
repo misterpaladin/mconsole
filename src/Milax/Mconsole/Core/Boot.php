@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole;
+namespace Milax\Mconsole\Core;
 
 use Milax\Mconsole\MconsoleMenu;
 
@@ -12,15 +12,22 @@ use DB;
 /**
  * Core Mconsole class.
  */
-class Core
+class Boot
 {
-
+	
+	/**
+	 * Boot mconsole support vars.
+	 * 
+	 * @access public
+	 * @static
+	 * @return void
+	 */
 	public static function boot()
 	{
 		self::bootMenu();
 		self::bootOptions();
 	}
-
+	
 	/**
 	 * Build menu UI tree.
 	 *
@@ -38,7 +45,7 @@ class Core
 
 		View::share('mconsole_menu', $menu);
 	}
-
+	
 	/**
 	 * Build options.
 	 *
@@ -55,5 +62,5 @@ class Core
 
 		View::share('mconsole_options', $options);
 	}
-
+	
 }
