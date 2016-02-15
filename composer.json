@@ -13,10 +13,6 @@
         "laravelcollective/html": "5.2.*"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations",
-            "src/seeds"
-        ],
         "psr-4": {
             "Milax\\Mconsole\\": "src/Milax/Mconsole"
         }
