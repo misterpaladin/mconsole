@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Milax\Mconsole\Http\Controllers\CMSController;
 
-use App\Page;
+use Milax\Mconsole\Models\Page;
 
 class PagesController extends CMSController
 {
@@ -17,9 +17,8 @@ class PagesController extends CMSController
 	 */
 	public function index()
 	{
-		dd(Page::all());
-		return $this->view('mconsole::pages.list', [
-			'items' => Page::all()
+		return $this->view('mconsole.pages.list', [
+			'items' => Page::all(),
 		]);
 	}
 
@@ -63,7 +62,9 @@ class PagesController extends CMSController
 	 */
 	public function edit($id)
 	{
-		//
+		return $this->view('mconsole.pages.add', [
+			'item' => Page::find($id),
+		]);
 	}
 
 	/**

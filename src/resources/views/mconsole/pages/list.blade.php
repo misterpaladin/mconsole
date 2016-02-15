@@ -1,4 +1,4 @@
-@extends('mconsole::app')
+@extends('mconsole::mconsole.app')
 
 @section('title', 'Страницы | Mconsole')
 
@@ -65,7 +65,7 @@
 				<td>{{ $item->id }}</td>
 				<td>{{ $item->updated_at->format('d.m.Y') }}</td>
 				<td>{{ $item->heading }}</td>
-				<td><a href="/mconsole/pages/edit/{{ $item->id }}" class="list-icon list-edit"></a>@if (!$item->system)<a href="/mconsole/pages/delete/{id}" class="list-icon list-remove"></a>@endif</td>
+				<td><a href="/mconsole/pages/{{ $item->id }}/edit" class="list-icon list-edit"></a>@if (!$item->system)<a href="/mconsole/pages/{id}" class="list-icon list-remove"></a>@endif</td>
 			</tr>
 			@endforeach
 		</tbody>
