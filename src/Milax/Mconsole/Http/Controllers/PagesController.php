@@ -4,11 +4,11 @@ namespace Milax\Mconsole\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Milax\Mconsole\Http\Controllers\CMSController;
 
 use App\Page;
 
-class PagesController extends Controller
+class PagesController extends CMSController
 {
 	/**
 	 * Display a listing of the resource.
@@ -17,9 +17,10 @@ class PagesController extends Controller
 	 */
 	public function index()
 	{
-		return view('mconsole::pages.list', [
+		dd(Page::all());
+		return $this->view('mconsole::pages.list', [
 			'items' => Page::all()
-			]);
+		]);
 	}
 
 	/**
