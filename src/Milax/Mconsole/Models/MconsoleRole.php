@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole;
+namespace Milax\Mconsole\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class MconsoleRole extends Model
 	
 	public function menus()
 	{
-		return $this->belongsToMany('Milax\Mconsole\MconsoleMenu', 'mconsole_roles_menus', 'role_id', 'menu_id');
+		return $this->belongsToMany('Milax\Mconsole\Models\MconsoleMenu', 'mconsole_roles_menus', 'role_id', 'menu_id');
 	}
 	
 	public function users()

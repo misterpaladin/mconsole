@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole;
+namespace Milax\Mconsole\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -29,7 +29,7 @@ class MconsoleUser extends Authenticatable
 	
 	public function role()
 	{
-		return $this->belongsTo('App\MconsoleRole');
+		return $this->belongsTo('Milax\Mconsole\Models\MconsoleRole');
 	}
 	
 }
