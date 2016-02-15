@@ -1,5 +1,7 @@
-# Milax Mconsole for Laravel 5.x #
+# Milax Mconsole for Laravel 5.2.x
 
-Still in **experimental develop** and not ready for production!
+Experimental content management system package for [Laravel framework](https://laravel.com).
+
+In development state, not ready for production use.
 
 [See wiki](https://github.com/misterpaladin/mconsole/wiki) to install.
