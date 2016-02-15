@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-// 	'middleware' => 'mconsole',
+	'middleware' => ['web', 'mconsole'],
 	'namespace' => 'Milax\Mconsole\Http\Controllers'
 ], function () {
 	
