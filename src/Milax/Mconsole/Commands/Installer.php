@@ -6,15 +6,14 @@ use DB;
 
 use Illuminate\Console\Command;
 
+use Milax\Mconsole\Seeds\MconsoleOptionsSeeder;
+
 class Installer extends Command
 {
-
-	protected $seeds = [
-		'MconsoleOptionsSeeder',
-	];
 	
-	protected $adminEmail = 'milax@milax.com';
-	
+	protected $name;
+	protected $email;
+	protected $pass;
 	protected $userCreated = false;
 	
 	/**
@@ -85,11 +84,8 @@ class Installer extends Command
 		else
 			$this->comment('Installing database components..');
 		
-		collect($this->seeds)->each(function ($seed) {
-			$this->call('db:seed', [
-				'--class' => $seed,
-			]);
-		});
+		$this->info(MconsoleOptionsSeeder::run());
+		
 		$this->info('Done!');
 		$this->comment(null);
 	}
@@ -102,19 +98,24 @@ class Installer extends Command
 	public function users()
 	{
 		$this->comment('Creating admin user..');
-		if (DB::table('users')->where('role_id', '>', 0)->count() == 0) {
-			$pass = str_random(8);
-			DB::table('users')->insert([
-				'role_id' => 1,
-				'name' => 'Admin',
-				'email' => $this->adminEmail,
-				'password' => bcrypt($pass),
-			]);
-			$this->userCreated = true;
-			$this->pass = $pass;
-			$this->info('Done!');
-		} else {
-			$this->comment('User with email ' . $this->adminEmail . ' already exists! Skipping.');
+		while (!$this->userCreated) {
+			$name = $this->ask('Enter admin name');
+			$email = $this->ask('Enter admin email');
+			$pass = $this->ask('Enter admin password');
+			if (DB::table('users')->where('email', $email)->count() == 0) {
+				DB::table('users')->insert([
+					'role_id' => 1,
+					'name' => $name,
+					'email' => $email,
+					'password' => bcrypt($pass),
+				]);
+				$this->userCreated = true;
+				$this->email = $email;
+				$this->pass = $pass;
+				$this->info('Done!');
+			} else {
+				$this->comment('User with email ' . $email . ' already exists!');
+			}
 		}
 		$this->comment(null);
 	}
@@ -146,11 +147,9 @@ class Installer extends Command
 			$this->comment('Installation completed! Visit ' . config('app.url') . '/mconsole, log in and enjoy!');
 		
 		$this->comment(null);
-		if ($this->userCreated) {
-			$this->info('Admin login: ' . $this->adminEmail);
-			$this->info('Admin password: ' . $this->pass);
-			$this->comment(null);
-		}
+		$this->info('Admin login: ' . $this->email);
+		$this->info('Admin password: ' . $this->pass);
+		$this->comment(null);
 	}
 
 }
