@@ -16,5 +16,6 @@ Route::group([
 	
 	/** Resources */
 	Route::resource('/pages', 'PagesController');
+	Route::resource('/users', 'UsersController');
 	
 });
