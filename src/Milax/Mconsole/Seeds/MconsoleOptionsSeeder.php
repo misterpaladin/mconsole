@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Milax\Mconsole\Seeds;
 
-class MconsoleOptionsSeeder extends Seeder
+use DB;
+
+class MconsoleOptionsSeeder
 {
 	
 	/**
@@ -13,7 +15,7 @@ class MconsoleOptionsSeeder extends Seeder
 	 * @var string
 	 * @access protected
 	 */
-	protected $table = 'mconsole_options';
+	protected static $table = 'mconsole_options';
 	
 	/**
 	 * Default options with values to create
@@ -21,7 +23,7 @@ class MconsoleOptionsSeeder extends Seeder
 	 * @var array
 	 * @access protected
 	 */
-	protected $options = [
+	protected static $options = [
 		'project_name' => 'New Project',
 	];
 	
@@ -30,15 +32,15 @@ class MconsoleOptionsSeeder extends Seeder
 	 *
 	 * @return void
 	 */
-	public function run()
+	public static function run()
 	{
-		
-		collect($this->options)->each(function ($value, $key) {
-			if (DB::table($this->table)->where('key', $key)->count() == 0)
-				DB::table($this->table)->insert([
+		collect(self::$options)->each(function ($value, $key) {
+			if (DB::table(self::$table)->where('key', $key)->count() == 0)
+				DB::table(self::$table)->insert([
 					'key' => $key,
 					'value' => $value,
 				]);
 		});
+		return 'Installed ' . __CLASS__ . '.';
 	}
 }
