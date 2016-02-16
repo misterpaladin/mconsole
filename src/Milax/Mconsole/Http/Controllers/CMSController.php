@@ -33,7 +33,7 @@ class CMSController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index($request = null)
+	public function index(Request $request)
 	{
 		//
 	}
