@@ -38,15 +38,6 @@ class MconsoleServiceProvider extends ServiceProvider
 				$migrations[$dir . $file] = base_path('database/migrations/' . $file);
 		});
 		$this->publishes($migrations, 'migrations');
-		
-		// Database seeds
-		$seeds = [];
-		$dir = __DIR__ . '/../../../seeds/';
-		collect(scandir(__DIR__ . '/../../../seeds'))->each(function ($file) use (&$dir, &$seeds) {
-			if (strpos($file, '.php') !== false)
-				$seeds[$dir . $file] = base_path('database/seeds/' . $file);
-		});
-		$this->publishes($seeds, 'seeds');
 	}
 
 	/**
