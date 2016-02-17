@@ -2,6 +2,8 @@
 
 namespace Milax\Mconsole\Core;
 
+define('version', '0.0.9');
+
 use Milax\Mconsole\Models\MconsoleMenu;
 
 use Cache;
