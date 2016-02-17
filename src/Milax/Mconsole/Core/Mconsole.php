@@ -10,6 +10,7 @@ use Cache;
 use Auth;
 use View;
 use DB;
+use App;
 
 /**
  * Core Mconsole class.
@@ -26,8 +27,21 @@ class Mconsole
 	 */
 	public static function boot()
 	{
+		self::setLang();
 		self::bootMenu();
 		self::bootOptions();
+	}
+	
+	/**
+	 * Set language depending on user settings.
+	 * 
+	 * @access public
+	 * @static
+	 * @return void
+	 */
+	public static function setLang()
+	{
+// 		App::setLocale('en');
 	}
 	
 	/**
