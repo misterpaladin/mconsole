@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Core;
 
-define('version', '0.0.9');
+define('version', '0.0.10');
 
 use Milax\Mconsole\Models\MconsoleMenu;
 
@@ -48,7 +48,8 @@ class Mconsole
 	 */
 	public static function setLang()
 	{
-// 		App::setLocale('en');
+		if (strlen($lang = Auth::user()->lang) > 0)
+			App::setLocale($lang);
 	}
 	
 	/**
