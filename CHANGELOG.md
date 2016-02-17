@@ -1,3 +1,10 @@
+## 0.0.10
+
+Added:
+  - Added user localization settings
+  - Added menu localization
+  - Added menu installation
+
 ## 0.0.9
 
 Added:

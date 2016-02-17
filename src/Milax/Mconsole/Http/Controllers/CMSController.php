@@ -12,7 +12,6 @@ class CMSController extends Controller
 {
 	
 	protected $redirectTo;
-	protected $model;
 	
 	/**
 	 * Override 'view()' helper, check for existed views..

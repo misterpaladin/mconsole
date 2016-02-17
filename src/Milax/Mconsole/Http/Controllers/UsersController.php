@@ -11,15 +11,7 @@ use App\User;
 class UsersController extends CMSController
 {
 	
-	use \Milax\Mconsole\Traits\Filterable;
-	
 	protected $redirectTo = '/mconsole/users';
-	
-	protected $query;
-	protected $model = 'App\User';
-	protected $filters = [
-		['text' => 'name'],
-	];
 	
 	/**
 	 * Display a listing of the resource.
