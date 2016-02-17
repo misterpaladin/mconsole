@@ -22,6 +22,7 @@ class MconsoleServiceProvider extends ServiceProvider
 	{
 		require __DIR__ . '/../Http/routes.php';
 		
+		// Resources
 		$this->loadTranslationsFrom(__DIR__ . '/../../../resources/lang', 'mconsole');
 		$this->loadViewsFrom(__DIR__ . '/../../../resources/views', 'mconsole');
 		
