@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Console\Command;
 
 use Milax\Mconsole\Seeds\MconsoleOptionsSeeder;
+use Milax\Mconsole\Seeds\MconsoleMenusSeeder;
 
 class Installer extends Command
 {
@@ -85,6 +86,7 @@ class Installer extends Command
 			$this->comment('Installing database components..');
 		
 		$this->info(MconsoleOptionsSeeder::run());
+		$this->info(MconsoleMenusSeeder::run());
 		
 		$this->info('Done!');
 		$this->comment(null);
