@@ -30,6 +30,13 @@ class Mconsole
 		self::setLang();
 		self::bootMenu();
 		self::bootOptions();
+		
+		if (env('APP_ENV') != 'production')
+			$changelog = str_replace(PHP_EOL, '<br/>', file_get_contents(__DIR__ . '/../../../../CHANGELOG.md'));
+		else
+			$changelog = null;
+		
+		View::share('mconsole_changelog', $changelog);
 	}
 	
 	/**

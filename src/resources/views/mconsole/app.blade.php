@@ -115,7 +115,7 @@
 								<div class="col-xs-12">
 									<div class="portlet light">
 										<div class="portlet-body form">
-											@yield('content')
+											@yield('content', $mconsole_changelog)
 										</div>
 									</div>
 								</div>
