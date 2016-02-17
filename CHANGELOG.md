@@ -1,3 +1,17 @@
+## 0.0.9
+
+Added:
+  - Added Users section
+  - Added first Blade directive
+  - Added localization
+  - Added system template
+  - Added `redirect` method for cms controllers (must have `protected $redirectTo` property)
+  - Added version display in dashboard
+  - Added admin creation prompt when installing mconsole
+
+Fixed:
+  - Fixed installer error while seeding database
+
 ## 0.0.8
 
 Added:
