@@ -1,109 +1,167 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<title>@yield('title', 'Mconsole')</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- 	<meta property="image:removeUrl" content="{HOST}image/delete/" /> -->
-	<link href="/massets/css/base.css?_=1" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/mconsole.css?_=1" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/forms.css?_=1" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/menueditor.css" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/pickmeup.css" rel="stylesheet" type="text/css" />
-	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script> -->
-	<script type="text/javascript" src="/massets/js/jquery-2.1.0.min.js"></script>
-	
-	<!-- maps edit -->
-	<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&language=ru"></script>
-    <script type="text/javascript" src="http://maps.api.2gis.ru/2.0/loader.js?pkg=basic" data-id="dgLoader"></script>
-	<link href="/massets/css/mapi-admin.css" rel="stylesheet" type="text/css">
-	<!-- maps edit -->
-
-	<!-- mcedit -->
-	<link href="/massets/css/jquery-ui.css" rel="stylesheet" type="text/css">
-	<link href="/massets/css/mcedit/editor.css" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/mcedit/redactor.css" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/mcedit/codemirror.css" rel="stylesheet" type="text/css" />
-	<link href="/massets/css/mcedit/neo.css" rel="stylesheet" type="text/css" />
-	<!-- mcedit -->
-</head>
-<body class="option-mconsole option-ui option-menueditor option-mcedit">
-	<div id="sidebar">
-		<div class="logo">Mconsole</div>
-		<div class="name">@yield('nav_title')</div>
-		<div class="pref-button"></div>
-	</div>
-	<div id="pref-window">
-		<div class="entry"><span class="capt">Проект</span>{{ $mconsole_options->project_name }}</div>
-		<div class="entry"><span class="capt">Профиль</span>{{ (Auth::check()) ? Auth::user()->email : null }}</div>
-		<a class="change-pwd" href="/massets/admin/access/change_pass/">Сменить пароль</a>
-		<a class="exit" href="/mconsole/logout">Выход</a>
-		<div class="about">&copy; Mconsole 3 @if (Storage::has('build_id')) build {{ Storage::get('build_id') }} @endif <br/><a href="http://www.milax.com/" target="_blank">Студия Милакс</a></div>
-	</div>
-
-	<div id="menu">
-		<div class="menu-child">
-			@include('mconsole::mconsole.partials.menu')
+<!DOCTYPE html>
+<!--[if IE 8]> 
+<html lang="en" class="ie8 no-js">
+<![endif]-->
+<!--[if IE 9]> 
+<html lang="en" class="ie9 no-js">
+<![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+	<!--<![endif]-->
+	<!-- BEGIN HEAD -->
+	<head>
+		<meta charset="utf-8" />
+		<title>@yield('title', 'Mconsole')</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+		<!-- END GLOBAL MANDATORY STYLES -->
+		<!-- BEGIN THEME GLOBAL STYLES -->
+		<link href="/massets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
+		<link href="/massets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+		<!-- END THEME GLOBAL STYLES -->
+		<!-- BEGIN THEME LAYOUT STYLES -->
+		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+		<link href="/massets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
+		<!-- END THEME LAYOUT STYLES -->
+		<link rel="shortcut icon" href="favicon.ico" />
+	</head>
+	<!-- END HEAD -->
+	<body class="page-container-bg-solid page-boxed">
+		<!-- BEGIN HEADER -->
+		<div class="page-header">
+			<!-- BEGIN HEADER TOP -->
+			<div class="page-header-top">
+				<div class="container">
+					<!-- BEGIN LOGO -->
+					<div class="page-logo">
+						
+					</div>
+					<!-- END LOGO -->
+					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+					<a href="javascript:;" class="menu-toggler"></a>
+					<!-- END RESPONSIVE MENU TOGGLER -->
+					<!-- BEGIN TOP NAVIGATION MENU -->
+					<div class="top-menu">
+						<ul class="nav navbar-nav pull-right">
+							<!-- BEGIN USER LOGIN DROPDOWN -->
+							<li class="dropdown dropdown-user dropdown-dark">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+								<img alt="" class="img-circle" src="/massets/layouts/layout3/img/avatar9.jpg">
+								<span class="username username-hide-mobile">{{ Auth::user()->name }}</span>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-default">
+									<li>
+										<a href="#">
+										<i class="icon-settings"></i> {{ trans('mconsole::profile.links.settings') }} </a>
+									</li>
+									<li class="divider"> </li>
+									<li>
+										<a href="/mconsole/logout">
+										<i class="icon-key"></i> {{ trans('mconsole::profile.links.logout') }} </a>
+									</li>
+								</ul>
+							</li>
+							<!-- END USER LOGIN DROPDOWN -->
+						</ul>
+					</div>
+					<!-- END TOP NAVIGATION MENU -->
+				</div>
+			</div>
+			<!-- END HEADER TOP -->
+			<!-- BEGIN HEADER MENU -->
+			<div class="page-header-menu">
+				<div class="container">
+					@include('mconsole::mconsole.partials.menu')
+				</div>
+			</div>
+			<!-- END HEADER MENU -->
 		</div>
-	</div>
-
-	<div id="content">
-{{--- 		@include('mconsole::partials.errors') ---}}
-		@yield('content', '<h1>Добро пожаловать в Mconsole!</h1>')
-	</div>
-	<script type="text/javascript" src="/massets/js/jquery.ui.min.js"></script>
-	<script type="text/javascript" src="/massets/js/jquery.transit.min.js"></script>
-	<script type="text/javascript" src="/massets/js/jquery.pickmeup.min.js"></script>
-	<script type="text/javascript" src="/massets/js/jquery.nestable.js"></script>
-	<script type="text/javascript" src="/massets/js/base.min.js"></script>
-	<script type="text/javascript" src="/massets/js/zeroclipboard/jquery.zclip.min.js"></script>
-	<script type="text/javascript" src="/massets/js/mconsole.js"></script>
-	<script type="text/javascript" src="/massets/js/jqmodalwin-1.2.js"></script>
-	<script type="text/javascript" src="/massets/js/ui.js"></script>
-	<script type="text/javascript" src="/massets/js/menueditor.js"></script>
-	<script type="text/javascript" src="/massets/js/obj.DOM.js"></script>
-	
-	<!-- mcedit -->
-	<script type="text/javascript" src="/massets/js/mcedit/assets/redactor.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mcedit.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/codemirror.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mode/javascript/javascript.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mode/css/css.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/addon/edit/matchbrackets.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mode/htmlmixed/htmlmixed.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mode/xml/xml.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mode/clike/clike.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/mode/php/php.js"></script>
-	<script type="text/javascript" src="/massets/js/mcedit/lib/formatting.js"></script>
-	<!-- mcedit -->
-	
-	<!-- maps edit -->
-	<script type="text/javascript" src="/massets/js/mapi-admin.js"></script>
-	<!-- maps edit -->
-	<script>
-		/**
-		 * FIX: Открывает меню активной страницы.
-		 * (В случае, когда из-за списка суб.параметров, не распознается активный пункт)
-		 **/
-		$(document).ready(function(){
-			var Pairs	= "{{Request::path()}}".split( "/" );
-			for ( var i = 0; i < Pairs.length; i++ ){
-				var href	= (href||'') + '/' + Pairs[i];
-				var Item	= $( "a.menu-item[href='"+href+"']" );
-				if ( Item.length > 0 )
-					if ( !Item.hasClass( "active" ) ) {
-						Item.trigger( "click" ).addClass("active");
-						Item.parents('.menu-child').find('a.menu-item-with-bundle').trigger( "click" ).addClass("active");
-					}
-			}
-			$('form').on("keyup keypress", function(e) {
-			  var code = e.keyCode || e.which; 
-			  if (code  == 13) {               
-				e.preventDefault();
-				return false;
-			  }
-			});
-		});
-	</script>
-</body>
+		<!-- END HEADER -->
+		<!-- BEGIN CONTAINER -->
+		<div class="page-container">
+			<!-- BEGIN CONTENT -->
+			<div class="page-content-wrapper">
+				<!-- BEGIN CONTENT BODY -->
+				<!-- BEGIN PAGE HEAD-->
+				<div class="page-head">
+					<div class="container">
+						<!-- BEGIN PAGE TITLE -->
+						<div class="page-title">
+							<h1>@yield('page.title', trans('mconsole::mconsole.text.welcome'))
+								<small>@yield('page.subtitle', trans('mconsole::mconsole.text.version', ['version' => version]))</small>
+							</h1>
+						</div>
+						<!-- END PAGE TITLE -->
+					</div>
+				</div>
+				<!-- END PAGE HEAD-->
+				<!-- BEGIN PAGE CONTENT BODY -->
+				<div class="page-content">
+					<div class="container">
+						<!-- BEGIN PAGE CONTENT INNER -->
+						<div class="page-content-inner">
+							
+							@include('mconsole::mconsole.partials.errors')
+							
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="portlet light">
+										<div class="portlet-body">
+											@yield('content')
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<!-- END PAGE CONTENT INNER -->
+					</div>
+				</div>
+				<!-- END PAGE CONTENT BODY -->
+				<!-- END CONTENT BODY -->
+			</div>
+			<!-- END CONTENT -->
+		</div>
+		<!-- END CONTAINER -->
+		<!-- BEGIN FOOTER -->
+		<!-- BEGIN INNER FOOTER -->
+		<div class="page-footer">
+			<div class="container"> @datetime('Y') &copy; <a href="http://www.milax.com/" target="_blank">Milax</a></div>
+		</div>
+		<div class="scroll-to-top">
+			<i class="icon-arrow-up"></i>
+		</div>
+		<!-- END INNER FOOTER -->
+		<!-- END FOOTER -->
+		<!--[if lt IE 9]>
+		<script src="/massets/global/plugins/respond.min.js"></script>
+		<script src="/massets/global/plugins/excanvas.min.js"></script> 
+		<![endif]-->
+		<!-- BEGIN CORE PLUGINS -->
+		<script src="/massets/global/plugins/jquery.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+		<!-- END CORE PLUGINS -->
+		<!-- BEGIN THEME GLOBAL SCRIPTS -->
+		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
+		<!-- END THEME GLOBAL SCRIPTS -->
+		<!-- BEGIN THEME LAYOUT SCRIPTS -->
+		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+		<script src="/massets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+		<!-- END THEME LAYOUT SCRIPTS -->
+	</body>
 </html>
