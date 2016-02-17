@@ -6,13 +6,13 @@
 		@foreach ($mconsole_menu as $menu)
 			<li class="menu-dropdown classic-menu-dropdown ">
 				@if (!isset($menu->child))
-					<a href="/mconsole/{{ $menu->url }}">{{ $menu->name }}</a>
+					<a href="/mconsole/{{ $menu->url }}">{{ trans('mconsole::' . $menu->translation) }}</a>
 				@else
-					<a href="#">{{ $menu->name }}</a>
+					<a href="#">{{ trans('mconsole::' . $menu->translation) }}</a>
 					<ul class="dropdown-menu pull-left">
 						@foreach ($menu->child as $child)
 					        <li>
-					            <a href="/mconsole/{{ $child->url }}" class="nav-link">{{ $child->name }}</a>
+					            <a href="/mconsole/{{ $child->url }}" class="nav-link">{{ trans('mconsole::' . $child->translation) }}</a>
 					        </li>
 				        @endforeach
 				    </ul>
