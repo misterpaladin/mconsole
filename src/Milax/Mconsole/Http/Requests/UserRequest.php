@@ -4,6 +4,8 @@ namespace Milax\Mconsole\Http\Requests;
 
 use App\Http\Requests\Request;
 
+use App\User;
+
 class UserRequest extends Request
 {
 	/**
@@ -23,10 +25,23 @@ class UserRequest extends Request
 	 */
 	public function rules()
 	{
-		return [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
-			'password' => 'required|min:6',
-		];
+		$user = User::find($this->users);
+		
+		switch ($this->method) {
+			case 'PUT':
+			case 'UPDATE':
+				return [
+					'name' => 'required|max:255',
+					'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+				];
+				break;
+			
+			default:
+				return [
+					'name' => 'required|max:255',
+					'email' => 'required|email|max:255|unique:users',
+					'password' => 'required|min:6',
+				];
+		}
 	}
 }
