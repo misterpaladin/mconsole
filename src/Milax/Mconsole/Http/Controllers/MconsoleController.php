@@ -44,11 +44,10 @@ class MconsoleController extends CMSController
 	 */
 	public function auth(Request $request)
 	{
-		if (Auth::attempt(['email' => $request->input('login'), 'password' => $request->input('password')])) {
-			return ['status' => 'ok', 'location' => '/mconsole'];
-		} else {
-			return ['status' => 'error'];
-		}
+		if (Auth::attempt(['email' => $request->input('login'), 'password' => $request->input('password')]))
+			return redirect()->back();
+		else
+			return redirect()->back()->withErrors(['INVALID PASSWORD']);
 	}
 	
 	/**

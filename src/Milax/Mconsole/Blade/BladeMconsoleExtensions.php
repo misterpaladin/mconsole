@@ -19,7 +19,9 @@ class BladeMconsoleExtensions extends ServiceProvider
 	 */
 	public function boot()
 	{
-		
+		Blade::directive('datetime', function($expression) {
+            return "<?php echo \Carbon\Carbon::now()->format({$expression}); ?>";
+        });
 	}
 
 	/**

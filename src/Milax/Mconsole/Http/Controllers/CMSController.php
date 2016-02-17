@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Milax\Mconsole\Exceptions\NoUrlPropertyException;
+
 class CMSController extends Controller
 {
 	
-	protected $uri;
+	protected $redirectTo;
 	protected $model;
 	
 	/**
@@ -27,84 +29,30 @@ class CMSController extends Controller
 		else
 			return view('mconsole::' . $view, $args);
 	}
-
+	
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
+	 * Redirect to section url with message after create, update or delete request.
+	 * 
+	 * @access protected
+	 * @return Redirector
 	 */
-	public function index()
+	protected function redirect()
 	{
-		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
-		//
-		return redirect($this->uri);
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id)
-	{
-		//
-		return redirect($this->uri);
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
-	{
-		//
-		return redirect($this->uri);
+		// Check for url property to use this method
+		if (strlen($this->redirectTo) == 0)
+			throw new NoUrlPropertyException('You must set protected $redirectTo controller property to use $this->redirect method.');
+		
+		// Show message depending on
+		switch (\Request::method())
+		{
+			case 'POST':
+				return redirect($this->redirectTo)->with('status', trans('mconsole::mconsole.status.created'));
+			case 'PUT':
+			case 'UPDATE':
+				return redirect($this->redirectTo)->with('status', trans('mconsole::mconsole.status.updated'));
+			case 'DELETE':
+				return redirect($this->redirectTo)->with('status', trans('mconsole::mconsole.status.deleted'));
+		}
 	}
 
 }

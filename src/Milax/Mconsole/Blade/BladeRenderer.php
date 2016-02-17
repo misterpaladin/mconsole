@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Render;
+namespace Milax\Mconsole\Blade;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Contracts\View\Factory;

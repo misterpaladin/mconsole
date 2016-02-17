@@ -17,8 +17,17 @@ class PagesController extends CMSController
 	 */
 	public function index()
 	{
-		return $this->view('mconsole.pages.list', [
-			'items' => Page::all(),
+		$items = Page::paginate(20);
+		return $this->view('mconsole.users.list', [
+			'paging' => $items,
+			'items' => $items->transform(function ($item) {
+				return [
+					'#' => $item->id,
+					'Updated' => $item->updated_at->format('m.d.Y'),
+					'Slug' => $item->slug,
+					'Heading' => $item->heading,
+				];
+			}),
 		]);
 	}
 

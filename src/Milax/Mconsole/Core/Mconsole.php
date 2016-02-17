@@ -2,12 +2,15 @@
 
 namespace Milax\Mconsole\Core;
 
+define('version', '0.0.9');
+
 use Milax\Mconsole\Models\MconsoleMenu;
 
 use Cache;
 use Auth;
 use View;
 use DB;
+use App;
 
 /**
  * Core Mconsole class.
@@ -24,8 +27,28 @@ class Mconsole
 	 */
 	public static function boot()
 	{
+		self::setLang();
 		self::bootMenu();
 		self::bootOptions();
+		
+		if (env('APP_ENV') != 'production')
+			$changelog = str_replace(PHP_EOL, '<br/>', file_get_contents(__DIR__ . '/../../../../CHANGELOG.md'));
+		else
+			$changelog = null;
+		
+		View::share('mconsole_changelog', $changelog);
+	}
+	
+	/**
+	 * Set language depending on user settings.
+	 * 
+	 * @access public
+	 * @static
+	 * @return void
+	 */
+	public static function setLang()
+	{
+// 		App::setLocale('en');
 	}
 	
 	/**
