@@ -109,12 +109,12 @@
 						<!-- BEGIN PAGE CONTENT INNER -->
 						<div class="page-content-inner">
 							
-							@include('mconsole::mconsole.partials.errors')
+							@include('mconsole::mconsole.partials.messages')
 							
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="portlet light">
-										<div class="portlet-body">
+										<div class="portlet-body form">
 											@yield('content')
 										</div>
 									</div>
