@@ -147,9 +147,12 @@ class Installer extends Command
 			$this->comment('Installation completed! Visit ' . config('app.url') . '/mconsole, log in and enjoy!');
 		
 		$this->comment(null);
-		$this->info('Admin login: ' . $this->email);
-		$this->info('Admin password: ' . $this->pass);
-		$this->comment(null);
+		
+		if ($this->userCreated) {
+			$this->info('Admin login: ' . $this->email);
+			$this->info('Admin password: ' . $this->pass);
+			$this->comment(null);
+		}
 	}
 
 }
