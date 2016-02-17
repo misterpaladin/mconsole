@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Core;
 
-define('version', '0.0.9');
+define('version', '0.0.10');
 
 use Milax\Mconsole\Models\MconsoleMenu;
 
