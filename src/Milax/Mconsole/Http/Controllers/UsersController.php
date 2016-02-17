@@ -13,6 +13,8 @@ class UsersController extends CMSController
 	
 	use \Milax\Mconsole\Traits\Filterable;
 	
+	protected $redirectTo = '/mconsole/users';
+	
 	protected $query;
 	protected $model = 'App\User';
 	protected $filters = [
@@ -47,7 +49,7 @@ class UsersController extends CMSController
 	 */
 	public function create()
 	{
-		return $this->view('mconsole.users.add');
+		return $this->view('mconsole.users.form');
 	}
 
 	/**
@@ -58,18 +60,12 @@ class UsersController extends CMSController
 	 */
 	public function store(UserRequest $request)
 	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
+		User::create([
+			'name' => $request->input('name'),
+			'email' => $request->input('email'),
+			'password' => bcrypt($request->input('password')),
+		]);
+		return $this->redirect();
 	}
 
 	/**
@@ -80,7 +76,9 @@ class UsersController extends CMSController
 	 */
 	public function edit($id)
 	{
-		//
+		return $this->view('mconsole.users.form', [
+			'item' => User::find($id),
+		]);
 	}
 
 	/**
@@ -92,7 +90,8 @@ class UsersController extends CMSController
 	 */
 	public function update(UserRequest $request, $id)
 	{
-		//
+		User::find($id)->update($request->all());
+		return $this->redirect();
 	}
 
 	/**
@@ -104,6 +103,6 @@ class UsersController extends CMSController
 	public function destroy($id)
 	{
 		User::destroy($id);
-		return redirect()->back()->with('success', 'User deleted.');
+		return $this->redirect();
 	}
 }
