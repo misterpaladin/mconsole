@@ -1,8 +1,8 @@
 @extends('mconsole::mconsole.app')
 
-@section('title', trans('mconsole::sections.users') . ' | Mconsole')
-@section('page.title', trans('mconsole::sections.users'))
-@section('page.subtitle', trans('mconsole::sections.create'))
+@section('title', trans('mconsole::sections.users.title') . ' | Mconsole')
+@section('page.title', trans('mconsole::sections.users.title'))
+@section('page.subtitle', trans('mconsole::sections.users.' . Request::segments()[count(Request::segments()) - 1]))
 
 @section('content')
 
