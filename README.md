@@ -1,7 +1,6 @@
 # Milax Mconsole for Laravel 5.2.x
 
-develop: [![Circle CI](https://circleci.com/gh/misterpaladin/mconsole/tree/develop.svg?style=svg&circle-token=6e4b220159cf7d26341ab0371284316896c7c285)](https://circleci.com/gh/misterpaladin/mconsole/tree/develop)
-master: [![Circle CI](https://circleci.com/gh/misterpaladin/mconsole/tree/master.svg?style=svg&circle-token=6e4b220159cf7d26341ab0371284316896c7c285)](https://circleci.com/gh/misterpaladin/mconsole/tree/master)
+[![Build Status](https://travis-ci.org/misterpaladin/mconsole.svg?branch=master)](https://travis-ci.org/misterpaladin/mconsole) [![Latest Stable Version](https://poser.pugx.org/milax/mconsole/v/stable)](https://packagist.org/packages/milax/mconsole) [![Latest Unstable Version](https://poser.pugx.org/milax/mconsole/v/unstable)](https://packagist.org/packages/milax/mconsole) [![Total Downloads](https://poser.pugx.org/milax/mconsole/downloads)](https://packagist.org/packages/milax/mconsole)
 
 Experimental content management system package for [Laravel framework](https://laravel.com).
 
