@@ -8,8 +8,7 @@ dependencies:
   override:
     - rm -rf /home/ubuntu/laravel
     - cd /home/ubuntu && composer create-project --prefer-dist --no-interaction laravel/laravel laravel
-    - cp -rfa /home/ubuntu/mconsole/circle/* /home/ubuntu/laravel
-    - cp /home/ubuntu/mconsole/circle/.env /home/ubuntu/laravel/.env
+    - cp -rfa /home/ubuntu/mconsole/ci/* /home/ubuntu/laravel
     - mkdir -p /home/ubuntu/laravel/workbench/milax
     - mv /home/ubuntu/mconsole /home/ubuntu/laravel/workbench/milax
     - cd /home/ubuntu/laravel && composer update --no-scripts --prefer-source --no-interaction
