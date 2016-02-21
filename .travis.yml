@@ -16,8 +16,8 @@ script:
   - composer create-project --prefer-dist --no-interaction laravel/laravel laravel
   - mkdir -p /home/travis/build/misterpaladin/mconsole/laravel/workbench/milax/mconsole
   - cp -rfa /home/travis/build/misterpaladin/mconsole/ci/* /home/travis/build/misterpaladin/mconsole/laravel
+  - cp /home/travis/build/misterpaladin/mconsole/ci/.env /home/travis/build/misterpaladin/mconsole/laravel
   - mv !(laravel) laravel/workbench/milax/mconsole
-  - cd /home/travis/build/misterpaladin/mconsole/laravel && composer dump-autoload
   - cd /home/travis/build/misterpaladin/mconsole/laravel && composer update --no-scripts
   - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan mconsole:install --update
   - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan migrate --force
