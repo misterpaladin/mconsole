@@ -6,7 +6,7 @@ machine:
 
 dependencies:
   cache_directories:
-    - /home/ubuntu/laravel
+    - /home/ubuntu/laravel/vendor
   override:
     - cd /home/ubuntu && composer create-project --prefer-dist --no-interaction laravel/laravel laravel
     - cp -rfa /home/ubuntu/mconsole/circle/* /home/ubuntu/laravel
