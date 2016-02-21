@@ -1,3 +1,15 @@
+## 0.1
+
+Added:
+  - Added Travis CI config
+  - Added PHPUnit tests
+  - Added MconsoleUploadPreset model (for future functional)
+  - Added status badges in readme
+  - Added MconsoleRole installer with predefined user roles
+
+Updated:
+  - Updated localization
+
 ## 0.0.10
 
 Added:
