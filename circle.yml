@@ -13,12 +13,10 @@ dependencies:
     - cp /home/ubuntu/mconsole/circle/.env /home/ubuntu/laravel/.env
     - mkdir -p /home/ubuntu/laravel/workbench/milax
     - mv /home/ubuntu/mconsole /home/ubuntu/laravel/workbench/milax
-    - cd /home/ubuntu/laravel
-    - composer update --no-scripts --prefer-source --no-interaction
+    - cd /home/ubuntu/laravel && composer update --no-scripts --prefer-source --no-interaction
 
 test:
   override:
-    - php artisan mconsole:install --update
-    - php artisan migrate --force
-    - cd /home/ubuntu/mconsole
-    - phpunit
+    - cd /home/ubuntu/laravel && php artisan mconsole:install --update
+    - cd /home/ubuntu/laravel && php artisan migrate --force
+    - cd /home/ubuntu/laravel/workbench/milax/mconsole && phpunit
