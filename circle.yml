@@ -6,18 +6,19 @@ machine:
 
 dependencies:
   override:
-    - echo 0
+    - cd /home/ubuntu
+    - composer create-project --prefer-dist laravel/laravel laravel
+    - cp -rfa /home/ubuntu/mconsole/circle/* /home/ubuntu/laravel
+    - mv /home/ubuntu/mconsole /home/ubuntu/test/workbench/milax
+    - cd laravel
+    - composer update --no-scripts --prefer-source --no-interaction
+    - sudo npm install -g gulp
 
 test:
   override:
-    - cd /home/ubuntu
-    - composer create-project --prefer-dist laravel/laravel laravel
-    - cp -rfa mconsole/circle/* laravel
-    - mv mconsole test/workbench/milax
-    - cd laravel
-    - composer update --no-scripts
-    - sudo npm install -g gulp
     - npm install
     - cd workbench/milax/mconsole
+    - php artisan mconsole:install --update
+    - php artisan migrate --force
     - gulp
     - phpunit
