@@ -14,8 +14,8 @@ sudo: false
 script:
   - composer create-project --prefer-dist --no-interaction laravel/laravel laravel
   - mkdir -p /home/travis/build/misterpaladin/mconsole/laravel/workbench/milax
-  - mv !(laravel) laravel/workbench/milax
   - cp -rfa /home/travis/build/misterpaladin/mconsole/ci/* /home/travis/build/misterpaladin/mconsole/laravel
+  - mv !(laravel) laravel/workbench/milax
   - cd /home/travis/build/misterpaladin/mconsole/laravel && composer update --no-scripts --prefer-source --no-interaction
   - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan mconsole:install --update
   - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan migrate --force
