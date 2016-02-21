@@ -2,13 +2,19 @@ machine:
   php:
     version: 5.6.14
   services:
-    - mysql
+    mysql: mysql
+  pre:
+    - cd /home/ubuntu
+    - composer create-project --prefer-dist laravel/laravel laravel
+    - cp -rfa mconsole/circle/* laravel
+    - mv mconsole test/workbench/milax
+    - cd laravel
+    - composer update --no-scripts
+    - sudo npm install -g gulp
+    - npm install
 
 test:
-  pre:
-    - pwd
-    - ls -l
-    - composer create-project --prefer-dist laravel/laravel test
-    - ls -l
-  only:
-    - develop
+  override:
+    - gulp
+    - cd workbench/milax/mconsole
+    - phpunit
