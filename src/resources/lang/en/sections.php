@@ -1,7 +1,10 @@
 <?php
 
 return [
-    'users' => 'Users',
-    'list' => 'List',
-    'create' => 'Create',
+	'users' => [
+		'title' => 'Users',
+		'list' => 'List',
+		'create' => 'Create',
+		'edit' => 'Edit',
+	],
 ];
