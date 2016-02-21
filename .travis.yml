@@ -17,6 +17,7 @@ script:
   - mkdir -p /home/travis/build/misterpaladin/mconsole/laravel/workbench/milax
   - cp -rfa /home/travis/build/misterpaladin/mconsole/ci/* /home/travis/build/misterpaladin/mconsole/laravel
   - mv !(laravel) laravel/workbench/milax
+  - cd /home/travis/build/misterpaladin/mconsole/laravel && composer dump-autoload
   - cd /home/travis/build/misterpaladin/mconsole/laravel && composer update --no-scripts
   - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan mconsole:install --update
   - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan migrate --force
