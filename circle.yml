@@ -1,0 +1,14 @@
+machine:
+  php:
+    version: 5.6.14
+  services:
+    - mysql
+
+test:
+  pre:
+    - pwd
+    - ls -l
+    - composer create-project --prefer-dist laravel/laravel test
+    - ls -l
+  only:
+    - develop
