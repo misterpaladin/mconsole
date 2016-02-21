@@ -6,8 +6,7 @@ machine:
 
 dependencies:
   override:
-    - cd /home/ubuntu
-    - composer create-project --prefer-dist laravel/laravel laravel
+    - cd /home/ubuntu && composer create-project --prefer-dist laravel/laravel laravel
     - cp -rfa /home/ubuntu/mconsole/circle/* /home/ubuntu/laravel
     - mv /home/ubuntu/mconsole /home/ubuntu/test/workbench/milax
     - cd laravel
