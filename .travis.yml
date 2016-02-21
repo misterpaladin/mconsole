@@ -14,11 +14,11 @@ sudo: true
 
 script:
   - composer create-project --prefer-dist --no-interaction laravel/laravel laravel
-  - mkdir -p /home/travis/build/misterpaladin/mconsole/laravel/workbench/milax/mconsole
-  - cp -rfa /home/travis/build/misterpaladin/mconsole/ci/* /home/travis/build/misterpaladin/mconsole/laravel
-  - cp /home/travis/build/misterpaladin/mconsole/ci/.env /home/travis/build/misterpaladin/mconsole/laravel
+  - mkdir -p /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole
+  - cp -rfa /home/travis/build/milaxcom/mconsole/ci/* /home/travis/build/milaxcom/mconsole/laravel
+  - cp /home/travis/build/milaxcom/mconsole/ci/.env /home/travis/build/milaxcom/mconsole/laravel
   - mv !(laravel) laravel/workbench/milax/mconsole
-  - cd /home/travis/build/misterpaladin/mconsole/laravel && composer update --no-scripts
-  - cd /home/travis/build/misterpaladin/mconsole/laravel && php artisan mconsole:install --update
-  - cd /home/travis/build/misterpaladin/mconsole/laravel/workbench/milax/mconsole && composer update --no-scripts
-  - cd /home/travis/build/misterpaladin/mconsole/laravel/workbench/milax/mconsole && phpunit
+  - cd /home/travis/build/milaxcom/mconsole/laravel && composer update --no-scripts
+  - cd /home/travis/build/milaxcom/mconsole/laravel && php artisan mconsole:install --update
+  - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && composer update --no-scripts
+  - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && phpunit
