@@ -8,7 +8,7 @@ dependencies:
   cache_directories:
     - /home/ubuntu/laravel
   override:
-    - cd /home/ubuntu && composer create-project --prefer-dist laravel/laravel laravel
+    - cd /home/ubuntu && composer create-project --prefer-dist --no-interaction laravel/laravel laravel
     - cp -rfa /home/ubuntu/mconsole/circle/* /home/ubuntu/laravel
     - cp /home/ubuntu/mconsole/circle/.env /home/ubuntu/laravel/.env
     - mv /home/ubuntu/mconsole /home/ubuntu/laravel/workbench/milax
