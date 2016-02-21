@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class UserInterfaceTest extends TestCase
 {
 
@@ -15,7 +11,6 @@ class UserInterfaceTest extends TestCase
 	 */
 	public function testDashboardIsWorking()
 	{
-		$this->assertTrue(true);
 		$this->boot();
 
 		$user = $this->makeUser('testing');
