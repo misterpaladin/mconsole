@@ -1,15 +1,16 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class CommandsTest extends TestCase
 {
-
+	
+	/**
+	 * Test installer.
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	public function testMconsoleInstaller()
 	{
-		$this->assertTrue(true);
 		\Artisan::call('mconsole:install', [
 			'--update' => true
 		]);
