@@ -31,7 +31,7 @@ class MconsoleServiceProvider extends ServiceProvider
 			__DIR__ . '/../../../../public' => base_path('public/massets'),
 		], 'assets');
 		
-		// Database migrations
+		// Copy database migrations
 		$migrations = [];
 		$dir = __DIR__ . '/../../../migrations/';
 		collect(scandir(__DIR__ . '/../../../migrations'))->each(function ($file) use (&$dir, &$migrations) {
@@ -50,23 +50,7 @@ class MconsoleServiceProvider extends ServiceProvider
 	{
 		$this->app['router']->middleware('mconsole', 'Milax\Mconsole\Http\Middleware\MconsoleMiddleware');
 		$this->app->register('Milax\Mconsole\Providers\MconsoleBladeExtensions');
-		$this->registerCommands();
-	}
-	
-	/**
-	 * Register mconsole artisan console commands.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function registerCommands()
-	{
-		$this->commands([
-			'mconsole:install',
-		]);
-		$this->app->bind('mconsole:install', function ($app) {
-			return new \Milax\Mconsole\Commands\Installer;
-		});
+		$this->app->register('Milax\Mconsole\Providers\CommandsServiceProvider');
 	}
 
 }
