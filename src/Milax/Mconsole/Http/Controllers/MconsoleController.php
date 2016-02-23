@@ -21,7 +21,7 @@ class MconsoleController extends CMSController
 	 */
 	public function index()
 	{
-		return $this->view('mconsole.app');
+		return view('mconsole::app');
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class MconsoleController extends CMSController
 	 */
 	public function login()
 	{
-		return $this->view('mconsole.auth.login');
+		return view('mconsole::auth.login');
 	}
 	
 	/**
