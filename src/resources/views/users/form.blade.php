@@ -1,4 +1,4 @@
-@extends('mconsole::mconsole.app')
+@extends('mconsole::app')
 
 @section('title', trans('mconsole::sections.users.title') . ' | Mconsole')
 @section('page.title', trans('mconsole::sections.users.title'))
@@ -14,17 +14,17 @@
 			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/users']) !!}
 		@endif
 			<div class="form-body">
-				@include('mconsole::mconsole.forms.text', [
+				@include('mconsole::forms.text', [
 					'label' => 'Name',
 					'name' => 'name',
 					'placeholder' => 'John Appleseed'
 				])
-				@include('mconsole::mconsole.forms.text', [
+				@include('mconsole::forms.text', [
 					'label' => 'Email',
 					'name' => 'email',
 					'placeholder' => 'example@milax.com'
 				])
-				@include('mconsole::mconsole.forms.select', [
+				@include('mconsole::forms.select', [
 					'label' => 'Language',
 					'name' => 'lang',
 					'options' => [
@@ -34,7 +34,7 @@
 				])
 				
 				@if (!isset($item))
-					@include('mconsole::mconsole.forms.password', [
+					@include('mconsole::forms.password', [
 						'name' => 'password',
 						'label' => 'Password',
 						'placeholder' => 'Password',
@@ -43,7 +43,7 @@
 				
 			</div>
 			<div class="form-actions">
-				@include('mconsole::mconsole.forms.submit')
+				@include('mconsole::forms.submit')
 			</div>
 		{!! Form::close() !!}
 	</div>

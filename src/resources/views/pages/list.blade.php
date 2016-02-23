@@ -1,4 +1,4 @@
-@extends('mconsole::mconsole.app')
+@extends('mconsole::app')
 
 @section('title', 'Pages | Mconsole')
 @section('page.title', 'Pages')
@@ -8,7 +8,7 @@
 
 @section('content')
 
-@include('mconsole::mconsole.partials.table')
+@include('mconsole::mconsole::partials.table')
 
 <div class="row">
 	<div class="col-xs-12 text-center">

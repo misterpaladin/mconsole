@@ -1,4 +1,4 @@
-@extends('mconsole::mconsole.app')
+@extends('mconsole::app')
 
 @section('title', 'Страницы | Mconsole')
 

@@ -79,7 +79,7 @@
 			<!-- BEGIN HEADER MENU -->
 			<div class="page-header-menu">
 				<div class="container">
-					@include('mconsole::mconsole.partials.menu')
+					@include('mconsole::partials.menu')
 				</div>
 			</div>
 			<!-- END HEADER MENU -->
@@ -109,7 +109,7 @@
 						<!-- BEGIN PAGE CONTENT INNER -->
 						<div class="page-content-inner">
 							
-							@include('mconsole::mconsole.partials.messages')
+							@include('mconsole::partials.messages')
 							
 							<div class="row">
 								<div class="col-xs-12">

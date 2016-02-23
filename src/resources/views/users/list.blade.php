@@ -1,4 +1,4 @@
-@extends('mconsole::mconsole.app')
+@extends('mconsole::app')
 
 @section('title', trans('mconsole::sections.users.title') . ' | Mconsole')
 @section('page.title', trans('mconsole::sections.users.title'))
@@ -6,7 +6,7 @@
 
 @section('content')
 
-@include('mconsole::mconsole.partials.table')
+@include('mconsole::partials.table')
 
 <div class="row">
 	<div class="col-xs-12 text-center">
