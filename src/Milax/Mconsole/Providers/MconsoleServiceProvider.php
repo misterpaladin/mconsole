@@ -7,13 +7,46 @@ use Illuminate\Foundation\AliasLoader;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
+	
+	protected $register;
+	
 	/**
 	 * Indicates if loading of the provider is deferred.
 	 *
 	 * @var bool
 	 */
 	protected $defer = false;
-
+	
+	/**
+     * Create a new service provider instance.
+     *
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @return void
+     */
+    public function __construct($app)
+    {
+		parent::__construct($app);
+		
+		$this->register = [
+			'middleware' => [
+				'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
+			],
+			
+			'providers' => [
+				\Intervention\Image\ImageServiceProvider::class,
+				\Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
+				\Milax\Mconsole\Providers\CommandsServiceProvider::class,
+			],
+			
+			'aliases' => [
+				'Gravatar' => \Milax\Gravatar::class,
+				'Image' => \Intervention\Image\Facades\Image::class,
+			],
+			
+		];
+		
+    }
+	
 	/**
 	 * Bootstrap the application events.
 	 *
@@ -49,13 +82,15 @@ class MconsoleServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app['router']->middleware('mconsole', \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class);
-		$this->app->register(\Intervention\Image\ImageServiceProvider::class);
-		$this->app->register(\Milax\Mconsole\Providers\MconsoleBladeExtensions::class);
-		$this->app->register(\Milax\Mconsole\Providers\CommandsServiceProvider::class);
+		foreach ($this->register['middleware'] as $alias => $class)
+			$this->app['router']->middleware($alias, $class);
 		
-		AliasLoader::getInstance()->alias('Gravatar', \Milax\Gravatar::class);
-		AliasLoader::getInstance()->alias('Image', \Intervention\Image\Facades\Image::class);
+		foreach ($this->register['providers'] as $class)
+			$this->app->register($class);
+		
+		foreach ($this->register['aliases'] as $alias => $class)
+			AliasLoader::getInstance()->alias($alias, $class);
+		
 	}
 
 }
