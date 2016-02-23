@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
@@ -49,8 +50,12 @@ class MconsoleServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->app['router']->middleware('mconsole', 'Milax\Mconsole\Http\Middleware\MconsoleMiddleware');
-		$this->app->register('Milax\Mconsole\Providers\MconsoleBladeExtensions');
-		$this->app->register('Milax\Mconsole\Providers\CommandsServiceProvider');
+		$this->app->register(\Intervention\Image\ImageServiceProvider::class);
+		$this->app->register(\Milax\Mconsole\Providers\MconsoleBladeExtensions::class);
+		$this->app->register(\Milax\Mconsole\Providers\CommandsServiceProvider::class);
+		
+		AliasLoader::getInstance()->alias('Gravatar', \Milax\Gravatar::class);
+		AliasLoader::getInstance()->alias('Image', \Intervention\Image\Facades\Image::class);
 	}
 
 }
