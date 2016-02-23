@@ -49,7 +49,7 @@ class MconsoleServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app['router']->middleware('mconsole', 'Milax\Mconsole\Http\Middleware\MconsoleMiddleware');
+		$this->app['router']->middleware('mconsole', \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class);
 		$this->app->register(\Intervention\Image\ImageServiceProvider::class);
 		$this->app->register(\Milax\Mconsole\Providers\MconsoleBladeExtensions::class);
 		$this->app->register(\Milax\Mconsole\Providers\CommandsServiceProvider::class);
