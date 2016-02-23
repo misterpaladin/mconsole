@@ -16,14 +16,21 @@ class ModelsTest extends TestCase
 			require_once $file;
 			
 			$class = basename($file, '.php');
+			$namespaced = 'Milax\\Mconsole\\Models\\' . $class;
 			
-			if (class_exists($class)) {
+			if (class_exists($namespaced)) {
 				// Model creation test
-				$dbCount = \Milax\Mconsole\Models\Page::count();
-				$object = \Milax\Mconsole\Models\Page::create([
-					'slug' => str_random(16),
-				]);
-				$newDbCount = \Milax\Mconsole\Models\Page::count();
+				
+				$dbCount = $namespaced::count();
+				
+				if ($class == 'Page')
+					$data['slug'] = str_random(16);
+				else
+					$data = [];
+				
+				$object = $namespaced::create($data);
+				
+				$newDbCount = $namespaced::count();
 				$this->assertEquals($dbCount, $newDbCount - 1);
 				
 				// Tests depending on class
@@ -52,9 +59,9 @@ class ModelsTest extends TestCase
 				}
 				
 				// Deletion
-				$page->delete();
-				$newPagesCount = \Milax\Mconsole\Models\Page::count();
-				$this->assertEquals($pagesCount, $newPagesCount);
+				$object->delete();
+				$newCount = $namespaced::count();
+				$this->assertEquals($dbCount, $newCount);
 			}
 		}
 	}
