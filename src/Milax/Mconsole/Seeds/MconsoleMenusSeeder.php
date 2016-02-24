@@ -76,6 +76,15 @@ class MconsoleMenusSeeder
 					'visible' => true,
 					'enabled' => true,
 				],
+				[
+					'name' => 'All roles',
+					'key' => 'roles_all',
+					'translation' => 'menu.roles.list.name',
+					'url' => 'roles',
+					'description' => 'menu.roles.list.description',
+					'visible' => true,
+					'enabled' => true,
+				],
 			],
 		],
 	];
