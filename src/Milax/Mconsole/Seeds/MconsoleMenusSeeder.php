@@ -103,7 +103,7 @@ class MconsoleMenusSeeder
 						$child['menu_id'] = $id;
 						self::update($childExist->id, $child);
 					} else {
-						self::insert($child);
+						self::insert(array_merge($child, ['menu_id' => $id]));
 					}
 				}
 			}
