@@ -56,10 +56,17 @@ class Installer extends Command
 		if (!$this->option('update'))
 			$this->users();
 		
+		$this->cleanup();
 		$this->finish();
 	}
 	
-	public function components()
+	/**
+	 * Install core package components
+	 *
+	 * @access protected
+	 * @return void
+	 */
+	protected function components()
 	{
 		if ($this->option('update'))
 			$this->comment('Updating package components..');
@@ -97,9 +104,10 @@ class Installer extends Command
 	/**
 	 * Create admin user
 	 *
+	 * @access protected
 	 * @return void
 	 */
-	public function users()
+	protected function users()
 	{
 		$this->comment('Creating admin user..');
 		while (!$this->userCreated) {
@@ -127,10 +135,10 @@ class Installer extends Command
 	/**
 	 * Run database migration.
 	 * 
-	 * @access public
+	 * @access protected
 	 * @return void
 	 */
-	public function migrate()
+	protected function migrate()
 	{
 		$this->comment('Migrating database..');
 		$this->call('migrate');
@@ -138,12 +146,26 @@ class Installer extends Command
 	}
 	
 	/**
-	 * Show end message.
-	 * 
-	 * @access public
+	 * Clear application caches
+	 *
+	 * @access protected
 	 * @return void
 	 */
-	public function finish()
+	protected function cleanup()
+	{
+		$this->call('cache:clear');
+		$this->call('view:clear');
+		$this->call('route:clear');
+		$this->comment(null);
+	}
+	
+	/**
+	 * Show end message.
+	 * 
+	 * @access protected
+	 * @return void
+	 */
+	protected function finish()
 	{
 		if ($this->option('update'))
 			$this->comment('Update completed!');
