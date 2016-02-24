@@ -39,14 +39,17 @@ trait Redirectable
 		{
 			case 'POST':
 				Session::flash('status', trans('mconsole::mconsole.status.created'));
+				break;
 			case 'PUT':
 			case 'UPDATE':
 				Session::flash('status', trans('mconsole::mconsole.status.updated'));
+				break;
 			case 'DELETE':
 				Session::flash('status', trans('mconsole::mconsole.status.deleted'));
-			
-			return abort(302, null, ['Location' => $this->redirectTo]);
+				break;
 		}
+		
+		return abort(302, null, ['Location' => $this->redirectTo]);
         
 	}
     
