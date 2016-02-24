@@ -29,8 +29,8 @@
 		<link href="/massets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
-		<link href="/massets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
-		<link href="/massets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+		<link href="/massets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
 		<!-- BEGIN PAGE LEVEL STYLES -->
 		<link href="/massets/pages/css/login.min.css" rel="stylesheet" type="text/css" />

@@ -23,8 +23,8 @@
 		<link href="/massets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
-		<link href="/massets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
-		<link href="/massets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+		<link href="/massets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
@@ -34,7 +34,7 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
 	<!-- END HEAD -->
-	<body class="page-container-bg-solid page-boxed">
+	<body class="page-container-bg-solid page-boxed page-md">
 		<!-- BEGIN HEADER -->
 		<div class="page-header">
 			<!-- BEGIN HEADER TOP -->
