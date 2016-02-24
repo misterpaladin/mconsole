@@ -4,11 +4,11 @@ namespace Milax\Mconsole\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Milax\Mconsole\Http\Controllers\CMSController;
+use App\Http\Controllers\Controller;
 
 use Auth;
 
-class MconsoleController extends CMSController
+class MconsoleController extends Controller
 {
 	
 	protected $uri = '/mconsole';

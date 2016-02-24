@@ -4,11 +4,11 @@ namespace Milax\Mconsole\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Milax\Mconsole\Http\Controllers\CMSController;
+use App\Http\Controllers\Controller;
 
 use Milax\Mconsole\Models\Page;
 
-class PagesController extends CMSController
+class PagesController extends Controller
 {
 	/**
 	 * Display a listing of the resource.

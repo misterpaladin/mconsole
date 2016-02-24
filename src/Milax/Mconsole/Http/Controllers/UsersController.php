@@ -2,13 +2,15 @@
 
 namespace Milax\Mconsole\Http\Controllers;
 
-use Milax\Mconsole\Http\Controllers\CMSController;
+use App\Http\Controllers\Controller;
 
 use Milax\Mconsole\Http\Requests\UserRequest;
 
 use App\User;
 
-class UsersController extends CMSController
+use Request;
+
+class UsersController extends Controller
 {
 	
 	protected $redirectTo = '/mconsole/users';
