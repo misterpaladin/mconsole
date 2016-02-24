@@ -11,9 +11,10 @@ class CommandsTest extends TestCase
 	 */
 	public function testMconsoleInstaller()
 	{
-		\Artisan::call('mconsole:install', [
+		$exitCode = \Artisan::call('mconsole:install', [
 			'--update' => true
 		]);
+		$this->assertEquals($exitCode, 0);
 	}
 
 }
