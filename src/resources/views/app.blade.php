@@ -29,7 +29,6 @@
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
-		<link href="/massets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME LAYOUT STYLES -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
@@ -111,6 +110,23 @@
 							
 							@include('mconsole::partials.messages')
 							
+							@if (isset($filterable))
+							<div class="portlet light">
+								<div class="portlet-title">
+									<div class="caption">
+										<i class="icon-magnifier font-grey-gallery"></i>
+										<span class="caption-subject bold font-grey-gallery uppercase">Filter</span>
+									</div>
+									<div class="tools">
+										<a href="" class="{{ ($filtered) ? 'collapse' : 'expand' }}"> </a>
+									</div>
+								</div>
+								<div class="portlet-body {{ ($filtered) ? null : 'portlet-collapsed' }}">
+									@include('mconsole::traits.filterable')
+								</div>
+							</div>
+							@endif
+							
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="portlet light">
@@ -120,6 +136,14 @@
 									</div>
 								</div>
 							</div>
+							
+							@if (isset($paging))
+							<div class="row">
+								<div class="col-xs-12 text-center">
+									{!! $paging->appends(Request::query())->links() !!}
+								</div>
+							</div>
+							@endif
 							
 						</div>
 						<!-- END PAGE CONTENT INNER -->
