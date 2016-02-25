@@ -4,8 +4,6 @@ namespace Milax\Mconsole\Core;
 
 define('version', '0.0.10');
 
-use Milax\Mconsole\Models\MconsoleMenu;
-
 use Cache;
 use Auth;
 use View;
