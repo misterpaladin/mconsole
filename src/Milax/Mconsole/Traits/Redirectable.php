@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Traits;
 
-use Milax\Mconsole\Exceptions\NoRedirectToPropertyException;
+use Milax\Mconsole\Exceptions\RedirectToPropertyException;
 
 use Request;
 use Session;
