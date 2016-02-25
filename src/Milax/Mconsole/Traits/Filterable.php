@@ -19,7 +19,7 @@ trait Filterable
 	 * @param  Illuminate\Database\Eloquent\Builder $query
 	 * @return View
 	 */
-	public function filtrate($view, $cb, $query = null)
+	protected function filtrate($view, $cb, $query = null)
 	{
 		$adaptor->adapt($this);
 		if (!property_exists($this, 'query')) {
@@ -45,7 +45,7 @@ trait Filterable
 	 * 
 	 * @return Illuminate\Database\Eloquent\Builder
 	 */
-	public function handleFilter()
+	protected function handleFilter()
 	{
 		// Ensure that $this->query property has a query
 		if (!property_exists($this, 'query')) {
@@ -67,11 +67,38 @@ trait Filterable
 	}
 	
 	/**
+	 * Add text input filter
+	 * 
+	 * @param  string $label		Label for input
+	 * @param  string $key			Key of model property
+	 * @param  bool $exact			Set to true if input value and property value must be equal
+	 * @return Filterable
+	 */
+	protected function setText($label, $key, $exact)
+	{
+		return $this->pushFilter('text', $label, $key, $exact);
+	}
+	
+	/**
+	 * Add select input filter
+	 * 
+	 * @param  string $label		Label for input
+	 * @param  string $key			Key of model property
+	 * @param  array $selects
+	 * @param  bool $exact			Set to true if input value and property value must be equal
+	 * @return Filterable
+	 */
+	protected function setSelect($label, $key, $selects, $exact)
+	{
+		return $this->pushFilter('select', $label, $key, $exact, $selects);
+	}
+	
+	/**
 	 * Handle GET query, to set builder query
 	 * 
 	 * @return void
 	 */
-	protected function handleQuery()
+	private function handleQuery()
 	{
 		$filtered = false;
 		foreach ($this->filters as $filter) {
@@ -103,10 +130,9 @@ trait Filterable
 	 * @param  string $key			Key of model property
 	 * @param  bool $exact			Set to true if input value and property value must be equal
 	 * @param  array $options	Additional data for filter
-	 *
 	 * @return Filterable
 	 */
-	protected function pushFilter($type, $label, $key, $exact, $options = [])
+	private function pushFilter($type, $label, $key, $exact, $options = [])
 	{
 		$filter = [
 			'type' => $type,
@@ -121,33 +147,6 @@ trait Filterable
 		$this->filters[] = $filter;
 		
 		return $this;
-	}
-	
-	/**
-	 * Add text input filter
-	 * 
-	 * @param  string $label		Label for input
-	 * @param  string $key			Key of model property
-	 * @param  bool $exact			Set to true if input value and property value must be equal
-	 * @return Filterable
-	 */
-	public function setText($label, $key, $exact)
-	{
-		return $this->pushFilter('text', $label, $key, $exact);
-	}
-	
-	/**
-	 * Add select input filter
-	 * 
-	 * @param  string $label		Label for input
-	 * @param  string $key			Key of model property
-	 * @param  array $selects
-	 * @param  bool $exact			Set to true if input value and property value must be equal
-	 * @return Filterable
-	 */
-	public function setSelect($label, $key, $selects, $exact)
-	{
-		return $this->pushFilter('select', $label, $key, $exact, $selects);
 	}
 	
 }
