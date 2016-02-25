@@ -36,7 +36,7 @@ trait Paginatable
 		if (method_exists($this, 'handleFilter'))
 			$this->query = $this->handleFilter($this->query);
 		
-		$this->items = $this->query->paginate($this->pageLength);
+		$this->items = $this->query->paginate($this->perPage);
 		
 		View::share('paging', $this->items);
 		
