@@ -39,11 +39,17 @@ class MconsoleServiceProvider extends ServiceProvider
 			],
 			
 			'aliases' => [
+				// Third party packages
 				'Gravatar' => \Milax\Gravatar::class,
 				'Image' => \Intervention\Image\Facades\Image::class,
 				
 				// Helpers
 				'String' => \Milax\Mconsole\Helpers\String::class,
+				
+				// Traits
+				'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
+				'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
+				'Filterable' => \Milax\Mconsole\Traits\Filterable::class
 			],
 			
 		];
