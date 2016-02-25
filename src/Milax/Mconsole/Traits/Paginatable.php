@@ -2,6 +2,10 @@
 
 namespace Milax\Mconsole\Traits;
 
+use Milax\Mconsole\Processors\TableProcessor;
+
+use View;
+
 trait Paginatable
 {
 	/**
@@ -15,32 +19,29 @@ trait Paginatable
 	 * 
 	 * @param  string $view
 	 * @param  function $cb
+	 * @param  Illuminate\Database\Eloquent\Builder $query
 	 * @return View
 	 */
 	protected function paginate($view, $cb, $query = null)
 	{
-		$model = $this->model;
-		
-		if ($query !== null)
-			$this->items = $query->paginate($this->pageLength);
-		else
-			$this->items = $model::paginate($this->pageLength);
-		
-		$items = collect();
-		
-		foreach ($this->items as $item) {
-			$item = $cb($item);
-			$cItem = collect();
-			
-			foreach ($item as $key => $val)
-				$cItem->put($key, $val);
-			
-			$items->push($cItem);
+		if (!property_exists($this, 'query')) {
+			if ($query === null) {
+				$model = $this->model;
+				$this->query = $model::setModel(new $model);
+			} else {
+				$this->query = $query;
+			}
 		}
 		
+		if (method_exists($this, 'handleFilter'))
+			$this->query = $this->handleFilter($this->query);
+		
+		$this->items = $this->query->paginate($this->pageLength);
+		
+		View::share('paging', $this->items);
+		
 		return view($view, [
-			'paging' => $this->items,
-			'items' => $items,
+			'items' => TableProcessor::processItems($cb, $this->items),
 		]);
 	}
 	
