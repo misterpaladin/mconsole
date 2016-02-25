@@ -41,6 +41,9 @@ class MconsoleServiceProvider extends ServiceProvider
 			'aliases' => [
 				'Gravatar' => \Milax\Gravatar::class,
 				'Image' => \Intervention\Image\Facades\Image::class,
+				
+				// Helpers
+				'String' => \Milax\Mconsole\Helpers\String::class,
 			],
 			
 		];
