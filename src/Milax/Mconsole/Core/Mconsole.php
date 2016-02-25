@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Core;
 
-define('version', '0.0.10');
+define('version', '0.1.0');
 
 use Cache;
 use Auth;
