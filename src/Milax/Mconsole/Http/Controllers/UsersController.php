@@ -7,13 +7,31 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\UserRequest;
 
 use App\User;
+use Milax\Mconsole\Models\MconsoleRole;
 
 use Request;
+
+use Filterable;
+use Paginatable;
+use Redirectable;
+
+use Milax\Mconsole\Adaptors\TraitsAdaptor;
 
 class UsersController extends Controller
 {
 	
+	use Redirectable, Filterable, Paginatable;
+	
 	protected $redirectTo = '/mconsole/users';
+	protected $model = 'App\User';
+	protected $pageLength = 20;
+	
+	public function __construct()
+	{
+		$this->setText('Email', 'email', true)
+			->setText('#', 'id', true)
+			->setSelect('Role', 'role_id', MconsoleRole::all()->lists('name', 'id'), true);
+	}
 	
 	/**
 	 * Display a listing of the resource.
@@ -22,18 +40,14 @@ class UsersController extends Controller
 	 */
 	public function index()
 	{
-		$items = User::paginate(20);
-		return $this->view('mconsole.users.list', [
-			'paging' => $items,
-			'items' => $items->transform(function ($item) {
-				return [
-					'#' => $item->id,
-					'Updated' => $item->updated_at->format('m.d.Y'),
-					'Email' => $item->email,
-					'Name' => $item->name,
-				];
-			}),
-		]);
+		return $this->paginate('mconsole::users.list', function ($item) {
+			return [
+				'#' => $item->id,
+				'Updated' => $item->updated_at,
+				'Email' => $item->email,
+				'Name' => $item->name,
+			];
+		});
 	}
 
 	/**
@@ -43,7 +57,7 @@ class UsersController extends Controller
 	 */
 	public function create()
 	{
-		return $this->view('mconsole.users.form');
+		return view('mconsole::users.form');
 	}
 
 	/**
@@ -59,7 +73,6 @@ class UsersController extends Controller
 			'email' => $request->input('email'),
 			'password' => bcrypt($request->input('password')),
 		]);
-		return $this->redirect();
 	}
 
 	/**
@@ -70,7 +83,7 @@ class UsersController extends Controller
 	 */
 	public function edit($id)
 	{
-		return $this->view('mconsole.users.form', [
+		return view('mconsole::users.form', [
 			'item' => User::find($id),
 		]);
 	}
@@ -85,7 +98,6 @@ class UsersController extends Controller
 	public function update(UserRequest $request, $id)
 	{
 		User::find($id)->update($request->all());
-		return $this->redirect();
 	}
 
 	/**
@@ -97,6 +109,5 @@ class UsersController extends Controller
 	public function destroy($id)
 	{
 		User::destroy($id);
-		return $this->redirect();
 	}
 }

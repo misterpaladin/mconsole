@@ -16,7 +16,7 @@
 			@endif
 			
 			@include('mconsole::forms.text', [
-				'label' => 'Name',
+				'label' => trans('mconsole::roles.form.name'),
 				'name' => 'name',
 				'placeholder' => 'Moderator'
 			])

@@ -2,7 +2,7 @@
 
 @section('title', trans('mconsole::sections.users.title') . ' | Mconsole')
 @section('page.title', trans('mconsole::sections.users.title'))
-@section('page.subtitle', trans('mconsole::sections.users.' . Request::segments()[count(Request::segments()) - 1]))
+@section('page.subtitle', trans('mconsole::sections.' . Request::segments()[count(Request::segments()) - 1]))
 
 @section('content')
 
@@ -15,17 +15,17 @@
 		@endif
 			<div class="form-body">
 				@include('mconsole::forms.text', [
-					'label' => 'Name',
+					'label' => trans('mconsole::users.form.name'),
 					'name' => 'name',
 					'placeholder' => 'John Appleseed'
 				])
 				@include('mconsole::forms.text', [
-					'label' => 'Email',
+					'label' => trans('mconsole::users.form.email'),
 					'name' => 'email',
 					'placeholder' => 'example@milax.com'
 				])
 				@include('mconsole::forms.select', [
-					'label' => 'Language',
+					'label' => trans('mconsole::users.form.language'),
 					'name' => 'lang',
 					'options' => [
 						'ru' => 'ru',
@@ -35,8 +35,8 @@
 				
 				@if (!isset($item))
 					@include('mconsole::forms.password', [
+						'label' => trans('mconsole::users.form.name'),
 						'name' => 'password',
-						'label' => 'Password',
 						'placeholder' => 'Password',
 					])
 				@endif
