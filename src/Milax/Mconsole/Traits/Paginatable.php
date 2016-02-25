@@ -45,4 +45,16 @@ trait Paginatable
 		]);
 	}
 	
+	/**
+	 * Set paginator per page number
+	 * 
+	 * @param int $perPage
+	 * @return Paginatable
+	 */
+	protected function setPerPage($perPage = 20)
+	{
+		$this->perPage = $perPage;
+		return $this;
+	}
+	
 }
