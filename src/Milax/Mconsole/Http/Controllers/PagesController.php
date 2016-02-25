@@ -17,7 +17,7 @@ class PagesController extends Controller
 	
 	use Redirectable, Paginatable;
 	
-	protected $redirectTo = '/mconsole/users';
+	protected $redirectTo = '/mconsole/pages';
 	protected $model = 'Milax\Mconsole\Models\Page';
 	
 	/**
