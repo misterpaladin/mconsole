@@ -18,11 +18,10 @@ class RolesController extends Controller
 	use Redirectable, Paginatable;
 	
 	protected $model = 'Milax\Mconsole\Models\MconsoleRole';
-	protected $pageLength = 20;
 	
 	public function __construct()
 	{
-		$this->redirects(['/mconsole/permissions', '/mconsole/roles', '/mconsole/roles']);
+		$this->setRedirects(['/mconsole/permissions', '/mconsole/roles', '/mconsole/roles']);
 	}
 	
 	/**
@@ -32,7 +31,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-		return $this->paginate('mconsole::roles.list', function ($item) {
+		return $this->setPerPage(20)->paginate('mconsole::roles.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Name' => $item->name,

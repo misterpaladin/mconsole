@@ -18,8 +18,7 @@ class PagesController extends Controller
 	use Redirectable, Paginatable;
 	
 	protected $redirectTo = '/mconsole/users';
-	protected $model = 'App\User';
-	protected $pageLength = 20;
+	protected $model = 'Milax\Mconsole\Models\Page';
 	
 	/**
 	 * Display a listing of the resource.
@@ -28,7 +27,7 @@ class PagesController extends Controller
 	 */
 	public function index()
 	{
-		return $this->paginate('mconsole::pages.list', function ($item) {
+		return $this->setPerPage(20)->paginate('mconsole::pages.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Updated' => $item->updated_at->format('m.d.Y'),

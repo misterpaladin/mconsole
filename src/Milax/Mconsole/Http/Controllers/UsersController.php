@@ -24,7 +24,6 @@ class UsersController extends Controller
 	
 	protected $redirectTo = '/mconsole/users';
 	protected $model = 'App\User';
-	protected $pageLength = 20;
 	
 	public function __construct()
 	{
@@ -40,7 +39,7 @@ class UsersController extends Controller
 	 */
 	public function index()
 	{
-		return $this->paginate('mconsole::users.list', function ($item) {
+		return $this->setPerPage(2)->paginate('mconsole::users.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Updated' => $item->updated_at,
