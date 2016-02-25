@@ -21,7 +21,7 @@ trait Redirectable
 	 * @param mixed $url
 	 * @return [type] [description]
 	 */
-	public function redirects($url)
+	protected function setRedirects($url)
 	{
 		$this->redirectTo = $url;
 	}
