@@ -17,5 +17,8 @@ Route::group([
 	/** Resources */
 	Route::resource('/pages', 'PagesController');
 	Route::resource('/users', 'UsersController');
+	Route::resource('/roles', 'RolesController');
+	Route::resource('/permissions', 'PermissionsController');
+	
 	
 });
