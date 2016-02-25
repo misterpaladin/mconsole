@@ -8,8 +8,19 @@ use App\Http\Controllers\Controller;
 
 use Milax\Mconsole\Models\Page;
 
+use Filterable;
+use Paginatable;
+use Redirectable;
+
 class PagesController extends Controller
 {
+	
+	use Redirectable, Paginatable;
+	
+	protected $redirectTo = '/mconsole/users';
+	protected $model = 'App\User';
+	protected $pageLength = 20;
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -17,18 +28,14 @@ class PagesController extends Controller
 	 */
 	public function index()
 	{
-		$items = Page::paginate(20);
-		return $this->view('mconsole.users.list', [
-			'paging' => $items,
-			'items' => $items->transform(function ($item) {
-				return [
-					'#' => $item->id,
-					'Updated' => $item->updated_at->format('m.d.Y'),
-					'Slug' => $item->slug,
-					'Heading' => $item->heading,
-				];
-			}),
-		]);
+		return $this->paginate('mconsole::pages.list', function ($item) {
+			return [
+				'#' => $item->id,
+				'Updated' => $item->updated_at->format('m.d.Y'),
+				'Slug' => $item->slug,
+				'Heading' => $item->heading,
+			];
+		});
 	}
 
 	/**
@@ -71,7 +78,7 @@ class PagesController extends Controller
 	 */
 	public function edit($id)
 	{
-		return $this->view('mconsole.pages.add', [
+		return $this->view('mconsole::pages.add', [
 			'item' => Page::find($id),
 		]);
 	}
