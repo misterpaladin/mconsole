@@ -14,13 +14,12 @@ use Request;
 use Filterable;
 use Paginatable;
 use Redirectable;
-
-use Milax\Mconsole\Adaptors\TraitsAdaptor;
+use HasQueryTraits;
 
 class UsersController extends Controller
 {
 	
-	use Redirectable, Filterable, Paginatable;
+	use HasQueryTraits, Redirectable, Filterable, Paginatable;
 	
 	protected $redirectTo = '/mconsole/users';
 	protected $model = 'App\User';
@@ -39,7 +38,7 @@ class UsersController extends Controller
 	 */
 	public function index()
 	{
-		return $this->setPerPage(2)->paginate('mconsole::users.list', function ($item) {
+		return $this->setPerPage(2)->run('mconsole::users.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Updated' => $item->updated_at,

@@ -2,4 +2,6 @@
 
 namespace Milax\Mconsole\Exceptions;
 
-class FiltersPropertyException extends \Exception {}
+use Milax\Mconsole\Exceptions\MconsoleException;
+
+class FiltersPropertyException extends MconsoleException {}

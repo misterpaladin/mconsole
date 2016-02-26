@@ -12,11 +12,12 @@ use Milax\Mconsole\Models\Page;
 use Filterable;
 use Paginatable;
 use Redirectable;
+use HasQueryTraits;
 
 class PagesController extends Controller
 {
 	
-	use Redirectable, Paginatable;
+	use HasQueryTraits, Redirectable, Paginatable;
 	
 	protected $redirectTo = '/mconsole/pages';
 	protected $model = 'Milax\Mconsole\Models\Page';

@@ -12,11 +12,12 @@ use Milax\Mconsole\Models\News;
 use Filterable;
 use Paginatable;
 use Redirectable;
+use HasQueryTraits;
 
 class NewsController extends Controller
 {
 	
-	use Redirectable, Paginatable;
+	use HasQueryTraits, Redirectable, Paginatable;
 	
 	protected $redirectTo = '/mconsole/news';
 	protected $model = 'Milax\Mconsole\Models\News';

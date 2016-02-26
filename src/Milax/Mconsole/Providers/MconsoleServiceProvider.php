@@ -53,7 +53,8 @@ class MconsoleServiceProvider extends ServiceProvider
 				'Cacheable' => \Milax\Cacheable::class,
 				'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
 				'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
-				'Filterable' => \Milax\Mconsole\Traits\Filterable::class
+				'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
+				'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
 			],
 			
 			// Interface to Implementation bindings
