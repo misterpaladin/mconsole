@@ -40,6 +40,8 @@ class ModelsTest extends TestCase
 				switch ($class) {
 					case 'MconsoleMenu':
 						$this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsToMany', $object->roles());
+						$this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\HasMany', $object->menus());
+						$this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsTo', $object->menu());
 						break;
 					
 					case 'MconsoleRole':
