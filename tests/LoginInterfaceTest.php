@@ -1,8 +1,28 @@
 <?php
 
-class UserInterfaceTest extends TestCase
+class LoginInterfaceTest extends TestCase
 {
-
+	
+	public $user;
+	
+	public function startTestSuite()
+	{
+		parent::startTestSuite();
+		\View::share('errors', new \Illuminate\Support\ViewErrorBag);
+		\View::share('mconsole_menu', \Milax\Mconsole\Models\MconsoleMenu::getCached());
+		\View::share('mconsole_options', \Milax\Mconsole\Models\MconsoleOption::getCached());
+		\View::share('mconsole_changelog', 'Testing');
+	}
+	
+	public function setUp()
+	{
+		parent::setUp();
+		$this->user = factory(App\User::class)->create([
+			'role_id' => 1,
+			'password' => bcrypt('testing'),
+		]);
+	}
+	
 	/**
 	 * Test if mconsole dashboard is working.
 	 *
@@ -11,11 +31,7 @@ class UserInterfaceTest extends TestCase
 	 */
 	public function testDashboardIsWorking()
 	{
-		$this->boot();
-
-		$user = $this->makeUser('testing');
-
-		$this->actingAs($user)->visit('/mconsole')->see($user->name);
+		$this->actingAs($this->user)->visit('/mconsole')->see($this->user->name);
 	}
 
 	/**
@@ -27,8 +43,7 @@ class UserInterfaceTest extends TestCase
 	public function testLoginFail()
 	{
 		$this->assertTrue(true);
-		$this->boot();
-
+		
 		$this->visit('/mconsole/login')
 			->type('test', 'login')
 			->type('test', 'password')
@@ -45,16 +60,13 @@ class UserInterfaceTest extends TestCase
 	public function testLoginSuccess()
 	{
 		$this->assertTrue(true);
-		$this->boot();
-
-		$user = $this->makeUser('testing');
-
+		
 		$this->visit('/mconsole/login')
-			->type($user->email, 'login')
+			->type($this->user->email, 'login')
 			->type('testing', 'password')
 			->press(trans('mconsole::login.buttons.login'))
 			->seePageIs('/mconsole')
-			->see($user->name);
+			->see($this->user->name);
 	}
 
 	/**
@@ -66,39 +78,20 @@ class UserInterfaceTest extends TestCase
 	public function testLogoutSuccess()
 	{
 		$this->assertTrue(true);
-		$this->boot();
 
-		$this->actingAs($this->makeUser('testing'))
+		$this->actingAs($this->user)
 			->visit('/mconsole/logout')
 			->seePageIs('/mconsole/login');
 	}
 
 	/**
-	 * Share required data with views.
-	 *
-	 * @access protected
+	 * Cleanup
+	 * 
 	 * @return void
 	 */
-	protected function boot()
+	public function tearDown()
 	{
-		\View::share('errors', new \Illuminate\Support\ViewErrorBag);
-		\View::share('mconsole_menu', \Milax\Mconsole\Models\MconsoleMenu::getCached());
-		\View::share('mconsole_options', \Milax\Mconsole\Models\MconsoleOption::getCached());
-		\View::share('mconsole_changelog', 'Testing');
-	}
-
-	/**
-	 * Make test user.
-	 *
-	 * @access protected
-	 * @return void
-	 */
-	protected function makeUser($pass)
-	{
-		return factory(App\User::class)->create([
-			'role_id' => 1,
-			'password' => bcrypt($pass),
-		]);
+		\App\User::destroy($this->user->id);
 	}
 
 }
