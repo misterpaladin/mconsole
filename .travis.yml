@@ -19,7 +19,6 @@ before_install:
   # configure apache virtual hosts
   - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
-  - sudo service apache2 restart
 
 sudo: true
 
@@ -32,4 +31,5 @@ script:
   - cd /home/travis/build/milaxcom/mconsole/laravel && composer update --no-scripts
   - cd /home/travis/build/milaxcom/mconsole/laravel && php artisan mconsole:install --update
   - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && composer update --no-scripts
+  - sudo service apache2 restart
   - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && phpunit -c phpunit.ci.xml --testdox
