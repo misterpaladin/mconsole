@@ -41,11 +41,11 @@
 				])
 
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::news.form.enabled'),
+					'label' => trans('mconsole::news.form.enabled.name'),
 					'name' => 'enabled',
 					'options' => [
-						'1' => 'Enabled',
-						'0' => 'Disabled',
+						'1' => trans('mconsole::news.form.enabled.true'),
+						'0' => trans('mconsole::news.form.enabled.false'),
 					],
 				])
 				
