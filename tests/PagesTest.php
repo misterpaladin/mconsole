@@ -53,6 +53,8 @@ class PagesTest extends TestCase
 		$dbCount = \DB::table('pages')->count();
 		$slug = md5(time());
 		
+		$this->auth()->visit('/mconsole/pages')->assertResponseOk();
+		
 		$response = $this->auth()->call('POST', '/mconsole/pages', [
 			'slug' => $slug,
 			'title' => 'My Test Page',
@@ -75,6 +77,9 @@ class PagesTest extends TestCase
 	{
 		$slug = md5(time());
 		$page = \DB::table('pages')->orderBy('id', 'desc')->first();
+		
+		$this->auth()->visit('/mconsole/pages/' . $page->id . '/edit')->assertResponseOk();
+		
 		$response = $this->auth()->call('POST', '/mconsole/pages/'. $page->id, [
 			'slug' => $slug,
 			'_method' => 'PUT',
