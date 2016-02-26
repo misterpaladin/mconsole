@@ -41,7 +41,7 @@
 				])
 				
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::users.form.hide_heading'),
+					'label' => trans('mconsole::pages.form.hide_heading'),
 					'name' => 'hide_heading',
 					'options' => [
 						'1' => 'Not hide',
@@ -49,7 +49,7 @@
 					],
 				])
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::users.form.fullwidth'),
+					'label' => trans('mconsole::pages.form.fullwidth'),
 					'name' => 'fullwidth',
 					'options' => [
 						'0' => 'Not fullwidth',
@@ -57,7 +57,7 @@
 					],
 				])
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::users.form.enabled'),
+					'label' => trans('mconsole::pages.form.enabled'),
 					'name' => 'enabled',
 					'options' => [
 						'1' => 'Enabled',
