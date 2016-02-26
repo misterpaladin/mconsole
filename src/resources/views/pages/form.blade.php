@@ -41,27 +41,27 @@
 				])
 				
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::pages.form.hide_heading'),
+					'label' => trans('mconsole::pages.form.hide_heading.name'),
 					'name' => 'hide_heading',
 					'options' => [
-						'1' => 'Not hide',
-						'0' => 'Hide',
+						'1' => trans('mconsole::pages.form.hide_heading.true'),
+						'0' => trans('mconsole::pages.form.hide_heading.false'),
 					],
 				])
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::pages.form.fullwidth'),
+					'label' => trans('mconsole::pages.form.fullwidth.name'),
 					'name' => 'fullwidth',
 					'options' => [
-						'0' => 'Not fullwidth',
-						'1' => 'Fullwidth',
+						'0' => trans('mconsole::pages.form.fullwidth.false'),
+						'1' => trans('mconsole::pages.form.fullwidth.true'),
 					],
 				])
 				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::pages.form.enabled'),
+					'label' => trans('mconsole::pages.form.enabled.name'),
 					'name' => 'enabled',
 					'options' => [
-						'1' => 'Enabled',
-						'0' => 'Disabled',
+						'1' => trans('mconsole::pages.form.enabled.true'),
+						'0' => trans('mconsole::pages.form.enabled.false'),
 					],
 				])
 				
