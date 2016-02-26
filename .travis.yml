@@ -24,12 +24,12 @@ sudo: true
 
 script:
   - composer create-project --prefer-dist --no-interaction laravel/laravel laravel
-  - mkdir -p /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole
-  - cp -rfa /home/travis/build/milaxcom/mconsole/build/* /home/travis/build/milaxcom/mconsole/laravel
-  - cp /home/travis/build/milaxcom/mconsole/build/.env /home/travis/build/milaxcom/mconsole/laravel
+  - mkdir -p %TRAVIS_BUILD_DIR%/laravel/workbench/milax/mconsole
+  - cp -rfa %TRAVIS_BUILD_DIR%/build/* %TRAVIS_BUILD_DIR%/laravel
+  - cp %TRAVIS_BUILD_DIR%/build/.env %TRAVIS_BUILD_DIR%/laravel
   - mv !(laravel) laravel/workbench/milax/mconsole
-  - cd /home/travis/build/milaxcom/mconsole/laravel && composer update --no-scripts
-  - cd /home/travis/build/milaxcom/mconsole/laravel && php artisan mconsole:install --update
-  - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && composer update --no-scripts
+  - cd %TRAVIS_BUILD_DIR%/laravel && composer update --no-scripts
+  - cd %TRAVIS_BUILD_DIR%/laravel && php artisan mconsole:install --update
+  - cd %TRAVIS_BUILD_DIR%/laravel/workbench/milax/mconsole && composer update --no-scripts
   - sudo service apache2 restart
-  - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && phpunit -c phpunit.ci.xml --testdox
+  - cd %TRAVIS_BUILD_DIR%/laravel/workbench/milax/mconsole && phpunit -c phpunit.ci.xml --testdox
