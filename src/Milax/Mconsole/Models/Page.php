@@ -20,4 +20,13 @@ class Page extends Model
 		return $this->updated_at->format('m.d.Y');
 	}
 	
+	public function setSlugAttribute($value)
+	{
+		if (strlen($value) == 0) {
+			$this->attributes['slug'] = str_slug($this->heading);
+		} else {
+			$this->attributes['slug'] = str_slug($value);
+		}
+	}
+	
 }

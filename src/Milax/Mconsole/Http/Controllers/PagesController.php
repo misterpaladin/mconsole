@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Milax\Mconsole\Http\Requests\PageRequest;
 
 use Milax\Mconsole\Models\Page;
 
@@ -44,7 +45,7 @@ class PagesController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('mconsole::pages.form');
 	}
 
 	/**
@@ -53,20 +54,9 @@ class PagesController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(PageRequest $request)
 	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
+		Page::create($request->all());
 	}
 
 	/**
@@ -77,7 +67,7 @@ class PagesController extends Controller
 	 */
 	public function edit($id)
 	{
-		return $this->view('mconsole::pages.add', [
+		return view('mconsole::pages.form', [
 			'item' => Page::find($id),
 		]);
 	}
@@ -89,9 +79,9 @@ class PagesController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(PageRequest $request, $id)
 	{
-		//
+		Page::find($id)->update($request->all());
 	}
 
 	/**
@@ -102,6 +92,10 @@ class PagesController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$page = Page::find($id);
+		if ($page->system)
+			return redirect()->back()->withErrors('System!!!');
+		
+		Page::destroy($id);
 	}
 }
