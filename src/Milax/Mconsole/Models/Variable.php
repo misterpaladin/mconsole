@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Variable extends Model
 {
-	
-	use \Cacheable;
-	
-	protected $fillable = ['key', 'value', 'description'];
-	
+    
+    use \Cacheable;
+    
+    protected $fillable = ['key', 'value', 'description'];
 }

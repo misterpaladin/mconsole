@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class MconsoleUploadPreset extends Model
 {
-	
-	use \Cacheable;
-	
-	protected $fillable = ['key', 'name', 'path', 'width', 'height', 'watermark', 'position', 'quality'];
-	
-	protected $casts = [
-		'extensions' => 'array',
-	];
-	
+    
+    use \Cacheable;
+    
+    protected $fillable = ['key', 'name', 'path', 'width', 'height', 'watermark', 'position', 'quality'];
+    
+    protected $casts = [
+        'extensions' => 'array',
+    ];
 }

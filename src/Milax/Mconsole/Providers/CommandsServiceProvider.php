@@ -8,28 +8,27 @@ class CommandsServiceProvider extends ServiceProvider
 {
     
     /**
-	 * Bootstrap the application events.
-	 *
-	 * @return void
-	 */
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
     public function boot()
     {
         //
     }
     
     /**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
+     * Register the service provider.
+     *
+     * @return void
+     */
     public function register()
     {
         $this->commands([
-			'mconsole:install',
-		]);
-		$this->app->bind('mconsole:install', function ($app) {
-			return new \Milax\Mconsole\Commands\Installer;
-		});
+            'mconsole:install',
+        ]);
+        $this->app->bind('mconsole:install', function ($app) {
+            return new \Milax\Mconsole\Commands\Installer;
+        });
     }
-    
 }

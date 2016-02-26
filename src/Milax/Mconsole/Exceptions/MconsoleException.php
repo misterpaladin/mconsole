@@ -2,4 +2,6 @@
 
 namespace Milax\Mconsole\Exceptions;
 
-class MconsoleException extends \Exception {}
+class MconsoleException extends \Exception
+{
+}

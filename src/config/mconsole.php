@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'menu' => [
-		
-	],
+    'menu' => [
+        
+    ],
 ];
