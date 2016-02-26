@@ -36,12 +36,15 @@ class MconsoleServiceProvider extends ServiceProvider
 				\Intervention\Image\ImageServiceProvider::class,
 				\Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
 				\Milax\Mconsole\Providers\CommandsServiceProvider::class,
+				Collective\Html\HtmlServiceProvider::class,
 			],
 			
 			'aliases' => [
 				// Third party packages
 				'Gravatar' => \Milax\Gravatar::class,
 				'Image' => \Intervention\Image\Facades\Image::class,
+				'Form' => Collective\Html\FormFacade::class,
+				'Html' => Collective\Html\HtmlFacade::class,
 				
 				// Helpers
 				'String' => \Milax\Mconsole\Helpers\String::class,
