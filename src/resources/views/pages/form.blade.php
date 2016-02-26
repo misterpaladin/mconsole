@@ -38,7 +38,6 @@
 				@include('mconsole::forms.textarea', [
 					'label' => trans('mconsole::pages.form.description'),
 					'name' => 'description',
-					'placeholder' => 'Описание для поиска',
 				])
 				
 				@include('mconsole::forms.select', [
