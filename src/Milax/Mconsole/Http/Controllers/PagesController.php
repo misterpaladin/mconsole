@@ -29,7 +29,7 @@ class PagesController extends Controller
 	 */
 	public function index()
 	{
-		return $this->setPerPage(20)->paginate('mconsole::pages.list', function ($item) {
+		return $this->setPerPage(20)->run('mconsole::pages.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Updated' => $item->updated_at->format('m.d.Y'),

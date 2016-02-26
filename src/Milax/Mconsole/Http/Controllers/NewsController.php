@@ -29,7 +29,7 @@ class NewsController extends Controller
 	 */
 	public function index()
 	{
-		return $this->setPerPage(20)->paginate('mconsole::news.list', function ($item) {
+		return $this->setPerPage(20)->run('mconsole::news.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Published' => $item->published_at->format('m.d.Y'),

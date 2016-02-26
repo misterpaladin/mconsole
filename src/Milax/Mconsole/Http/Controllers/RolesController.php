@@ -32,7 +32,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-		return $this->setPerPage(20)->paginate('mconsole::roles.list', function ($item) {
+		return $this->setPerPage(20)->run('mconsole::roles.list', function ($item) {
 			return [
 				'#' => $item->id,
 				'Name' => $item->name,
