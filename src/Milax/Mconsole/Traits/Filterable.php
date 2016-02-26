@@ -21,7 +21,6 @@ trait Filterable
 	 */
 	protected function filtrate($view, $cb, $query = null)
 	{
-		$adaptor->adapt($this);
 		if (!property_exists($this, 'query')) {
 			if ($query === null) {
 				$model = $this->model;
