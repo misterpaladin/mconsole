@@ -25,7 +25,7 @@ trait HasQueryTraits
 		if (!property_exists($this, 'query')) {
 			if ($query === null) {
 				$model = $this->model;
-				$this->query = $model::getQuery();
+				$this->query = $model::query();
 			} else {
 				$this->query = $query;
 			}
