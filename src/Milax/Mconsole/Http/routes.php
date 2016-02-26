@@ -19,6 +19,7 @@ Route::group([
 	Route::resource('/users', 'UsersController');
 	Route::resource('/roles', 'RolesController');
 	Route::resource('/permissions', 'PermissionsController');
+	Route::resource('/news', 'NewsController');
 	
 	
 });
