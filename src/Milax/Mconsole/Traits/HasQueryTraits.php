@@ -14,7 +14,7 @@ trait HasQueryTraits
 	 * 
 	 * @return
 	 */
-	public function run($view, $cb, $query = null)
+	public function run($view, $cb)
 	{
 		// Check if $model property exists
 		if (!property_exists($this, 'model')) {
@@ -23,12 +23,8 @@ trait HasQueryTraits
 		
 		// Check if $query property exists
 		if (!property_exists($this, 'query')) {
-			if ($query === null) {
-				$model = $this->model;
-				$this->query = $model::query();
-			} else {
-				$this->query = $query;
-			}
+			$model = $this->model;
+			$this->query = $model::query();
 		}
 		
 		// Filterable Trait
@@ -46,6 +42,19 @@ trait HasQueryTraits
 			'items' => TableProcessor::processItems($cb, $this->items),
 		]);
 		
+	}
+	
+	/**
+	 * Set query
+	 * 
+	 * @param IlluminateDatabaseEloquentBuilder $query [description]
+	 * 
+	 * @return $this
+	 */
+	public function setQuery(\Illuminate\Database\Eloquent\Builder $query)
+	{
+		$this->query = $query;
+		return $this;
 	}
 	
 }
