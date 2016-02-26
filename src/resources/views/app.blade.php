@@ -21,6 +21,10 @@
 		<link href="/massets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
 		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
@@ -178,9 +182,15 @@
 		<script src="/massets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/moment.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 		<!-- END CORE PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
+		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>

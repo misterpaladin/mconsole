@@ -14,6 +14,10 @@
 			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/news']) !!}
 		@endif
 			<div class="form-body">
+				@include('mconsole::forms.date', [
+					'label' => trans('mconsole::news.form.date'),
+					'name' => 'published',
+				])
 				@include('mconsole::forms.text', [
 					'label' => trans('mconsole::news.form.heading'),
 					'name' => 'heading',

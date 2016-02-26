@@ -31,6 +31,7 @@ class NewsController extends Controller
 		return $this->setPerPage(20)->paginate('mconsole::news.list', function ($item) {
 			return [
 				'#' => $item->id,
+				'Published' => $item->published_at->format('m.d.Y'),
 				'Updated' => $item->updated_at->format('m.d.Y'),
 				'Slug' => $item->slug,
 				'Heading' => $item->heading,
