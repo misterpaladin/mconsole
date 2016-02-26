@@ -4,7 +4,7 @@ namespace Milax\Mconsole\Http\Composers;
 
 use Illuminate\View\View;
 
-use Milax\Mconsole\Models\MconsoleMenu;
+use Milax\Mconsole\Contracts\Menu;
 
 use Auth;
 
@@ -13,6 +13,13 @@ use Auth;
  */
 class MenuComposer
 {
+	
+	protected $menu;
+	
+	public function __construct(Menu $menu)
+	{
+		$this->menu = $menu;
+	}
 	
 	/**
 	 * Compose mconsole menu tree.
@@ -25,7 +32,7 @@ class MenuComposer
 	{
 		$allowed = Auth::user()->role->menus;
 		
-		$all = MconsoleMenu::getCached();
+		$all = $this->menu->load();
 		
 		$filtered = collect();
 		

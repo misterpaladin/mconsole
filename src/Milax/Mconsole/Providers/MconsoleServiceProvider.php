@@ -52,6 +52,21 @@ class MconsoleServiceProvider extends ServiceProvider
 				'Filterable' => \Milax\Mconsole\Traits\Filterable::class
 			],
 			
+			// Interface to Implementation bindings
+			'bindings' => [
+				'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+			],
+			
+			// Dependencies for injection
+			'dependencies' => [
+				'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
+				'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+			],
+			
+		];
+		
+		$this->config = [
+			'mconsole.php',
 		];
 		
     }
@@ -73,6 +88,15 @@ class MconsoleServiceProvider extends ServiceProvider
 		$this->publishes([
 			__DIR__ . '/../../../../public' => base_path('public/massets'),
 		], 'assets');
+		
+		// Custom configurations
+		foreach ($this->config as $config) {
+			if (!file_exists(config_path($config))) {
+				$this->publishes([
+					__DIR__ . '/../../../../src/config/' . $config => config_path($config)
+				], 'config');
+			}
+		}
 		
 		// Copy database migrations
 		$migrations = [];
@@ -99,6 +123,14 @@ class MconsoleServiceProvider extends ServiceProvider
 		
 		foreach ($this->register['aliases'] as $alias => $class)
 			AliasLoader::getInstance()->alias($alias, $class);
+		
+		foreach ($this->register['bindings'] as $interface => $implementation)
+			$this->app->bind($interface, $implementation);
+		
+		foreach ($this->register['dependencies'] as $dependency => $class)
+			$this->app->bind($dependency, function ($app) use (&$class) {
+				return new $class();
+			});
 		
 	}
 
