@@ -23,10 +23,13 @@ class ModelsTest extends TestCase
 				
 				$dbCount = $namespaced::count();
 				
+				$data = [];
+				
 				if ($class == 'Page')
 					$data['slug'] = str_random(16);
-				else
-					$data = [];
+				
+				if ($class == 'MconsoleUser')
+					$data['email'] = str_random(10) . '@' . str_random(5) . 'com';
 				
 				$object = $namespaced::create($data);
 				
@@ -35,11 +38,6 @@ class ModelsTest extends TestCase
 				
 				// Tests depending on class
 				switch ($class) {
-					case 'Page':
-						$now = \Carbon\Carbon::now()->format('m.d.Y');
-						$this->assertEquals($object->updated, $now);
-						break;
-					
 					case 'MconsoleMenu':
 						$this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsToMany', $object->roles());
 						break;
@@ -50,11 +48,7 @@ class ModelsTest extends TestCase
 						break;
 					
 					case 'MconsoleUser':
-						$now = \Carbon\Carbon::now()->format('m.d.Y');
-						$this->assertEquals($object->updated, $now);
-						
 						$this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsTo', $object->role());
-						
 						break;
 				}
 				
