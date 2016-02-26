@@ -5,6 +5,11 @@ class LoginInterfaceTest extends TestCase
 	
 	public $user;
 	
+	/**
+	 * Share views
+	 * 
+	 * @return void
+	 */
 	public function startTestSuite()
 	{
 		parent::startTestSuite();
@@ -14,6 +19,11 @@ class LoginInterfaceTest extends TestCase
 		\View::share('mconsole_changelog', 'Testing');
 	}
 	
+	/**
+	 * Create test user
+	 *
+	 * @return void
+	 */
 	public function setUp()
 	{
 		parent::setUp();
