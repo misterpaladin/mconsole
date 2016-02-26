@@ -26,7 +26,7 @@ class MconsoleRolesSeeder
 	protected static $roles = [
 		[
 			'key' => 'root',
-			'name' => 'Root',
+			'name' => 'mconsole::roles.root',
 		],
 	];
 	
