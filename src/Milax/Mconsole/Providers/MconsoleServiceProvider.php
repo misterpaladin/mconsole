@@ -50,6 +50,7 @@ class MconsoleServiceProvider extends ServiceProvider
 				'String' => \Milax\Mconsole\Helpers\String::class,
 				
 				// Traits
+				'Cacheable' => \Milax\Cacheable::class,
 				'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
 				'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
 				'Filterable' => \Milax\Mconsole\Traits\Filterable::class

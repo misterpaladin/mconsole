@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class MconsoleOption extends Model
 {
 	
-	use \Milax\Cacheable;
+	use \Cacheable;
 	
 }

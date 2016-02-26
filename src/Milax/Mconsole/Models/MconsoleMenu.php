@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MconsoleMenu extends Model
 {
 	
-	use \Milax\Cacheable;
+	use \Cacheable;
 	
 	public function roles()
 	{
