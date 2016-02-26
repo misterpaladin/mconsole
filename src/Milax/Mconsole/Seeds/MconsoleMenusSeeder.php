@@ -178,20 +178,13 @@ class MconsoleMenusSeeder
      ];
 	
 	/**
-	 * List of menu keys that need to be deleted
-	 * @var array
-	 */
-	protected static $toDelete = [
-		
-	];
-	
-	/**
 	 * Run the database seeds.
 	 *
 	 * @return void
 	 */
 	public static function run()
 	{
+		DB::table(self::$table)->truncate();
 		// Insert new menu items
 		foreach (self::$menus as $menu) {
 			$exist = DB::table(self::$table)->where('key', $menu['key'])->first();
@@ -213,10 +206,6 @@ class MconsoleMenusSeeder
 				}
 			}
 		};
-		
-		// Delete unused menu items
-		foreach (self::$toDelete as $key)
-			DB::table(self::$table)->where('key', $key)->delete();
 		
 		return 'Installed ' . __CLASS__ . '.';
 	}
