@@ -7,7 +7,6 @@ use Illuminate\Foundation\AliasLoader;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
-    
     protected $register;
     
     /**
@@ -97,7 +96,7 @@ class MconsoleServiceProvider extends ServiceProvider
         foreach ($this->config as $config) {
             if (!file_exists(config_path($config))) {
                 $this->publishes([
-                    __DIR__ . '/../../../../src/config/' . $config => config_path($config)
+                    __DIR__ . '/../../../../src/config/' . $config => config_path($config),
                 ], 'config');
             }
         }

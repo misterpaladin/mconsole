@@ -11,7 +11,6 @@ use Auth;
  */
 class MenuComposer
 {
-    
     protected $menu;
     
     public function __construct(Menu $menu)

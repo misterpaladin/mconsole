@@ -10,7 +10,6 @@ use Request;
 
 class MconsoleValidatorServiceProvider extends ServiceProvider
 {
-    
     protected $request;
     protected $translator;
     protected $errors;

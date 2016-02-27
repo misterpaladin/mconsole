@@ -10,7 +10,6 @@ use Milax\Mconsole\Seeds\MconsoleRolesSeeder;
 
 class Installer extends Command
 {
-    
     protected $name;
     protected $email;
     protected $pass;

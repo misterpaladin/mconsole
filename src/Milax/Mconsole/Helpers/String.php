@@ -7,7 +7,6 @@ namespace Milax\Mconsole\Helpers;
  */
 class String
 {
-    
     public $string;
     
     /**
@@ -59,7 +58,7 @@ class String
      */
     public function removeParenthesis()
     {
-        $this->string = str_replace(['(', ')', ], null, $this->string);
+        $this->string = str_replace(['(', ')'], null, $this->string);
         return $this;
     }
 }

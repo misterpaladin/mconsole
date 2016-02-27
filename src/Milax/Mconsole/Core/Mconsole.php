@@ -15,43 +15,43 @@ use App;
  */
 class Mconsole
 {
-	
-	/**
-	 * Boot mconsole support vars.
-	 * 
-	 * @access public
-	 * @static
-	 * @return void
-	 */
-	public static function boot()
-	{
-		self::setLang();
-		self::loadViewComposers();
-	}
-	
-	/**
-	 * Set language depending on user settings.
-	 * 
-	 * @access public
-	 * @static
-	 * @return void
-	 */
-	public static function setLang()
-	{
-		if (strlen($lang = Auth::user()->lang) > 0)
-			App::setLocale($lang);
-	}
-	
-	/**
-	 * Load view composers.
-	 *
-	 * @access public
-	 * @static
-	 * @return void
-	 */
-	public static function loadViewComposers()
-	{
-		view()->composer('mconsole::partials.menu', 'Milax\Mconsole\Http\Composers\MenuComposer');
-		view()->composer('mconsole::app', 'Milax\Mconsole\Http\Composers\OptionsComposer');
-	}
+    /**
+     * Boot mconsole support vars.
+     * 
+     * @access public
+     * @static
+     * @return void
+     */
+    public static function boot()
+    {
+        self::setLang();
+        self::loadViewComposers();
+    }
+    
+    /**
+     * Set language depending on user settings.
+     * 
+     * @access public
+     * @static
+     * @return void
+     */
+    public static function setLang()
+    {
+        if (strlen($lang = Auth::user()->lang) > 0) {
+            App::setLocale($lang);
+        }
+    }
+    
+    /**
+     * Load view composers.
+     *
+     * @access public
+     * @static
+     * @return void
+     */
+    public static function loadViewComposers()
+    {
+        view()->composer('mconsole::partials.menu', 'Milax\Mconsole\Http\Composers\MenuComposer');
+        view()->composer('mconsole::app', 'Milax\Mconsole\Http\Composers\OptionsComposer');
+    }
 }

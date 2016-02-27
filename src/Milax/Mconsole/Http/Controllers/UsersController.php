@@ -14,7 +14,6 @@ use HasQueryTraits;
 
 class UsersController extends Controller
 {
-    
     use HasQueryTraits, Redirectable, Filterable, Paginatable;
     
     protected $redirectTo = '/mconsole/users';

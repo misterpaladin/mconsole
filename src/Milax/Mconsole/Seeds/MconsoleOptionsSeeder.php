@@ -6,7 +6,6 @@ use DB;
 
 class MconsoleOptionsSeeder
 {
-    
     /**
      * Table name for options
      * 

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class MconsoleUser extends Authenticatable
 {
-    
     protected $table = 'users';
     
     /**

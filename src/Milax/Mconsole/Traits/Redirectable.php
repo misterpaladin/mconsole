@@ -11,7 +11,6 @@ use Session;
  */
 trait Redirectable
 {
-    
     protected $redirects = [];
     
     /**

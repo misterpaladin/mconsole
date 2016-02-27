@@ -8,7 +8,6 @@ use Milax\Mconsole\Exceptions\FiltersPropertyException;
 
 trait Filterable
 {
-    
     /**
      * Start filtration process
      * 

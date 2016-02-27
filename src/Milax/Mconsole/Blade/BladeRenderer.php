@@ -7,7 +7,6 @@ use Illuminate\Contracts\View\Factory;
 
 class BladeRenderer
 {
-
     /**
      * @var
      */

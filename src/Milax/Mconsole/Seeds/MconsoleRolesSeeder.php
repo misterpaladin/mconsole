@@ -6,7 +6,6 @@ use DB;
 
 class MconsoleRolesSeeder
 {
-    
     /**
      * Table name for options
      * 

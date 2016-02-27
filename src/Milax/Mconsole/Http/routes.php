@@ -3,7 +3,7 @@
 Route::group([
     'prefix' => 'mconsole',
     'middleware' => ['web', 'mconsole'],
-    'namespace' => 'Milax\Mconsole\Http\Controllers'
+    'namespace' => 'Milax\Mconsole\Http\Controllers',
 ], function () {
     
     /** Authentication */

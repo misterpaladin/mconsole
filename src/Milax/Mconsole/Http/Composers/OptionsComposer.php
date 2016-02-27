@@ -7,7 +7,6 @@ use Milax\Mconsole\Models\MconsoleOption;
 
 class OptionsComposer
 {
-    
     /**
      * Compose mconsole options with app view.
      * 

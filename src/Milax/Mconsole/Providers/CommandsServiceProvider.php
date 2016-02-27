@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class CommandsServiceProvider extends ServiceProvider
 {
-    
     /**
      * Bootstrap the application events.
      *
