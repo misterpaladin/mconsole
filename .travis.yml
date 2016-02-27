@@ -32,4 +32,4 @@ script:
   - cd /home/travis/build/milaxcom/mconsole/laravel && php artisan mconsole:install --update
   - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && composer update --no-scripts
   - sudo service apache2 restart
-  - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && phpunit -c phpunit.ci.xml --testdox
+  - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && phpunit -c phpunit.ci.xml --debug
