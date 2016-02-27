@@ -1,3 +1,31 @@
+## 0.1.2
+
+Added:
+  - Added Page section
+  - Added News section
+  - Added Date form component with assets
+  - Added Textarea form component
+  - Added MergedMenu class (for merging database + file menu)
+
+Updated:
+  - Database menu is system now, custom menu will be located in `/config/mconsole.php` file
+
+Fixed:
+  - Installer fixed
+
+## 0.1.1
+
+Added:
+  - Added user roles
+  - Added Blade directive for new Variable model
+  - Added Redirectable class (trait for controllers)
+  - Added Filterable class (trait for controllers)
+  - Added Paginatable class (trait for controllers)
+
+Removed:
+  - CMSController class
+  - 50 megabytes of theme assets
+
 ## 0.1.0
 
 Added:
