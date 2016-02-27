@@ -84,7 +84,7 @@ class PagesTest extends TestCase
     {
         $dbCount = \DB::table('pages')->count();
         $page = \DB::table('pages')->orderBy('id', 'desc')->first();
-        $response = $this->auth()->call('DELETE', '/mconsole/pages/'.$page->id);
+        $response = $this->auth()->call('DELETE', '/mconsole/pages/' . $page->id);
         $this->assertEquals(302, $response->status());
         $this->assertEquals($dbCount - 1, \DB::table('pages')->count());
     }
