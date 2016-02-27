@@ -1,6 +1,6 @@
 # Milax Mconsole for Laravel 5.2.x
 
-[![Build Status](https://travis-ci.org/milaxcom/mconsole.svg?branch=master)](https://travis-ci.org/misterpaladin/mconsole) [![Latest Stable Version](https://poser.pugx.org/milax/mconsole/v/stable)](https://packagist.org/packages/milax/mconsole) [![Latest Unstable Version](https://poser.pugx.org/milax/mconsole/v/unstable)](https://packagist.org/packages/milax/mconsole) [![Total Downloads](https://poser.pugx.org/milax/mconsole/downloads)](https://packagist.org/packages/milax/mconsole)
+[![Build Status](https://travis-ci.org/milaxcom/mconsole.svg?branch=0.1)](https://travis-ci.org/milaxcom/mconsole) [![Latest Stable Version](https://poser.pugx.org/milax/mconsole/v/stable)](https://packagist.org/packages/milax/mconsole) [![Latest Unstable Version](https://poser.pugx.org/milax/mconsole/v/unstable)](https://packagist.org/packages/milax/mconsole) [![Total Downloads](https://poser.pugx.org/milax/mconsole/downloads)](https://packagist.org/packages/milax/mconsole)
 
 Experimental content management system package for [Laravel framework](https://laravel.com).
 
