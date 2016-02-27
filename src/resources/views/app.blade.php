@@ -30,6 +30,10 @@
 		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
 		<link href="/massets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
+		<!-- BEGIN PAGE LEVEL PLUGINS -->
+		<link href="/massets/css/links-editor.css" rel="stylesheet" type="text/css">
+		<link href="/massets/global/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.css" rel="stylesheet">
+		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
@@ -131,15 +135,7 @@
 							</div>
 							@endif
 							
-							<div class="row">
-								<div class="col-xs-12">
-									<div class="portlet light">
-										<div class="portlet-body form">
-											@yield('content', trans('mconsole::mconsole.text.welcome'))
-										</div>
-									</div>
-								</div>
-							</div>
+							@yield('content', trans('mconsole::mconsole.text.welcome'))
 							
 							@if (isset($paging))
 							<div class="row">
@@ -187,11 +183,19 @@
         <script src="/massets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/ckeditor/config.js" type="text/javascript"></script>
 		<!-- END CORE PLUGINS -->
+		<!-- BEGIN PAGE LEVEL PLUGINS -->
+		<script src="/massets/global/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.js" type="text/javascript"></script>
+		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
-		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
+		<!-- BEGIN PAGE LEVEL SCRIPTS -->
+		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
+		<script src="/massets/js/links-editor.js" type="text/javascript"></script>
+		<!-- END PAGE LEVEL SCRIPTS -->
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
