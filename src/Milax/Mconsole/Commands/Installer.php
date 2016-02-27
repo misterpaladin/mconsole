@@ -111,8 +111,8 @@ class Installer extends Command
     {
         $this->comment('Creating admin user..');
         while (!$this->userCreated) {
-            $name = $this->ask('Enter admin name');
             $email = $this->ask('Enter admin email');
+            $name = $this->ask('Enter admin name');
             $pass = $this->ask('Enter admin password');
             if (DB::table('users')->where('email', $email)->count() == 0) {
                 DB::table('users')->insert([
