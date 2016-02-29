@@ -2,6 +2,7 @@
 
 namespace Milax\Mconsole\Http\Controllers;
 
+use Milax;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\PageRequest;
 use Milax\Mconsole\Models\Page;
@@ -52,7 +53,23 @@ class PagesController extends Controller
      */
     public function store(PageRequest $request)
     {
-        Page::create($request->all());
+        $page = Page::create($request->all());
+        if (strlen($request->input('links')) > 0) {
+            $links = collect(json_decode($request->input('links'), true));
+            $page->links()->whereNotIn('id', $links->lists('id'))->delete();
+            
+            foreach ($links as $link) {
+                if (strlen($link['id']) > 0) {
+                    if ($dbLink = Milax\Mconsole\Models\ContentLink::find((int) $link['id'])) {
+                        $dbLink->update($link);
+                    } else {
+                        $page->links()->create($link);
+                    }
+                } else {
+                    $page->links()->create($link);
+                }
+            }
+        }
     }
 
     /**
@@ -64,8 +81,10 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
+        $page = Page::with('links')->find($id);
+        $page->links = $page->links->sortBy('order')->toJson();
         return view('mconsole::pages.form', [
-            'item' => Page::find($id),
+            'item' => $page,
         ]);
     }
 
@@ -79,7 +98,26 @@ class PagesController extends Controller
      */
     public function update(PageRequest $request, $id)
     {
-        Page::find($id)->update($request->all());
+        $page = Page::find($id);
+        
+        if (strlen($request->input('links')) > 0) {
+            $links = collect(json_decode($request->input('links'), true));
+            $page->links()->whereNotIn('id', $links->lists('id'))->delete();
+            
+            foreach ($links as $link) {
+                if (strlen($link['id']) > 0) {
+                    if ($dbLink = Milax\Mconsole\Models\ContentLink::find((int) $link['id'])) {
+                        $dbLink->update($link);
+                    } else {
+                        $page->links()->create($link);
+                    }
+                } else {
+                    $page->links()->create($link);
+                }
+            }
+        }
+        
+        $page->update($request->all());
     }
 
     /**

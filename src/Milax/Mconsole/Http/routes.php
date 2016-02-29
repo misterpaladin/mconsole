@@ -21,4 +21,6 @@ Route::group([
     Route::resource('/permissions', 'PermissionsController');
     Route::resource('/news', 'NewsController');
     
+    Route::resource('/test', 'TestController');
+    
 });

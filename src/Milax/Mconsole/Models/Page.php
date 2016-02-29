@@ -16,4 +16,14 @@ class Page extends Model
             $this->attributes['slug'] = str_slug($value);
         }
     }
+    
+    /**
+     * ContentLink relationship
+     * 
+     * @return Illuminate\Eloquent\Relatios\HasMany
+     */
+    public function links()
+    {
+        return $this->hasMany('Milax\Mconsole\Models\ContentLink');
+    }
 }
