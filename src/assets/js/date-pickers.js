@@ -5,7 +5,7 @@ var DatePickers = {
 DatePickers.init = function () {
 	if ($(DatePickers.class).length > 0) {
 		$(DatePickers.class).datepicker({
-			format: 'DD/MM/YYYY',
+			format: 'mm/dd/yyyy',
 		});
 	}
 }
