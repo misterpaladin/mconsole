@@ -61,13 +61,19 @@ class LocalizationTest extends TestCase
      */
     public function testLocalizationFilesContents()
     {
-        function m_array_diff_key($a1, $a2)
+        $results = [];
+        
+        // Anonymous recursive function to compare multidimensional arrays
+        function m_array_diff_key($a1, $a2, $lKey)
         {
             $result = array_diff_key($a1, $a2);
+            if (count($result) > 0) {
+                dump(json_encode(array_dot($result)) . ' is not localized to ' . $lKey);
+            }
             foreach ($a1 as $key => $base) {
                 if (is_array($base)) {
                     if (isset($a2[$key])) {
-                        $result[] = m_array_diff_key($a1[$key], $a2[$key]);
+                        $result[] = m_array_diff_key($a1[$key], $a2[$key], $lKey);
                     }
                 }
             }
@@ -75,11 +81,19 @@ class LocalizationTest extends TestCase
             return $result;
         }
         
-        foreach (self::$languages as $lang) {
+        // Collect results
+        foreach (self::$languages as $lKey => $lang) {
             foreach ($lang['files'] as $file) {
                 $base = include(self::$base['path'] . '/' . $file);
                 $localization = include($lang['path'] . '/' . $file);
-                dd(m_array_diff_key($base, $localization));
+                $results[$lKey][] = m_array_diff_key($base, $localization, $lKey);
+            }
+        }
+        
+        // Assertion
+        foreach ($results as $lKey => $lResult) {
+            foreach ($lResult as $result) {
+                $this->assertTrue(count($result) == 0);
             }
         }
     }
