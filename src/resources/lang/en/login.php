@@ -22,8 +22,5 @@ return [
     ],
     'text' => [
         'forgot_enter_email' => 'Enter your e-mail address below to reset your password.',
-        'test' => [
-            'test2' => 'test3',
-        ],
     ],
 ];
