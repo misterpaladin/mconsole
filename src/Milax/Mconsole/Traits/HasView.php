@@ -8,9 +8,7 @@ trait HasView
 {
     protected function setTitle($value)
     {
-        view()->composer('mconsole::app', function ($view) use (&$value) {
-            $view->with('pageTitle', $value  . ' | Mconsole');
-        });
+        View::share('pageTitle', $value . ' | Mconsole');
         return $this;
     }
     
