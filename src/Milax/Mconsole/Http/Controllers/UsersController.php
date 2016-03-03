@@ -26,16 +26,16 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $this->setText('Email', 'email', true)
-            ->setText('#', 'id', true)
-            ->setSelect('Role', 'role_id', MconsoleRole::all()->lists('name', 'id'), true);
+        $this->setText(trans('mconsole::users.filter.email'), 'email', true)
+            ->setText(trans('mconsole::users.filter.id'), 'id', true)
+            ->setSelect(trans('mconsole::users.filter.role'), 'role_id', MconsoleRole::all()->lists('name', 'id'), true);
         
         return $this->setPerPage(2)->run('mconsole::users.list', function ($item) {
             return [
-                '#' => $item->id,
-                'Updated' => $item->updated_at->format('Y'),
-                'Email' => $item->email,
-                'Name' => $item->name,
+                trans('mconsole::users.table.id') => $item->id,
+                trans('mconsole::users.table.updated') => $item->updated_at->format('Y'),
+                trans('mconsole::users.table.email') => $item->email,
+                trans('mconsole::users.table.name') => $item->name,
             ];
         });
     }
