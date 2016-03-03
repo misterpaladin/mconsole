@@ -2,8 +2,8 @@
 
 class LocalizationTest extends TestCase
 {
-    private static $languages;
-    private static $base;
+    private static $languages = [];
+    private static $base = [];
     
     /**
      * Collect languages
