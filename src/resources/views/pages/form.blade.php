@@ -20,27 +20,49 @@
 					</div>
 				</div>
 				<div class="portlet-body form">
-					@include('mconsole::forms.text', [
-						'label' => trans('mconsole::pages.form.heading'),
-						'name' => 'heading',
-					])
-					@include('mconsole::forms.text', [
-						'label' => trans('mconsole::pages.form.slug'),
-						'name' => 'slug',
-					])
-					
-					@include('mconsole::forms.ckeditor', [
-						'label' => trans('mconsole::pages.form.preview'),
-						'name' => 'preview',
-					])
-					{{-- @include('mconsole::forms.textarea', [
-						'label' => trans('mconsole::pages.form.text'),
-						'name' => 'text',
-					]) --}}
-					@include('mconsole::forms.ckeditor', [
-						'label' => trans('mconsole::pages.form.text'),
-						'name' => 'text',
-					])
+                    @include('mconsole::forms.text', [
+                        'label' => trans('mconsole::pages.form.slug'),
+                        'name' => 'slug',
+                    ])
+                    <div class="tabbable-line">
+						<ul class="nav nav-tabs">
+                            @foreach ($languages as $key => $language)
+    							<li @if ($key == 0) class="active" @endif>
+    								<a href="#lang_{{ $language->id }}" data-toggle="tab"> {{ $language->name }}  </a>
+    							</li>
+                            @endforeach
+						</ul>
+						<div class="tab-content">
+                            @foreach ($languages as $key =>$language)
+    							<div class="tab-pane fade @if ($key == 0) active @endif in" id="lang_{{ $language->id }}">
+                                    @include('mconsole::forms.text', [
+                						'label' => trans('mconsole::pages.form.heading'),
+                						'name' => 'heading[' . $language->key . ']',
+                					])
+                                    <hr />
+                                    <h3>{{ trans('mconsole::pages.form.content') }}</h3>
+                					@include('mconsole::forms.textarea', [
+                						'label' => trans('mconsole::pages.form.preview'),
+                						'name' => 'preview[' . $language->key . ']',
+                					])
+                					@include('mconsole::forms.textarea', [
+                						'label' => trans('mconsole::pages.form.text'),
+                						'name' => 'text[' . $language->key . ']',
+                					])
+                                    <hr />
+                                    <h3>{{ trans('mconsole::pages.form.seo') }}</h3>
+                                    @include('mconsole::forms.text', [
+    									'label' => trans('mconsole::pages.form.title'),
+    									'name' => 'title[' . $language->key . ']',
+    								])
+    								@include('mconsole::forms.text', [
+    									'label' => trans('mconsole::pages.form.description'),
+    									'name' => 'description[' . $language->key . ']',
+    								])
+    							</div>
+                            @endforeach
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -56,30 +78,15 @@
 					<div class="tabbable-line">
 						<ul class="nav nav-tabs">
 							<li class="active">
-								<a href="#tab_1" data-toggle="tab"> {{ trans('mconsole::pages.form.seo') }}  </a>
+								<a href="#tab_1" data-toggle="tab"> {{ trans('mconsole::pages.form.options') }}  </a>
 							</li>
 							<li>
-								<a href="#tab_2" data-toggle="tab"> {{ trans('mconsole::pages.form.options') }} </a>
+								<a href="#tab_2" data-toggle="tab"> {{ trans('mconsole::pages.form.links') }} </a>
 							</li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane fade active in" id="tab_1">
-								@include('mconsole::forms.text', [
-									'label' => trans('mconsole::pages.form.title'),
-									'name' => 'title',
-								])
-								@include('mconsole::forms.textarea', [
-									'label' => trans('mconsole::pages.form.description'),
-									'name' => 'description',
-								])
-								@include('mconsole::forms.hidden', [
-									'label' => trans('mconsole::pages.form.links'),
-									'name' => 'links',
-									'class' => 'links-editor'
-								])
-							</div>
-							<div class="tab-pane fade" id="tab_2">
-								@include('mconsole::forms.select', [
+                                @include('mconsole::forms.select', [
 									'label' => trans('mconsole::pages.form.hide_heading.name'),
 									'name' => 'hide_heading',
 									'options' => [
@@ -102,6 +109,13 @@
 										'1' => trans('mconsole::pages.form.enabled.true'),
 										'0' => trans('mconsole::pages.form.enabled.false'),
 									],
+								])
+							</div>
+							<div class="tab-pane fade" id="tab_2">
+                                @include('mconsole::forms.hidden', [
+									'label' => trans('mconsole::pages.form.links'),
+									'name' => 'links',
+									'class' => 'links-editor'
 								])
 							</div>
 						</div>

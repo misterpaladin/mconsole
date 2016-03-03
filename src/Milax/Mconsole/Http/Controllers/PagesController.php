@@ -9,6 +9,7 @@ use Milax\Mconsole\Models\Page;
 use Paginatable;
 use Redirectable;
 use HasQueryTraits;
+use Milax\Mconsole\Contracts\Localizator;
 
 class PagesController extends Controller
 {
@@ -16,7 +17,12 @@ class PagesController extends Controller
 
     protected $redirectTo = '/mconsole/pages';
     protected $model = 'Milax\Mconsole\Models\Page';
-
+    
+    public function __construct(Localizator $localizator)
+    {
+        $this->localizator = $localizator;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -26,10 +32,10 @@ class PagesController extends Controller
     {
         return $this->setPerPage(20)->run('mconsole::pages.list', function ($item) {
             return [
-                '#' => $item->id,
-                'Updated' => $item->updated_at->format('m.d.Y'),
-                'Slug' => $item->slug,
-                'Heading' => $item->heading,
+                trans('mconsole::pages.table.id') => $item->id,
+                trans('mconsole::pages.table.updated') => $item->updated_at->format('m.d.Y'),
+                trans('mconsole::pages.table.slug') => $item->slug,
+                trans('mconsole::pages.table.heading') => $item->heading['en'],
             ];
         });
     }
@@ -82,7 +88,6 @@ class PagesController extends Controller
     public function edit($id)
     {
         $page = Page::with('links')->find($id);
-        $page->links = $page->links->sortBy('order')->toJson();
         return view('mconsole::pages.form', [
             'item' => $page,
         ]);
