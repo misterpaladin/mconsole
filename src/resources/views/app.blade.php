@@ -11,7 +11,7 @@
 	<!-- BEGIN HEAD -->
 	<head>
 		<meta charset="utf-8" />
-		<title>@yield('title', 'Mconsole')</title>
+		<title>{{ (isset($pageTitle)) ? $pageTitle : 'Mconsole' }}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -102,8 +102,8 @@
 					<div class="container">
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
-							<h1>@yield('page.title', trans('mconsole::mconsole.text.welcome'))
-								<small>@yield('page.subtitle', trans('mconsole::mconsole.text.version', ['version' => version]))</small>
+							<h1>{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.welcome') }}
+								<small>{{ (isset($pageSubcaption)) ? $pageSubcaption : trans('mconsole::mconsole.text.version', ['version' => version]) }}</small>
 							</h1>
 						</div>
 						<!-- END PAGE TITLE -->
@@ -123,7 +123,7 @@
 								<div class="portlet-title">
 									<div class="caption">
 										<i class="icon-magnifier font-grey-gallery"></i>
-										<span class="caption-subject bold font-grey-gallery uppercase">Filter</span>
+										<span class="caption-subject bold font-grey-gallery uppercase">{{ trans('mconsole::traits.filterable.filter') }}</span>
 									</div>
 									<div class="tools">
 										<a href="" class="{{ ($filtered) ? 'collapse' : 'expand' }}"> </a>

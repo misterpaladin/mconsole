@@ -6,14 +6,15 @@ use Milax;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\PageRequest;
 use Milax\Mconsole\Models\Page;
+use Milax\Mconsole\Contracts\Localizator;
 use Paginatable;
 use Redirectable;
 use HasQueryTraits;
-use Milax\Mconsole\Contracts\Localizator;
+use HasView;
 
 class PagesController extends Controller
 {
-    use HasQueryTraits, Redirectable, Paginatable;
+    use HasQueryTraits, Redirectable, Paginatable, HasView;
 
     protected $redirectTo = '/mconsole/pages';
     protected $model = 'Milax\Mconsole\Models\Page';
@@ -21,6 +22,8 @@ class PagesController extends Controller
     public function __construct(Localizator $localizator)
     {
         $this->localizator = $localizator;
+        $this->setTitle(trans('mconsole::sections.pages.title'));
+        $this->setCaption(trans('mconsole::sections.pages.title'));
     }
     
     /**

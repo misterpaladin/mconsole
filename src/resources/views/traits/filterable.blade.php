@@ -10,7 +10,7 @@
 				@elseif ($filter['type'] == 'select')
 					<div class="col-md-4">
 						<select name="{{ $filter['key'] }}" class="form-control">
-							<option value="">Not selected</option>
+							<option value="">{{ trans('mconsole::traits.filterable.notselected') }}</option>
 							@foreach ($filter['options'] as $key => $name)
 								@if (Request::query($filter['key']) == $key)
 									<option value="{{ $key }}" selected="selected">{{ $name }}</option>
@@ -27,8 +27,8 @@
 	<div class="form-actions">
 		<div class="row">
 			<div class="col-md-offset-3 col-md-9">
-				<button type="submit" class="btn btn-sm blue">Apply filter</button>
-				<a href="#" class="btn btn-sm">Reset filter</a>
+				<button type="submit" class="btn btn-sm blue">{{ trans('mconsole::traits.filterable.apply') }}</button>
+				<a href="#" class="btn btn-sm">{{ trans('mconsole::traits.filterable.reset') }}</a>
 			</div>
 		</div>
 	</div>

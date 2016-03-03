@@ -1,9 +1,5 @@
 @extends('mconsole::app')
 
-@section('title', trans('mconsole::sections.roles.title') . ' | Mconsole')
-@section('page.title', trans('mconsole::sections.roles.title'))
-@section('page.subtitle', trans('mconsole::sections.list'))
-
 @section('content')
 
 <div class="row">

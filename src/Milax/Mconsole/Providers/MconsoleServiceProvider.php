@@ -54,6 +54,7 @@ class MconsoleServiceProvider extends ServiceProvider
                 'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
                 'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
                 'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
+                'HasView' => \Milax\Mconsole\Traits\HasView::class,
             ],
             
             // Interface to Implementation bindings
