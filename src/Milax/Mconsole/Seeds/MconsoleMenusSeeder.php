@@ -39,8 +39,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.pages.index',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Create page',
                     'key' => 'pages_form',
                     'translation' => 'menu.pages.form.name',
@@ -49,8 +48,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.pages.store',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Edit pages',
                     'key' => 'pages_update',
                     'translation' => 'menu.pages.update.name',
@@ -58,8 +56,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.pages.edit',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Delete pages',
                     'key' => 'pages_delete',
                     'translation' => 'menu.pages.delete.name',
@@ -67,8 +64,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.pages.destroy',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'All news',
                     'key' => 'news_all',
                     'translation' => 'menu.news.list.name',
@@ -77,8 +73,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.news.index',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Create news',
                     'key' => 'news_form',
                     'translation' => 'menu.news.form.name',
@@ -87,8 +82,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.news.store',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Edit news',
                     'key' => 'news_update',
                     'translation' => 'menu.news.update.name',
@@ -96,8 +90,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.news.edit',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Delete news',
                     'key' => 'news_delete',
                     'translation' => 'menu.news.delete.name',
@@ -107,8 +100,7 @@ class MconsoleMenusSeeder
                     'enabled' => true,
                 ],
             ],
-        ],
-        [
+        ], [
             'name' => 'Users',
             'key' => 'users',
             'translation' => 'menu.users.name',
@@ -124,8 +116,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.users.index',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Create user',
                     'key' => 'users_create',
                     'translation' => 'menu.users.create.name',
@@ -134,8 +125,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.users.create',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Edit users',
                     'key' => 'users_update',
                     'translation' => 'menu.users.update.name',
@@ -143,8 +133,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.users.edit',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Delete users',
                     'key' => 'users_delete',
                     'translation' => 'menu.users.delete.name',
@@ -152,8 +141,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.users.destroy',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'All roles',
                     'key' => 'roles_all',
                     'translation' => 'menu.roles.list.name',
@@ -162,8 +150,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.roles.index',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Create role',
                     'key' => 'roles_create',
                     'translation' => 'menu.roles.create.name',
@@ -172,8 +159,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.roles.create',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Edit roles',
                     'key' => 'roles_update',
                     'translation' => 'menu.roles.update.name',
@@ -181,8 +167,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.roles.edit',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Delete roles',
                     'key' => 'roles_delete',
                     'translation' => 'menu.roles.delete.name',
@@ -190,8 +175,7 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.roles.destroy',
                     'visible' => false,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'All permissions',
                     'key' => 'permissions_all',
                     'translation' => 'menu.permissions.list.name',
@@ -200,13 +184,58 @@ class MconsoleMenusSeeder
                     'route' => 'mconsole.permissions.index',
                     'visible' => true,
                     'enabled' => true,
-                ],
-                [
+                ], [
                     'name' => 'Edit permissions',
                     'key' => 'permissions_update',
                     'translation' => 'menu.permissions.update.name',
                     'description' => 'menu.permissions.update.description',
                     'route' => 'mconsole.permissions.store',
+                    'visible' => false,
+                    'enabled' => true,
+                ],
+            ],
+        ], [
+            'name' => 'Инструменты',
+            'key' => 'tools',
+            'translation' => 'menu.tools.name',
+            'visible' => true,
+            'enabled' => true,
+            'child' => [
+                [
+                    'name' => 'Presets',
+                    'key' => 'presets_all',
+                    'translation' => 'menu.presets.list.name',
+                    'url' => 'presets',
+                    'description' => 'menu.presets.list.description',
+                    'route' => 'mconsole.presets.index',
+                    'visible' => true,
+                    'enabled' => true,
+                ],
+                [
+                    'name' => 'Create preset',
+                    'key' => 'presets_form',
+                    'translation' => 'menu.presets.form.name',
+                    'url' => 'presets/create',
+                    'description' => 'menu.presets.form.description',
+                    'route' => 'mconsole.presets.store',
+                    'visible' => false,
+                    'enabled' => true,
+                ],
+                [
+                    'name' => 'Edit presets',
+                    'key' => 'presets_update',
+                    'translation' => 'menu.presets.update.name',
+                    'description' => 'menu.presets.update.description',
+                    'route' => 'mconsole.presets.edit',
+                    'visible' => false,
+                    'enabled' => true,
+                ],
+                [
+                    'name' => 'Delete presets',
+                    'key' => 'presets_delete',
+                    'translation' => 'menu.presets.delete.name',
+                    'description' => 'menu.presets.delete.description',
+                    'route' => 'mconsole.presets.destroy',
                     'visible' => false,
                     'enabled' => true,
                 ],
