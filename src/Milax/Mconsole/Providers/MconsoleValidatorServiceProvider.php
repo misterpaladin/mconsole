@@ -60,7 +60,7 @@ class MconsoleValidatorServiceProvider extends ServiceProvider
                     // Filter presets by file extensions
                     $match = 0;
                     foreach ($presets as $preset) {
-                        if (in_array($value->getClientOriginalExtension(), $preset->extensions)) {
+                        if (in_array($value->getClientOriginalExtension(), json_decode($preset->extensions))) {
                             $match++;
                         }
                     }
