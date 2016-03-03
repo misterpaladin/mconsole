@@ -4,7 +4,7 @@ namespace Milax\Mconsole\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class UploadableRequest extends Request
+class MconsoleUploadPresetRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,14 @@ class UploadableRequest extends Request
     public function rules()
     {
         return [
-            'uploadable.*.files.*' => 'presets_required|presets_extensions|image|presets_image_size',
+            'name' => 'required',
+            'path' => 'required|string',
+            'width' => 'integer',
+            'height' => 'integer',
+            'quality' => 'integer',
+            'extensions' => 'json',
+            'min_width' => 'integer',
+            'min_height' => 'integer',
         ];
     }
 }

@@ -36,6 +36,7 @@ class MconsoleServiceProvider extends ServiceProvider
                 \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
                 \Milax\Mconsole\Providers\CommandsServiceProvider::class,
                 \Collective\Html\HtmlServiceProvider::class,
+                \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
             ],
             
             'aliases' => [
