@@ -10,7 +10,7 @@
 									@foreach ($items->first() as $key => $item)
 										<th>{{ $key }}</th>
 									@endforeach
-									<th>Actions</th>
+									<th>{{ trans('mconsole::tables.actions') }}</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -20,8 +20,8 @@
 											<td>{{ $value }}</td>
 										@endforeach
 										<td>
-											{!! Form::open(['method' => 'DELETE', 'url' => Request::url() . '/' . $item['#']]) !!}
-											<a href="{{ Request::url() }}/{{ $item['#'] }}/edit" class="btn btn-xs blue">{{ trans('mconsole::tables.edit') }}</a>
+											{!! Form::open(['method' => 'DELETE', 'url' => Request::url() . '/' . $item->values()->first()]) !!}
+											<a href="{{ Request::url() }}/{{ $item->values()->first() }}/edit" class="btn btn-xs blue">{{ trans('mconsole::tables.edit') }}</a>
 											{!! Form::submit(trans('mconsole::tables.delete'), ['class' => 'btn btn-xs btn-danger']) !!}
 											{!! Form::close() !!}
 										</td>
