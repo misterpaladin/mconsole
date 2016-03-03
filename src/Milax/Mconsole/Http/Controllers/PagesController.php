@@ -35,7 +35,7 @@ class PagesController extends Controller
                 trans('mconsole::pages.table.id') => $item->id,
                 trans('mconsole::pages.table.updated') => $item->updated_at->format('m.d.Y'),
                 trans('mconsole::pages.table.slug') => $item->slug,
-                trans('mconsole::pages.table.heading') => $item->heading['en'],
+                trans('mconsole::pages.table.heading') => json_encode($item->heading),
             ];
         });
     }
