@@ -139,7 +139,7 @@ class PagesController extends Controller
     {
         $page = Page::find($id);
         if ($page->system) {
-            return redirect()->back()->withErrors('System!!!');
+            return redirect()->back()->withErrors(trans('mconsole::mconsole.errors.system'));
         }
 
         Page::destroy($id);
