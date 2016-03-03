@@ -20,6 +20,7 @@ Route::group([
     Route::resource('/roles', 'RolesController');
     Route::resource('/permissions', 'PermissionsController');
     Route::resource('/news', 'NewsController');
+    Route::resource('/presets', 'PresetsController');
     
     Route::resource('/test', 'TestController');
     
