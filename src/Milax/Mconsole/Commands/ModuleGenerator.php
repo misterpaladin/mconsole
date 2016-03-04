@@ -52,20 +52,13 @@ return [
     'menu' => [],
     'register' => [
         'middleware' => [],
-        
         'providers' => [],
-        
         'aliases' => [],
-        
         'bindings' => [],
-        
         'dependencies' => [],
     ],
-    
     'config' => [],
-    
     'migrations' => [],
-    
     'routes' => [],
 ];", $class));
         File::put(app_path(sprintf('Mconsole/%s/Http/routes.php', $class)), sprintf("<?php
