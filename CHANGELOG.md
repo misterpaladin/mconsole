@@ -1,6 +1,9 @@
 ## 0.2
 
 Added:
+  - Modular application structure
+  - Module loader class
+  - Module generator class (`php artisan make:module` to generate custom module in `/app/Mconsole` directory)
   - Upload presets section
   - More tests
   - View composer (takes page headings from database menu)
@@ -10,7 +13,8 @@ Fixed:
   - Custom validators
 
 Removed:
-  - Removed all localization files, will be localized at 1.0
+  - All localization files removed, will be localized at 1.0
+  - News section removed, available as composer package `milax/mconsole-news`
 
 ## 0.1.2
 
