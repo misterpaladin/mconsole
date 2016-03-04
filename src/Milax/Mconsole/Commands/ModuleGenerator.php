@@ -45,6 +45,28 @@ class ModuleGenerator extends Command
         }
         
         File::makeDirectory(app_path(sprintf('Mconsole/%s/Http/Controllers', $class)), 0775, true, true);
+        File::put(app_path(sprintf('Mconsole/%s/bootstrap.php', $class)), sprintf("<?php
+
+return [
+    'name' => '%s',
+    'menu' => [],
+    'register' => [
+        'middleware' => [],
+        
+        'providers' => [],
+        
+        'aliases' => [],
+        
+        'bindings' => [],
+        
+        'dependencies' => [],
+    ],
+    
+    'config' => [],
+    
+    'migrations' => [],
+];
+", $class));
         File::put(app_path(sprintf('Mconsole/%s/Http/routes.php', $class)), sprintf("<?php
 
 Route::group([
