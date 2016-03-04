@@ -48,7 +48,7 @@ class ModuleGenerator extends Command
         File::put(app_path(sprintf('Mconsole/%s/bootstrap.php', $class)), sprintf("<?php
 
 return [
-    'name' => '%s',
+    'name' => 'News',
     'menu' => [],
     'register' => [
         'middleware' => [],
@@ -65,8 +65,9 @@ return [
     'config' => [],
     
     'migrations' => [],
-];
-", $class));
+    
+    'routes' => [],
+];", $class));
         File::put(app_path(sprintf('Mconsole/%s/Http/routes.php', $class)), sprintf("<?php
 
 Route::group([
