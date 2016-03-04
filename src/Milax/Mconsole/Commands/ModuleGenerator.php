@@ -19,7 +19,7 @@ class ModuleGenerator extends Command
      *
      * @var string
      */
-    protected $description = 'Install mconsole package';
+    protected $description = 'Create new Mconsole module';
 
     /**
      * Create a new command instance.
