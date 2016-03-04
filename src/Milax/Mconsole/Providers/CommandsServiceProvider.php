@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 class CommandsServiceProvider extends ServiceProvider
 {
+    protected $commands = [
+        'mconsole:install' => \Milax\Mconsole\Commands\Installer::class,
+        'make:module' => \Milax\Mconsole\Commands\ModuleGenerator::class,
+    ];
+    
     /**
      * Bootstrap the application events.
      *
@@ -23,11 +28,11 @@ class CommandsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands([
-            'mconsole:install',
-        ]);
-        $this->app->bind('mconsole:install', function ($app) {
-            return new \Milax\Mconsole\Commands\Installer;
-        });
+        $this->commands($this->commands);
+        foreach ($this->commands as $command => $class) {
+            $this->app->bind($command, function ($app) use (&$class) {
+                return new $class();
+            });
+        }
     }
 }
