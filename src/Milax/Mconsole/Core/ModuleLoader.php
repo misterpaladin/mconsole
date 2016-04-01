@@ -9,21 +9,36 @@ use File;
 
 class ModuleLoader
 {
+    protected $provider;
+    
+    /**
+     * Create new loader instance
+     */
+    public function __construct($provider)
+    {
+        $this->provider = $provider;
+    }
+    
     /**
      * Scan for new modules
      * 
      * @return 
      */
-    public static function scan()
+    public function scan()
     {
+        $modules = [];
         $psr4 = require sprintf('%s/../../../../../../../vendor/composer/autoload_psr4.php', __DIR__);
         foreach ($psr4 as $class => $path) {
             if (strpos($class, MODULESEARCH) > -1) {
                 $file = sprintf('%s/%s', $path[0], BOOTSTRAPFILE);
                 if (File::exists($file)) {
-                    return self::load($file);
+                    $modules[] = include $file;
                 }
             }
+        }
+        
+        if (count($modules) > 0) {
+            $this->load($modules);
         }
     }
     
@@ -33,9 +48,18 @@ class ModuleLoader
      * @param  string $file
      * @return void
      */
-    public static function load($file)
+    public function load($modules)
     {
-        return include $file;
+        if (count($modules) > 0) {
+            foreach ($modules as $module) {
+                $this->provider->routes = array_merge_recursive($this->provider->routes, $module['routes']);
+                $this->provider->register = array_merge_recursive($this->provider->register, $module['register']);
+                $this->provider->config = array_merge_recursive($this->provider->config, $module['config']);
+                $this->provider->translations = array_merge_recursive($this->provider->translations, $module['translations']);
+                $this->provider->views = array_merge_recursive($this->provider->views, $module['views']);
+                $this->provider->relationships = array_merge_recursive($this->provider->relationships, $module['relationships']);
+            }
+        }
     }
     
     /**
@@ -43,7 +67,7 @@ class ModuleLoader
      * 
      * @return void
      */
-    public static function install($class)
+    public function install($class)
     {
         \Artisan::call('migrate', [
             '--path' => '',
@@ -55,7 +79,7 @@ class ModuleLoader
      * 
      * @return void
      */
-    public static function uninstall($class)
+    public function uninstall($class)
     {
         \Artisan::call('migrate:rollback', [
             '--path' => '',

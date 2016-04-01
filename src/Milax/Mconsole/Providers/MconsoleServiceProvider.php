@@ -4,10 +4,73 @@ namespace Milax\Mconsole\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use Milax\Mconsole\Core\ModuleLoader;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
-    protected $register;
+    public $register = [
+        'middleware' => [
+            'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
+        ],
+        
+        'providers' => [
+            \Intervention\Image\ImageServiceProvider::class,
+            \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
+            \Milax\Mconsole\Providers\CommandsServiceProvider::class,
+            \Collective\Html\HtmlServiceProvider::class,
+            \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
+        ],
+        
+        'aliases' => [
+            // Third party packages
+            'Gravatar' => \Milax\Gravatar::class,
+            'Image' => \Intervention\Image\Facades\Image::class,
+            'Form' => \Collective\Html\FormFacade::class,
+            'Html' => \Collective\Html\HtmlFacade::class,
+            
+            // Helpers
+            'String' => \Milax\Mconsole\Helpers\String::class,
+            
+            // Traits
+            'Cacheable' => \Milax\Cacheable::class,
+            'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
+            'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
+            'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
+            'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
+        ],
+        
+        // Interface to Implementation bindings
+        'bindings' => [
+            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+            'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
+        ],
+        
+        // Dependencies for injection
+        'dependencies' => [
+            'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
+            'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+        ],
+        
+    ];
+    
+    public $routes = [
+        __DIR__ . '/../Http/routes.php',
+    ];
+    
+    public $config = [
+        'mconsole.php',
+        'relations.php',
+    ];
+    
+    public $relationships = [];
+    
+    public $translations = [
+        __DIR__ . '/../../../resources/lang',
+    ];
+    
+    public $views = [
+        __DIR__ . '/../../../resources/views',
+    ];
     
     /**
      * Indicates if loading of the provider is deferred.
@@ -25,55 +88,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        
-        $this->register = [
-            'middleware' => [
-                'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
-            ],
-            
-            'providers' => [
-                \Intervention\Image\ImageServiceProvider::class,
-                \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
-                \Milax\Mconsole\Providers\CommandsServiceProvider::class,
-                \Collective\Html\HtmlServiceProvider::class,
-                \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
-            ],
-            
-            'aliases' => [
-                // Third party packages
-                'Gravatar' => \Milax\Gravatar::class,
-                'Image' => \Intervention\Image\Facades\Image::class,
-                'Form' => \Collective\Html\FormFacade::class,
-                'Html' => \Collective\Html\HtmlFacade::class,
-                
-                // Helpers
-                'String' => \Milax\Mconsole\Helpers\String::class,
-                
-                // Traits
-                'Cacheable' => \Milax\Cacheable::class,
-                'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
-                'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
-                'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
-                'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
-            ],
-            
-            // Interface to Implementation bindings
-            'bindings' => [
-                'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
-                'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
-            ],
-            
-            // Dependencies for injection
-            'dependencies' => [
-                'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
-                'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
-            ],
-            
-        ];
-        
-        $this->config = [
-            'mconsole.php',
-        ];
+        $this->moduleLoader = new ModuleLoader($this);
     }
     
     /**
@@ -83,11 +98,19 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require __DIR__ . '/../Http/routes.php';
+        $this->moduleLoader->scan();
         
-        // Resources
-        $this->loadTranslationsFrom(__DIR__ . '/../../../resources/lang', 'mconsole');
-        $this->loadViewsFrom(__DIR__ . '/../../../resources/views', 'mconsole');
+        foreach ($this->routes as $route) {
+            require $route;
+        }
+        
+        foreach ($this->translations as $translation) {
+            $this->loadTranslationsFrom($translation, 'mconsole');
+        }
+        
+        foreach ($this->views as $view) {
+            $this->loadViewsFrom($view, 'mconsole');
+        }
         
         // Assets
         $this->publishes([
@@ -100,6 +123,10 @@ class MconsoleServiceProvider extends ServiceProvider
                 $this->publishes([
                     __DIR__ . '/../../../../src/config/' . $config => config_path($config),
                 ], 'config');
+            } else {
+                $this->mergeConfigFrom(
+                    __DIR__ . '/../../../../src/config/' . $config, 'config'
+                );
             }
         }
         
@@ -112,6 +139,12 @@ class MconsoleServiceProvider extends ServiceProvider
             }
         });
         $this->publishes($migrations, 'migrations');
+        
+        // Register singleton
+        $this->app->singleton('Mconsole', function ($app) {
+            return $this;
+        });
+        
     }
 
     /**
