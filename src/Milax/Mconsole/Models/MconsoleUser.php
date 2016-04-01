@@ -38,7 +38,7 @@ class MconsoleUser extends Authenticatable
         $class_name = class_basename($this);
 
         $config = implode('.', [$class_name, $method]);
-        $relationships = \App::make('Mconsole')->relationships;
+        $relationships = app('Mconsole')->relationships;
 
         if (array_has($relationships, $config)) {
             $function = array_get($relationships, $config);
