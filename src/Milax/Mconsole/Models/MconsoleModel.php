@@ -3,7 +3,6 @@
 namespace Milax\Mconsole\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Config;
 
 class MconsoleModel extends Model
 {
@@ -17,14 +16,15 @@ class MconsoleModel extends Model
     public function __call($method, $parameters)
     {
         $class_name = class_basename($this);
-        
-        $config = implode('.', ['relationships', $class_name, $method]);
-        
-        if (Config::has($config)) {
-            $function = Config::get($config);
+
+        $config = implode('.', [$class_name, $method]);
+        $relationships = \App::make('Mconsole')->relationships;
+
+        if (array_has($relationships, $config)) {
+            $function = array_get($relationships, $config);
             return $function($this);
         }
-        
+
         return parent::__call($method, $parameters);
     }
     
