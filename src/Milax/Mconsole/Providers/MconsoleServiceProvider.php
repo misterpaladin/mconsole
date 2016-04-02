@@ -59,10 +59,7 @@ class MconsoleServiceProvider extends ServiceProvider
     
     public $config = [
         'mconsole.php',
-        'relations.php',
     ];
-    
-    public $relationships = [];
     
     public $translations = [
         __DIR__ . '/../../../resources/lang',
@@ -71,6 +68,8 @@ class MconsoleServiceProvider extends ServiceProvider
     public $views = [
         __DIR__ . '/../../../resources/views',
     ];
+    
+    public $modules = [];
     
     /**
      * Indicates if loading of the provider is deferred.
@@ -144,7 +143,6 @@ class MconsoleServiceProvider extends ServiceProvider
         $this->app->singleton('Mconsole', function ($app) {
             return $this;
         });
-        
     }
 
     /**
