@@ -20,6 +20,14 @@ Route::group([
     Route::resource('/permissions', 'PermissionsController');
     Route::resource('/presets', 'PresetsController');
     
+    Route::group([
+        'prefix' => 'modules',
+    ], function () {
+        Route::get('/', 'ModulesController@index');
+        Route::get('/{id}/install', 'ModulesController@install');
+        Route::get('/{id}/uninstall', 'ModulesController@uninstall');
+    });
+    
     Route::resource('/test', 'TestController');
     
 });
