@@ -49,6 +49,7 @@ class MconsoleServiceProvider extends ServiceProvider
         'dependencies' => [
             'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
             'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+            'ModuleInstaller' => \Milax\Mconsole\Core\ModuleInstaller::class,
         ],
         
     ];
