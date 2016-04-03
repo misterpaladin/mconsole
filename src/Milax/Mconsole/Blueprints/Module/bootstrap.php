@@ -5,7 +5,8 @@
  */
 return [
     'name' => '%s',
-    'identifier' => 'mconsole-',
+    'identifier' => 'mconsole-%s',
+    'description' => '',
     'menu' => [],
     'register' => [
         'middleware' => [],
@@ -14,10 +15,4 @@ return [
         'bindings' => [],
         'dependencies' => [],
     ],
-    'config' => [],
-    'migrations' => [],
-    'routes' => [],
-    'translations' => [],
-    'views' => [],
-    'relationships' => [],
 ];

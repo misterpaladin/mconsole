@@ -49,6 +49,7 @@ class ModuleGenerator extends Command
             'Mconsole/%s/assets/migrations',
             'Mconsole/%s/assets/config',
             'Mconsole/%s/assets/resources',
+            'Mconsole/%s/Models',
         ];
     }
     
@@ -67,7 +68,7 @@ class ModuleGenerator extends Command
         
         File::makeDirectory(app_path(sprintf('Mconsole/%s/Http/Controllers', $class)), 0775, true, true);
         
-        File::put(app_path(sprintf($this->blueprint['bootstrap']['destination'], $class)), sprintf($this->blueprint['bootstrap']['file'], $class, $class));
+        File::put(app_path(sprintf($this->blueprint['bootstrap']['destination'], $class)), sprintf($this->blueprint['bootstrap']['file'], $class, $class, strtolower($class)));
         File::put(app_path(sprintf($this->blueprint['routes']['destination'], $class)), sprintf($this->blueprint['routes']['file'], $class, $class));
         File::put(app_path(sprintf($this->blueprint['controller']['destination'], $class, $class)), sprintf($this->blueprint['controller']['file'], $class, $class, $class));
         
