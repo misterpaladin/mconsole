@@ -70,7 +70,11 @@ class MconsoleServiceProvider extends ServiceProvider
         __DIR__ . '/../../../resources/views',
     ];
     
-    public $modules = [];
+    public $modules = [
+        'all' => [],
+        'installed' => [],
+        'available' => [],
+    ];
     
     /**
      * Indicates if loading of the provider is deferred.

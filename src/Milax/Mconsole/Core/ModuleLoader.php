@@ -11,6 +11,7 @@ use File;
 class ModuleLoader
 {
     protected $provider;
+    protected $modules;
     
     /**
      * Create new loader instance
@@ -38,7 +39,7 @@ class ModuleLoader
                 $file = sprintf('%s/%s', $path[0], BOOTSTRAPFILE);
                 if (File::exists($file)) {
                     $config = include $file;
-                    array_push($this->provider->modules, $this->makeModule($config, $path[0], 'base'));
+                    array_push($modules, $this->makeModule($config, $path[0], 'base'));
                 }
             }
         }
@@ -49,19 +50,19 @@ class ModuleLoader
             if (is_array($config)) {
                 $matched = false;
                 
-                foreach ($this->provider->modules as $key => $baseModule) {
+                foreach ($modules as $key => $baseModule) {
                     if ($baseModule->identifier == $config['identifier']) {
                         $module = $this->makeModule($config, pathinfo($file, PATHINFO_DIRNAME), 'custom');
-                        $this->provider->modules[$key]->original = clone($baseModule);
-                        $this->provider->modules[$key]->extend = $module;
+                        $modules[$key]->original = clone($baseModule);
+                        $modules[$key]->extend = $module;
                         
                         // Merge custom module with original
-                        $this->provider->modules[$key]->controllers = array_merge($this->provider->modules[$key]->controllers, $module->controllers);
-                        $this->provider->modules[$key]->models = array_merge($this->provider->modules[$key]->models, $module->models);
-                        $this->provider->modules[$key]->routes = array_merge($this->provider->modules[$key]->routes, $module->routes);
-                        $this->provider->modules[$key]->views = array_merge($this->provider->modules[$key]->views, $module->views);
-                        $this->provider->modules[$key]->migrations = array_merge($this->provider->modules[$key]->migrations, $module->migrations);
-                        $this->provider->modules[$key]->type = 'extended';
+                        $modules[$key]->controllers = array_merge($modules[$key]->controllers, $module->controllers);
+                        $modules[$key]->models = array_merge($modules[$key]->models, $module->models);
+                        $modules[$key]->routes = array_merge($modules[$key]->routes, $module->routes);
+                        $modules[$key]->views = array_merge($modules[$key]->views, $module->views);
+                        $modules[$key]->migrations = array_merge($modules[$key]->migrations, $module->migrations);
+                        $modules[$key]->type = 'extended';
                         
                         $matched = true;
                         break;
@@ -71,13 +72,13 @@ class ModuleLoader
                 // .. or push custom module to modules array
                 if (!$matched) {
                     $module = $this->collect($module, pathinfo($file, PATHINFO_DIRNAME), 'custom');
-                    array_push($this->provider->modules, $module);
+                    array_push($modules, $module);
                 }
             }
         }
         
-        if (count($this->provider->modules) > 0) {
-            $this->load($this->provider->modules);
+        if (count($modules) > 0) {
+            $this->load($modules);
         }
     }
     
@@ -91,11 +92,17 @@ class ModuleLoader
     {
         if (count($modules) > 0) {
             foreach ($modules as $module) {
-                $this->provider->routes = array_merge_recursive($this->provider->routes, $module->routes);
-                $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
-                $this->provider->config = array_merge_recursive($this->provider->config, $module->config);
-                $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
-                $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
+                array_push($this->provider->modules['all'], $module);
+                if ($module->installed) {
+                    $this->provider->routes = array_merge_recursive($this->provider->routes, $module->routes);
+                    $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
+                    $this->provider->config = array_merge_recursive($this->provider->config, $module->config);
+                    $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
+                    $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
+                    array_push($this->provider->modules['installed'], $module);
+                } else {
+                    array_push($this->provider->modules['available'], $module);
+                }
             }
             
             // Load custom views before base
