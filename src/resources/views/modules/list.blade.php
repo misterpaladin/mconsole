@@ -12,8 +12,8 @@
     							<thead>
     								<tr class="uppercase">
                                         <th width="1%"></th>
-                                        <th width="90%">{{ trans('mconsole::tables.modules.info') }}</th>
-    									<th>{{ trans('mconsole::tables.actions') }}</th>
+                                        <th>{{ trans('mconsole::tables.modules.info') }}</th>
+    									<th width="30%">{{ trans('mconsole::tables.actions') }}</th>
     								</tr>
     							</thead>
     							<tbody>
@@ -25,15 +25,8 @@
                                             <td>
                                                 <p>
                                                     <strong>{{ $item->name }}</strong> <span class="small">[{{ $item->identifier }}]</span>
-                                                    @if ($item->type == 'extended')
-                                                        <small class="text-success">{{ trans('mconsole::tables.modules.types.extended') }}</small>
-                                                    @elseif ($item->type == 'custom')
-                                                        <small class="text-primary">{{ trans('mconsole::tables.modules.types.custom') }}</small>
-                                                    @else
-                                                        <small class="text-muted">{{ trans('mconsole::tables.modules.types.base') }}</small>
-                                                    @endif
                                                 </p>
-                                                <p class="small">{{ $item->description }}</p>
+                                                <p class="">{{ $item->description }} <span class="btn btn-xs default show-module-info popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.info.toggle') }}">Toggle info</span></p>
                                                 <div class="row small module-info hide">
                                                     <div class="col-xs-12">
                                                         <hr>
@@ -54,9 +47,15 @@
                                                 </div>
                                             </td>
     										<td>
-                                                <span class="btn btn-xs btn blue show-module-info"><i class="fa fa-info"></i> Info</span>
-                                                <span class="btn btn-xs btn-danger uninstall-module @if (!$item->installed) hide @endif"><i class="fa fa-close"></i> Uninstall</span>
-                                                <span class="btn btn-xs btn green-jungle install-module @if ($item->installed) hide @endif"><i class="fa fa-download"></i> Install</span>
+                                                <span class="btn btn-xs btn-danger uninstall-module popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.uninstall.info') }}"><i class="fa fa-close"></i> Uninstall</span>
+                                                <span class="btn btn-xs green-jungle install-module popovers @if ($item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.install.info') }}"><i class="fa fa-download"></i> Install</span>
+                                                @if ($item->type == 'custom')
+                                                    <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.custom') }}"><i class="fa fa-plus"></i> Extend</span>
+                                                @elseif ($item->type == 'extended')
+                                                    <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.extended') }}"><i class="fa fa-plus"></i> Extend</span>
+                                                @else
+                                                    <span class="btn btn-xs btn-success extend-module popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.base') }}"><i class="fa fa-plus"></i> Extend</span>
+                                                @endif
     										</td>
     									</tr>
     								@endforeach
