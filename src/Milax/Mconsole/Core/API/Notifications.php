@@ -14,11 +14,13 @@ class Notifications extends ModelAPI
      * @param  string $text  [Notification text]
      * @return mixed
      */
-    public function push($title, $text)
+    public function push($user, $title, $text, $link)
     {
         return $this->store([
             'title' => $title,
             'text' => $text,
+            'link' => $link,
+            'user_id' => $user,
         ]);
     }
     
@@ -37,9 +39,11 @@ class Notifications extends ModelAPI
      * Get unread notifications
      * @return Collection
      */
-    public function index()
+    public function get()
     {
         $model = $this->model;
-        return $model::where('seen', false)->get();
+        return $model::where('seen', false)->where(function ($query) {
+            $query->where('user_id', \Auth::id())->orWhere('user_id', 0);
+        })->get();
     }
 }

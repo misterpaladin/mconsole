@@ -14,8 +14,10 @@ class CreateMconsoleNotificationsTable extends Migration
     {
         Schema::create('mconsole_notifications', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->default(0);
             $table->string('title');
             $table->text('text');
+            $table->text('link');
             $table->boolean('seen');
             $table->timestamps();
         });
