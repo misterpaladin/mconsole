@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Milax\Mconsole\Core\ModuleLoader;
+use File;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
@@ -104,13 +105,16 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         $this->moduleLoader->scan();
         
+        if (!File::exists(storage_path('app/translations'))) {
+            File::makeDirectory(storage_path('app/translations'));
+            $this->initTranslations();
+        }
+        
         foreach ($this->routes as $route) {
             require $route;
         }
         
-        foreach ($this->translations as $translation) {
-            $this->loadTranslationsFrom($translation, 'mconsole');
-        }
+        $this->loadTranslationsFrom(storage_path('app/translations'), 'mconsole');
         
         foreach ($this->views as $view) {
             $this->loadViewsFrom($view, 'mconsole');
@@ -177,6 +181,39 @@ class MconsoleServiceProvider extends ServiceProvider
             $this->app->bind($dependency, function ($app) use (&$class) {
                 return new $class();
             });
+        }
+    }
+    
+    /**
+     * Init translations
+     * 
+     * @return void
+     */
+    protected function initTranslations()
+    {
+        $languages = \Milax\Mconsole\Models\Language::all();
+        
+        foreach ($this->translations as $translation) {
+            foreach (glob($translation . '/*/*.php') as $lg) {
+                foreach ($languages as $language) {
+                    if (File::exists($translation . '/'. $language->key . '/' . basename($lg))) {
+                        // Create if language directory is not exists
+                        if (!File::exists(storage_path('app/translations/' . $language->key))) {
+                            File::makeDirectory(storage_path('app/translations/' . $language->key));
+                        }
+                        
+                        // Copy new or merge existing translation file
+                        if (File::exists(storage_path('app/translations/' . $language->key . '/' . basename($lg)))) {
+                            $baseLang = include storage_path('app/translations/' . $language->key . '/' . basename($lg));
+                            $customLang = include $lg;
+                            $baseLang = array_merge($baseLang, $customLang);
+                            File::put(storage_path('app/translations/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
+                        } else {
+                            File::copy($lg, storage_path('app/translations/' . $language->key . '/' . basename($lg)));
+                        }
+                    }
+                }
+            }
         }
     }
 }

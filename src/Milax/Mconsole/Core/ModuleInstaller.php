@@ -35,6 +35,8 @@ class ModuleInstaller
         
         $dbMod->save();
         
+        File::deleteDirectory(storage_path('app/translations'));
+        
         return $this;
     }
     
@@ -63,6 +65,8 @@ class ModuleInstaller
         $dbMod = MconsoleModule::where('identifier', $module->identifier)->first();
         $dbMod->installed = false;
         $dbMod->save();
+        
+        File::deleteDirectory(storage_path('app/translations'));
         
         return $this;
     }

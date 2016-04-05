@@ -7,6 +7,7 @@ define('BOOTSTRAPFILE', 'bootstrap.php');
 
 use Milax\Mconsole\Models\MconsoleModule;
 use File;
+use Storage;
 
 class ModuleLoader
 {
@@ -62,6 +63,7 @@ class ModuleLoader
                         $modules[$key]->routes = array_merge($modules[$key]->routes, $module->routes);
                         $modules[$key]->views = array_merge($modules[$key]->views, $module->views);
                         $modules[$key]->migrations = array_merge($modules[$key]->migrations, $module->migrations);
+                        $modules[$key]->translations = array_merge($modules[$key]->translations, $module->translations);
                         $modules[$key]->type = 'extended';
                         
                         $matched = true;
@@ -71,7 +73,7 @@ class ModuleLoader
                 
                 // .. or push custom module to modules array
                 if (!$matched) {
-                    $module = $this->collect($module, pathinfo($file, PATHINFO_DIRNAME), 'custom');
+                    $module = $this->makeModule($config, pathinfo($file, PATHINFO_DIRNAME), 'custom');
                     array_push($modules, $module);
                 }
             }
@@ -97,7 +99,9 @@ class ModuleLoader
                     $this->provider->routes = array_merge_recursive($this->provider->routes, $module->routes);
                     $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
                     $this->provider->config = array_merge_recursive($this->provider->config, $module->config);
-                    $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
+                    if ($module->installed) {
+                        $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
+                    }
                     $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
                     array_push($this->provider->modules['installed'], $module);
                 } else {
@@ -169,6 +173,7 @@ class ModuleLoader
         
         // Collect views
         array_push($module->views, sprintf('%s/assets/resources/views', $path));
+        array_push($module->translations, sprintf('%s/assets/resources/translations', $path));
         
         return $module;
     }
