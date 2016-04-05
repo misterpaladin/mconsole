@@ -205,7 +205,7 @@ class MconsoleServiceProvider extends ServiceProvider
                     if (File::exists($translation . '/'. $language->key . '/' . basename($lg))) {
                         // Create if language directory is not exists
                         if (!File::exists(storage_path('app/lang/' . $language->key))) {
-                            File::makeDirectory(storage_path('app/lang/' . $language->key));
+                            File::makeDirectory(storage_path('app/lang/' . $language->key), 0775, true, true);
                         }
                         
                         // Copy new or merge existing translation file
