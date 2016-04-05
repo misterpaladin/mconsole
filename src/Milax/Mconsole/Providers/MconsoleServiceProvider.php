@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Milax\Mconsole\Core\ModuleLoader;
 use File;
+use Schema;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
@@ -191,6 +192,10 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     protected function initTranslations()
     {
+        if (!Schema::hasTable(Language::getQuery()->from)) {
+            return;
+        }
+        
         $languages = \Milax\Mconsole\Models\Language::all();
         
         foreach ($this->translations as $translation) {
