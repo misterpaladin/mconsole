@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Milax\Mconsole\Core\ModuleLoader;
+use Milax\Mconsole\Models\Language;
 use File;
 use Schema;
 
@@ -196,7 +197,7 @@ class MconsoleServiceProvider extends ServiceProvider
             return;
         }
         
-        $languages = \Milax\Mconsole\Models\Language::all();
+        $languages = Language::all();
         
         foreach ($this->translations as $translation) {
             foreach (glob($translation . '/*/*.php') as $lg) {
