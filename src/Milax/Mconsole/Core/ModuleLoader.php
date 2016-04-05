@@ -8,6 +8,7 @@ define('BOOTSTRAPFILE', 'bootstrap.php');
 use Milax\Mconsole\Models\MconsoleModule;
 use File;
 use Storage;
+use Schema;
 
 class ModuleLoader
 {
@@ -29,6 +30,10 @@ class ModuleLoader
      */
     public function scan()
     {
+        if (!Schema::hasTable(MconsoleModule::getQuery()->from)) {
+            return;
+        }
+        
         $this->dbMods = MconsoleModule::getCached();
         
         $modules = [];
