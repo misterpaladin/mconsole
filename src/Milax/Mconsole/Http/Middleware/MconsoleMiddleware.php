@@ -43,6 +43,10 @@ class MconsoleMiddleware
     
     protected function hasAccess($request)
     {
+        if ($request->is('mconsole/logout')) {
+            return true;
+        }
+        
         $user = Auth::user();
         
         $route = $request->route()->getName();
@@ -54,7 +58,7 @@ class MconsoleMiddleware
         }
         
         // Check if route is in user allowed routes
-        $menus = $user->role->menus;
+        $menus = $user->role->routes;
         
         // Fix for creating and updating routes
         switch ($method) {
@@ -65,7 +69,7 @@ class MconsoleMiddleware
                 $route = str_replace('.store', '.create', $route);
         }
         
-        if ($menus->where('route', $route)->count() > 0) {
+        if (in_array($menus, $route)) {
             return true;
         }
         

@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
+use Milax\Mconsole\Models\MconsoleMenu;
 use Redirectable;
 use Paginatable;
 use HasQueryTraits;
@@ -17,7 +18,7 @@ class RolesController extends Controller
 
     public function __construct()
     {
-        $this->setRedirects(['/mconsole/permissions', '/mconsole/roles', '/mconsole/roles']);
+        $this->setRedirects(['/mconsole/roles', '/mconsole/roles', '/mconsole/roles']);
     }
 
     /**
@@ -27,7 +28,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return $this->setPerPage(20)->run('mconsole::roles.list', function ($item) {
+        return $this->setQuery(MconsoleRole::notRoot())->setPerPage(20)->run('mconsole::roles.list', function ($item) {
             return [
                 '#' => $item->id,
                 'Name' => $item->name,
@@ -43,7 +44,9 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('mconsole::roles.form');
+        return view('mconsole::roles.form', [
+            'menu' => MconsoleMenu::all(),
+        ]);
     }
 
     /**
@@ -55,7 +58,10 @@ class RolesController extends Controller
      */
     public function store(MconsoleRoleRequest $request)
     {
-        MconsoleRole::create($request->all());
+        MconsoleRole::create([
+            'name' => $request->input('name'),
+            'routes' => collect($request->input('routes'))->keys(),
+        ]);
     }
 
     /**
@@ -69,6 +75,7 @@ class RolesController extends Controller
     {
         return view('mconsole::roles.form', [
             'item' => MconsoleRole::find($id),
+            'menu' => MconsoleMenu::all(),
         ]);
     }
 
@@ -82,7 +89,10 @@ class RolesController extends Controller
      */
     public function update(MconsoleRoleRequest $request, $id)
     {
-        MconsoleRole::find($id)->update($request->all());
+        MconsoleRole::find($id)->update([
+            'name' => $request->input('name'),
+            'routes' => collect($request->input('routes'))->keys(),
+        ]);
     }
 
     /**
