@@ -1,44 +1,59 @@
 @if (count($item->models) > 0)
-    <strong>Models:</strong>
-    <ul>
-        @foreach ($item->models as $model)
-            <li>{{ $model }}</li>
-        @endforeach
-    </ul>
+    <li> Models
+        <ul>
+            @foreach ($item->models as $model)
+                <li data-jstree='{ "type" : "file" }'> {{ $model }} </li>
+            @endforeach
+        </ul>
+    </li>
 @endif
 
 @if (count($item->controllers) > 0)
-    <strong>Controllers:</strong>
-    <ul>
-        @foreach ($item->controllers as $controller)
-            <li>{{ $controller }}</li>
-        @endforeach
-    </ul>
+    <li> Controllers
+        <ul>
+            @foreach ($item->controllers as $controller)
+                <li data-jstree='{ "type" : "file" }'> {{ $controller }} </li>
+            @endforeach
+        </ul>
+    </li>
 @endif
 
 @if (count($item->requests) > 0)
-    <strong>Requests:</strong>
-    <ul>
-        @foreach ($item->requests as $request)
-            <li>{{ $request }}</li>
-        @endforeach
-    </ul>
-@endif
-
-@if (count($item->views) > 0)
-    <strong>Views:</strong>
-    <ul>
-        @foreach ($item->views as $view)
-            <li>{{ $view }}</li>
-        @endforeach
-    </ul>
+    <li> Requests
+        <ul>
+            @foreach ($item->requests as $request)
+                <li data-jstree='{ "type" : "file" }'> {{ $request }} </li>
+            @endforeach
+        </ul>
+    </li>
 @endif
 
 @if (count($item->migrations) > 0)
-    <strong>Migrations:</strong>
-    <ul>
-        @foreach ($item->migrations as $migration)
-            <li>{{ $migration }}</li>
-        @endforeach
-    </ul>
+    <li> Migrations
+        <ul>
+            @foreach ($item->migrations as $migration)
+                <li data-jstree='{ "type" : "file" }'> {{ $migration }} </li>
+            @endforeach
+        </ul>
+    </li>
+@endif
+
+@if (count($item->views) > 0)
+    <li> Views
+        <ul>
+            @foreach ($item->views as $view)
+                <li data-jstree='{ "type" : "file" }'> {{ $view }} </li>
+            @endforeach
+        </ul>
+    </li>
+@endif
+
+@if (count($item->translations) > 0)
+    <li> Translations
+        <ul>
+            @foreach ($item->translations as $translation)
+                <li data-jstree='{ "type" : "file" }'> {{ $translation }} </li>
+            @endforeach
+        </ul>
+    </li>
 @endif

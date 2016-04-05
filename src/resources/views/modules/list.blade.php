@@ -26,28 +26,32 @@
                                                 <p>
                                                     <strong>{{ $item->name }}</strong> <span class="small">[{{ $item->identifier }}]</span>
                                                 </p>
-                                                <p class="">{{ $item->description }} <span class="btn btn-xs default show-module-info popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.info.toggle') }}">Toggle info</span></p>
-                                                <div class="row small module-info hide">
+                                                <p class="">{{ $item->description }}</p>
+                                                <div class="row">
                                                     <div class="col-xs-12">
-                                                        <hr>
-                                                        <p><strong><i class="fa fa-cube"></i> Module components</strong></p>
-                                                        
-                                                        @include('mconsole::modules.module-info-block', ['item' => $item])
-                                                        
-                                                        @if ($item->type == 'extended')
-                                                            <hr/>
-                                                            <p class="text-success"><strong><i class="fa fa-plus"></i> Extended module custom components</strong></p>
-                                                            @include('mconsole::modules.module-info-block', ['item' => $item->extend])
-                                                            
-                                                            <hr/>
-                                                            <p><strong><i class="fa fa-cube"></i> Base module components</strong></p>
-                                                            @include('mconsole::modules.module-info-block', ['item' => $item->original])
-                                                        @endif
+                                                        <div class="jstree small">
+                                                            <ul>
+                                                                <li data-jstree='{ "icon" : "fa fa-cubes" }'>
+                                                                    Module components
+                                                                    <ul>@include('mconsole::modules.module-info-block', ['item' => $item])</ul>
+                                                                </li>
+                                                                @if ($item->type == 'extended')
+                                                                    <li data-jstree='{ "icon" : "fa fa-plus" }'>
+                                                                        Extended module custom components
+                                                                        <ul>@include('mconsole::modules.module-info-block', ['item' => $item->extend])</ul>
+                                                                    </li>
+                                                                    <li data-jstree='{ "icon" : "fa fa-cube" }'>
+                                                                        Base module components
+                                                                        <ul>@include('mconsole::modules.module-info-block', ['item' => $item->original])</ul>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
     										<td>
-                                                <span class="btn btn-xs btn-danger uninstall-module popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.uninstall.info') }}"><i class="fa fa-close"></i> Uninstall</span>
+                                                <span class="btn btn-xs btn-danger uninstall-module popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.uninstall.info') }}" data-modal-title="{{ trans('mconsole::tables.modules.uninstall.modal.title') }}" data-modal-content="{{ trans('mconsole::tables.modules.uninstall.modal.content') }}" data-modal-cancel="{{ trans('mconsole::tables.modules.uninstall.modal.cancel') }}" data-modal-uninstall="{{ trans('mconsole::tables.modules.uninstall.modal.uninstall') }}"><i class="fa fa-close"></i> Uninstall</span>
                                                 <span class="btn btn-xs green-jungle install-module popovers @if ($item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.install.info') }}"><i class="fa fa-download"></i> Install</span>
                                                 @if ($item->type == 'custom')
                                                     <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.custom') }}"><i class="fa fa-plus"></i> Extend</span>
@@ -72,5 +76,26 @@
 @endsection
 
 @section('page.scripts')
+    <script src="/massets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
     <script src="/massets/js/modules.js"></script>
+    <script>
+        $(function () {
+            $('.jstree').jstree({
+                "core" : {
+                    "themes" : {
+                        "responsive": true
+                    }
+                },
+                "types" : {
+                    "default" : {
+                        "icon" : "fa fa-folder icon-state-default icon-lg"
+                    },
+                    "file" : {
+                        "icon" : "fa fa-file icon-state-default icon-lg"
+                    }
+                },
+                "plugins": ["types"]
+            });
+        });
+    </script>
 @endsection
