@@ -44,7 +44,7 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Interface to Implementation bindings
         'bindings' => [
-            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
             'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
         ],
         

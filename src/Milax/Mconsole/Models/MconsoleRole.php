@@ -7,15 +7,31 @@ use Milax\Mconsole\Adapters\PermissionsAdapter;
 
 class MconsoleRole extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'routes'];
     
-    public function menus()
+    public function getRoutesAttribute($value)
     {
-        return $this->belongsToMany('Milax\Mconsole\Models\MconsoleMenu', 'mconsole_roles_menus', 'role_id', 'menu_id');
+        return json_decode($value);
+    }
+    
+    public function setRoutesAttribute($value)
+    {
+        $this->attributes['routes'] = json_encode($value);
     }
     
     public function users()
     {
         return $this->hasMany('App\User', 'role_id');
+    }
+    
+    /**
+     * Scope to get all roles but not root
+     * 
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeNotRoot($query)
+    {
+        return $query->where('key', '!=', 'root');
     }
 }

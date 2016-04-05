@@ -28,7 +28,11 @@
 						'en' => 'en',
 					],
 				])
-				
+				@include('mconsole::forms.select', [
+					'label' => trans('mconsole::users.form.role'),
+					'name' => 'role_id',
+					'options' => $roles,
+				])
 				@if (!isset($item))
 					@include('mconsole::forms.password', [
 						'label' => trans('mconsole::users.form.name'),
