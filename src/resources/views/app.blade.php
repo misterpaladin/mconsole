@@ -29,6 +29,7 @@
 		<!-- BEGIN THEME GLOBAL STYLES -->
 		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
 		<link href="/massets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<link href="/massets/css/links-editor.css" rel="stylesheet" type="text/css">
