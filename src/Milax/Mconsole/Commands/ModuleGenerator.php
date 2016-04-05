@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Commands;
 
 use Illuminate\Console\Command;
+use Milax\Mconsole\Models\Language;
 use File;
 
 class ModuleGenerator extends Command
@@ -19,7 +20,7 @@ class ModuleGenerator extends Command
      *
      * @var string
      */
-    protected $description = 'Create new Mconsole module';
+    protected $description = 'Create a new Mconsole module';
 
     /**
      * Create a new command instance.
@@ -29,6 +30,32 @@ class ModuleGenerator extends Command
     public function __construct()
     {
         parent::__construct();
+        
+        $this->blueprint = [
+            'bootstrap' => [
+                'destination' => 'Mconsole/%s/bootstrap.php',
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/bootstrap.php'),
+            ],
+            'routes' => [
+                'destination' => 'Mconsole/%s/Http/routes.php',
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/routes.php'),
+            ],
+            'controller' => [
+                'destination' => 'Mconsole/%s/Http/Controllers/%sController.php',
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Controllers/Controller.php'),
+            ],
+        ];
+        
+        $this->directories = [
+            'Mconsole/%s/assets/migrations',
+            'Mconsole/%s/assets/config',
+            'Mconsole/%s/assets/resources/views',
+            'Mconsole/%s/Models',
+        ];
+        
+        Language::all()->each(function ($lang) {
+            array_push($this->directories, 'Mconsole/%s/assets/resources/translations/' . $lang->key);
+        });
     }
     
     /**
@@ -41,53 +68,19 @@ class ModuleGenerator extends Command
         $class = $this->argument('class');
         
         if (File::exists(app_path(sprintf('Mconsole/%s', $class)))) {
-            return $this->error(sprintf('Custom module %s already exists!', $class));
+            return $this->error(sprintf('Module %s already exists!', $class));
         }
         
         File::makeDirectory(app_path(sprintf('Mconsole/%s/Http/Controllers', $class)), 0775, true, true);
-        File::put(app_path(sprintf('Mconsole/%s/bootstrap.php', $class)), sprintf("<?php
-
-return [
-    'name' => 'News',
-    'menu' => [],
-    'register' => [
-        'middleware' => [],
-        'providers' => [],
-        'aliases' => [],
-        'bindings' => [],
-        'dependencies' => [],
-    ],
-    'config' => [],
-    'migrations' => [],
-    'routes' => [],
-];", $class));
-        File::put(app_path(sprintf('Mconsole/%s/Http/routes.php', $class)), sprintf("<?php
-
-Route::group([
-    'prefix' => 'mconsole',
-    'middleware' => ['web', 'mconsole'],
-    'namespace' => 'App\Mconsole\%s\Http\Controllers',
-], function () {
-
-    //
-
-});
-", $class));
-        File::put(app_path(sprintf('Mconsole/%s/Http/Controllers/%sController.php', $class, $class)), sprintf("<?php
-
-namespace App\Mconsole\%s\Http\Controllers;
-
-use App\Http\Controllers\Controller;
-
-class %sController extends Controller
-{
-    
-    //
-    
-}
-", $class, $class));
-        File::makeDirectory(app_path(sprintf('Mconsole/%s/assets/migrations', $class)), 0775, true, true);
-        File::makeDirectory(app_path(sprintf('Mconsole/%s/assets/config', $class)), 0775, true, true);
-        File::makeDirectory(app_path(sprintf('Mconsole/%s/assets/resources', $class)), 0775, true, true);
+        
+        File::put(app_path(sprintf($this->blueprint['bootstrap']['destination'], $class)), sprintf($this->blueprint['bootstrap']['file'], $class, $class, strtolower($class)));
+        File::put(app_path(sprintf($this->blueprint['routes']['destination'], $class)), sprintf($this->blueprint['routes']['file'], $class, $class));
+        File::put(app_path(sprintf($this->blueprint['controller']['destination'], $class, $class)), sprintf($this->blueprint['controller']['file'], $class, $class, $class));
+        
+        foreach ($this->directories as $dir) {
+            File::makeDirectory(app_path(sprintf($dir, $class)), 0775, true, true);
+        }
+        
+        $this->info(sprintf('Module %s was created!', $class));
     }
 }

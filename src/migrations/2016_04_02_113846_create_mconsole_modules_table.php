@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentLinksTable extends Migration
+class CreateMconsoleModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,10 @@ class CreateContentLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('content_links', function (Blueprint $table) {
+        Schema::create('mconsole_modules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('page_id');
-            $table->string('url');
-            $table->string('title');
-            $table->integer('order');
-            $table->boolean('enabled')->default(true);
+            $table->string('identifier');
+            $table->boolean('installed')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateContentLinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('content_links');
+        Schema::drop('mconsole_modules');
     }
 }

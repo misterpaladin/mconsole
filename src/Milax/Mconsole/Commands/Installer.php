@@ -5,7 +5,6 @@ namespace Milax\Mconsole\Commands;
 use DB;
 use Illuminate\Console\Command;
 use Milax\Mconsole\Seeds\MconsoleOptionsSeeder;
-use Milax\Mconsole\Seeds\MconsoleMenusSeeder;
 use Milax\Mconsole\Seeds\MconsoleRolesSeeder;
 
 class Installer extends Command
@@ -94,7 +93,6 @@ class Installer extends Command
         }
         
         $this->info(MconsoleOptionsSeeder::run());
-        $this->info(MconsoleMenusSeeder::run());
         $this->info(MconsoleRolesSeeder::run());
         
         $this->info('Done!');

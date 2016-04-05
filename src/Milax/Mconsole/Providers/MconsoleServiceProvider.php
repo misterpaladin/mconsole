@@ -4,10 +4,78 @@ namespace Milax\Mconsole\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use Milax\Mconsole\Core\ModuleLoader;
+use File;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
-    protected $register;
+    public $register = [
+        'middleware' => [
+            'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
+        ],
+        
+        'providers' => [
+            \Intervention\Image\ImageServiceProvider::class,
+            \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
+            \Milax\Mconsole\Providers\CommandsServiceProvider::class,
+            \Collective\Html\HtmlServiceProvider::class,
+            \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
+        ],
+        
+        'aliases' => [
+            // Third party packages
+            'Gravatar' => \Milax\Gravatar::class,
+            'Image' => \Intervention\Image\Facades\Image::class,
+            'Form' => \Collective\Html\FormFacade::class,
+            'Html' => \Collective\Html\HtmlFacade::class,
+            
+            // Helpers
+            'String' => \Milax\Mconsole\Helpers\String::class,
+            
+            // Traits
+            'Cacheable' => \Milax\Cacheable::class,
+            'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
+            'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
+            'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
+            'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
+        ],
+        
+        // Interface to Implementation bindings
+        'bindings' => [
+            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+            'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
+        ],
+        
+        // Dependencies for injection
+        'dependencies' => [
+            'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
+            'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+            'ModuleInstaller' => \Milax\Mconsole\Core\ModuleInstaller::class,
+        ],
+        
+    ];
+    
+    public $routes = [
+        __DIR__ . '/../Http/routes.php',
+    ];
+    
+    public $config = [
+        'mconsole.php',
+    ];
+    
+    public $translations = [
+        __DIR__ . '/../../../resources/lang',
+    ];
+    
+    public $views = [
+        __DIR__ . '/../../../resources/views',
+    ];
+    
+    public $modules = [
+        'all' => [],
+        'installed' => [],
+        'available' => [],
+    ];
     
     /**
      * Indicates if loading of the provider is deferred.
@@ -25,55 +93,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        
-        $this->register = [
-            'middleware' => [
-                'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
-            ],
-            
-            'providers' => [
-                \Intervention\Image\ImageServiceProvider::class,
-                \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
-                \Milax\Mconsole\Providers\CommandsServiceProvider::class,
-                \Collective\Html\HtmlServiceProvider::class,
-                \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
-            ],
-            
-            'aliases' => [
-                // Third party packages
-                'Gravatar' => \Milax\Gravatar::class,
-                'Image' => \Intervention\Image\Facades\Image::class,
-                'Form' => \Collective\Html\FormFacade::class,
-                'Html' => \Collective\Html\HtmlFacade::class,
-                
-                // Helpers
-                'String' => \Milax\Mconsole\Helpers\String::class,
-                
-                // Traits
-                'Cacheable' => \Milax\Cacheable::class,
-                'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
-                'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
-                'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
-                'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
-            ],
-            
-            // Interface to Implementation bindings
-            'bindings' => [
-                'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
-                'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
-            ],
-            
-            // Dependencies for injection
-            'dependencies' => [
-                'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
-                'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
-            ],
-            
-        ];
-        
-        $this->config = [
-            'mconsole.php',
-        ];
+        $this->moduleLoader = new ModuleLoader($this);
     }
     
     /**
@@ -83,11 +103,22 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require __DIR__ . '/../Http/routes.php';
+        $this->moduleLoader->scan();
         
-        // Resources
-        $this->loadTranslationsFrom(__DIR__ . '/../../../resources/lang', 'mconsole');
-        $this->loadViewsFrom(__DIR__ . '/../../../resources/views', 'mconsole');
+        if (!File::exists(storage_path('app/translations'))) {
+            File::makeDirectory(storage_path('app/translations'));
+            $this->initTranslations();
+        }
+        
+        foreach ($this->routes as $route) {
+            require $route;
+        }
+        
+        $this->loadTranslationsFrom(storage_path('app/translations'), 'mconsole');
+        
+        foreach ($this->views as $view) {
+            $this->loadViewsFrom($view, 'mconsole');
+        }
         
         // Assets
         $this->publishes([
@@ -100,6 +131,10 @@ class MconsoleServiceProvider extends ServiceProvider
                 $this->publishes([
                     __DIR__ . '/../../../../src/config/' . $config => config_path($config),
                 ], 'config');
+            } else {
+                $this->mergeConfigFrom(
+                    __DIR__ . '/../../../../src/config/' . $config, 'config'
+                );
             }
         }
         
@@ -112,6 +147,11 @@ class MconsoleServiceProvider extends ServiceProvider
             }
         });
         $this->publishes($migrations, 'migrations');
+        
+        // Register singleton
+        $this->app->singleton('Mconsole', function ($app) {
+            return $this;
+        });
     }
 
     /**
@@ -141,6 +181,39 @@ class MconsoleServiceProvider extends ServiceProvider
             $this->app->bind($dependency, function ($app) use (&$class) {
                 return new $class();
             });
+        }
+    }
+    
+    /**
+     * Init translations
+     * 
+     * @return void
+     */
+    protected function initTranslations()
+    {
+        $languages = \Milax\Mconsole\Models\Language::all();
+        
+        foreach ($this->translations as $translation) {
+            foreach (glob($translation . '/*/*.php') as $lg) {
+                foreach ($languages as $language) {
+                    if (File::exists($translation . '/'. $language->key . '/' . basename($lg))) {
+                        // Create if language directory is not exists
+                        if (!File::exists(storage_path('app/translations/' . $language->key))) {
+                            File::makeDirectory(storage_path('app/translations/' . $language->key));
+                        }
+                        
+                        // Copy new or merge existing translation file
+                        if (File::exists(storage_path('app/translations/' . $language->key . '/' . basename($lg)))) {
+                            $baseLang = include storage_path('app/translations/' . $language->key . '/' . basename($lg));
+                            $customLang = include $lg;
+                            $baseLang = array_merge($baseLang, $customLang);
+                            File::put(storage_path('app/translations/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
+                        } else {
+                            File::copy($lg, storage_path('app/translations/' . $language->key . '/' . basename($lg)));
+                        }
+                    }
+                }
+            }
         }
     }
 }

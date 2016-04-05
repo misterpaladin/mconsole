@@ -2,13 +2,12 @@
 
 namespace Milax\Mconsole\Core;
 
-define('version', '0.1.0');
-
 use Cache;
 use Auth;
 use View;
 use DB;
 use App;
+use File;
 
 /**
  * Core Mconsole class.
@@ -24,8 +23,25 @@ class Mconsole
      */
     public static function boot()
     {
+        self::setAppVersion();
         self::setLang();
         self::loadViewComposers();
+    }
+    
+    /**
+     * Set Application version from latest git tag
+     *
+     * @return void
+     */
+    public static function setAppVersion()
+    {
+        $dir = __DIR__ . '/../../../..';
+        if (env('APP_ENV') != 'PRODUCTION') {
+            chdir($dir);
+            $version = exec('git describe');
+            File::put(sprintf('%s/version', $dir), $version);
+        }
+        define('app_version', File::get(sprintf('%s/version', $dir)));
     }
     
     /**

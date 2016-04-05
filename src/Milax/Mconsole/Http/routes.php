@@ -15,12 +15,18 @@ Route::group([
     Route::get('/', 'MconsoleController@index');
     
     /** Resources */
-    Route::resource('/pages', 'PagesController');
     Route::resource('/users', 'UsersController');
     Route::resource('/roles', 'RolesController');
     Route::resource('/permissions', 'PermissionsController');
-    Route::resource('/news', 'NewsController');
     Route::resource('/presets', 'PresetsController');
+    
+    Route::group([
+        'prefix' => 'modules',
+    ], function () {
+        Route::get('/', 'ModulesController@index');
+        Route::get('/{id}/install', 'ModulesController@install');
+        Route::get('/{id}/uninstall', 'ModulesController@uninstall');
+    });
     
     Route::resource('/test', 'TestController');
     

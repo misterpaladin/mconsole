@@ -29,6 +29,7 @@
 		<!-- BEGIN THEME GLOBAL STYLES -->
 		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
 		<link href="/massets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<link href="/massets/css/links-editor.css" rel="stylesheet" type="text/css">
@@ -103,7 +104,7 @@
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
 							<h1>{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.welcome') }}
-								<small>{{ (isset($pageSubcaption)) ? $pageSubcaption : trans('mconsole::mconsole.text.version', ['version' => version]) }}</small>
+								<small>{{ (isset($pageSubcaption)) ? $pageSubcaption : trans('mconsole::mconsole.text.version') }}</small>
 							</h1>
 						</div>
 						<!-- END PAGE TITLE -->
@@ -158,7 +159,9 @@
 		<!-- BEGIN FOOTER -->
 		<!-- BEGIN INNER FOOTER -->
 		<div class="page-footer">
-			<div class="container"> @datetime('Y') &copy; <a href="http://www.milax.com/" target="_blank">Milax</a></div>
+			<div class="container">@datetime('Y') &copy; <a href="http://www.milax.com/" target="_blank">Milax</a>
+                <div class="pull-right">mconsole {{ app_version }}</div>
+            </div>
 		</div>
 		<div class="scroll-to-top">
 			<i class="icon-arrow-up"></i>
@@ -201,5 +204,11 @@
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 		<!-- END THEME LAYOUT SCRIPTS -->
+        @yield('page.scripts')
+        <script>
+            $(function () {
+                $('.popovers').popover();
+            });
+        </script>
 	</body>
 </html>
