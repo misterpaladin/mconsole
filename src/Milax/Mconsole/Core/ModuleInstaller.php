@@ -35,7 +35,7 @@ class ModuleInstaller
         
         $dbMod->save();
         
-        File::deleteDirectory(storage_path('app/translations'));
+        File::deleteDirectory(storage_path('app/lang'));
         
         return $this;
     }
@@ -66,7 +66,7 @@ class ModuleInstaller
         $dbMod->installed = false;
         $dbMod->save();
         
-        File::deleteDirectory(storage_path('app/translations'));
+        File::deleteDirectory(storage_path('app/lang'));
         
         return $this;
     }

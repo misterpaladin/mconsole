@@ -105,8 +105,8 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         $this->moduleLoader->scan();
         
-        if (!File::exists(storage_path('app/translations'))) {
-            File::makeDirectory(storage_path('app/translations'));
+        if (!File::exists(storage_path('app/lang'))) {
+            File::makeDirectory(storage_path('app/lang'));
             $this->initTranslations();
         }
         
@@ -114,7 +114,7 @@ class MconsoleServiceProvider extends ServiceProvider
             require $route;
         }
         
-        $this->loadTranslationsFrom(storage_path('app/translations'), 'mconsole');
+        $this->loadTranslationsFrom(storage_path('app/lang'), 'mconsole');
         
         foreach ($this->views as $view) {
             $this->loadViewsFrom($view, 'mconsole');
@@ -198,18 +198,18 @@ class MconsoleServiceProvider extends ServiceProvider
                 foreach ($languages as $language) {
                     if (File::exists($translation . '/'. $language->key . '/' . basename($lg))) {
                         // Create if language directory is not exists
-                        if (!File::exists(storage_path('app/translations/' . $language->key))) {
-                            File::makeDirectory(storage_path('app/translations/' . $language->key));
+                        if (!File::exists(storage_path('app/lang/' . $language->key))) {
+                            File::makeDirectory(storage_path('app/lang/' . $language->key));
                         }
                         
                         // Copy new or merge existing translation file
-                        if (File::exists(storage_path('app/translations/' . $language->key . '/' . basename($lg)))) {
-                            $baseLang = include storage_path('app/translations/' . $language->key . '/' . basename($lg));
+                        if (File::exists(storage_path('app/lang/' . $language->key . '/' . basename($lg)))) {
+                            $baseLang = include storage_path('app/lang/' . $language->key . '/' . basename($lg));
                             $customLang = include $lg;
                             $baseLang = array_merge($baseLang, $customLang);
-                            File::put(storage_path('app/translations/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
+                            File::put(storage_path('app/lang/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
                         } else {
-                            File::copy($lg, storage_path('app/translations/' . $language->key . '/' . basename($lg)));
+                            File::copy($lg, storage_path('app/lang/' . $language->key . '/' . basename($lg)));
                         }
                     }
                 }

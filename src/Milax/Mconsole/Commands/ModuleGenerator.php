@@ -54,7 +54,7 @@ class ModuleGenerator extends Command
         ];
         
         Language::all()->each(function ($lang) {
-            array_push($this->directories, 'Mconsole/%s/assets/resources/translations/' . $lang->key);
+            array_push($this->directories, 'Mconsole/%s/assets/resources/lang/' . $lang->key);
         });
     }
     

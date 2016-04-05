@@ -173,7 +173,7 @@ class ModuleLoader
         
         // Collect views
         array_push($module->views, sprintf('%s/assets/resources/views', $path));
-        array_push($module->translations, sprintf('%s/assets/resources/translations', $path));
+        array_push($module->translations, sprintf('%s/assets/resources/lang', $path));
         
         return $module;
     }
