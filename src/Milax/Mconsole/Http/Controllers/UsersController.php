@@ -19,6 +19,11 @@ class UsersController extends Controller
     protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';
     
+    public function __construct()
+    {
+        $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +33,9 @@ class UsersController extends Controller
     {
         $this->setText(trans('mconsole::users.filter.email'), 'email', true)
             ->setText(trans('mconsole::users.filter.id'), 'id', true)
-            ->setSelect(trans('mconsole::users.filter.role'), 'role_id', MconsoleRole::all()->lists('name', 'id'), true);
+            ->setSelect(trans('mconsole::users.filter.role'), 'role_id', $this->roles, true);
         
-        return $this->setPerPage(2)->run('mconsole::users.list', function ($item) {
+        return $this->setPerPage(20)->run('mconsole::users.list', function ($item) {
             return [
                 trans('mconsole::users.table.id') => $item->id,
                 trans('mconsole::users.table.updated') => $item->updated_at->format('Y'),
@@ -47,7 +52,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('mconsole::users.form');
+        return view('mconsole::users.form', [
+            'roles' => $this->roles,
+        ]);
     }
 
     /**
@@ -58,11 +65,12 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-        ]);
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->role_id = $request->input('role_id');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
     }
 
     /**
@@ -75,6 +83,7 @@ class UsersController extends Controller
     {
         return view('mconsole::users.form', [
             'item' => User::find($id),
+            'roles' => $this->roles,
         ]);
     }
 
@@ -87,7 +96,14 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        User::find($id)->update($request->all());
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->role_id = $request->input('role_id');
+        $user->email = $request->input('email');
+        if ($request->input('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
     }
 
     /**

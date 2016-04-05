@@ -11,9 +11,10 @@
         "php": ">=5.5.9",
         "illuminate/support": "5.2.*",
         "laravelcollective/html": "5.2.*",
-        "milax/cacheable": "*",
         "intervention/image": "^2.3",
-		"milax/gravatar": "*"
+		"milax/gravatar": "*",
+        "milax/cacheable": "*",
+        "mliax/mconsole-base-components": "*"
     },
     "autoload": {
         "psr-4": {

@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Commands;
 
 use DB;
+use File;
 use Illuminate\Console\Command;
 use Milax\Mconsole\Seeds\MconsoleOptionsSeeder;
 use Milax\Mconsole\Seeds\MconsoleRolesSeeder;
@@ -151,6 +152,7 @@ class Installer extends Command
      */
     protected function cleanup()
     {
+        File::deleteDirectory(storage_path('app/lang'));
         $this->call('cache:clear');
         $this->call('view:clear');
         $this->call('route:clear');

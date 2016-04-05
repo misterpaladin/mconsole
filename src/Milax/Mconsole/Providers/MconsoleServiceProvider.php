@@ -5,7 +5,9 @@ namespace Milax\Mconsole\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Milax\Mconsole\Core\ModuleLoader;
+use Milax\Mconsole\Models\Language;
 use File;
+use Schema;
 
 class MconsoleServiceProvider extends ServiceProvider
 {
@@ -42,7 +44,7 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Interface to Implementation bindings
         'bindings' => [
-            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
+            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
             'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
         ],
         
@@ -105,8 +107,8 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         $this->moduleLoader->scan();
         
-        if (!File::exists(storage_path('app/translations'))) {
-            File::makeDirectory(storage_path('app/translations'));
+        if (!File::exists(storage_path('app/lang'))) {
+            File::makeDirectory(storage_path('app/lang'));
             $this->initTranslations();
         }
         
@@ -114,7 +116,7 @@ class MconsoleServiceProvider extends ServiceProvider
             require $route;
         }
         
-        $this->loadTranslationsFrom(storage_path('app/translations'), 'mconsole');
+        $this->loadTranslationsFrom(storage_path('app/lang'), 'mconsole');
         
         foreach ($this->views as $view) {
             $this->loadViewsFrom($view, 'mconsole');
@@ -191,25 +193,35 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     protected function initTranslations()
     {
-        $languages = \Milax\Mconsole\Models\Language::all();
+        if (!Schema::hasTable(Language::getQuery()->from)) {
+            return;
+        }
         
+        $languages = Language::all();
+        
+        // Delete lang directory in local environment
+        if (env('APP_ENV') == 'local') {
+            File::deleteDirectory(storage_path('app/lang'));
+        }
+        
+        // Collect translation files
         foreach ($this->translations as $translation) {
             foreach (glob($translation . '/*/*.php') as $lg) {
                 foreach ($languages as $language) {
                     if (File::exists($translation . '/'. $language->key . '/' . basename($lg))) {
                         // Create if language directory is not exists
-                        if (!File::exists(storage_path('app/translations/' . $language->key))) {
-                            File::makeDirectory(storage_path('app/translations/' . $language->key));
+                        if (!File::exists(storage_path('app/lang/' . $language->key))) {
+                            File::makeDirectory(storage_path('app/lang/' . $language->key), 0775, true, true);
                         }
                         
                         // Copy new or merge existing translation file
-                        if (File::exists(storage_path('app/translations/' . $language->key . '/' . basename($lg)))) {
-                            $baseLang = include storage_path('app/translations/' . $language->key . '/' . basename($lg));
+                        if (File::exists(storage_path('app/lang/' . $language->key . '/' . basename($lg)))) {
+                            $baseLang = include storage_path('app/lang/' . $language->key . '/' . basename($lg));
                             $customLang = include $lg;
                             $baseLang = array_merge($baseLang, $customLang);
-                            File::put(storage_path('app/translations/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
+                            File::put(storage_path('app/lang/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
                         } else {
-                            File::copy($lg, storage_path('app/translations/' . $language->key . '/' . basename($lg)));
+                            File::copy($lg, storage_path('app/lang/' . $language->key . '/' . basename($lg)));
                         }
                     }
                 }

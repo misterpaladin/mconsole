@@ -8,6 +8,7 @@ define('BOOTSTRAPFILE', 'bootstrap.php');
 use Milax\Mconsole\Models\MconsoleModule;
 use File;
 use Storage;
+use Schema;
 
 class ModuleLoader
 {
@@ -29,6 +30,10 @@ class ModuleLoader
      */
     public function scan()
     {
+        if (!Schema::hasTable(MconsoleModule::getQuery()->from)) {
+            return;
+        }
+        
         $this->dbMods = MconsoleModule::getCached();
         
         $modules = [];
@@ -173,7 +178,7 @@ class ModuleLoader
         
         // Collect views
         array_push($module->views, sprintf('%s/assets/resources/views', $path));
-        array_push($module->translations, sprintf('%s/assets/resources/translations', $path));
+        array_push($module->translations, sprintf('%s/assets/resources/lang', $path));
         
         return $module;
     }
