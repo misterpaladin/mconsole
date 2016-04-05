@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Commands;
 use Illuminate\Console\Command;
 use Milax\Mconsole\Models\Language;
 use File;
+use Schema;
 
 class ModuleGenerator extends Command
 {
@@ -53,9 +54,11 @@ class ModuleGenerator extends Command
             'Mconsole/%s/Models',
         ];
         
-        Language::all()->each(function ($lang) {
-            array_push($this->directories, 'Mconsole/%s/assets/resources/lang/' . $lang->key);
-        });
+        if (Schema::hasTable(Language::getQuery()->from)) {
+            Language::all()->each(function ($lang) {
+                array_push($this->directories, 'Mconsole/%s/assets/resources/lang/' . $lang->key);
+            });
+        }
     }
     
     /**
