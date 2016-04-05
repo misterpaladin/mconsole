@@ -107,10 +107,7 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         $this->moduleLoader->scan();
         
-        if (!File::exists(storage_path('app/lang'))) {
-            File::makeDirectory(storage_path('app/lang'));
-            $this->initTranslations();
-        }
+        $this->initTranslations();
         
         foreach ($this->routes as $route) {
             require $route;
@@ -193,16 +190,15 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     protected function initTranslations()
     {
+        if (!File::exists(storage_path('app/lang'))) {
+            File::makeDirectory(storage_path('app/lang'));
+        }
+        
         if (!Schema::hasTable(Language::getQuery()->from)) {
             return;
         }
         
         $languages = Language::all();
-        
-        // Delete lang directory in local environment
-        if (env('APP_ENV') == 'local') {
-            File::deleteDirectory(storage_path('app/lang'));
-        }
         
         // Collect translation files
         foreach ($this->translations as $translation) {
