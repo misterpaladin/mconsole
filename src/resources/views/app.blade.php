@@ -59,6 +59,25 @@
 					<!-- BEGIN TOP NAVIGATION MENU -->
 					<div class="top-menu">
 						<ul class="nav navbar-nav pull-right">
+                            <!-- BEGIN NOTIFICATION DROPDOWN -->
+                            <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="icon-bell"></i>
+                                    <span class="badge badge-default notifications-count"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external">
+                                        <h3>Уведомления</h3>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller notifications-container" style="height: 250px;" data-handle-color="#637283"></ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END NOTIFICATION DROPDOWN -->
+                            <li class="droddown dropdown-separator">
+                                <span class="separator"></span>
+                            </li>
 							<!-- BEGIN USER LOGIN DROPDOWN -->
 							<li class="dropdown dropdown-user dropdown-dark">
 								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -194,6 +213,7 @@
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
+		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>

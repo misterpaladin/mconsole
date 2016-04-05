@@ -12,9 +12,11 @@ class Notifications extends ModelAPI
      * 
      * @param  string $title [Notification title]
      * @param  string $text  [Notification text]
+     * @param  string $link  [Link on click]
+     * @param  int $user  [User id]
      * @return mixed
      */
-    public function push($user, $title, $text, $link)
+    public function push($title, $text, $link = null, $user = null)
     {
         return $this->store([
             'title' => $title,

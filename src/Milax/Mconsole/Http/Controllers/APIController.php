@@ -13,8 +13,21 @@ class APIController extends Controller
      * 
      * @return Response
      */
-    public function notifications()
+    public function getNotifications()
     {
         return app('API')->notifications->get();
+    }
+    
+    /**
+     * See notification
+     * 
+     * @param  int $id [Notification id]
+     * @return void
+     */
+    public function seeNotification($id)
+    {
+        app('API')->notifications->update($id, [
+            'seen' => true,
+        ]);
     }
 }
