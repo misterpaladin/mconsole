@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Commands;
 
 use Illuminate\Console\Command;
+use Milax\Mconsole\Models\Language;
 use File;
 
 class ModuleGenerator extends Command
@@ -48,9 +49,13 @@ class ModuleGenerator extends Command
         $this->directories = [
             'Mconsole/%s/assets/migrations',
             'Mconsole/%s/assets/config',
-            'Mconsole/%s/assets/resources',
+            'Mconsole/%s/assets/resources/views',
             'Mconsole/%s/Models',
         ];
+        
+        Language::all()->each(function ($lang) {
+            array_push($this->directories, 'Mconsole/%s/assets/resources/translations/' . $lang->key);
+        });
     }
     
     /**
