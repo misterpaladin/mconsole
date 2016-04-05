@@ -199,6 +199,12 @@ class MconsoleServiceProvider extends ServiceProvider
         
         $languages = Language::all();
         
+        // Delete lang directory in local environment
+        if (env('APP_ENV') == 'local') {
+            File::deleteDirectory(storage_path('app/lang'));
+        }
+        
+        // Collect translation files
         foreach ($this->translations as $translation) {
             foreach (glob($translation . '/*/*.php') as $lg) {
                 foreach ($languages as $language) {
