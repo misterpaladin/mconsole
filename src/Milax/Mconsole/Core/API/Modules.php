@@ -1,43 +1,67 @@
 <?php
 
-namespace Milax\Mconsole\Core;
+namespace Milax\Mconsole\Core\API;
+
+use Milax\Mconsole\Contracts\API\ModelAPI;
+use Artisan;
+use File;
+use Storage;
+use Schema;
+use DB;
 
 define('MODULESEARCH', 'Mconsole');
 define('BOOTSTRAPFILE', 'bootstrap.php');
 
-use Milax\Mconsole\Models\MconsoleModule;
-use File;
-use Storage;
-use Schema;
-
-class ModuleLoader
+class Modules extends ModelAPI
 {
-    protected $provider;
-    protected $modules;
+    public $modules;
+    
+    public $provider;
+    protected $model;
     
     /**
      * Create new loader instance
      */
-    public function __construct($provider)
+    public function __construct($model, $provider)
     {
+        $this->model = $model;
         $this->provider = $provider;
+    }
+    
+    /**
+     * Get list of modules
+     *
+     * @param string $key [Get specific array key]
+     * @return array
+     */
+    public function get($key = null)
+    {
+        if (is_null($key)) {
+            return $this->modules;
+        } else {
+            return $this->modules->get($key);
+        }
     }
     
     /**
      * Scan for new modules
      * 
-     * @return 
+     * @return Modules
      */
     public function scan()
     {
-        if (!Schema::hasTable(MconsoleModule::getQuery()->from)) {
+        $this->resetMods();
+        
+        $model = $this->model;
+        
+        if (!Schema::hasTable($model::getQuery()->from)) {
             return;
         }
         
-        $this->dbMods = MconsoleModule::getCached();
+        $this->dbMods = $model::getCached();
         
         $modules = [];
-        $psr4 = require sprintf('%s/../../../../../../../vendor/composer/autoload_psr4.php', __DIR__);
+        $psr4 = require sprintf('%s/../../../../../../../../vendor/composer/autoload_psr4.php', __DIR__);
         
         // Base modules
         foreach ($psr4 as $class => $path) {
@@ -87,6 +111,72 @@ class ModuleLoader
         if (count($modules) > 0) {
             $this->load($modules);
         }
+        
+        return $this;
+    }
+    
+    /**
+     * Install module package migrations, assets
+     * 
+     * @param  MconsoleModule $module [Module object]
+     * @return Modules
+     */
+    public function install($module)
+    {
+        $model = $this->model;
+        foreach ($module->migrations as $migration) {
+            File::copy($migration, database_path(sprintf('migrations/%s.php', pathinfo($migration, PATHINFO_FILENAME))));
+        }
+        
+        Artisan::call('migrate');
+        
+        $dbMod = $model::where('identifier', $module->identifier)->first();
+        
+        if ($dbMod) {
+            $dbMod->installed = true;
+        } else {
+            $dbMod = new $model;
+            $dbMod->identifier = $identifier;
+            $dbMod->installed = true;
+        }
+        
+        $dbMod->save();
+        
+        File::deleteDirectory(storage_path('app/lang'));
+        
+        return $this;
+    }
+    
+    /**
+     * Uninstall module package
+     * @param  MconsoleModule $module [ModuleObject]
+     * @return Modules
+     */
+    public function uninstall($module)
+    {
+        $model = $this->model;
+        $batch = DB::table('migrations')->max('batch') + 1;
+        
+        if (count($module->migrations) > 0) {
+            foreach ($module->migrations as $migration) {
+                DB::table('migrations')->where('migration', pathinfo($migration, PATHINFO_FILENAME))->orderBy('migration', 'asc')->update([
+                    'batch' => $batch,
+                ]);
+            }
+            
+            Artisan::call('migrate:rollback');
+            foreach ($module->migrations as $migration) {
+                File::delete(database_path(sprintf('migrations/%s.php', pathinfo($migration, PATHINFO_FILENAME))));
+            }
+        }
+        
+        $dbMod = $model::where('identifier', $module->identifier)->first();
+        $dbMod->installed = false;
+        $dbMod->save();
+        
+        File::deleteDirectory(storage_path('app/lang'));
+        
+        return $this;
     }
     
     /**
@@ -95,11 +185,11 @@ class ModuleLoader
      * @param  string $file
      * @return void
      */
-    public function load($modules)
+    protected function load($modules)
     {
         if (count($modules) > 0) {
             foreach ($modules as $module) {
-                array_push($this->provider->modules['all'], $module);
+                $this->modules->get('all')->push($module);
                 if ($module->installed) {
                     $this->provider->routes = array_merge_recursive($this->provider->routes, $module->routes);
                     $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
@@ -108,9 +198,9 @@ class ModuleLoader
                         $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
                     }
                     $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
-                    array_push($this->provider->modules['installed'], $module);
+                    $this->modules->get('installed')->push($module);
                 } else {
-                    array_push($this->provider->modules['available'], $module);
+                    $this->modules->get('available')->push($module);
                 }
             }
             
@@ -128,7 +218,8 @@ class ModuleLoader
      */
     protected function makeModule($config, $path, $type)
     {
-        $module = new MconsoleModule();
+        $model = $this->model;
+        $module = new $model;
         
         $module->name = $config['name'];
         $module->identifier = $config['identifier'];
@@ -181,5 +272,17 @@ class ModuleLoader
         array_push($module->translations, sprintf('%s/assets/resources/lang', $path));
         
         return $module;
+    }
+    
+    /**
+     * Reset modules store to default state
+     */
+    protected function resetMods()
+    {
+        $this->modules = collect([
+            'all' => collect(),
+            'installed' => collect(),
+            'available' => collect(),
+        ]);
     }
 }

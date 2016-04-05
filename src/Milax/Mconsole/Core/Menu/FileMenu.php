@@ -160,7 +160,7 @@ class FileMenu implements Menu
     {
         $fileMenu = collect();
         
-        foreach (app('Mconsole')->modules['installed'] as $module) {
+        foreach (app('API')->modules->get('installed') as $module) {
             if ($module->menu) {
                 foreach ($module->menu as $key => $menu) {
                     $this->appendCategory($key, $menu);
