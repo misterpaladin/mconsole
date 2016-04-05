@@ -155,6 +155,7 @@ class MconsoleServiceProvider extends ServiceProvider
         $this->app->singleton('API', function ($app) {
             $api = new \stdClass;
             $api->notifications = new \Milax\Mconsole\Core\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
+            $api->search = new \Milax\Mconsole\Core\API\Search;
             return $api;
         });
     }
