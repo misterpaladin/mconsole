@@ -147,9 +147,15 @@ class MconsoleServiceProvider extends ServiceProvider
         });
         $this->publishes($migrations, 'migrations');
         
-        // Register singleton
+        // Register mconsole singleton
         $this->app->singleton('Mconsole', function ($app) {
             return $this;
+        });
+        
+        $this->app->singleton('API', function ($app) {
+            $api = new \stdClass;
+            $api->notifications = new \Milax\Mconsole\Core\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
+            return $api;
         });
     }
 
