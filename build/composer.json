@@ -10,7 +10,8 @@
         "laravelcollective/html": "^5.2",
         "intervention/image": "^2.3",
         "milax/cacheable": "*",
-		"milax/gravatar": "*"
+		"milax/gravatar": "*",
+        "milax/mconsole-base-components": "^1.1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
