@@ -60,6 +60,10 @@ class MconsoleMiddleware
         // Check if route is in user allowed routes
         $menus = $user->role->routes;
         
+        if (count($menus) == 0) {
+            return false;
+        }
+        
         // Fix for creating and updating routes
         switch ($method) {
             case 'PUT':
@@ -69,7 +73,7 @@ class MconsoleMiddleware
                 $route = str_replace('.store', '.create', $route);
         }
         
-        if (in_array($menus, $route)) {
+        if (in_array($route, $menus)) {
             return true;
         }
         
