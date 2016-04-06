@@ -209,7 +209,7 @@ class FileMenu implements Menu
      * 
      * @return void
      */
-    public function appendCategory($key, $menu)
+    protected function appendCategory($key, $menu)
     {
         if (isset($this->menu[$key])) {
             if (isset($menu['child'])) {
