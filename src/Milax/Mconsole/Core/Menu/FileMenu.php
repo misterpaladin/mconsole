@@ -94,23 +94,6 @@ class FileMenu implements Menu
                         'visible' => false,
                         'enabled' => true,
                     ],
-                    'permissions_all' => [
-                        'name' => 'All permissions',
-                        'translation' => 'menu.permissions.list.name',
-                        'url' => 'permissions',
-                        'description' => 'menu.permissions.list.description',
-                        'route' => 'mconsole.permissions.index',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                    'permissions_update' => [
-                        'name' => 'Edit permissions',
-                        'translation' => 'menu.permissions.update.name',
-                        'description' => 'menu.permissions.update.description',
-                        'route' => 'mconsole.permissions.store',
-                        'visible' => false,
-                        'enabled' => true,
-                    ],
                 ],
             ],
             'tools' => [
@@ -177,7 +160,7 @@ class FileMenu implements Menu
     {
         $fileMenu = collect();
         
-        foreach (app('Mconsole')->modules['installed'] as $module) {
+        foreach (app('API')->modules->get('installed') as $module) {
             if ($module->menu) {
                 foreach ($module->menu as $key => $menu) {
                     $this->appendCategory($key, $menu);

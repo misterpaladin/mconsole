@@ -4,7 +4,6 @@ namespace Milax\Mconsole\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Milax\Mconsole\Core\ModuleLoader;
 use Milax\Mconsole\Models\Language;
 use File;
 use Schema;
@@ -73,12 +72,6 @@ class MconsoleServiceProvider extends ServiceProvider
         __DIR__ . '/../../../resources/views',
     ];
     
-    public $modules = [
-        'all' => [],
-        'installed' => [],
-        'available' => [],
-    ];
-    
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -95,7 +88,6 @@ class MconsoleServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->moduleLoader = new ModuleLoader($this);
     }
     
     /**
@@ -105,12 +97,24 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->moduleLoader->scan();
+        // Register API singleton
+        $this->app->singleton('API', function ($app) {
+            $api = new \stdClass;
+            $api->notifications = new \Milax\Mconsole\Core\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
+            $api->search = new \Milax\Mconsole\Core\API\Search;
+            $api->modules = new \Milax\Mconsole\Core\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
+            return $api;
+        });
         
-        if (!File::exists(storage_path('app/lang'))) {
-            File::makeDirectory(storage_path('app/lang'));
-            $this->initTranslations();
-        }
+        // Run one time modules scan
+        app('API')->modules->scan();
+        
+        // Register mconsole singleton
+        $this->app->singleton('Mconsole', function ($app) {
+            return $this;
+        });
+        
+        $this->initTranslations();
         
         foreach ($this->routes as $route) {
             require $route;
@@ -150,9 +154,14 @@ class MconsoleServiceProvider extends ServiceProvider
         });
         $this->publishes($migrations, 'migrations');
         
-        // Register singleton
-        $this->app->singleton('Mconsole', function ($app) {
-            return $this;
+        app('API')->search->register(function ($text) {
+            return \App\User::where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($user) {
+                return [
+                    'type' => 'user',
+                    'text' => sprintf('%s (%s)', $user->name, $user->email),
+                    'link' => sprintf('/mconsole/users/%s/edit', $user->id),
+                ];
+            });
         });
     }
 
@@ -193,16 +202,15 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     protected function initTranslations()
     {
+        if (!File::exists(storage_path('app/lang'))) {
+            File::makeDirectory(storage_path('app/lang'));
+        }
+        
         if (!Schema::hasTable(Language::getQuery()->from)) {
             return;
         }
         
         $languages = Language::all();
-        
-        // Delete lang directory in local environment
-        if (env('APP_ENV') == 'local') {
-            File::deleteDirectory(storage_path('app/lang'));
-        }
         
         // Collect translation files
         foreach ($this->translations as $translation) {

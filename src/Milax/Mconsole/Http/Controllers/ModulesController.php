@@ -5,27 +5,16 @@ namespace Milax\Mconsole\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\MconsoleModule;
-use Milax\Mconsole\Core\ModuleInstaller;
 
 class ModulesController extends Controller
 {
-    /**
-     * Create new instance
-     * 
-     * @param ModuleInstaller $installer [Installer instance]
-     */
-    public function __construct(ModuleInstaller $installer)
-    {
-        $this->installer = $installer;
-    }
-    
     /**
      * Manage modules
      * @return Response
      */
     public function index()
     {
-        $modules = collect(app('Mconsole')->modules['all']);
+        $modules = app('API')->modules->get('all');
         $cached = MconsoleModule::all();
         
         $modules->each(function ($module) use (&$cached) {
@@ -40,7 +29,7 @@ class ModulesController extends Controller
             }
         });
         
-        return view('mconsole::modules.list', ['items' => collect(app('Mconsole')->modules['all'])]);
+        return view('mconsole::modules.list', ['items' => app('API')->modules->get('all')]);
     }
     
     /**
@@ -50,8 +39,8 @@ class ModulesController extends Controller
      */
     public function install($identifier)
     {
-        $module = collect(app('Mconsole')->modules['all'])->where('identifier', $identifier)->first();
-        $this->installer->install($module);
+        $module = app('API')->modules->get('all')->where('identifier', $identifier)->first();
+        app('API')->modules->install($module);
         
         return ['status' => 'ok'];
     }
@@ -63,8 +52,8 @@ class ModulesController extends Controller
      */
     public function uninstall($identifier)
     {
-        $module = collect(app('Mconsole')->modules['all'])->where('identifier', $identifier)->first();
-        $this->installer->uninstall($module);
+        $module = app('API')->modules->get('all')->where('identifier', $identifier)->first();
+        app('API')->modules->uninstall($module);
         
         return ['status' => 'ok'];
     }

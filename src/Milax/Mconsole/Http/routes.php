@@ -14,6 +14,11 @@ Route::group([
     /** Mconsole root */
     Route::get('/', 'MconsoleController@index');
     
+    /** API */
+    Route::get('/api/notifications', 'APIController@getNotifications');
+    Route::get('/api/notifications/{id}/seen', 'APIController@seeNotification');
+    Route::get('/api/search', 'APIController@doSearch');
+    
     /** Resources */
     Route::resource('/users', 'UsersController');
     Route::resource('/roles', 'RolesController');
