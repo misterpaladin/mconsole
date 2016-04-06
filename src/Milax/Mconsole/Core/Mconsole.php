@@ -35,14 +35,8 @@ class Mconsole
      */
     public static function setAppVersion()
     {
-        $dir = __DIR__ . '/../../../..';
-        if (env('APP_ENV') == 'local') {
-            chdir($dir);
-            $version = exec('git describe --abbrev=0 --tags');
-            File::put(sprintf('%s/version', $dir), $version);
-        }
         if (!defined('app_version')) {
-            define('app_version', File::get(sprintf('%s/version', $dir)));
+            define('app_version', 0.2.3);
         }
     }
     
