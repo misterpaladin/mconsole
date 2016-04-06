@@ -11,13 +11,6 @@ use Auth;
  */
 class MenuComposer
 {
-    protected $menu;
-    
-    public function __construct(Menu $menu)
-    {
-        $this->menu = $menu;
-    }
-    
     /**
      * Compose mconsole menu tree.
      * 
@@ -28,7 +21,7 @@ class MenuComposer
     public function compose(View $view)
     {
         $allowed = Auth::user()->role->routes;
-        $all = $this->menu->load();
+        $all = app('API')->menu->get();
         
         $all->each(function ($menu, $key) use (&$all, &$allowed) {
             if (!$menu->visible || !$menu->enabled) {

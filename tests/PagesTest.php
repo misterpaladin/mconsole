@@ -11,7 +11,7 @@ class PagesTest extends TestCase
     {
         parent::startTestSuite();
         \View::share('errors', new \Illuminate\Support\ViewErrorBag());
-        \View::share('mconsole_menu', \Milax\Mconsole\Models\MconsoleMenu::getCached());
+        \View::share('mconsole_menu', app('API')->menu->get());
         \View::share('mconsole_options', \Milax\Mconsole\Models\MconsoleOption::getCached());
         \View::share('mconsole_changelog', 'Testing');
     }

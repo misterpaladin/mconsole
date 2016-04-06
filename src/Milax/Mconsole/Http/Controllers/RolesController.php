@@ -5,7 +5,6 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
-use Milax\Mconsole\Models\MconsoleMenu;
 use Redirectable;
 use Paginatable;
 use HasQueryTraits;
@@ -45,7 +44,7 @@ class RolesController extends Controller
     public function create()
     {
         return view('mconsole::roles.form', [
-            'menu' => MconsoleMenu::all(),
+            'menu' => app('API')->menu->get(true),
         ]);
     }
 
@@ -75,7 +74,7 @@ class RolesController extends Controller
     {
         return view('mconsole::roles.form', [
             'item' => MconsoleRole::find($id),
-            'menu' => MconsoleMenu::all(),
+            'menu' => app('API')->menu->get(true),
         ]);
     }
 

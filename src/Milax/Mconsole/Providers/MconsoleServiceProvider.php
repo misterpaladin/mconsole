@@ -103,10 +103,11 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->notifications = new \Milax\Mconsole\Core\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
             $api->search = new \Milax\Mconsole\Core\API\Search;
             $api->modules = new \Milax\Mconsole\Core\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
+            $api->menu = new \Milax\Mconsole\Core\API\Menu(new \Milax\Mconsole\Core\Menu\FileMenu);
             return $api;
         });
         
-        // Run one time modules scan
+        // Run one time scans
         app('API')->modules->scan();
         
         // Register mconsole singleton

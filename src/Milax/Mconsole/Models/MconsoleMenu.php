@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MconsoleMenu extends Model
 {
-    use \Cacheable;
-    
     public $child;
 }
