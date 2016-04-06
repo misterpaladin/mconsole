@@ -16,6 +16,10 @@ class ModelsTest extends TestCase
             if (class_exists($namespaced)) {
                 // Model creation test
 
+                if ($class == 'MconsoleMenu') {
+                    break;
+                }
+                
                 $dbCount = $namespaced::count();
 
                 $data = [];
@@ -36,7 +40,6 @@ class ModelsTest extends TestCase
                 // Tests depending on class
                 switch ($class) {
                     case 'MconsoleRole':
-                        $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsToMany', $object->menus());
                         $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\HasMany', $object->users());
                         break;
 
@@ -44,7 +47,7 @@ class ModelsTest extends TestCase
                         $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsTo', $object->role());
                         break;
                 }
-
+                
                 // Deletion
                 $object->delete();
                 $newCount = $namespaced::count();

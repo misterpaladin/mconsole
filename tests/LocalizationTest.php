@@ -11,8 +11,8 @@ class LocalizationTest extends TestCase
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        $baseLocale = 'en';
-        foreach (glob(__DIR__ . '/../src/resources/lang/*') as $path) {
+        $baseLocale = 'ru';
+        foreach (glob(__DIR__ . '/../../../../storage/app/lang/*') as $path) {
             $lang = basename($path);
             
             if ($lang != $baseLocale) {
