@@ -14,7 +14,7 @@
         "intervention/image": "^2.3",
 		"milax/gravatar": "*",
         "milax/cacheable": "*",
-        "mliax/mconsole-base-components": "*"
+        "milax/mconsole-base-components": "^1.1"
     },
     "autoload": {
         "psr-4": {
