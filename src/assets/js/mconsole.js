@@ -6,11 +6,66 @@ var Mconsole = function () {
         items: 0,
     };
     
+    this.search = {
+        form: $('.search-form'),
+        results: $('.search-results'),
+        icon: $('.search-form').find('.submit i'),
+        ajax: null,
+    }
+    
+    $(document).on('click', ':not(.search-form), :not(.search-results)', function ($el) {
+        this.search.results.hide();
+    }.bind(this));
+    
+    this.search.form.find('input').on('click', function () {
+        this.search.results.show();
+    }.bind(this));
+    
+    this.search.form.on('submit', function () {
+        return false;
+    });
+    
+    this.search.form.on('keyup', this.handleSearch.bind(this));
+    
     var self = this;
     self.getNotifications();
     setInterval(function () {
         self.getNotifications();
     }, 10000);
+}
+
+Mconsole.prototype.handleSearch = function () {
+    if (this.search.form.find('input').val().length < 3) {
+        return;
+    }
+    
+    if (this.search.ajax) {
+        this.search.ajax.abort();
+    }
+    
+    this.search.icon.removeClass('icon-magnifier').addClass('fa fa-spin fa-spinner');
+    
+    this.search.ajax = $.ajax({
+        method: 'GET',
+        url: '/mconsole/api/search',
+        data: this.search.form.serialize(),
+    });
+    
+    this.search.ajax.success(this.handleSearchResults.bind(this));
+}
+
+Mconsole.prototype.handleSearchResults = function (data) {
+    this.search.results.show().html('');
+    if (data.length == 0) {
+        this.search.results.text('No search results');
+    } else {
+        var results = [];
+        for (var i in data) {
+            var $result = $('<a href="' + data[i].link + '">' + data[i].text + '</a>');
+            this.search.results.append($result);
+        }
+    }
+    this.search.icon.removeClass('fa fa-spin fa-spinner').addClass('icon-magnifier');
 }
 
 Mconsole.prototype.getNotifications = function () {

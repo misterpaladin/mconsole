@@ -18,7 +18,7 @@ class Search implements ServiceAPI
         $results = collect();
         foreach ($this->stack as $callback) {
             if ($result = $callback($text)) {
-                $results->push($result);
+                $results = $results->merge($result);
             }
         }
         return $results;

@@ -30,4 +30,14 @@ class APIController extends Controller
             'seen' => true,
         ]);
     }
+    
+    /**
+     * Search by text
+     * 
+     * @return Response
+     */
+    public function doSearch(Request $request)
+    {
+        return app('API')->search->handle($request->query('query'));
+    }
 }
