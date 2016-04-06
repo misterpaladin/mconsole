@@ -110,7 +110,7 @@
                     <!-- BEGIN HEADER SEARCH BOX -->
                     <form class="search-form" action="" method="GET" style="position: relative;">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="query">
+                            <input type="text" class="form-control" placeholder="{{ trans('mconsole::mconsole.search.placeholder') }}" name="query">
                             <span class="input-group-btn">
                                 <span class="btn submit">
                                     <i class="icon-magnifier"></i>
@@ -136,7 +136,7 @@
 					<div class="container">
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
-							<h1>{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.welcome') }}
+							<h1>{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.heading') }}
 								<small>{{ (isset($pageSubcaption)) ? $pageSubcaption : trans('mconsole::mconsole.text.version') }}</small>
 							</h1>
 						</div>
@@ -169,7 +169,27 @@
 							</div>
 							@endif
 							
-							@yield('content', trans('mconsole::mconsole.text.welcome'))
+                            @yield('content', '<div class="row">
+                                <div class="col-xs-12">
+                                    <div class="portlet light">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-bulb font-dark"></i>
+                                            <span class="caption-subject font-dark bold uppercase">Мудрость минуты</span>
+                                        </div>
+                                    </div>
+                                        <div class="portlet-body form">
+                                            <div class="table-scrollable table-scrollable-borderless">
+                                                <blockquote>
+                                                 ' . collect([
+                                                     'Нужно больше контента!', 'Владеешь контентом — владеешь сайтом', 'Mconsole — загружай и тести.', 'Нажми на кпопку и получишь.. результат', 'Теперь с сайтом справится даже водитель', 'Надо потестить поглубже (Д. Баранов)', 'Только снег нельзя вырубить через админку (Д. Баранов)', 'Газета была эпицентром всех несчастий сайта. Газета и Вован', 'Это будет просто поправить если надо (Д. Баранов)', 'Mconsole — для обладателей нетрудолюбивого пальца', 'Фигню всегда надо двигать вперед остальных дел, а не тянуть сколько получится.', 'Ты запустил процесс, который перемелет все баги (когда-нибудь).', 'Она долго и упорно клянчила пароль от админки, пришлось дать', 'Я б тут жил (Д. Баранов)', 'Тебе надо сделать один клик', 'Да надо не забывать, а делать быстренько мелочи (Д. Баранов)', 'Думаешь само рассосется, если сидеть?', 'А, ну это объясняет количество «СРОЧНО!» в этом месяце.'
+                                                 ])->random() . '
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </test>')
 							
 							@if (isset($paging))
 							<div class="row">

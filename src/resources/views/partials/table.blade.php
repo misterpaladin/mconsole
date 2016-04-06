@@ -30,7 +30,7 @@
 							</tbody>
 						</table>
 					@else
-						<p class="align-center">Not found</p>
+						<p class="align-center">{{ trans('mconsole::tables.notfound') }}</p>
 					@endif
 				</div>
 			</div>

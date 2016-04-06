@@ -11,14 +11,14 @@
 		@endif
 			<div class="form-body">
 				@include('mconsole::forms.text', [
-					'label' => trans('mconsole::users.form.name'),
+					'label' => trans('mconsole::users.form.name.label'),
 					'name' => 'name',
-					'placeholder' => 'John Appleseed'
+					'placeholder' => trans('mconsole::users.form.name.placeholder')
 				])
 				@include('mconsole::forms.text', [
-					'label' => trans('mconsole::users.form.email'),
+					'label' => trans('mconsole::users.form.email.label'),
 					'name' => 'email',
-					'placeholder' => 'example@milax.com'
+					'placeholder' => trans('mconsole::users.form.email.placeholder')
 				])
 				@include('mconsole::forms.select', [
 					'label' => trans('mconsole::users.form.language'),
@@ -35,9 +35,9 @@
 				])
 				@if (!isset($item))
 					@include('mconsole::forms.password', [
-						'label' => trans('mconsole::users.form.name'),
+						'label' => trans('mconsole::users.form.password.label'),
 						'name' => 'password',
-						'placeholder' => 'Password',
+						'placeholder' => trans('mconsole::users.form.password.placeholder'),
 					])
 				@endif
 				

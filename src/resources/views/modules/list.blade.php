@@ -12,7 +12,7 @@
     							<thead>
     								<tr class="uppercase">
                                         <th width="1%"></th>
-                                        <th>{{ trans('mconsole::tables.modules.info') }}</th>
+                                        <th>{{ trans('mconsole::modules.table.info') }}</th>
     									<th width="30%">{{ trans('mconsole::tables.actions') }}</th>
     								</tr>
     							</thead>
@@ -51,14 +51,14 @@
                                                 </div>
                                             </td>
     										<td>
-                                                <span class="btn btn-xs btn-danger uninstall-module popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.uninstall.info') }}" data-modal-title="{{ trans('mconsole::tables.modules.uninstall.modal.title') }}" data-modal-content="{{ trans('mconsole::tables.modules.uninstall.modal.content') }}" data-modal-cancel="{{ trans('mconsole::tables.modules.uninstall.modal.cancel') }}" data-modal-uninstall="{{ trans('mconsole::tables.modules.uninstall.modal.uninstall') }}"><i class="fa fa-close"></i> Uninstall</span>
-                                                <span class="btn btn-xs green-jungle install-module popovers @if ($item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.install.info') }}"><i class="fa fa-download"></i> Install</span>
+                                                <span class="btn btn-xs btn-danger uninstall-module popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.uninstall.info') }}" data-modal-title="{{ trans('mconsole::modules.table.uninstall.modal.title') }}" data-modal-content="{{ trans('mconsole::modules.table.uninstall.modal.content') }}" data-modal-cancel="{{ trans('mconsole::modules.table.uninstall.modal.cancel') }}" data-modal-uninstall="{{ trans('mconsole::modules.table.uninstall.modal.uninstall') }}"><i class="fa fa-close"></i> {{ trans('mconsole::modules.table.buttons.uninstall') }}</span>
+                                                <span class="btn btn-xs green-jungle install-module popovers @if ($item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.install.info') }}"><i class="fa fa-download"></i> {{ trans('mconsole::modules.table.buttons.install') }}</span>
                                                 @if ($item->type == 'custom')
-                                                    <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.custom') }}"><i class="fa fa-plus"></i> Extend</span>
+                                                    <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.extend.custom') }}"><i class="fa fa-plus"></i> {{ trans('mconsole::modules.table.buttons.extend') }}</span>
                                                 @elseif ($item->type == 'extended')
-                                                    <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.extended') }}"><i class="fa fa-plus"></i> Extend</span>
+                                                    <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.extend.extended') }}"><i class="fa fa-plus"></i> {{ trans('mconsole::modules.table.buttons.extend') }}</span>
                                                 @else
-                                                    <span class="btn btn-xs btn-success extend-module popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.extend.base') }}"><i class="fa fa-plus"></i> Extend</span>
+                                                    <span class="btn btn-xs btn-success extend-module popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.extend.base') }}"><i class="fa fa-plus"></i> {{ trans('mconsole::modules.table.buttons.extend') }}</span>
                                                 @endif
     										</td>
     									</tr>
@@ -66,7 +66,7 @@
     							</tbody>
     						</table>
     					@else
-    						<p class="align-center">Not found</p>
+    						<p class="align-center">{{ trans('mconsole::tables.notfound') }}</p>
     					@endif
     				</div>
     			</div>

@@ -42,7 +42,7 @@ class MconsoleController extends Controller
         if (Auth::attempt(['email' => $request->input('login'), 'password' => $request->input('password')])) {
             return redirect()->back();
         } else {
-            return redirect()->back()->withErrors(['INVALID PASSWORD']);
+            return redirect()->back()->withErrors([trans('mconsole::login.errors.password')]);
         }
     }
 

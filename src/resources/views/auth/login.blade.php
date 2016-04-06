@@ -81,10 +81,12 @@
 					<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="{{ trans('mconsole::login.inputs.password') }}" name="password" /> 
 				</div>
 				<div class="form-actions">
-					{!! Form::submit(trans('mconsole::login.buttons.login'), ['class' => 'btn green uppercase']) !!}
-					<label class="rememberme check">
-					<input type="checkbox" name="remember" value="1" />{{ trans('mconsole::login.inputs.remember') }} </label>
-					<a href="javascript:;" id="forget-password" class="forget-password">{{ trans('mconsole::login.links.forgot') }}</a>
+					{!! Form::submit(trans('mconsole::login.buttons.login'), ['class' => 'btn green uppercase col-xs-12']) !!}
+                    <div class="checkbox-list col-xs-12">
+					<label class="rememberme check checkbox-inline"><input type="checkbox" name="remember" value="1" />{{ trans('mconsole::login.inputs.remember') }}</label>
+                    <a href="javascript:;" id="forget-password" class="forget-password">{{ trans('mconsole::login.links.forgot') }}</a>
+                    </div>
+					
 				</div>
 			</form>
 			<!-- END LOGIN FORM -->
