@@ -181,7 +181,7 @@
                                         <div class="portlet-body form">
                                             <div class="table-scrollable table-scrollable-borderless">
                                                 <blockquote>
-                                                    <p>“' . app('API')->quotes->getText() . '„</p>
+                                                    <p>“ ' . app('API')->quotes->getText() . ' „</p>
                                                     <small><cite title="Source Title">' . app('API')->quotes->getAuthor() . '</cite></small>
                                                 </blockquote>
                                             </div>
