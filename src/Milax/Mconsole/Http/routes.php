@@ -17,6 +17,7 @@ Route::group([
     /** API */
     Route::get('/api/notifications', 'APIController@getNotifications');
     Route::get('/api/notifications/{id}/seen', 'APIController@seeNotification');
+    Route::get('/api/search', 'APIController@doSearch');
     
     /** Resources */
     Route::resource('/users', 'UsersController');
