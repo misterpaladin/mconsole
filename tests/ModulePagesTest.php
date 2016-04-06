@@ -33,9 +33,8 @@ class ModulePagesTest extends TestCase
      */
     public function testInstallModule()
     {
-        dump(app('API')->modules->get());
-        $module = app('API')->modules->get('all')->where('identifier', 'mconsole-pages')->first();
-        app('API')->modules->install($module);
+        $this->auth()->visit('/mconsole/modules')->assertResponseOk();
+        $this->auth()->visit('/mconsole/modules/mconsole-pages/install')->assertResponseOk();
     }
     
     /**
