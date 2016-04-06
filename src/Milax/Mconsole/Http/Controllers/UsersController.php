@@ -38,7 +38,7 @@ class UsersController extends Controller
         return $this->setPerPage(20)->run('mconsole::users.list', function ($item) {
             return [
                 '#' => $item->id,
-                trans('mconsole::users.table.updated') => $item->updated_at->format('Y'),
+                trans('mconsole::users.table.updated') => $item->updated_at->format('m.d.Y'),
                 trans('mconsole::users.table.email') => $item->email,
                 trans('mconsole::users.table.name') => $item->name,
             ];
