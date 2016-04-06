@@ -29,7 +29,7 @@ script:
   - cp /home/travis/build/milaxcom/mconsole/build/.env /home/travis/build/milaxcom/mconsole/laravel
   - mv !(laravel) laravel/workbench/milax/mconsole
   - cd /home/travis/build/milaxcom/mconsole/laravel && composer update --no-scripts
-  - cd /home/travis/build/milaxcom/mconsole/laravel && php artisan mconsole:install --update
   - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && composer update --no-scripts
+  - cd /home/travis/build/milaxcom/mconsole/laravel && php artisan mconsole:install --update
   - sudo service apache2 restart
   - cd /home/travis/build/milaxcom/mconsole/laravel/workbench/milax/mconsole && phpunit -c phpunit.ci.xml --debug
