@@ -1,6 +1,6 @@
 <?php
 
-class PagesTest extends TestCase
+class ModulePagesTest extends TestCase
 {
     protected $user;
 
@@ -27,7 +27,16 @@ class PagesTest extends TestCase
             'password' => bcrypt('testing'),
         ]);
     }
-
+    
+    /**
+     * Test module installation
+     */
+    public function testInstallModule()
+    {
+        $this->auth()->visit('/mconsole/modules');
+        $this->auth()->visit('/mconsole/modules/mconsole-pages/install');
+    }
+    
     /**
      * Test pages index.
      */
