@@ -104,11 +104,13 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->search = new \Milax\Mconsole\Core\API\Search;
             $api->modules = new \Milax\Mconsole\Core\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
             $api->menu = new \Milax\Mconsole\Core\API\Menu(new \Milax\Mconsole\Core\Menu\FileMenu);
+            $api->quotes = new \Milax\Mconsole\Core\API\Quotes;
             return $api;
         });
         
         // Run one time scans
         app('API')->modules->scan();
+        app('API')->quotes->shuffle();
         
         // Register mconsole singleton
         $this->app->singleton('Mconsole', function ($app) {
