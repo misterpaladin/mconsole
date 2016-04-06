@@ -17,7 +17,7 @@
 								@foreach ($items as $item)
 									<tr>
 										@foreach ($item as $key => $value)
-											<td>{{ $value }}</td>
+											<td>{!! $value !!}</td>
 										@endforeach
 										<td>
 											{!! Form::open(['method' => 'DELETE', 'url' => Request::url() . '/' . $item->values()->first()]) !!}
