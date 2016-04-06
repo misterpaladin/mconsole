@@ -31,8 +31,8 @@ class RolesController extends Controller
         return $this->setQuery(MconsoleRole::notRoot())->setPerPage(20)->run('mconsole::roles.list', function ($item) {
             return [
                 '#' => $item->id,
-                'Name' => $item->name,
-                'Users' => $item->users->count(),
+                trans('mconsole::roles.table.name') => $item->name,
+                trans('mconsole::roles.table.users') => $item->users->count(),
             ];
         });
     }

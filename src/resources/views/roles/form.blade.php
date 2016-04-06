@@ -19,11 +19,11 @@
         					</div>
         				</div>
         				<div class="portlet-body form">
-                			@include('mconsole::forms.text', [
-                				'label' => trans('mconsole::roles.form.name'),
-                				'name' => 'name',
-                				'placeholder' => 'Moderator'
-                			])
+                            @include('mconsole::forms.text', [
+                                'label' => trans('mconsole::roles.form.name.label'),
+                                'name' => 'name',
+                                'placeholder' => trans('mconsole::roles.form.name.placeholder')
+                            ])
         				</div>
         			</div>
                     <div class="form-actions">
@@ -42,13 +42,13 @@
             					<thead>
             						<tr class="uppercase">
                                         <th></th>
-            							<th>Page name</th>
-            							<th>Description</th>
+            							<th>{{ trans('mconsole::roles.permission.name') }}</th>
+            							<th>{{ trans('mconsole::roles.permission.description') }}</th>
             						</tr>
             					</thead>
             					<tbody>
             						@foreach ($menu as $menuItem)
-            							<tr>
+            							<tr onclick="javascript:$(this).find(':checkbox').prop('checked', !$(this).find(':checkbox').prop('checked'));">
                                             <td>
                                                 @if (!empty($menuItem->route))
                                                     <label><input type="checkbox" name="routes[{{ $menuItem->route }}]" class="form-control" @if (isset($item) && in_array($menuItem->route, $item->routes)) checked @endif></label>
