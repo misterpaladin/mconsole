@@ -36,7 +36,7 @@ class Mconsole
     public static function setAppVersion()
     {
         if (!defined('app_version')) {
-            define('app_version', 0.2.3);
+            define('app_version', '0.2.3');
         }
     }
     
