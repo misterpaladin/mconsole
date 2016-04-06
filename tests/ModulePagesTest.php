@@ -33,8 +33,8 @@ class ModulePagesTest extends TestCase
      */
     public function testInstallModule()
     {
-        $this->auth()->visit('/mconsole/modules');
-        $this->auth()->visit('/mconsole/modules/mconsole-pages/install');
+        $module = app('API')->modules->get('all')->where('identifier', 'mconsole-pages')->first();
+        app('API')->modules->install($module);
     }
     
     /**
