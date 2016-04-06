@@ -28,11 +28,15 @@
 						'en' => 'en',
 					],
 				])
-				@include('mconsole::forms.select', [
-					'label' => trans('mconsole::users.form.role'),
-					'name' => 'role_id',
-					'options' => $roles,
-				])
+				
+                @if (!isset($item) || $item->role->key != 'root')
+                    @include('mconsole::forms.select', [
+    					'label' => trans('mconsole::users.form.role'),
+    					'name' => 'role_id',
+    					'options' => $roles,
+    				])
+                @endif
+                
 				@if (!isset($item))
 					@include('mconsole::forms.password', [
 						'label' => trans('mconsole::users.form.password.label'),
@@ -40,7 +44,6 @@
 						'placeholder' => trans('mconsole::users.form.password.placeholder'),
 					])
 				@endif
-				
 			</div>
 			<div class="form-actions">
 				@include('mconsole::forms.submit')

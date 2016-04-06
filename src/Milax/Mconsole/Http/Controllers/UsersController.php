@@ -69,6 +69,7 @@ class UsersController extends Controller
         $user->name = $request->input('name');
         $user->role_id = $request->input('role_id');
         $user->email = $request->input('email');
+        $user->lang = $request->input('lang');
         $user->password = bcrypt($request->input('password'));
         $user->save();
     }
@@ -98,8 +99,13 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->input('name');
-        $user->role_id = $request->input('role_id');
         $user->email = $request->input('email');
+        $user->lang = $request->input('lang');
+        
+        if ($request->input('role_id')) {
+            $user->role_id = $request->input('role_id');
+        }
+        
         if ($request->input('password')) {
             $user->password = bcrypt($request->input('password'));
         }
