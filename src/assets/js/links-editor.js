@@ -101,12 +101,16 @@ LinksEditor.prototype.factory.linkItem = function (item) {
  * @return {object}
  */
 LinksEditor.prototype.factory.linkItemDOM = function (item) {
+    var title = $('input[name="hidden-input-title"]').val();
+    var url = $('input[name="hidden-input-url"]').val();
+    var enabled = $('input[name="hidden-input-enabled"]').val();
+    
 	var $container = $('<div class="ui-state-default links-editor-item" data-id="' + item.id + '">\
-		<input class="form-control input-sm" placeholder="Title" type="text" value="' + item.title + '">\
-		<div class="input-icon input-icon-sm"><i class="fa fa-link"></i><input class="form-control input-sm" placeholder="URL" type="text" value="' + item.url + '"></div>\
+		<input class="form-control input-sm" placeholder="' + title + '" type="text" value="' + item.title + '">\
+		<div class="input-icon input-icon-sm"><i class="fa fa-link"></i><input class="form-control input-sm" placeholder="' + url + '" type="text" value="' + item.url + '"></div>\
 		<div class="btn btn-xs blue drag"><i class="fa fa-bars"></i></div>\
 		<div class="btn btn-xs btn-danger remove"><i class="fa fa-trash"></i></div>\
-		<label class="checkbox-inline"><input type="checkbox" value="1"> ENABLED </label>\
+		<label class="checkbox-inline"><input type="checkbox" value="1"> ' + enabled + ' </label>\
 	</div>');
 	
 	if (item.enabled == 1)
