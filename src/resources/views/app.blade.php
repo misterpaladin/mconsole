@@ -60,6 +60,11 @@
 					<!-- BEGIN TOP NAVIGATION MENU -->
 					<div class="top-menu">
 						<ul class="nav navbar-nav pull-right">
+                            <li class="dropdown">
+                                <a href="{{ app('API')->options->getBykey('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
+                                    <i class="icon-share-alt"></i>
+                                </a>
+                            </li>
                             <!-- BEGIN NOTIFICATION DROPDOWN -->
                             <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">

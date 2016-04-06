@@ -24,6 +24,7 @@ class MconsoleOptionsSeeder
      */
     protected static $options = [
         'project_name' => 'New Project',
+        'project_url' => 'http://milax.com',
     ];
     
     /**

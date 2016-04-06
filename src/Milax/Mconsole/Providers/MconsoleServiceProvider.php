@@ -105,6 +105,7 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->modules = new \Milax\Mconsole\Core\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
             $api->menu = new \Milax\Mconsole\Core\API\Menu(new \Milax\Mconsole\Core\Menu\FileMenu);
             $api->quotes = new \Milax\Mconsole\Core\API\Quotes;
+            $api->options = new \Milax\Mconsole\Core\API\Options(\Milax\Mconsole\Models\MconsoleOption::class);
             return $api;
         });
         

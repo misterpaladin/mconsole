@@ -13,5 +13,8 @@ return [
         'heading' => 'Mconsole X',
         'version' => 'ßeta',
         'welcome' => 'Добро пожаловать в Mconsole X!',
-    ]
+    ],
+    'links' => [
+        'website' => 'Перейти на веб-сайт',
+    ],
 ];
