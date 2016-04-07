@@ -67,10 +67,10 @@ class MconsoleMiddleware
         // Fix for creating and updating routes
         switch ($method) {
             case 'PUT':
-                $route = str_replace('.update', '.edit', $route);
+                $route = str_replace('.edit', '.update', $route);
                 break;
             case 'POST':
-                $route = str_replace('.store', '.create', $route);
+                $route = str_replace('.create', '.store', $route);
         }
         
         if (in_array($route, $menus)) {
