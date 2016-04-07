@@ -1,8 +1,22 @@
+## 0.2.4
+
+- Added:
+  - Quick menu API
+  - Modules extending in modules interface
+  - RU translation for modules interface
+  - Modules init callbacks
+  - Images upload presets builder
+  - Settings interface
+  - Variables editor interface
+
+Fixed:
+  - Some RU translation strings
+  - Modules tests
+
 ## 0.2.3
 
 Added:
   - HasImages trait for Eloquent models (provides `hasMany Image` relationship)
-  - Settings interface
 
 Fixed:
   - Pages module tests

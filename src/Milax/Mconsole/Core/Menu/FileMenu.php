@@ -166,6 +166,23 @@ class FileMenu implements Menu
                         'visible' => false,
                         'enabled' => true,
                     ],
+                    'variables_all' => [
+                        'name' => 'Variables',
+                        'translation' => 'variables.menu.name',
+                        'url' => 'variables',
+                        'description' => 'variables.menu.description',
+                        'route' => 'mconsole.variables.index',
+                        'visible' => true,
+                        'enabled' => true,
+                    ],
+                    'variables_form' => [
+                        'name' => 'Edit variables',
+                        'translation' => 'variables.menu.update.name',
+                        'description' => 'variables.menu.update.description',
+                        'route' => 'mconsole.variables.edit',
+                        'visible' => false,
+                        'enabled' => true,
+                    ],
                 ],
             ],
         ];
