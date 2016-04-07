@@ -167,6 +167,8 @@ class Installer extends Command
      */
     protected function finish()
     {
+        app('API')->translations->load();
+        
         if ($this->option('update')) {
             $this->comment('Update completed!');
         } else {

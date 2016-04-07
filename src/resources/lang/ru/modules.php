@@ -21,6 +21,7 @@ return [
             'info' => 'Установить модуль',
         ],
         'extend' => [
+            'process' => 'Идет расширение',
             'custom' => '',
             'extended' => '',
             'base' => '',

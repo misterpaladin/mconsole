@@ -29,6 +29,8 @@ class ModulesController extends Controller
             }
         });
         
+        app('API')->translations->load();
+        
         return view('mconsole::modules.list', ['items' => app('API')->modules->get('all')]);
     }
     
@@ -41,6 +43,7 @@ class ModulesController extends Controller
     {
         $module = app('API')->modules->get('all')->where('identifier', $identifier)->first();
         app('API')->modules->install($module);
+        app('API')->translations->load();
         
         return ['status' => 'ok'];
     }
@@ -54,6 +57,21 @@ class ModulesController extends Controller
     {
         $module = app('API')->modules->get('all')->where('identifier', $identifier)->first();
         app('API')->modules->uninstall($module);
+        app('API')->translations->load();
+        
+        return ['status' => 'ok'];
+    }
+    
+    /**
+     * Extend module
+     * 
+     * @param  string $identifier [Module identifier]
+     * @return Response
+     */
+    public function extend($identifier)
+    {
+        $module = app('API')->modules->get('all')->where('identifier', $identifier)->first();
+        app('API')->modules->extend($module);
         
         return ['status' => 'ok'];
     }

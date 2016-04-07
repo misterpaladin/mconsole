@@ -58,7 +58,7 @@
                                                 @elseif ($item->type == 'extended')
                                                     <span class="btn btn-xs btn-success extend-module disabled popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.extend.extended') }}"><i class="fa fa-plus"></i> {{ trans('mconsole::modules.table.buttons.extend') }}</span>
                                                 @else
-                                                    <span class="btn btn-xs btn-success extend-module popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.extend.base') }}"><i class="fa fa-plus"></i> {{ trans('mconsole::modules.table.buttons.extend') }}</span>
+                                                    <span class="btn btn-xs btn-success extend-module popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.extend.base') }}" data-lang-process="{{ trans('mconsole::modules.table.extend.process') }}"><i class="fa fa-plus"></i> {{ trans('mconsole::modules.table.buttons.extend') }}</span>
                                                 @endif
     										</td>
     									</tr>

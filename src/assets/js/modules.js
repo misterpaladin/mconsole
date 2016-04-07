@@ -1,8 +1,7 @@
 var Module = function (module) {
     this.module = module;
     $(this.module).on('click', '.show-module-info', this.toggleInfo.bind(this));
-    $(this.module).on('click', '.install-module', this.toggleModuleInstallation.bind(this));
-    $(this.module).on('click', '.uninstall-module', this.toggleModuleInstallation.bind(this));
+    $(this.module).on('click', '.install-module, .uninstall-module, .extend-module', this.toggleModuleInstallation.bind(this));
 }
 
 /**
@@ -22,16 +21,18 @@ Module.prototype.toggleInfo = function () {
  * Install or uninstall module
  * @return {void}
  */
-Module.prototype.toggleModuleInstallation = function () {
+Module.prototype.toggleModuleInstallation = function (e) {
     var identifier = $(this.module).data('identifier');
-    if ($(this.module).find('.uninstall-module').hasClass('hide')) {
-        var button = $(this.module).find('.install-module');
+    var button = $(e.target);
+    if ($(e.target).hasClass('install-module')) {
         var otherButton = $(this.module).find('.uninstall-module');
         var url = 'install';
-    } else {
-        var button = $(this.module).find('.uninstall-module');
+    } else if ($(e.target).hasClass('uninstall-module')) {
         var otherButton = $(this.module).find('.install-module');
         var url = 'uninstall';
+    } else {
+        var otherButton = null;
+        var url = 'extend';
     }
     
     var allButtons = $('.extend-module, .uninstall-module, .install-module');
@@ -61,9 +62,14 @@ Module.prototype.toggleModuleInstallation = function () {
         allButtons.addClass('disabled');
         button.addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i> ' + text);
         $.get('/mconsole/modules/' + identifier + '/' + url, function (data) {
+            if (button.hasClass('extend-module')) {
+                return location.reload();
+            }
             button.html(oldHtml);
             button.addClass('hide');
-            otherButton.removeClass('hide');
+            if (otherButton) {
+                otherButton.removeClass('hide');
+            }
             allButtons.removeClass('disabled');
         });
     }
