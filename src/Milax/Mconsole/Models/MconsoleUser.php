@@ -26,6 +26,11 @@ class MconsoleUser extends Authenticatable
         'password', 'remember_token',
     ];
     
+    /**
+     * Relationship to MconsoleRole
+     * 
+     * @return BelongsTo
+     */
     public function role()
     {
         return $this->belongsTo('Milax\Mconsole\Models\MconsoleRole');

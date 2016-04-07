@@ -88,27 +88,52 @@ class Quotes
         ]);
     }
     
+    /**
+     * Get all quotes
+     * 
+     * @return Illuminate\Support\Collection
+     */
     public function get()
     {
         return $this->quotes;
     }
     
+    /**
+     * Get random quote
+     * 
+     * @return array
+     */
     public function getRandom()
     {
         return $this->quotes->random();
     }
     
+    /**
+     * Shuffle quotes, set random quote in $this->random
+     * 
+     * @return void
+     */
     public function shuffle()
     {
         $random = $this->quotes->random();
         $this->random = $random;
     }
     
+    /**
+     * Get random quote text
+     * 
+     * @return string
+     */
     public function getText()
     {
         return $this->random['text'];
     }
     
+    /**
+     * Get random quote author
+     * 
+     * @return string
+     */
     public function getAuthor()
     {
         return $this->random['author'];

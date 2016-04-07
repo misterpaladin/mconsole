@@ -11,6 +11,11 @@ class Translations
 {
     protected $provider;
     
+    /**
+     * Create new class instance
+     * 
+     * @param MconsoleServiceProvider $provider [Mconsole service provider]
+     */
     public function __construct(MconsoleServiceProvider $provider)
     {
         $this->provider = $provider;
