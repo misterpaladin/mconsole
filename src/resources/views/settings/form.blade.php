@@ -10,7 +10,7 @@
                 <div class="col-md-8 col-sm-6">
                     <div class="portlet light">
         				@include('mconsole::partials.portlet-title', [
-                            'title' => 'Настройки',
+                            'title' => trans('mconsole::settings.menu.name'),
                         ])
         				<div class="portlet-body">
                             @foreach ($options as $option)
