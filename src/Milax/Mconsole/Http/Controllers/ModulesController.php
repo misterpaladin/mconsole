@@ -29,8 +29,6 @@ class ModulesController extends Controller
             }
         });
         
-        app('API')->translations->load();
-        
         return view('mconsole::modules.list', ['items' => app('API')->modules->get('all')]);
     }
     
@@ -74,5 +72,16 @@ class ModulesController extends Controller
         app('API')->modules->extend($module);
         
         return ['status' => 'ok'];
+    }
+    
+    /**
+     * Reload modules language files
+     * 
+     * @return Response
+     */
+    public function reloadTranslations()
+    {
+        app('API')->translations->load();
+        return redirect()->back();
     }
 }

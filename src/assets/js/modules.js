@@ -25,13 +25,10 @@ Module.prototype.toggleModuleInstallation = function (e) {
     var identifier = $(this.module).data('identifier');
     var button = $(e.target);
     if ($(e.target).hasClass('install-module')) {
-        var otherButton = $(this.module).find('.uninstall-module');
         var url = 'install';
     } else if ($(e.target).hasClass('uninstall-module')) {
-        var otherButton = $(this.module).find('.install-module');
         var url = 'uninstall';
     } else {
-        var otherButton = null;
         var url = 'extend';
     }
     
@@ -58,19 +55,10 @@ Module.prototype.toggleModuleInstallation = function (e) {
             $modal.modal('hide');
             setTimeout(1000, $modal.remove);
         }
-        var oldHtml = button.html();
         allButtons.addClass('disabled');
         button.addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i> ' + text);
         $.get('/mconsole/modules/' + identifier + '/' + url, function (data) {
-            if (button.hasClass('extend-module')) {
-                return location.reload();
-            }
-            button.html(oldHtml);
-            button.addClass('hide');
-            if (otherButton) {
-                otherButton.removeClass('hide');
-            }
-            allButtons.removeClass('disabled');
+            return location.reload();
         });
     }
 }
@@ -99,5 +87,21 @@ $(function () {
     var rows = $('#modules-table tbody tr');
     rows.each(function (i, row) {
         new Module(row);
+    });
+    
+    var reloadTranslations = $('.reload-translations');
+    reloadTranslations.on('click', function (e) {
+        if ($(this).hasClass('disabled'))
+            return false;
+        
+        var text = $(this).data('lang-process');
+        
+        $(this).addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i> ' + text);
+        
+        $.get('/mconsole/modules/reloadtrans', function (data) {
+            return location.reload();
+        });
+        
+        return false;
     });
 });
