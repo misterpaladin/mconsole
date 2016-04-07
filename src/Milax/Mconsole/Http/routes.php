@@ -29,6 +29,7 @@ Route::group([
         'prefix' => 'modules',
     ], function () {
         Route::get('/', 'ModulesController@index');
+        Route::get('/reloadtrans', 'ModulesController@reloadTranslations');
         Route::get('/{id}/install', 'ModulesController@install');
         Route::get('/{id}/uninstall', 'ModulesController@uninstall');
         Route::get('/{id}/extend', 'ModulesController@extend');

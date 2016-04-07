@@ -88,4 +88,20 @@ $(function () {
     rows.each(function (i, row) {
         new Module(row);
     });
+    
+    var reloadTranslations = $('.reload-translations');
+    reloadTranslations.on('click', function (e) {
+        if ($(this).hasClass('disabled'))
+            return false;
+        
+        var text = $(this).data('lang-process');
+        
+        $(this).addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i> ' + text);
+        
+        $.get('/mconsole/modules/reloadtrans', function (data) {
+            return location.reload();
+        });
+        
+        return false;
+    });
 });
