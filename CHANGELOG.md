@@ -2,6 +2,7 @@
 
 Added:
   - HasImages trait for Eloquent models (provides `hasMany Image` relationship)
+  - Settings interface
 
 Fixed:
   - Pages module tests

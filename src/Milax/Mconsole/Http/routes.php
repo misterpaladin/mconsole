@@ -6,25 +6,25 @@ Route::group([
     'namespace' => 'Milax\Mconsole\Http\Controllers',
 ], function () {
     
-    /** Authentication */
+    // Authentication
     Route::get('/login', 'MconsoleController@login');
     Route::post('/login', 'MconsoleController@auth');
     Route::get('/logout', 'MconsoleController@logout');
     
-    /** Mconsole root */
+    // Mconsole root
     Route::get('/', 'MconsoleController@index');
     
-    /** API */
+    // API
     Route::get('/api/notifications', 'APIController@getNotifications');
     Route::get('/api/notifications/{id}/seen', 'APIController@seeNotification');
     Route::get('/api/search', 'APIController@doSearch');
     
-    /** Resources */
+    // Resources
     Route::resource('/users', 'UsersController');
     Route::resource('/roles', 'RolesController');
     Route::resource('/presets', 'PresetsController');
     
-    /** Modules */
+    // Modules
     Route::group([
         'prefix' => 'modules',
     ], function () {
@@ -35,6 +35,10 @@ Route::group([
         Route::get('/{id}/extend', 'ModulesController@extend');
     });
     
+    // Settings
+    Route::get('/settings', 'SettingsController@index');
+    Route::post('/settings', 'SettingsController@save');
+
     Route::resource('/test', 'TestController');
     
 });
