@@ -14,4 +14,14 @@ class MconsoleUploadPreset extends Model
         'extensions' => 'array',
         'operations' => 'array',
     ];
+    
+    /**
+     * Relationship to Image
+     * 
+     * @return HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany('Milax\Mconsole\Models\Image', 'preset_id');
+    }
 }
