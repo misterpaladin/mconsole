@@ -9,16 +9,32 @@ class MconsoleRole extends Model
 {
     protected $fillable = ['name', 'routes'];
     
+    /**
+     * Get routes as array
+     * 
+     * @param  string $value
+     * @return array
+     */
     public function getRoutesAttribute($value)
     {
         return json_decode($value);
     }
     
+    /**
+     * Set routes attribute
+     * 
+     * @param string $value
+     */
     public function setRoutesAttribute($value)
     {
         $this->attributes['routes'] = json_encode($value);
     }
     
+    /**
+     * Relationship to User
+     * 
+     * @return HasMany
+     */
     public function users()
     {
         return $this->hasMany('App\User', 'role_id');

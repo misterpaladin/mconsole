@@ -15,6 +15,9 @@ class RolesController extends Controller
 
     protected $model = 'Milax\Mconsole\Models\MconsoleRole';
 
+    /**
+     * Create new class instance
+     */
     public function __construct()
     {
         $this->setRedirects(['/mconsole/roles', '/mconsole/roles', '/mconsole/roles']);

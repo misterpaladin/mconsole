@@ -8,6 +8,9 @@ class FileMenu implements Menu
 {
     protected $model = '\Milax\Mconsole\Models\MconsoleMenu';
     
+    /**
+     * Create new class instance, define menu
+     */
     public function __construct()
     {
         $this->menu = [
@@ -183,6 +186,7 @@ class FileMenu implements Menu
     
     /**
      * Convert menu item array to MconsoleMenu object
+     * 
      * @param  array $array
      * @return MconsoleMenu
      */

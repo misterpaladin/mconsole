@@ -18,11 +18,6 @@ class PresetsController extends Controller
     protected $redirectTo = '/mconsole/presets';
     protected $model = 'Milax\Mconsole\Models\MconsoleUploadPreset';
     
-    public function __construct(Localizator $localizator)
-    {
-        $this->localizator = $localizator;
-    }
-    
     /**
      * Display a listing of the resource.
      *

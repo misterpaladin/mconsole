@@ -19,6 +19,9 @@ class UsersController extends Controller
     protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';
     
+    /**
+     * Create new class instance
+     */
     public function __construct()
     {
         $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');

@@ -41,6 +41,12 @@ class MconsoleMiddleware
         return $next($request);
     }
     
+    /**
+     * Check if user has access to given route
+     * 
+     * @param  Request  $request
+     * @return boolean
+     */
     protected function hasAccess($request)
     {
         if ($request->is('mconsole/logout')) {
