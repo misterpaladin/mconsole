@@ -27,14 +27,15 @@ Module.prototype.toggleModuleInstallation = function () {
     if ($(this.module).find('.uninstall-module').hasClass('hide')) {
         var button = $(this.module).find('.install-module');
         var otherButton = $(this.module).find('.uninstall-module');
-        var text = 'Installing..';
         var url = 'install';
     } else {
         var button = $(this.module).find('.uninstall-module');
         var otherButton = $(this.module).find('.install-module');
-        var text = 'Uninstalling..';
         var url = 'uninstall';
     }
+    
+    var allButtons = $('.extend-module, .uninstall-module, .install-module');
+    var text = button.data('lang-process');
     
     if (button.hasClass('disabled')) {
         return false;
@@ -57,12 +58,13 @@ Module.prototype.toggleModuleInstallation = function () {
             setTimeout(1000, $modal.remove);
         }
         var oldHtml = button.html();
+        allButtons.addClass('disabled');
         button.addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i> ' + text);
         $.get('/mconsole/modules/' + identifier + '/' + url, function (data) {
             button.html(oldHtml);
-            button.removeClass('disabled');
             button.addClass('hide');
             otherButton.removeClass('hide');
+            allButtons.removeClass('disabled');
         });
     }
 }
