@@ -8,6 +8,12 @@ class MconsoleOption extends Model
 {
     use \Cacheable;
     
+    protected $fillable = ['value'];
+    
+    protected $casts = [
+        'options' => 'array',
+    ];
+    
     /**
      * Get option value by its key
      * 

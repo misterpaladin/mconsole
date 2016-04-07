@@ -149,6 +149,23 @@ class FileMenu implements Menu
                         'visible' => true,
                         'enabled' => true,
                     ],
+                    'settings_all' => [
+                        'name' => 'Settings',
+                        'translation' => 'settings.menu.name',
+                        'url' => 'settings',
+                        'description' => 'settings.menu.description',
+                        'route' => 'mconsole.settings.index',
+                        'visible' => true,
+                        'enabled' => true,
+                    ],
+                    'settings_form' => [
+                        'name' => 'Edit settings',
+                        'translation' => 'settings.menu.update.name',
+                        'description' => 'settings.menu.update.description',
+                        'route' => 'mconsole.settings.edit',
+                        'visible' => false,
+                        'enabled' => true,
+                    ],
                 ],
             ],
         ];

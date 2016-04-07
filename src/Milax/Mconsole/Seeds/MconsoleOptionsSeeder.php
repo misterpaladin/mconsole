@@ -23,8 +23,25 @@ class MconsoleOptionsSeeder
      * @access protected
      */
     protected static $options = [
-        'project_name' => 'New Project',
-        'project_url' => 'http://milax.com',
+        [
+            'label' => 'settings.labels.name',
+            'key' => 'project_name',
+            'value' => 'New Project',
+            'type' => 'text',
+        ],
+        [
+            'label' => 'settings.labels.url',
+            'key' => 'project_url',
+            'value' => 'http://milax.com',
+            'type' => 'text',
+        ],
+        [
+            'label' => 'settings.labels.notifications',
+            'key' => 'notifications',
+            'value' => '1',
+            'type' => 'select',
+            'options' => '{"1": "On", "0": "Off"}',
+        ],
     ];
     
     /**
@@ -34,12 +51,12 @@ class MconsoleOptionsSeeder
      */
     public static function run()
     {
-        collect(self::$options)->each(function ($value, $key) {
-            if (DB::table(self::$table)->where('key', $key)->count() == 0) {
-                DB::table(self::$table)->insert([
-                    'key' => $key,
-                    'value' => $value,
-                ]);
+        collect(self::$options)->each(function ($option) {
+            if (DB::table(self::$table)->where('key', $option['key'])->count() == 0) {
+                DB::table(self::$table)->insert($option);
+            } else {
+                unset($option['value']);
+                DB::table(self::$table)->where('key', $option['key'])->update($option);
             }
         });
         return 'Installed ' . __CLASS__ . '.';
