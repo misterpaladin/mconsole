@@ -2,14 +2,12 @@
 
 namespace Milax\Mconsole\Core\API;
 
-use Milax\Mconsole\Contracts\API\ServiceAPI;
-
-class Search implements ServiceAPI
+class QuickMenu
 {
     protected $stack = [];
     
     /**
-     * Register search engine callback
+     * Register callback function
      * 
      * @param  Closure $callback
      * @return void
@@ -20,19 +18,19 @@ class Search implements ServiceAPI
     }
     
     /**
-     * Handle search
+     * Get all quick menu items
      * 
-     * @param  string $text
-     * @return Illuminate\Support\Collection
+     * @return Illumiate\Support\Collection
      */
-    public function handle($text)
+    public function get()
     {
         $results = collect();
         foreach ($this->stack as $callback) {
-            if ($result = $callback($text)) {
-                $results = $results->merge($result);
+            if ($result = $callback()) {
+                $results->push($result);
             }
         }
+        
         return $results;
     }
 }
