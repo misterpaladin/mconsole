@@ -25,13 +25,10 @@ Module.prototype.toggleModuleInstallation = function (e) {
     var identifier = $(this.module).data('identifier');
     var button = $(e.target);
     if ($(e.target).hasClass('install-module')) {
-        var otherButton = $(this.module).find('.uninstall-module');
         var url = 'install';
     } else if ($(e.target).hasClass('uninstall-module')) {
-        var otherButton = $(this.module).find('.install-module');
         var url = 'uninstall';
     } else {
-        var otherButton = null;
         var url = 'extend';
     }
     
@@ -58,19 +55,10 @@ Module.prototype.toggleModuleInstallation = function (e) {
             $modal.modal('hide');
             setTimeout(1000, $modal.remove);
         }
-        var oldHtml = button.html();
         allButtons.addClass('disabled');
         button.addClass('disabled').html('<i class="fa fa-spin fa-spinner"></i> ' + text);
         $.get('/mconsole/modules/' + identifier + '/' + url, function (data) {
-            if (button.hasClass('extend-module')) {
-                return location.reload();
-            }
-            button.html(oldHtml);
-            button.addClass('hide');
-            if (otherButton) {
-                otherButton.removeClass('hide');
-            }
-            allButtons.removeClass('disabled');
+            return location.reload();
         });
     }
 }
