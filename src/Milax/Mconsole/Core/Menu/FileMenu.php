@@ -114,9 +114,9 @@ class FileMenu implements Menu
                     ],
                     'presets_form' => [
                         'name' => 'Create preset',
-                        'translation' => 'presets.menu.form.name',
+                        'translation' => 'presets.menu.create.name',
                         'url' => 'presets/create',
-                        'description' => 'presets.menu.form.description',
+                        'description' => 'presets.menu.create.description',
                         'route' => 'mconsole.presets.store',
                         'visible' => false,
                         'enabled' => true,
