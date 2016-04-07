@@ -116,6 +116,19 @@ class Modules extends ModelAPI
     }
     
     /**
+     * Extend module
+     * 
+     * @param  MconsoleModule $module [Module object]
+     * @return int
+     */
+    public function extend($module)
+    {
+        return Artisan::call('make:module', [
+            'class' => $module->name,
+        ]);
+    }
+    
+    /**
      * Install module package migrations, assets
      * 
      * @param  MconsoleModule $module [Module object]
