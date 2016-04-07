@@ -113,6 +113,10 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->modules->scan();
         app('API')->quotes->shuffle();
         
+        if (env('APP_ENV') == 'local') {
+            app('API')->translations->load();
+        }
+        
         // Register mconsole singleton
         $this->app->singleton('Mconsole', function ($app) {
             return $this;
