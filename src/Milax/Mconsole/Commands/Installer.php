@@ -160,13 +160,16 @@ class Installer extends Command
     }
     
     /**
-     * Show end message.
+     * Final steps, show finish message.
      * 
      * @access protected
      * @return void
      */
     protected function finish()
     {
+        app('API')->modules->get('installed')->each(function ($module) {
+            app('API')->modules->install($module);
+        });
         app('API')->translations->load();
         
         if ($this->option('update')) {
