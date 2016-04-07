@@ -117,7 +117,7 @@ class FileMenu implements Menu
                         'translation' => 'presets.menu.create.name',
                         'url' => 'presets/create',
                         'description' => 'presets.menu.create.description',
-                        'route' => 'mconsole.presets.store',
+                        'route' => 'mconsole.presets.create',
                         'visible' => false,
                         'enabled' => true,
                     ],
