@@ -44,7 +44,7 @@ class FileMenu implements Menu
                         'url' => 'users/create',
                         'description' => 'users.menu.create.description',
                         'route' => 'mconsole.users.create',
-                        'visible' => true,
+                        'visible' => false,
                         'enabled' => true,
                     ],
                     'users_update' => [
