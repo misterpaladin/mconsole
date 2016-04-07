@@ -26,12 +26,10 @@ class MconsoleUploadPresetRequest extends Request
         return [
             'name' => 'required',
             'path' => 'required|string',
-            'width' => 'integer',
-            'height' => 'integer',
-            'quality' => 'integer',
             'extensions' => 'json',
             'min_width' => 'integer',
             'min_height' => 'integer',
+            'operations' => 'json',
         ];
     }
 }
