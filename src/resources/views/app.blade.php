@@ -60,10 +60,34 @@
 					<!-- BEGIN TOP NAVIGATION MENU -->
 					<div class="top-menu">
 						<ul class="nav navbar-nav pull-right">
-                            <li class="dropdown">
-                                <a href="{{ app('API')->options->getBykey('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
-                                    <i class="icon-share-alt"></i>
+                            <li class="dropdown dropdown-extended dropdown-notification dropdown-dark">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="icon-plus"></i>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external">
+                                        <h3>Быстрое меню</h3>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                            @forelse (app('API')->quickmenu->get() as $qmItem)
+                                                <li>
+                                                    <a href="{{ $qmItem->link }}">
+                                                        <span class="details">
+                                                            @if ($qmItem->icon)
+                                                            <span class="label label-sm label-icon {{ isset($qmItem->color) ? $qmItem->color : null }}">
+                                                                <i class="{{ $qmItem->icon }}"></i>
+                                                            </span>
+                                                            @endif
+                                                            {{ $qmItem->text }} </span>
+                                                    </a>
+                                                </li>
+                                            @empty
+                                                <li><a href="javascript:;"><span class="details">Нет элементов меню</span></a></li>
+                                            @endforelse
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>
                             <!-- BEGIN NOTIFICATION DROPDOWN -->
                             <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
@@ -81,6 +105,11 @@
                                 </ul>
                             </li>
                             <!-- END NOTIFICATION DROPDOWN -->
+                            <li class="dropdown">
+                                <a href="{{ app('API')->options->getBykey('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
+                                    <i class="icon-share-alt"></i>
+                                </a>
+                            </li>
                             <li class="droddown dropdown-separator">
                                 <span class="separator"></span>
                             </li>
