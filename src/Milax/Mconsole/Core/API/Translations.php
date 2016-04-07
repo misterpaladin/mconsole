@@ -52,7 +52,11 @@ class Translations
                         if (File::exists(storage_path('app/lang/' . $language->key . '/' . basename($lg)))) {
                             $baseLang = include storage_path('app/lang/' . $language->key . '/' . basename($lg));
                             $customLang = include $lg;
-                            $baseLang = array_merge($baseLang, $customLang);
+                            if (is_array($baseLang)) {
+                                $baseLang = array_merge($baseLang, $customLang);
+                            } else {
+                                $baseLang = $customLang;
+                            }
                             File::put(storage_path('app/lang/' . $language->key . '/' . basename($lg)), '<?php return ' . var_export($baseLang, true) . ';');
                         } else {
                             File::copy($lg, storage_path('app/lang/' . $language->key . '/' . basename($lg)));
