@@ -23,6 +23,7 @@ class MconsoleModule extends Model
     public $menu;
     public $controllers;
     public $requests;
+    public $init;
     
     protected $fillable = ['identifier', 'installed'];
 }

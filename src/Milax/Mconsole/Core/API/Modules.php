@@ -204,12 +204,14 @@ class Modules extends ModelAPI
             foreach ($modules as $module) {
                 $this->modules->get('all')->push($module);
                 if ($module->installed) {
+                    if ($module->init) {
+                        $init = $module->init;
+                        $init();
+                    }
                     $this->provider->routes = array_merge_recursive($this->provider->routes, $module->routes);
                     $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
                     $this->provider->config = array_merge_recursive($this->provider->config, $module->config);
-                    if ($module->installed) {
-                        $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
-                    }
+                    $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
                     $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
                     $this->modules->get('installed')->push($module);
                 } else {
@@ -253,6 +255,11 @@ class Modules extends ModelAPI
         // Get installation state
         if ($dbModule = $this->dbMods->where('identifier', $module->identifier)->first()) {
             $module->installed = ($dbModule->installed === 1);
+        }
+        
+        // Get init function
+        if (isset($config['init'])) {
+            $module->init = $config['init'];
         }
         
         // Collect routes
