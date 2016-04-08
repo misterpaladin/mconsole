@@ -32,7 +32,6 @@ Variables.prototype.appendVariable = function () {
  */
 Variables.prototype.removeVariable = function (e) {
     var row = $(e.target).closest('.row').remove();
-    this.toggleSubmit();
 }
 
 /**
