@@ -29,7 +29,13 @@ class VariablesController extends Controller
     public function save(Request $request)
     {
         Variable::truncate();
-        Variable::insert($request->input('variables'));
+        
+        $data = collect($request->input('variables'))->reject(function ($variable) {
+            return strlen($variable['key']) == 0;
+        });
+        if ($data->count() > 0) {
+            Variable::insert($data->toArray());
+        }        
         
         return redirect()->back()->with('status', trans('mconsole::variables.saved'));
     }
