@@ -1,6 +1,6 @@
 ## 0.2.4
 
-- Added:
+Added:
   - Quick menu API
   - Modules extending in modules interface
   - RU translation for modules interface
