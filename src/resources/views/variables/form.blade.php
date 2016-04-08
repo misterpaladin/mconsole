@@ -83,7 +83,7 @@
                                         @include('mconsole::forms.submit')
                                     </div>
                                     <div class="col-sm-4">
-                                        <span class="btn blue form-control add-variable">Добавить переменную</span>
+                                        <span class="btn green-jungle form-control add-variable">{{ trans('mconsole::variables.buttons.add')}}</span>
                                     </div>
                                 </div>
                     		</div>
