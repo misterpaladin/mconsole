@@ -55,7 +55,7 @@ class ModuleGenerator extends Command
         ];
         
         if (Schema::hasTable(Language::getQuery()->from)) {
-            Language::all()->each(function ($lang) {
+            Language::getCached()->each(function ($lang) {
                 array_push($this->directories, 'Mconsole/%s/assets/resources/lang/' . $lang->key);
             });
         }

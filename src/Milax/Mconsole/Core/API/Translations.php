@@ -36,7 +36,7 @@ class Translations
             return;
         }
         
-        $languages = Language::all();
+        $languages = Language::getCached();
         
         // Collect translation files
         foreach ($this->provider->translations as $translation) {
