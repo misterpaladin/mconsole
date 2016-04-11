@@ -66,5 +66,6 @@ class Mconsole
         view()->composer('mconsole::app', 'Milax\Mconsole\Http\Composers\SectionComposer');
         view()->composer('mconsole::partials.menu', 'Milax\Mconsole\Http\Composers\MenuComposer');
         view()->composer('mconsole::app', 'Milax\Mconsole\Http\Composers\OptionsComposer');
+        view()->composer('mconsole::partials.upload', 'Milax\Mconsole\Http\Composers\FormImagesUploadComposer');
     }
 }

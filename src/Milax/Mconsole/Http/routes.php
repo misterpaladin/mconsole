@@ -1,6 +1,18 @@
 <?php
 
 Route::group([
+    'prefix' => 'storage',
+    'namespace' => 'Milax\Mconsole\Http\Controllers',
+], function () {
+    Route::group([
+        'prefix' => 'images',
+    ], function () {
+        Route::any('/preview/{file}', 'API\ImagesController@previewUploadedImage');
+        Route::get('/preview/{dir}/{file}', 'API\ImagesController@previewUploadedImage');
+    });
+});
+
+Route::group([
     'prefix' => 'mconsole',
     'middleware' => ['web', 'mconsole'],
     'namespace' => 'Milax\Mconsole\Http\Controllers',
@@ -15,9 +27,16 @@ Route::group([
     Route::get('/', 'MconsoleController@index');
     
     // API
-    Route::get('/api/notifications', 'APIController@getNotifications');
-    Route::get('/api/notifications/{id}/seen', 'APIController@seeNotification');
-    Route::get('/api/search', 'APIController@doSearch');
+    Route::group([
+        'prefix' => 'api',
+    ], function () {
+        Route::get('/notifications', 'APIController@getNotifications');
+        Route::get('/notifications/{id}/seen', 'APIController@seeNotification');
+        Route::get('/search', 'APIController@doSearch');
+        Route::any('/images/upload', 'API\ImagesController@uploadImage');
+        Route::get('/images/get', 'API\ImagesController@get');
+        Route::get('/images/delete/{file}', 'API\ImagesController@deleteImage');
+    });
     
     // Resources
     Route::resource('/users', 'UsersController');
