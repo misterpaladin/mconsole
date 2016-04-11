@@ -29,7 +29,7 @@
                                                 <p>
                                                     <strong>{{ $item->name }}</strong> <span class="small">[{{ $item->identifier }}]</span>
                                                 </p>
-                                                <p class="">{{ $item->description }}</p>
+                                                <p class="">{{ trans($item->description) }}</p>
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <div class="jstree small">
