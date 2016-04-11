@@ -24,4 +24,14 @@ class MconsoleUploadPreset extends Model
     {
         return $this->hasMany('Milax\Mconsole\Models\Image', 'preset_id');
     }
+    
+    /**
+     * Trim slashes
+     * 
+     * @param string $value [Original path]
+     */
+    public function setPathAttribute($value)
+    {
+        $this->attributes['path'] = trim($value, '/');
+    }
 }
