@@ -112,7 +112,6 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Run one time scans
         app('API')->modules->scan();
-        app('API')->quotes->shuffle();
         
         if (env('APP_ENV') == 'local') {
             app('API')->translations->load();
