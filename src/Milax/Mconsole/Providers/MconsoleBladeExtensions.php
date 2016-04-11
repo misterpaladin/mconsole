@@ -32,11 +32,6 @@ class MconsoleBladeExtensions extends ServiceProvider
             return "<?php echo \Carbon\Carbon::now()->format({$expression}); ?>";
         });
         
-        Blade::directive('upload', function ($expression) {
-            $presets = MconsoleUploadPreset::getCached();
-            return "<?php echo View::make('mconsole::partials.upload')->with('presets', '{$presets}'); ?>";
-        });
-        
         Blade::directive('variable', function ($expression) {
             $string = new String($expression);
             $expression = $string->removeQuote()->removeParenthesis()->getString();
