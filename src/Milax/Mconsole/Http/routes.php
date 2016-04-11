@@ -57,11 +57,10 @@ Route::group([
     // Settings
     Route::get('/settings', 'SettingsController@index');
     Route::post('/settings', 'SettingsController@save');
+    Route::get('/settings/clearcache', 'SettingsController@clearCache');
     
     // Variables
     Route::get('/variables', 'VariablesController@index');
     Route::post('/variables', 'VariablesController@save');
 
-    Route::resource('/test', 'TestController');
-    
 });

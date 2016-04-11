@@ -10,7 +10,7 @@
                 <div class="col-md-8 col-sm-6">
                     <div class="portlet light">
         				@include('mconsole::partials.portlet-title', [
-                            'title' => trans('mconsole::settings.menu.name'),
+                            'title' => trans('mconsole::settings.main'),
                         ])
         				<div class="portlet-body">
                             @foreach ($options as $option)
@@ -44,6 +44,16 @@
                             <div class="form-actions">
                     			@include('mconsole::forms.submit')
                     		</div>
+        				</div>
+        			</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="portlet light">
+        				@include('mconsole::partials.portlet-title', [
+                            'title' => trans('mconsole::settings.additional'),
+                        ])
+        				<div class="portlet-body">
+                            <a href="{{ url('mconsole/settings/clearcache') }}" class="btn btn-danger form-control">{{ trans('mconsole::settings.clearcache') }}</a>
         				</div>
         			</div>
                 </div>

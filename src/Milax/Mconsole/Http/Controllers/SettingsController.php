@@ -43,4 +43,15 @@ class SettingsController extends Controller
         
         return redirect()->back()->with('status', trans('mconsole::settings.saved'));
     }
+    
+    /**
+     * Clear application caches
+     * 
+     * @return Redirect
+     */
+    public function clearCache()
+    {
+        \Artisan::call('cache:clear');
+        return redirect()->back()->with('status', trans('mconsole::settings.cacheclear'));
+    }
 }
