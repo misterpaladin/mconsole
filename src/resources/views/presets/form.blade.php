@@ -81,7 +81,7 @@
                             <option value="watermark">{{ trans('mconsole::presets.form.operations.types.watermark') }}</option>
                         </optgroup>
                         <optgroup label="{{ trans('mconsole::presets.form.operations.types.groups.filters') }}">
-                            <option value="blackwhite">{{ trans('mconsole::presets.form.operations.types.blackwhite') }}</option>
+                            <option value="greyscale">{{ trans('mconsole::presets.form.operations.types.greyscale') }}</option>
                         </optgroup>
                     </select>
                 </div>
