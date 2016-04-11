@@ -19,7 +19,6 @@
 		<link href="/massets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="/massets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
@@ -27,13 +26,18 @@
         <link href="/massets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
+        <link href="/massets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
 		<link href="/massets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
 		<!-- END THEME GLOBAL STYLES -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
-		<link href="/massets/css/links-editor.css" rel="stylesheet" type="text/css">
+		<link href="/massets/css/sortable.css" rel="stylesheet" type="text/css">
 		<link href="/massets/global/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.css" rel="stylesheet">
+        <link href="/massets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css">
+        <link href="/massets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
@@ -275,10 +279,25 @@
 		<!-- END CORE PLUGINS -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<script src="/massets/global/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/vendor/load-image.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-audio.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
-		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
+		{{-- <script src="/massets/js/mconsole.js" type="text/javascript"></script> --}}
+		<script src="/massets/js/form-images-upload.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
@@ -287,7 +306,6 @@
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
-		<script src="/massets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 		<!-- END THEME LAYOUT SCRIPTS -->
         @yield('page.scripts')
         <script>
