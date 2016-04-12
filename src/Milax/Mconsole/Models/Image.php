@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $fillable = ['path', 'preset_id', 'filename', 'copies', 'related_id', 'related_class', 'group', 'order', 'unique'];
+    protected $fillable = ['path', 'preset_id', 'filename', 'copies', 'related_id', 'related_class', 'group', 'order', 'unique', 'language_id', 'title', 'description'];
     
     protected $casts = [
         'copies' => 'array',
@@ -20,6 +20,16 @@ class Image extends Model
     public function preset()
     {
         return $this->belongsTo('Milax\Mconsole\Models\MconsoleUploadPreset', 'preset_id');
+    }
+    
+    /**
+     * Relationship to Language
+     * 
+     * @return BelongsTo
+     */
+    public function language()
+    {
+        return $this->belongsTo('Milax\Mconsole\Models\Language');
     }
     
     /**

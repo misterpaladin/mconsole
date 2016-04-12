@@ -8,6 +8,17 @@ FormImagesUpload.prototype.init = function () {
     var element = this.element;
     var multiple = element.find('input[type="file"]').prop('multiple');
     
+    // Toggle image description
+    this.element.find('button.description').on('click', function () {
+        element.find('div.description').map(function (i, el) {
+            if ($(el).hasClass('hide')) {
+                $(el).removeClass('hide');
+            } else {
+                $(el).addClass('hide');
+            }
+        });
+    });
+    
     // Make images sortable
     this.element.find('tbody.files').sortable({
 		axis: 'y',
@@ -85,6 +96,10 @@ FormImagesUpload.prototype.init = function () {
             $(this).removeClass('fileupload-processing');
         }).done(function (result) {
             $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
+            $(this).find('tbody.files tr').map(function (i, row) {
+                var lang = $(row).find('input.uploadable-language-id').val();
+                $(row).find('select').val(lang);
+            });
         });
     }
 }

@@ -15,6 +15,10 @@
                 <i class="fa fa-upload"></i>
                 <span> {{ trans('mconsole::uploader.upload') }} </span>
             </button>
+            <button type="button" class="btn btn-xs blue description">
+                <i class="fa fa-info-circle"></i>
+                <span> {{ trans('mconsole::uploader.description') }} </span>
+            </button>
             <button type="reset" class="btn btn-xs warning cancel">
                 <i class="fa fa-ban-circle"></i>
                 <span> {{ trans('mconsole::uploader.cancel') }} </span>
@@ -100,13 +104,26 @@
                 </a> {% } %} </span>
         </td>
         <td>
+            <input type="hidden" class="uploadable-language-id" value="{%=file.language_id%}">
             <input type="hidden" class="uploadable-filename" name="uploadable[{{ $group }}][files][]" value="{%=file.name%}">
             <p class="name"> {% if (file.url) { %}
                 <span class="size">{%=o.formatFileSize(file.size)%}</span>
                 <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl? 'data-gallery': ''%}>{%=file.name%}</a> {% } else { %}
                 <span>{%=file.name%}</span> {% } %} </p> {% if (file.error) { %}
             <div class="help-block">
-                <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %} </td>
+                <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %}
+                <div class="description hide">
+                    <div class="form-group">
+                        {!! Form::select(sprintf('uploadable[%s][language_id][]', $group), $languages, null, ['class' => 'form-control input-sm']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::text(sprintf('uploadable[%s][title][]', $group), '{%=file.title%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.title')]) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::text(sprintf('uploadable[%s][description][]', $group), '{%=file.description%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.description')]) !!}
+                    </div>
+                </div>
+        </td>
         <td class="controls"><div class="btn btn-xs blue drag"><i class="fa fa-bars"></i></div>
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-xs btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}' {%

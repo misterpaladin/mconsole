@@ -69,6 +69,9 @@ class Images
             if (File::exists(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename))) {
                 $images->get('files')->push([
                     'name' => $image->filename,
+                    'language_id' => $image->language_id,
+                    'title' => $image->title,
+                    'description' => $image->description,
                     'size' => File::size(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename)),
                     'url' => sprintf('%s%s/original/%s', $url, $image->path, $image->filename),
                     'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $image->path, $image->filename),
@@ -169,12 +172,17 @@ class Images
                 if (!isset($input['files']) || count($input['files']) == 0) {
                     break;
                 }
+                
                 $preset = $this->presets->where('key', $input['preset'])->first();
                 $model = $input['related_class'];
                 $path = sprintf('%s/%s', $this->imagesPath, $preset->path);
                 
-                foreach ($input['files'] as $file) {
+                foreach ($input['files'] as $key => $file) {
                     $file = sprintf('%s/%s', storage_path('tmp/images'), $file);
+                    
+                    $language = $input['language_id'][$key];
+                    $title = $input['title'][$key];
+                    $description = $input['description'][$key];
                     
                     // Load image from tmp storage
                     if (File::exists($file)) {
@@ -182,6 +190,9 @@ class Images
                         
                         $image = ImageModel::create([
                             'preset_id' => $preset->id,
+                            'language_id' => $language,
+                            'title' => $title,
+                            'description' => $description,
                             'group' => $group,
                             'path' => $preset->path,
                             'filename' => basename($file),
@@ -192,6 +203,11 @@ class Images
                         $this->deleteTmp($file);
                     } else { // Or get Image object from database
                         $image = ImageModel::where('preset_id', $preset->id)->where('related_class', $model)->where('filename', basename($file))->first();
+                        $image->update([
+                            'language_id' => $language,
+                            'title' => $title,
+                            'description' => $description,
+                        ]);
                     }
                     
                     $images->get($group)->push($image);
