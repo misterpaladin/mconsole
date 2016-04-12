@@ -1,5 +1,5 @@
 @if (count($item->models) > 0)
-    <li> Models
+    <li> {{ trans('mconsole::modules.table.models') }}
         <ul>
             @foreach ($item->models as $model)
                 <li data-jstree='{ "type" : "file" }'> {{ $model }} </li>
@@ -9,7 +9,7 @@
 @endif
 
 @if (count($item->controllers) > 0)
-    <li> Controllers
+    <li> {{ trans('mconsole::modules.table.controllers') }}
         <ul>
             @foreach ($item->controllers as $controller)
                 <li data-jstree='{ "type" : "file" }'> {{ $controller }} </li>
@@ -19,7 +19,7 @@
 @endif
 
 @if (count($item->requests) > 0)
-    <li> Requests
+    <li> {{ trans('mconsole::modules.table.requests') }}
         <ul>
             @foreach ($item->requests as $request)
                 <li data-jstree='{ "type" : "file" }'> {{ $request }} </li>
@@ -29,7 +29,7 @@
 @endif
 
 @if (count($item->migrations) > 0)
-    <li> Migrations
+    <li> {{ trans('mconsole::modules.table.migrations') }}
         <ul>
             @foreach ($item->migrations as $migration)
                 <li data-jstree='{ "type" : "file" }'> {{ $migration }} </li>
@@ -39,7 +39,7 @@
 @endif
 
 @if (count($item->views) > 0)
-    <li> Views
+    <li> {{ trans('mconsole::modules.table.views') }}
         <ul>
             @foreach ($item->views as $view)
                 <li data-jstree='{ "type" : "file" }'> {{ $view }} </li>
@@ -49,7 +49,7 @@
 @endif
 
 @if (count($item->translations) > 0)
-    <li> Translations
+    <li> {{ trans('mconsole::modules.table.translations') }}
         <ul>
             @foreach ($item->translations as $translation)
                 <li data-jstree='{ "type" : "file" }'> {{ $translation }} </li>

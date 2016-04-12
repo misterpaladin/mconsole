@@ -35,16 +35,16 @@
                                                         <div class="jstree small">
                                                             <ul>
                                                                 <li data-jstree='{ "icon" : "fa fa-cubes" }'>
-                                                                    Module components
+                                                                    {{ trans('mconsole::modules.table.components') }}
                                                                     <ul>@include('mconsole::modules.module-info-block', ['item' => $item])</ul>
                                                                 </li>
                                                                 @if ($item->type == 'extended')
                                                                     <li data-jstree='{ "icon" : "fa fa-plus" }'>
-                                                                        Extended module custom components
+                                                                        {{ trans('mconsole::modules.table.extended') }}
                                                                         <ul>@include('mconsole::modules.module-info-block', ['item' => $item->extend])</ul>
                                                                     </li>
                                                                     <li data-jstree='{ "icon" : "fa fa-cube" }'>
-                                                                        Base module components
+                                                                        {{ trans('mconsole::modules.table.base') }}
                                                                         <ul>@include('mconsole::modules.module-info-block', ['item' => $item->original])</ul>
                                                                     </li>
                                                                 @endif
