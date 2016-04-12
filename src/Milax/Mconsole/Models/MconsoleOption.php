@@ -8,10 +8,11 @@ class MconsoleOption extends Model
 {
     use \Cacheable;
     
-    protected $fillable = ['value'];
+    protected $fillable = ['label', 'key', 'value', 'type', 'options', 'enabled', 'rules'];
     
     protected $casts = [
         'options' => 'array',
+        'rules' => 'array',
     ];
     
     /**

@@ -28,12 +28,14 @@ class MconsoleOptionsSeeder
             'key' => 'project_name',
             'value' => 'New Project',
             'type' => 'text',
+            'rules' => ['required'],
         ],
         [
             'label' => 'settings.labels.url',
             'key' => 'project_url',
             'value' => 'http://milax.com',
             'type' => 'text',
+            'rules' => ['required', 'url'],
         ],
         [
             'label' => 'settings.labels.notifications',
