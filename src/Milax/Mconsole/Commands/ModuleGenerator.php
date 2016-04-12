@@ -37,6 +37,10 @@ class ModuleGenerator extends Command
                 'destination' => 'Mconsole/%s/bootstrap.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/bootstrap.php'),
             ],
+            'installer' => [
+                'destination' => 'Mconsole/%s/Installer.php',
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Installer.php'),
+            ],
             'routes' => [
                 'destination' => 'Mconsole/%s/Http/routes.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/routes.php'),
@@ -76,9 +80,10 @@ class ModuleGenerator extends Command
         
         File::makeDirectory(app_path(sprintf('Mconsole/%s/Http/Controllers', $class)), 0775, true, true);
         
-        File::put(app_path(sprintf($this->blueprint['bootstrap']['destination'], $class)), sprintf($this->blueprint['bootstrap']['file'], $class, $class, strtolower($class)));
+        File::put(app_path(sprintf($this->blueprint['bootstrap']['destination'], $class)), sprintf($this->blueprint['bootstrap']['file'], $class, $class, $class, strtolower($class)));
         File::put(app_path(sprintf($this->blueprint['routes']['destination'], $class)), sprintf($this->blueprint['routes']['file'], $class, $class));
         File::put(app_path(sprintf($this->blueprint['controller']['destination'], $class, $class)), sprintf($this->blueprint['controller']['file'], $class, $class, $class));
+        File::put(app_path(sprintf($this->blueprint['installer']['destination'], $class, $class)), sprintf($this->blueprint['installer']['file'], $class));
         
         foreach ($this->directories as $dir) {
             File::makeDirectory(app_path(sprintf($dir, $class)), 0775, true, true);

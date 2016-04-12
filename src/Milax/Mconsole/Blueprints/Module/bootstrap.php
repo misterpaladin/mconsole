@@ -1,5 +1,7 @@
 <?php
 
+use App\Mconsole\%s\Installer;
+
 /**
  * %s module bootstrap file
  */
@@ -15,4 +17,13 @@ return [
         'bindings' => [],
         'dependencies' => [],
     ],
+    'install' => function () {
+        Installer::install();
+    },
+    'uninstall' => function () {
+        Installer::uninstall();
+    },
+    'init' => function () {
+        // ..
+    },
 ];
