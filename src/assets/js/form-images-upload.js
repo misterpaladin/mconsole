@@ -18,8 +18,9 @@ FormImagesUpload.prototype.init = function () {
     var config = {
         disableImageResize: true,
         autoUpload: true,
+        maxNumberOfFiles: 50,
         disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
-        maxFileSize: 5000000,
+        maxFileSize: 30000000,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         singleFileUploads: false,
         url: '/mconsole/api/images/upload',

@@ -17,7 +17,7 @@ class ImagesController extends Controller
     public function __construct()
     {
         $this->uploadDir = storage_path('tmp/images/');
-        $this->previewUrl = '/storage/images/preview/';
+        $this->previewUrl = '/storage/images/';
         $this->scriptUrl = '/mconsole/api/images/delete/';
     }
     
@@ -29,17 +29,6 @@ class ImagesController extends Controller
     public function get(Request $request)
     {
         return app('API')->images->get($request->query('group'), $request->query('related_class'), $request->query('related_id'), $this->previewUrl, $this->scriptUrl);
-    }
-    
-    /**
-     * Preview uploaded images
-     * Used echo to avoid Laravel 'return' pre-processing
-     * 
-     * @return Response
-     */
-    public function previewUploadedImage($dir, $fileID = null)
-    {
-        echo app('API')->images->preview($dir, $fileID);
     }
     
     /**

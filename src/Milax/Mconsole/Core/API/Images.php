@@ -66,12 +66,12 @@ class Images
             'files' => collect(),
         ]);
         ImageModel::where('group', $group)->where('related_class', $class)->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($image) use (&$images, &$url, &$scriptURL) {
-            if (File::exists(sprintf('%s/original/%s', $image->path, $image->filename))) {
+            if (File::exists(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename))) {
                 $images->get('files')->push([
                     'name' => $image->filename,
-                    'size' => File::size(sprintf('%s/original/%s', $image->path, $image->filename)),
-                    'url' => sprintf('%s%s', $url, $image->id),
-                    'thumbnailUrl' => sprintf('%smconsole/%s', $url, $image->id),
+                    'size' => File::size(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename)),
+                    'url' => sprintf('%s%s/original/%s', $url, $image->path, $image->filename),
+                    'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $image->path, $image->filename),
                     'deleteUrl' => sprintf('%s%s', $scriptURL, $image->id),
                     'deleteType' => 'GET',
                 ]);
@@ -169,7 +169,7 @@ class Images
                 if (!isset($input['files']) || count($input['files']) == 0) {
                     break;
                 }
-                $preset = $this->presets->where('id', (int) $input['preset'])->first();
+                $preset = $this->presets->where('key', $input['preset'])->first();
                 $model = $input['related_class'];
                 $path = sprintf('%s/%s', $this->imagesPath, $preset->path);
                 
@@ -183,7 +183,7 @@ class Images
                         $image = ImageModel::create([
                             'preset_id' => $preset->id,
                             'group' => $group,
-                            'path' => $path,
+                            'path' => $preset->path,
                             'filename' => basename($file),
                             'related_class' => $model,
                             'copies' => $copies,
@@ -243,44 +243,44 @@ class Images
         
         $copies = [];
         
-        foreach (json_decode($preset->operations) as $operation) {
-            switch ($operation->operation) {
+        foreach ($preset->operations as $operation) {
+            switch ($operation['operation']) {
                 case 'original':
                     $workingCopy = clone($original);
                     break;
                 
                 case 'save':
-                    $saveTo = sprintf('%s/%s', $path, trim($operation->path, '/'));
+                    $saveTo = sprintf('%s/%s', $path, trim($operation['path'], '/'));
                     File::makeDirectory($saveTo, 0755, true, true);
                     $copyPath = sprintf('%s/%s', $saveTo, basename($file));
-                    $workingCopy->save($copyPath, $operation->quality);
-                    array_push($copies, $copyPath);
+                    $workingCopy->save($copyPath, $operation['quality']);
+                    array_push($copies, sprintf('%s/%s/%s', $preset->path, trim($operation['path'], '/'), basename($file)));
                     break;
                 
                 case 'resize':
-                    switch ($operation->type) {
+                    switch ($operation['type']) {
                         case 'ratio':
-                            $workingCopy->resize($operation->width, $operation->height, function ($constraint) {
+                            $workingCopy->resize($operation['width'], $operation['height'], function ($constraint) {
                                 $constraint->aspectRatio();
                             });
                             break;
                         case 'center':
-                            $workingCopy->fit($operation->width, $operation->height, function ($constraint) {
+                            $workingCopy->fit($operation['width'], $operation['height'], function ($constraint) {
                                 $constraint->upsize();
                             });
                             break;
                         case 'fixed':
                             if ($workingCopy->width() >= $workingCopy->height()) {
-                                $width = $operation->width;
+                                $width = $operation['width'];
                                 $height = null;
                             } else {
                                 $width = null;
-                                $height = $operation->height;
+                                $height = $operation['height'];
                             }
                             
                             $workingCopy->resize($width, $height, function ($constraint) {
                                 $constraint->aspectRatio();
-                            })->resizeCanvas($operation->width, $operation->height, 'center');
+                            })->resizeCanvas($operation['width'], $operation['height'], 'center');
                             break;
                     }
                     break;

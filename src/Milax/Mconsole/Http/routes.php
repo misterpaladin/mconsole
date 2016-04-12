@@ -1,18 +1,6 @@
 <?php
 
 Route::group([
-    'prefix' => 'storage',
-    'namespace' => 'Milax\Mconsole\Http\Controllers',
-], function () {
-    Route::group([
-        'prefix' => 'images',
-    ], function () {
-        Route::any('/preview/{file}', 'API\ImagesController@previewUploadedImage');
-        Route::get('/preview/{dir}/{file}', 'API\ImagesController@previewUploadedImage');
-    });
-});
-
-Route::group([
     'prefix' => 'mconsole',
     'middleware' => ['web', 'mconsole'],
     'namespace' => 'Milax\Mconsole\Http\Controllers',

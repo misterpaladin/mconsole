@@ -26,6 +26,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Image' => \Intervention\Image\Facades\Image::class,
             'Form' => \Collective\Html\FormFacade::class,
             'Html' => \Collective\Html\HtmlFacade::class,
+            'Debugbar' => \Barryvdh\Debugbar\Facade::class,
             
             // Helpers
             'String' => \Milax\Mconsole\Helpers\String::class,

@@ -11,7 +11,7 @@
                 <i class="fa fa-plus"></i>
                 <span> {{ trans('mconsole::uploader.add') }} </span>
                 <input type="file" name="files[]" @if (isset($multiple) && $multiple === true) multiple="" @endif> </span>
-            <button type="submit" class="btn btn-xs blue start">
+            <button type="submit" class="btn btn-xs blue start hide">
                 <i class="fa fa-upload"></i>
                 <span> {{ trans('mconsole::uploader.upload') }} </span>
             </button>
@@ -48,7 +48,7 @@
     </table>
     <div class="row">
         <div class="col-xs-12">
-            <p class="help-block">{{ trans('mconsole::uploader.help', ['width' => $presets->where('id', $preset)->first()->min_width, 'height' => $presets->where('id', $preset)->first()->min_height]) }}</p>
+            <p class="help-block">{{ trans('mconsole::uploader.help', ['width' => $presets->where('key', $preset)->first()->min_width, 'height' => $presets->where('key', $preset)->first()->min_height]) }}</p>
         </div>
     </div>
 </div>
