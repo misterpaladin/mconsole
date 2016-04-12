@@ -123,6 +123,11 @@ class MconsoleServiceProvider extends ServiceProvider
             return $this;
         });
         
+        // Register service providers
+        foreach ($this->register['providers'] as $class) {
+            $this->app->register($class);
+        }
+        
         foreach ($this->routes as $route) {
             require $route;
         }
@@ -181,10 +186,6 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         foreach ($this->register['middleware'] as $alias => $class) {
             $this->app['router']->middleware($alias, $class);
-        }
-        
-        foreach ($this->register['providers'] as $class) {
-            $this->app->register($class);
         }
         
         foreach ($this->register['aliases'] as $alias => $class) {

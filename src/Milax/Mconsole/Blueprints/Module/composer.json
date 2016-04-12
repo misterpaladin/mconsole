@@ -1,0 +1,16 @@
+{
+    "name": "milax/mconsole-%s",
+    "description": "",
+    "authors": [],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "5.2.*",
+        "laravelcollective/html": "5.2.*",
+    },
+    "autoload": {
+        "psr-4": {
+            "Milax\\Mconsole\\%s\\": "src/Milax/Mconsole/%s/"
+        }
+    },
+    "minimum-stability": "stable"
+}

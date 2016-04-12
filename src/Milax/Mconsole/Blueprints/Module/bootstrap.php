@@ -1,6 +1,6 @@
 <?php
 
-use App\Mconsole\%s\Installer;
+use %s\Mconsole\%s\Installer;
 
 /**
  * %s module bootstrap file
@@ -12,7 +12,9 @@ return [
     'menu' => [],
     'register' => [
         'middleware' => [],
-        'providers' => [],
+        'providers' => [
+            %s\Mconsole\%s\Provider::class,
+        ],
         'aliases' => [],
         'bindings' => [],
         'dependencies' => [],

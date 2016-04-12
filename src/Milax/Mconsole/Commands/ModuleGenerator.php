@@ -14,7 +14,7 @@ class ModuleGenerator extends Command
      *
      * @var string
      */
-    protected $signature = 'make:module {class=: class name of the module}';
+    protected $signature = 'make:module {class : Module class name} {--namespace= : Specify module namespace} {--package : Add composer.json to the project, set namespaces and workbench directories}';
 
     /**
      * The console command description.
@@ -34,33 +34,37 @@ class ModuleGenerator extends Command
         
         $this->blueprint = [
             'bootstrap' => [
-                'destination' => 'Mconsole/%s/bootstrap.php',
+                'destination' => 'bootstrap.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/bootstrap.php'),
             ],
             'installer' => [
-                'destination' => 'Mconsole/%s/Installer.php',
+                'destination' => 'Installer.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Installer.php'),
             ],
             'routes' => [
-                'destination' => 'Mconsole/%s/Http/routes.php',
+                'destination' => 'Http/routes.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/routes.php'),
             ],
             'controller' => [
-                'destination' => 'Mconsole/%s/Http/Controllers/%sController.php',
+                'destination' => 'Http/Controllers/%sController.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Controllers/Controller.php'),
+            ],
+            'serviceprovider' => [
+                'destination' => 'Provider.php',
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Provider.php'),
             ],
         ];
         
         $this->directories = [
-            'Mconsole/%s/assets/migrations',
-            'Mconsole/%s/assets/config',
-            'Mconsole/%s/assets/resources/views',
-            'Mconsole/%s/Models',
+            'assets/migrations',
+            'assets/config',
+            'assets/resources/views',
+            'Models',
         ];
         
         if (Schema::hasTable(Language::getQuery()->from)) {
             Language::getCached()->each(function ($lang) {
-                array_push($this->directories, 'Mconsole/%s/assets/resources/lang/' . $lang->key);
+                array_push($this->directories, 'assets/resources/lang/' . $lang->key);
             });
         }
     }
@@ -72,23 +76,43 @@ class ModuleGenerator extends Command
      */
     public function handle()
     {
+        $package = $this->option('package');
         $class = $this->argument('class');
         
-        if (File::exists(app_path(sprintf('Mconsole/%s', $class)))) {
-            return $this->error(sprintf('Module %s already exists!', $class));
+        if ($package) {
+            $namespace = 'Milax\Mconsole';
+            $path = base_path(sprintf('workbench/milax/mconsole-%s', strtolower($class)));
+            $root = sprintf('%s/src/Milax/Mconsole/%s', $path, $class);
+        } else {
+            $namespace = 'App';
+            $path = app_path(sprintf('Mconsole/%s', $class));
+            $root = $path;
         }
         
-        File::makeDirectory(app_path(sprintf('Mconsole/%s/Http/Controllers', $class)), 0775, true, true);
+        if ($this->option('namespace')) {
+            $namespace = $this->option('namespace');
+        }
         
-        File::put(app_path(sprintf($this->blueprint['bootstrap']['destination'], $class)), sprintf($this->blueprint['bootstrap']['file'], $class, $class, $class, strtolower($class)));
-        File::put(app_path(sprintf($this->blueprint['routes']['destination'], $class)), sprintf($this->blueprint['routes']['file'], $class, $class));
-        File::put(app_path(sprintf($this->blueprint['controller']['destination'], $class, $class)), sprintf($this->blueprint['controller']['file'], $class, $class, $class));
-        File::put(app_path(sprintf($this->blueprint['installer']['destination'], $class, $class)), sprintf($this->blueprint['installer']['file'], $class));
+        if (File::exists($path)) {
+            return $this->error(sprintf('Module "%s" already exists!', $class));
+        }
+        
+        File::makeDirectory(sprintf('%s/Http/Controllers', $root), 0775, true, true);
+        File::put(sprintf('%s/%s', $root, $this->blueprint['bootstrap']['destination']), sprintf($this->blueprint['bootstrap']['file'], $namespace, $class, $class, $class, strtolower($class), $namespace, $class));
+        File::put(sprintf('%s/%s', $root, $this->blueprint['routes']['destination']), sprintf($this->blueprint['routes']['file'], $class, $class));
+        File::put(sprintf('%s/%s', $root, sprintf($this->blueprint['controller']['destination'], $class)), sprintf($this->blueprint['controller']['file'], $namespace, $class, $class, $class));
+        File::put(sprintf('%s/%s', $root, $this->blueprint['installer']['destination']), sprintf($this->blueprint['installer']['file'], $namespace, $class));
+        File::put(sprintf('%s/%s', $root, $this->blueprint['serviceprovider']['destination']), sprintf($this->blueprint['serviceprovider']['file'], $namespace, $class));
         
         foreach ($this->directories as $dir) {
-            File::makeDirectory(app_path(sprintf($dir, $class)), 0775, true, true);
+            File::makeDirectory(sprintf('%s/%s', $root, sprintf($dir, $class)), 0775, true, true);
         }
-        
-        $this->info(sprintf('Module %s was created!', $class));
+
+        if ($package) {
+            File::put(sprintf('%s/composer.json', $path), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/composer.json'), strtolower($class), $class, $class));
+            $this->info(sprintf('Package module "%s" was created! Don\'t forget to edit your composer.json file!', $class));
+        } else {
+            $this->info(sprintf('Module "%s" was created!', $class));
+        }
     }
 }
