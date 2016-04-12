@@ -221,12 +221,14 @@ class Modules extends ModelAPI
                     $this->provider->routes = array_merge_recursive($this->provider->routes, $module->routes);
                     $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
                     $this->provider->config = array_merge_recursive($this->provider->config, $module->config);
-                    $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
                     $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
                     $this->modules->get('installed')->push($module);
                 } else {
                     $this->modules->get('available')->push($module);
                 }
+                
+                // Load translation anyway
+                $this->provider->translations = array_merge_recursive($this->provider->translations, $module->translations);
             }
             
             // Load custom views before base
@@ -290,13 +292,13 @@ class Modules extends ModelAPI
         }
         
         // Collect controllers
-        foreach (glob(sprintf('%s/Http/Controllers/*.php', $path)) as $controller) {
-            array_push($module->controllers, $controller);
+        if (File::exists(sprintf('%s/Http/Controllers', $path))) {
+            array_push($module->controllers, sprintf('%s/Http/Controllers', $path));
         }
         
         // Collect controllers
-        foreach (glob(sprintf('%s/Http/Requests/*.php', $path)) as $request) {
-            array_push($module->requests, $request);
+        if (File::exists(sprintf('%s/Http/Requests', $path))) {
+            array_push($module->requests, sprintf('%s/Http/Requests', $path));
         }
         
         // Collect migrations
@@ -305,13 +307,19 @@ class Modules extends ModelAPI
         }
         
         // Collect models
-        foreach (glob(sprintf('%s/Models/*.php', $path)) as $model) {
-            array_push($module->models, $model);
+        if (File::exists(sprintf('%s/Models', $path))) {
+            array_push($module->models, sprintf('%s/Models', $path));
         }
         
         // Collect views
-        array_push($module->views, sprintf('%s/assets/resources/views', $path));
-        array_push($module->translations, sprintf('%s/assets/resources/lang', $path));
+        if (File::exists(sprintf('%s/assets/resources/views', $path))) {
+            array_push($module->views, sprintf('%s/assets/resources/views', $path));
+        }
+        
+        // Collect translation files
+        if (File::exists(sprintf('%s/assets/resources/lang', $path))) {
+            array_push($module->translations, sprintf('%s/assets/resources/lang', $path));
+        }
         
         return $module;
     }

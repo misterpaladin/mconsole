@@ -1,8 +1,10 @@
 @if (count($item->models) > 0)
     <li> {{ trans('mconsole::modules.table.models') }}
         <ul>
-            @foreach ($item->models as $model)
-                <li data-jstree='{ "type" : "file" }'> {{ $model }} </li>
+            @foreach ($item->models as $path)
+                @foreach (File::allFiles($path) as $file)
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                @endforeach
             @endforeach
         </ul>
     </li>
@@ -11,8 +13,10 @@
 @if (count($item->controllers) > 0)
     <li> {{ trans('mconsole::modules.table.controllers') }}
         <ul>
-            @foreach ($item->controllers as $controller)
-                <li data-jstree='{ "type" : "file" }'> {{ $controller }} </li>
+            @foreach ($item->controllers as $path)
+                @foreach (File::allFiles($path) as $file)
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                @endforeach
             @endforeach
         </ul>
     </li>
@@ -21,8 +25,10 @@
 @if (count($item->requests) > 0)
     <li> {{ trans('mconsole::modules.table.requests') }}
         <ul>
-            @foreach ($item->requests as $request)
-                <li data-jstree='{ "type" : "file" }'> {{ $request }} </li>
+            @foreach ($item->requests as $path)
+                @foreach (File::allFiles($path) as $file)
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                @endforeach
             @endforeach
         </ul>
     </li>
@@ -32,7 +38,7 @@
     <li> {{ trans('mconsole::modules.table.migrations') }}
         <ul>
             @foreach ($item->migrations as $migration)
-                <li data-jstree='{ "type" : "file" }'> {{ $migration }} </li>
+                <li data-jstree='{ "type" : "file" }'> {{ basename($migration) }} </li>
             @endforeach
         </ul>
     </li>
@@ -41,8 +47,10 @@
 @if (count($item->views) > 0)
     <li> {{ trans('mconsole::modules.table.views') }}
         <ul>
-            @foreach ($item->views as $view)
-                <li data-jstree='{ "type" : "file" }'> {{ $view }} </li>
+            @foreach ($item->views as $path)
+                @foreach (File::allFiles($path) as $file)
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                @endforeach
             @endforeach
         </ul>
     </li>
@@ -51,8 +59,10 @@
 @if (count($item->translations) > 0)
     <li> {{ trans('mconsole::modules.table.translations') }}
         <ul>
-            @foreach ($item->translations as $translation)
-                <li data-jstree='{ "type" : "file" }'> {{ $translation }} </li>
+            @foreach ($item->translations as $path)
+                @foreach (File::allFiles($path) as $file)
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                @endforeach
             @endforeach
         </ul>
     </li>
