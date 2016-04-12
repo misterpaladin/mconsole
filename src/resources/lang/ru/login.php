@@ -15,7 +15,7 @@ return [
         'login' => 'Войти',
     ],
     'errors' => [
-        'login_password_empty' => 'Введите пароль',
         'password' => 'Указан неправильный логин или пароль',
+        'login_password_empty' => 'Введите пароль',
     ],
 ];
