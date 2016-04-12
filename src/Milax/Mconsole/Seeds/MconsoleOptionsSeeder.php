@@ -44,17 +44,7 @@ class MconsoleOptionsSeeder
      */
     public static function run()
     {
-        foreach (self::$options as $option) {
-            if ($dbOption = MconsoleOption::where('key', $option['key'])->first()) {
-                unset($option['value']);
-                foreach ($option as $key => $value) {
-                    $dbOption->$key = $value;
-                }
-                $dbOption->save();
-            } else {
-                MconsoleOption::create($option);
-            }
-        }
+        app('API')->options->install(self::$options);
         return 'Installed ' . __CLASS__ . '.';
     }
 }
