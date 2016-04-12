@@ -18,26 +18,26 @@
                                     @include('mconsole::forms.text', [
                                         'label' => trans('mconsole::' . $option->label),
                                         'name' => $option->key,
-                                        'value' => old($option->value),
+                                        'value' => $option->value,
                                     ])
                                 @elseif ($option->type == 'textarea')
                                     @include('mconsole::forms.textarea', [
                                         'label' => trans('mconsole::' . $option->label),
                                         'name' => $option->key,
-                                        'value' => old($option->value),
+                                        'value' => $option->value,
                                     ])
                                 @elseif ($option->type == 'checkbox')
                                     @include('mconsole::forms.checkbox', [
                                         'label' => trans('mconsole::' . $option->label),
                                         'name' => $option->key,
-                                        'value' => old($option->value),
+                                        'value' => $option->value,
                                     ])
                                 @elseif ($option->type == 'select')
                                     @include('mconsole::forms.select', [
                                         'label' => trans('mconsole::' . $option->label),
                                         'name' => $option->key,
                                         'options' => $option->options,
-                                        'value' => old($option->value),
+                                        'value' => $option->value,
                                     ])
                                 @endif
                             @endforeach
