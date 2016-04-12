@@ -3,19 +3,10 @@
 namespace Milax\Mconsole\Seeds;
 
 use DB;
+use Milax\Mconsole\Models\MconsoleOption;
 
 class MconsoleOptionsSeeder
 {
-    /**
-     * Table name for options
-     * 
-     * (default value: 'mconsole_options')
-     * 
-     * @var string
-     * @access protected
-     */
-    protected static $table = 'mconsole_options';
-    
     /**
      * Default options with values to create
      * 
@@ -42,7 +33,7 @@ class MconsoleOptionsSeeder
             'key' => 'notifications',
             'value' => '1',
             'type' => 'select',
-            'options' => '{"1": "On", "0": "Off"}',
+            'options' => ['1' => 'On', '0' => 'Off'],
         ],
     ];
     
@@ -53,14 +44,17 @@ class MconsoleOptionsSeeder
      */
     public static function run()
     {
-        collect(self::$options)->each(function ($option) {
-            if (DB::table(self::$table)->where('key', $option['key'])->count() == 0) {
-                DB::table(self::$table)->insert($option);
-            } else {
+        foreach (self::$options as $option) {
+            if ($dbOption = MconsoleOption::where('key', $option['key'])->first()) {
                 unset($option['value']);
-                DB::table(self::$table)->where('key', $option['key'])->update($option);
+                foreach ($option as $key => $value) {
+                    $dbOption->$key = $value;
+                }
+                $dbOption->save();
+            } else {
+                MconsoleOption::create($option);
             }
-        });
+        }
         return 'Installed ' . __CLASS__ . '.';
     }
 }
