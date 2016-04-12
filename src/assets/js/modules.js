@@ -23,10 +23,16 @@ Module.prototype.toggleInfo = function () {
  */
 Module.prototype.toggleModuleInstallation = function (e) {
     var identifier = $(this.module).data('identifier');
-    var button = $(e.target);
-    if ($(e.target).hasClass('install-module')) {
+    
+    if ($(e.target).hasClass('fa')) {
+        var button = $(e.target).parent();
+    } else {
+        var button = $(e.target);
+    }
+    
+    if (button.hasClass('install-module')) {
         var url = 'install';
-    } else if ($(e.target).hasClass('uninstall-module')) {
+    } else if (button.hasClass('uninstall-module')) {
         var url = 'uninstall';
     } else {
         var url = 'extend';
