@@ -1,3 +1,25 @@
+## 0.3
+
+Added:
+  - Module service provider support
+  - `php artisan make:module --package` option for module packaging including composer.json
+  - Detailed modules information
+  - `MconsoleOption` seeder API
+  - Images API
+  - Images Uploader (with inputs and sortable)
+  - Some new cool quotes
+
+Fixed:
+  - Empty input values in settings
+  - Module install buttons
+  - Migrations with `doctrine/dbal` package
+  - Empty rows in variables editor
+
+Updated:
+  - Some RU translations
+  - Module blueprints
+  - Images accessible with public path by symbolic links
+
 ## 0.2.4
 
 Added:
