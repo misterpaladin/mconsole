@@ -153,6 +153,11 @@ class Modules extends ModelAPI
             $dbMod->installed = true;
         }
         
+        // Call install function if exists
+        if (!is_null($install = $module->install)) {
+            $install();
+        }
+        
         $dbMod->save();
         
         File::deleteDirectory(storage_path('app/lang'));
@@ -186,6 +191,11 @@ class Modules extends ModelAPI
         $dbMod = $model::where('identifier', $module->identifier)->first();
         $dbMod->installed = false;
         $dbMod->save();
+        
+        // Call install function if exists
+        if (!is_null($uninstall = $module->uninstall)) {
+            $uninstall();
+        }
         
         File::deleteDirectory(storage_path('app/lang'));
         
@@ -251,6 +261,8 @@ class Modules extends ModelAPI
         $module->controllers = [];
         $module->requests = [];
         $module->installed = false;
+        $module->install = null;
+        $module->uninstall = null;
         
         // Get installation state
         if ($dbModule = $this->dbMods->where('identifier', $module->identifier)->first()) {
@@ -260,6 +272,16 @@ class Modules extends ModelAPI
         // Get init function
         if (isset($config['init'])) {
             $module->init = $config['init'];
+        }
+        
+        // Get install function
+        if (isset($config['install'])) {
+            $module->install = $config['install'];
+        }
+        
+        // Get uninstall function
+        if (isset($config['uninstall'])) {
+            $module->uninstall = $config['uninstall'];
         }
         
         // Collect routes
