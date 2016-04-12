@@ -29,7 +29,7 @@ class PresetsController extends Controller
             return [
                 trans('mconsole::presets.table.id') => $item->id,
                 trans('mconsole::presets.table.name') => $item->name,
-                trans('mconsole::presets.table.operations') => count(json_decode($item->operations)),
+                trans('mconsole::presets.table.operations') => count($item->operations),
             ];
         });
     }
@@ -53,6 +53,15 @@ class PresetsController extends Controller
      */
     public function store(MconsoleUploadPresetRequest $request)
     {
+        $data = $request->all();
+        
+        $data['extensions'] = explode(',', $data['extensions']);
+        foreach ($data['extensions'] as &$extension) {
+            $extension = trim($extension);
+        }
+        
+        $data['operations'] = json_decode($data['operations'], true);
+        
         $preset = MconsoleUploadPreset::create($request->all());
     }
 
@@ -66,6 +75,8 @@ class PresetsController extends Controller
     public function edit($id)
     {
         $preset = MconsoleUploadPreset::find($id);
+        $preset->extensions = implode(', ', $preset->extensions);
+        $preset->operations = json_encode($preset->operations);
         return view('mconsole::presets.form', [
             'item' => $preset,
         ]);
@@ -81,7 +92,16 @@ class PresetsController extends Controller
      */
     public function update(MconsoleUploadPresetRequest $request, $id)
     {
-        MconsoleUploadPreset::find($id)->update($request->all());
+        $data = $request->all();
+        
+        $data['extensions'] = explode(',', $data['extensions']);
+        foreach ($data['extensions'] as &$extension) {
+            $extension = trim($extension);
+        }
+        
+        $data['operations'] = json_decode($data['operations'], true);
+        
+        MconsoleUploadPreset::find($id)->update($data);
     }
 
     /**
