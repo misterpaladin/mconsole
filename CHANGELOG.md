@@ -1,3 +1,21 @@
+## 0.3.1
+
+Added:
+  - Tags support
+  - Copy module public assets to `/public/massets/modules` directory
+  - `doctrine/dbal` dependency for migrations
+
+Updated:
+  - `milax/mconsole-base-components` dependency to any version
+  - Module generator creates public assets directories
+
+Fixed:
+  - Images API
+  - Image model
+
+Removed:
+  - Caching test
+
 ## 0.3
 
 Added:
