@@ -6,7 +6,7 @@ use View;
 use Request;
 use Milax\Mconsole\Exceptions\FiltersPropertyException;
 
-trait Filterable
+trait HasFilters
 {
     /**
      * Start filtration process
@@ -35,7 +35,7 @@ trait Filterable
      * @param  string $label		Label for input
      * @param  string $key			Key of model property
      * @param  bool $exact			Set to true if input value and property value must be equal
-     * @return Filterable
+     * @return HasFilters
      */
     protected function setText($label, $key, $exact)
     {
@@ -49,7 +49,7 @@ trait Filterable
      * @param  string $key			Key of model property
      * @param  array $selects
      * @param  bool $exact			Set to true if input value and property value must be equal
-     * @return Filterable
+     * @return HasFilters
      */
     protected function setSelect($label, $key, $selects, $exact)
     {
@@ -75,14 +75,14 @@ trait Filterable
             }
         }
         
-        // Avoid collision with Paginatable trait
+        // Avoid collision with HasPaginator trait
         if (!method_exists($this, 'handleItems')) {
             $this->items = $query->get();
             View::share('items', $this->items);
         }
         
         View::share('filtered', $filtered);
-        View::share('filterable', $this->filters);
+        View::share('HasFilters', $this->filters);
         
         return $query;
     }
@@ -95,7 +95,7 @@ trait Filterable
      * @param  string $key			Key of model property
      * @param  bool $exact			Set to true if input value and property value must be equal
      * @param  array $options	Additional data for filter
-     * @return Filterable
+     * @return HasFilters
      */
     private function pushFilter($type, $label, $key, $exact, $options = [])
     {

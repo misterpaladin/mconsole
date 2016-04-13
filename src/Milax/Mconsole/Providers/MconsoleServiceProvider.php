@@ -33,9 +33,9 @@ class MconsoleServiceProvider extends ServiceProvider
             
             // Traits
             'Cacheable' => \Milax\Cacheable::class,
-            'Redirectable' => \Milax\Mconsole\Traits\Redirectable::class,
-            'Paginatable' => \Milax\Mconsole\Traits\Paginatable::class,
-            'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
+            'HasRedirects' => \Milax\Mconsole\Traits\HasRedirects::class,
+            'HasPaginator' => \Milax\Mconsole\Traits\HasPaginator::class,
+            'HasFilters' => \Milax\Mconsole\Traits\HasFilters::class,
             'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
             'HasImages' => \Milax\Mconsole\Traits\HasImages::class,
             'HasTags' => \Milax\Mconsole\Traits\HasTags::class,

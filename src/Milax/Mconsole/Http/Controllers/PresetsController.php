@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleUploadPresetRequest;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Contracts\Localizator;
-use Paginatable;
-use Redirectable;
+use HasPaginator;
+use HasRedirects;
 use HasQueryTraits;
 
 class PresetsController extends Controller
 {
-    use HasQueryTraits, Redirectable, Paginatable;
+    use HasQueryTraits, HasRedirects, HasPaginator;
 
     protected $redirectTo = '/mconsole/presets';
     protected $model = 'Milax\Mconsole\Models\MconsoleUploadPreset';

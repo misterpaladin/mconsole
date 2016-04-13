@@ -5,13 +5,13 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
-use Redirectable;
-use Paginatable;
+use HasRedirects;
+use HasPaginator;
 use HasQueryTraits;
 
 class RolesController extends Controller
 {
-    use HasQueryTraits, Redirectable, Paginatable;
+    use HasQueryTraits, HasRedirects, HasPaginator;
 
     protected $model = 'Milax\Mconsole\Models\MconsoleRole';
 

@@ -4,7 +4,7 @@ namespace Milax\Mconsole\Traits;
 
 use Milax\Mconsole\Processors\TableProcessor;
 
-trait Paginatable
+trait HasPaginator
 {
     /**
      * Collection to hold Model items
@@ -30,7 +30,7 @@ trait Paginatable
      * Set paginator per page number
      * 
      * @param int $perPage
-     * @return Paginatable
+     * @return HasPaginator
      */
     protected function setPerPage($perPage = 20)
     {

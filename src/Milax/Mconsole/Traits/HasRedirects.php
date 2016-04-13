@@ -5,11 +5,12 @@ namespace Milax\Mconsole\Traits;
 use Milax\Mconsole\Exceptions\RedirectToPropertyException;
 use Request;
 use Session;
+use URL;
 
 /**
- * Redirectable trait for Controllers
+ * HasRedirects trait for Controllers
  */
-trait Redirectable
+trait HasRedirects
 {
     protected $redirects = [];
     
@@ -70,6 +71,19 @@ trait Redirectable
                 $this->redirectTo,
                 $this->redirectTo,
             ];
+        }
+        
+        // If we need to redirect to edit saved object
+        if (app('API')->options->get('editredirect')) {
+            if (in_array(Request::method(), ['POST', 'PUT'])) {
+                $model = $this->model;
+                $id = $model::select('id')->orderBy('id', 'desc')->first()->id;
+                $this->redirects = [
+                    sprintf('%s/%s/edit', Request::url(), $id),
+                    URL::previous(),
+                    $this->redirectTo,
+                ];
+            }
         }
         
         // Check for session errors and request method

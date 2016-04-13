@@ -7,14 +7,14 @@ use Milax\Mconsole\Http\Requests\UserRequest;
 use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
 use Request;
-use Filterable;
-use Paginatable;
-use Redirectable;
+use HasFilters;
+use HasPaginator;
+use HasRedirects;
 use HasQueryTraits;
 
 class UsersController extends Controller
 {
-    use HasQueryTraits, Redirectable, Filterable, Paginatable;
+    use HasQueryTraits, HasRedirects, HasFilters, HasPaginator;
     
     protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';

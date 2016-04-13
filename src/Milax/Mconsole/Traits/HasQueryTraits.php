@@ -9,7 +9,7 @@ use View;
 trait HasQueryTraits
 {
     /**
-     * Run queries with Paginatable and Redirectable traits
+     * Run queries with HasPaginator and HasRedirects traits
      * 
      * @return
      */
@@ -26,7 +26,7 @@ trait HasQueryTraits
             $this->query = $model::query();
         }
         
-        // Filterable Trait
+        // HasFilters Trait
         if (method_exists($this, 'filtrate')) {
             $this->query = $this->filtrate($this->query);
         }
