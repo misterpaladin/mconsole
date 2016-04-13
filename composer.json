@@ -12,6 +12,7 @@
         "illuminate/support": "5.2.*",
         "laravelcollective/html": "5.2.*",
         "intervention/image": "^2.3",
+        "doctrine/dbal": "^2.5",
 		"milax/gravatar": "*",
         "milax/cacheable": "*",
         "milax/mconsole-base-components": "^1.1"
