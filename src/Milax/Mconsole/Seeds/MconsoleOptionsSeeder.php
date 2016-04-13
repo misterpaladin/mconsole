@@ -36,7 +36,15 @@ class MconsoleOptionsSeeder
             'key' => 'notifications',
             'value' => '1',
             'type' => 'select',
-            'options' => ['1' => 'On', '0' => 'Off'],
+            'options' => ['1' => 'settings.options.on', '0' => 'settings.options.off'],
+        ],
+        [
+            'group' => 'settings.options.group.name',
+            'label' => 'settings.labels.editredirect',
+            'key' => 'editredirect',
+            'value' => '1',
+            'type' => 'select',
+            'options' => ['1' => 'settings.options.on', '0' => 'settings.options.off'],
         ],
     ];
     
