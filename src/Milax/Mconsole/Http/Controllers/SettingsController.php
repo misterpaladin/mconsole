@@ -57,6 +57,7 @@ class SettingsController extends Controller
         
         MconsoleOption::truncate();
         MconsoleOption::insert($toSave);
+        MconsoleOption::dropCache();
         
         return redirect()->back()->with('status', trans('mconsole::settings.saved'));
     }
