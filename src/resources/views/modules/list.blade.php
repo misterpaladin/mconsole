@@ -5,9 +5,7 @@
     <div class="row">
     	<div class="col-xs-12">
     		<div class="portlet light">
-                @include('mconsole::partials.portlet-title', [
-                    'actions' => '<a href="javascript:;" class="btn btn-xs btn-circle blue reload-translations popovers" data-lang-process="' . trans('mconsole::modules.table.reloadtransprocess') . '" data-container="body" data-trigger="hover" data-placement="top" data-title="' . trans('mconsole::modules.table.reloadtrans.title') . '" data-content="' . trans('mconsole::modules.table.reloadtrans.content') . '"><i class="fa fa-refresh"></i></a>'
-                ])
+                @include('mconsole::partials.portlet-title')
     			<div class="portlet-body form">
     				<div class="table-scrollable table-scrollable-borderless">
     					@if (isset($items) && $items->count() > 0)

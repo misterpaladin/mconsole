@@ -73,15 +73,4 @@ class ModulesController extends Controller
         
         return ['status' => 'ok'];
     }
-    
-    /**
-     * Reload modules language files
-     * 
-     * @return Response
-     */
-    public function reloadTranslations()
-    {
-        app('API')->translations->load();
-        return redirect()->back();
-    }
 }

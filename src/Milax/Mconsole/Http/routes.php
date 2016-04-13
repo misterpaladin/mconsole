@@ -36,7 +36,6 @@ Route::group([
         'prefix' => 'modules',
     ], function () {
         Route::get('/', 'ModulesController@index');
-        Route::get('/reloadtrans', 'ModulesController@reloadTranslations');
         Route::get('/{id}/install', 'ModulesController@install');
         Route::get('/{id}/uninstall', 'ModulesController@uninstall');
         Route::get('/{id}/extend', 'ModulesController@extend');
@@ -46,6 +45,7 @@ Route::group([
     Route::get('/settings', 'SettingsController@index');
     Route::post('/settings', 'SettingsController@save');
     Route::get('/settings/clearcache', 'SettingsController@clearCache');
+    Route::get('/settings/reloadtrans', 'SettingsController@reloadTranslations');
     
     // Variables
     Route::get('/variables', 'VariablesController@index');

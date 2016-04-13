@@ -72,4 +72,15 @@ class SettingsController extends Controller
         \Artisan::call('cache:clear');
         return redirect()->back()->with('status', trans('mconsole::settings.additional.cachecleared'));
     }
+    
+    /**
+     * Reload modules language files
+     * 
+     * @return Response
+     */
+    public function reloadTranslations()
+    {
+        app('API')->translations->load();
+        return redirect()->back();
+    }
 }
