@@ -296,7 +296,7 @@
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
-		{{-- <script src="/massets/js/mconsole.js" type="text/javascript"></script> --}}
+		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
 		<script src="/massets/js/form-images-upload.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
