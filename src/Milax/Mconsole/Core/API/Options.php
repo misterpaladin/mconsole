@@ -12,7 +12,7 @@ class Options extends ModelAPI
      * @param  string $key
      * @return mixed
      */
-    public function getByKey($key)
+    public function get($key)
     {
         $model = $this->model;
         return $model::getByKey($key);
