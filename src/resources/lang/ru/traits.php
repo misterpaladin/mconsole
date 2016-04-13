@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'filterable' => [
+    'filters' => [
         'filter' => 'Фильтр',
         'notselected' => 'не выбрано',
         'apply' => 'Искать',
         'reset' => 'Сбросить',
-    ]
+    ],
 ];

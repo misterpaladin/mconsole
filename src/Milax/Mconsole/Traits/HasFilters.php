@@ -82,7 +82,7 @@ trait HasFilters
         }
         
         View::share('filtered', $filtered);
-        View::share('HasFilters', $this->filters);
+        View::share('filters', $this->filters);
         
         return $query;
     }

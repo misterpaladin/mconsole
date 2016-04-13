@@ -5,7 +5,7 @@ namespace Milax\Mconsole\Processors;
 class TableProcessor
 {
     /**
-     * Process callbacks for Filterable and Paginatable traits
+     * Process callbacks for HasFilters and HasPaginator traits
      * 
      * @param  function $cb
      * @param  Collection $items
