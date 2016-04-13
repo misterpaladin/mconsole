@@ -41,7 +41,9 @@
                                                     @include('mconsole::forms.select', [
                                                         'label' => trans('mconsole::' . $option->label),
                                                         'name' => $option->key,
-                                                        'options' => $option->options,
+                                                        'options' => collect($option->options)->transform(function ($val, $key) {
+                                                            return trans(sprintf('mconsole::%s', $val));
+                                                        })->toArray(),
                                                         'value' => $option->value,
                                                     ])
                                                 @endif
@@ -80,7 +82,9 @@
                                                     @include('mconsole::forms.select', [
                                                         'label' => trans('mconsole::' . $option->label),
                                                         'name' => $option->key,
-                                                        'options' => $option->options,
+                                                        'options' => collect($option->options)->transform(function ($val, $key) {
+                                                            return trans(sprintf('mconsole::%s', $val));
+                                                        })->toArray(),
                                                         'value' => $option->value,
                                                     ])
                                                 @endif
