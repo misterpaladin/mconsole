@@ -49,6 +49,7 @@ class Installer extends Command
         $this->components();
         $this->migrate();
         $this->seeds();
+        $this->modules();
         
         if (!$this->option('update')) {
             $this->users();
@@ -145,6 +146,22 @@ class Installer extends Command
     }
     
     /**
+     * Update modules
+     * 
+     * @return void
+     */
+    protected function modules()
+    {
+        $this->comment('Updating modules components..');
+        app('API')->modules->get('installed')->each(function ($module) {
+            app('API')->modules->install($module);
+        });
+        
+        $this->comment('Updating translations..');
+        app('API')->translations->load();
+    }
+    
+    /**
      * Clear application caches
      *
      * @access protected
@@ -167,15 +184,10 @@ class Installer extends Command
      */
     protected function finish()
     {
-        app('API')->modules->get('installed')->each(function ($module) {
-            app('API')->modules->install($module);
-        });
-        app('API')->translations->load();
-        
         if ($this->option('update')) {
-            $this->comment('Update completed!');
+            $this->info('Update completed!');
         } else {
-            $this->comment('Installation completed! Visit ' . config('app.url') . '/mconsole, log in and enjoy!');
+            $this->info('Installation completed! Visit ' . config('app.url') . '/mconsole, log in and enjoy!');
         }
         
         $this->comment(null);
