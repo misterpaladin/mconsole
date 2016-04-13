@@ -108,7 +108,7 @@
                             </li>
                             <!-- END NOTIFICATION DROPDOWN -->
                             <li class="dropdown">
-                                <a href="{{ app('API')->options->getBykey('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
+                                <a href="{{ app('API')->options->get('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
                                     <i class="icon-share-alt"></i>
                                 </a>
                             </li>
