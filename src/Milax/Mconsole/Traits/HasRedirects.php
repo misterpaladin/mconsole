@@ -2,6 +2,7 @@
 
 namespace Milax\Mconsole\Traits;
 
+use Milax\Mconsole\Exceptions\ModelPropertyException;
 use Milax\Mconsole\Exceptions\RedirectToPropertyException;
 use Request;
 use Session;
@@ -75,6 +76,12 @@ trait HasRedirects
         
         // If we need to redirect to edit saved object
         if (app('API')->options->get('editredirect')) {
+            
+            // Ensure that we have protected $model property in our controller
+            if (strlen($this->model) == 0) {
+                throw new ModelPropertyException('You must set protected $model property in order to use redirects to saved object.');
+            }
+            
             if (in_array(Request::method(), ['POST', 'PUT'])) {
                 $model = $this->model;
                 $id = $model::select('id')->orderBy('id', 'desc')->first()->id;
