@@ -168,10 +168,10 @@ class MconsoleServiceProvider extends ServiceProvider
         $this->publishes($migrations, 'migrations');
         
         app('API')->search->register(function ($text) {
-            return \App\User::where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($user) {
+            return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($user) {
                 return [
-                    'type' => 'user',
-                    'text' => sprintf('%s (%s)', $user->name, $user->email),
+                    'title' => $user->name,
+                    'description' => $user->email,
                     'link' => sprintf('/mconsole/users/%s/edit', $user->id),
                 ];
             });

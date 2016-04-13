@@ -153,7 +153,7 @@
                                 </span>
                             </span>
                         </div>
-                        <div class="search-results"></div>
+                        <ul class="search-results"></ul>
                     </form>
                     <!-- END HEADER SEARCH BOX -->
 					@include('mconsole::partials.menu')
