@@ -23,8 +23,15 @@ class MconsoleOption extends Model
      */
     public static function getByKey($key)
     {
-        if ($cached = self::getCached()->where('key', $key)->first()) {
-            return $cached->value;
+        if ($option = self::getCached()->where('key', $key)->first()) {
+            switch ($option->value) {
+                case '1':
+                    return true;
+                case '0':
+                    return false;
+                default:
+                    return $option->value;
+            }
         } else {
             return null;
         }
