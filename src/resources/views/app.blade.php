@@ -188,19 +188,19 @@
 							
 							@include('mconsole::partials.messages')
 							
-							@if (isset($filterable))
+							@if (isset($filters))
 							<div class="portlet light">
 								<div class="portlet-title">
 									<div class="caption">
 										<i class="icon-magnifier font-grey-gallery"></i>
-										<span class="caption-subject bold font-grey-gallery uppercase">{{ trans('mconsole::traits.filterable.filter') }}</span>
+										<span class="caption-subject bold font-grey-gallery uppercase">{{ trans('mconsole::traits.filters.filter') }}</span>
 									</div>
 									<div class="tools">
 										<a href="" class="{{ ($filtered) ? 'collapse' : 'expand' }}"> </a>
 									</div>
 								</div>
 								<div class="portlet-body {{ ($filtered) ? null : 'portlet-collapsed' }}">
-									@include('mconsole::traits.filterable')
+									@include('mconsole::traits.filters')
 								</div>
 							</div>
 							@endif
