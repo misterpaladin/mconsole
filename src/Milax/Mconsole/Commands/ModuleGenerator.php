@@ -58,7 +58,9 @@ class ModuleGenerator extends Command
         $this->directories = [
             'assets/migrations',
             'assets/config',
-            'assets/public',
+            'assets/public/css',
+            'assets/public/img',
+            'assets/public/js',
             'assets/resources/views',
             'Models',
         ];

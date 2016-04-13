@@ -153,6 +153,11 @@ class Modules extends ModelAPI
             $dbMod->installed = true;
         }
         
+        // Install public assets
+        if (File::exists(sprintf('%s/assets/public', $module->path)) && File::allFiles(sprintf('%s/assets/public', $module->path))) {
+            File::copyDirectory(sprintf('%s/assets/public', $module->path), sprintf('%s/%s/', public_path('massets/modules'), $module->identifier));
+        }
+        
         // Call install function if exists
         if (!is_null($install = $module->install)) {
             $install();
@@ -191,6 +196,11 @@ class Modules extends ModelAPI
         $dbMod = $model::where('identifier', $module->identifier)->first();
         $dbMod->installed = false;
         $dbMod->save();
+        
+        // Uninstall public assets
+        if (File::exists(sprintf('%s/%s/', public_path('massets/modules'), $module->identifier))) {
+            File::deleteDirectory(sprintf('%s/%s/', public_path('massets/modules'), $module->identifier));
+        }
         
         // Call install function if exists
         if (!is_null($uninstall = $module->uninstall)) {
@@ -265,6 +275,12 @@ class Modules extends ModelAPI
         $module->installed = false;
         $module->install = null;
         $module->uninstall = null;
+        $module->path = $path;
+        $module->public = [
+            'css' => [],
+            'img' => [],
+            'js' => [],
+        ];
         
         // Get installation state
         if ($dbModule = $this->dbMods->where('identifier', $module->identifier)->first()) {
@@ -319,6 +335,17 @@ class Modules extends ModelAPI
         // Collect translation files
         if (File::exists(sprintf('%s/assets/resources/lang', $path))) {
             array_push($module->translations, sprintf('%s/assets/resources/lang', $path));
+        }
+        
+        // Public assets
+        if (File::exists(sprintf('%s/assets/public', $path)) && File::directories(sprintf('%s/assets/public', $path))) {
+            foreach ($module->public as $type => $contents) {
+                if ($allFiles = File::allFiles(sprintf('%s/assets/public/%s', $path, $type))) {
+                    foreach ($allFiles as $file) {
+                        array_push($module->public[$type], sprintf('/massets/modules/%s/%s/%s', $module->identifier, $type, $file->getRelativePathname()));
+                    }
+                }
+            }
         }
         
         return $module;
