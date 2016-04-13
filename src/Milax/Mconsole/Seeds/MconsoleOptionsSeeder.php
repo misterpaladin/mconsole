@@ -15,6 +15,7 @@ class MconsoleOptionsSeeder
      */
     protected static $options = [
         [
+            'group' => 'settings.options.group.name',
             'label' => 'settings.labels.name',
             'key' => 'project_name',
             'value' => 'New Project',
@@ -22,6 +23,7 @@ class MconsoleOptionsSeeder
             'rules' => ['required'],
         ],
         [
+            'group' => 'settings.options.group.name',
             'label' => 'settings.labels.url',
             'key' => 'project_url',
             'value' => 'http://milax.com',
@@ -29,6 +31,7 @@ class MconsoleOptionsSeeder
             'rules' => ['required', 'url'],
         ],
         [
+            'group' => 'settings.options.group.name',
             'label' => 'settings.labels.notifications',
             'key' => 'notifications',
             'value' => '1',

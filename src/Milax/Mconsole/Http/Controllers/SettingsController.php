@@ -69,6 +69,6 @@ class SettingsController extends Controller
     public function clearCache()
     {
         \Artisan::call('cache:clear');
-        return redirect()->back()->with('status', trans('mconsole::settings.cacheclear'));
+        return redirect()->back()->with('status', trans('mconsole::settings.additional.cachecleared'));
     }
 }
