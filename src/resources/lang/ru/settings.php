@@ -19,6 +19,7 @@ return [
     'options' => [
         'group' => [
             'name' => 'Основные',
+            'other' => 'Остальные',
         ],
     ],
     'additional' => [

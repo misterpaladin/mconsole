@@ -14,40 +14,81 @@
                         ])
         				<div class="portlet-body">
                             @foreach ($options->groupBy('group') as $groupName => $groupOptions)
-                                <h4>{{ trans(sprintf('mconsole::%s', $groupName)) }}</h4>
-                                <div class="row">
-                                    @foreach ($groupOptions as $option)
-                                        <div class="col-lg-4 col-md-6 col-xs-12">
-                                            @if ($option->type == 'text')
-                                                @include('mconsole::forms.text', [
-                                                    'label' => trans('mconsole::' . $option->label),
-                                                    'name' => $option->key,
-                                                    'value' => $option->value,
-                                                ])
-                                            @elseif ($option->type == 'textarea')
-                                                @include('mconsole::forms.textarea', [
-                                                    'label' => trans('mconsole::' . $option->label),
-                                                    'name' => $option->key,
-                                                    'value' => $option->value,
-                                                ])
-                                            @elseif ($option->type == 'checkbox')
-                                                @include('mconsole::forms.checkbox', [
-                                                    'label' => trans('mconsole::' . $option->label),
-                                                    'name' => $option->key,
-                                                    'value' => $option->value,
-                                                ])
-                                            @elseif ($option->type == 'select')
-                                                @include('mconsole::forms.select', [
-                                                    'label' => trans('mconsole::' . $option->label),
-                                                    'name' => $option->key,
-                                                    'options' => $option->options,
-                                                    'value' => $option->value,
-                                                ])
-                                            @endif
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <hr/>
+                                @if (strlen($groupName) > 0)
+                                    <h4>{{ trans(sprintf('mconsole::%s', $groupName)) }}</h4>
+                                    <div class="row">
+                                        @foreach ($groupOptions as $option)
+                                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                                @if ($option->type == 'text')
+                                                    @include('mconsole::forms.text', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @elseif ($option->type == 'textarea')
+                                                    @include('mconsole::forms.textarea', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @elseif ($option->type == 'checkbox')
+                                                    @include('mconsole::forms.checkbox', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @elseif ($option->type == 'select')
+                                                    @include('mconsole::forms.select', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'options' => $option->options,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <hr/>
+                                @endif
+                            @endforeach
+                            
+                            @foreach ($options->groupBy('group') as $groupName => $groupOptions)
+                                @if (strlen($groupName) == 0)
+                                    <h4>{{ trans('mconsole::settings.options.group.other') }}</h4>
+                                    <div class="row">
+                                        @foreach ($groupOptions as $option)
+                                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                                @if ($option->type == 'text')
+                                                    @include('mconsole::forms.text', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @elseif ($option->type == 'textarea')
+                                                    @include('mconsole::forms.textarea', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @elseif ($option->type == 'checkbox')
+                                                    @include('mconsole::forms.checkbox', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @elseif ($option->type == 'select')
+                                                    @include('mconsole::forms.select', [
+                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'name' => $option->key,
+                                                        'options' => $option->options,
+                                                        'value' => $option->value,
+                                                    ])
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <hr/>
+                                @endif
                             @endforeach
                             <div class="form-actions">
                     			@include('mconsole::forms.submit')
