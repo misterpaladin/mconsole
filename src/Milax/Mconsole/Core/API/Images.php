@@ -165,7 +165,7 @@ class Images
 
         $images = collect();
         
-        if ($this->request['uploadable']) {
+        if (isset($this->request['uploadable'])) {
             foreach ($this->request['uploadable'] as $group => $input) {
                 $images->put($group, collect());
                 

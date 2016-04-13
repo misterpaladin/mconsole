@@ -47,9 +47,11 @@ class Image extends Model
             if (\File::exists(sprintf('%s/mconsole/%s', $image->path, $image->filename))) {
                 \File::delete(sprintf('%s/mconsole/%s', $image->path, $image->filename));
             }
-            foreach ($image->copies as $copy) {
-                if (\File::exists($copy)) {
-                    \File::delete($copy);
+            if ($image->copies && count($image->copies) > 0) {
+                foreach ($image->copies as $copy) {
+                    if (\File::exists($copy)) {
+                        \File::delete($copy);
+                    }
                 }
             }
         });
