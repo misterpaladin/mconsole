@@ -10,7 +10,7 @@ trait HasTags
     /**
      * Dynamic hasMany relationship on Image model
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function tags()
     {
