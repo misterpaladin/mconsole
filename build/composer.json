@@ -11,7 +11,7 @@
         "intervention/image": "^2.3",
         "milax/cacheable": "*",
 		"milax/gravatar": "*",
-        "milax/mconsole-base-components": "^1.1.2",
+        "milax/mconsole-base-components": "*",
         "doctrine/dbal": "*"
     },
     "require-dev": {
