@@ -38,6 +38,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Filterable' => \Milax\Mconsole\Traits\Filterable::class,
             'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
             'HasImages' => \Milax\Mconsole\Traits\HasImages::class,
+            'HasTags' => \Milax\Mconsole\Traits\HasTags::class,
         ],
         
         // Interface to Implementation bindings
