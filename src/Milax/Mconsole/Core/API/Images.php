@@ -269,7 +269,7 @@ class Images
                     $saveTo = sprintf('%s/%s', $path, trim($operation['path'], '/'));
                     File::makeDirectory($saveTo, 0755, true, true);
                     $copyPath = sprintf('%s/%s', $saveTo, basename($file));
-                    $workingCopy->save($copyPath, $operation['quality']);
+                    $workingCopy->save($copyPath, strlen($operation['quality']) > 0 ? $operation['quality'] : 95);
                     array_push($copies, sprintf('%s/%s/%s', $preset->path, trim($operation['path'], '/'), basename($file)));
                     break;
                 
