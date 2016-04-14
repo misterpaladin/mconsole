@@ -1,3 +1,15 @@
+## 0.3.2
+
+Added:
+  - Search bar with an API
+  - Settings groups
+  - CKEditor
+
+Updated:
+  - Trats renamed
+  - Installer `--quick` option to skip long assets copy
+  - Translations updater moved from Modules to Settings page
+
 ## 0.3.1
 
 Added:
@@ -120,9 +132,9 @@ Fixed:
 Added:
   - User roles
   - Blade directive for new Variable model
-  - Redirectable class (trait for controllers)
-  - Filterable class (trait for controllers)
-  - Paginatable class (trait for controllers)
+  - HasRedirects class (trait for controllers)
+  - HasFilters class (trait for controllers)
+  - HasPaginator class (trait for controllers)
 
 Removed:
   - CMSController class
