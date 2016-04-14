@@ -24,13 +24,23 @@ class MconsoleOption extends Model
     public static function getByKey($key)
     {
         if ($option = self::getCached()->where('key', $key)->first()) {
-            switch ($option->value) {
-                case '1':
-                    return true;
-                case '0':
-                    return false;
-                default:
+            if (count($option->options) == 2) {
+                if (isset($option->options[0]) && isset($option->options[1])) {
+                    switch ($option->value) {
+                        case '1':
+                            return true;
+                        case '0':
+                            return false;
+                    }
+                } else {
                     return $option->value;
+                }
+            } else {
+                if (in_array('integer', $option->rules)) {
+                    return (int) $option->value;
+                } else {
+                    return $option->value;
+                }
             }
         } else {
             return null;

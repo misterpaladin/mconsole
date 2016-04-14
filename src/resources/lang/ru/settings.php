@@ -20,6 +20,7 @@ return [
         'url' => 'Адрес сайта',
         'notifications' => 'Уведомления',
         'editredirect' => 'Переадресация на редактирование после сохранения',
+        'editor' => 'Тип HTML редактора',
     ],
     'options' => [
         'group' => [
@@ -28,6 +29,8 @@ return [
         ],
         'on' => 'Включено',
         'off' => 'Отключено',
+        'textarea' => 'Textarea',
+        'ckeditor' => 'CKEditor',
     ],
     'additional' => [
         'name' => 'Дополнительно',

@@ -40,6 +40,14 @@ class MconsoleOptionsSeeder
         ],
         [
             'group' => 'settings.options.group.name',
+            'label' => 'settings.labels.editor',
+            'key' => 'textareatype',
+            'value' => 'textarea',
+            'type' => 'select',
+            'options' => ['textarea' => 'settings.options.textarea', 'ckeditor' => 'settings.options.ckeditor'],
+        ],
+        [
+            'group' => 'settings.options.group.name',
             'label' => 'settings.labels.editredirect',
             'key' => 'editredirect',
             'value' => '1',
