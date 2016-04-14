@@ -20,7 +20,7 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $signature = 'mconsole:install {--update : Run update without package initializing}';
+    protected $signature = 'mconsole:install {--update : Run update without package initializing} {--quick : Run without copying assets}';
 
     /**
      * The console command description.
@@ -46,7 +46,9 @@ class Installer extends Command
      */
     public function handle()
     {
-        $this->components();
+        if (!$this->option('quick')) {
+            $this->components();
+        }
         $this->migrate();
         $this->seeds();
         $this->modules();
