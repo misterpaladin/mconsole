@@ -308,10 +308,5 @@
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
 		<!-- END THEME LAYOUT SCRIPTS -->
         @yield('page.scripts')
-        <script>
-            $(function () {
-                $('.popovers').popover();
-            });
-        </script>
 	</body>
 </html>
