@@ -47,6 +47,7 @@
     <script src="/massets/global/plugins/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>
     <script>
         $('.color-picker').minicolors({
+            defaultValue: '#0088cc',
             theme: 'bootstrap'
         });
     </script>
