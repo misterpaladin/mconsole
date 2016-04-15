@@ -17,8 +17,10 @@ class MconsoleController extends Controller
      */
     public function index()
     {
-        app('API')->quotes->shuffle();
-        return view('mconsole::app');
+        $quote = app('API')->quotes->getRandom();
+        return view('mconsole::dashboard', [
+            'quote' => $quote,
+        ]);
     }
 
     /**
