@@ -252,7 +252,7 @@
 		<!-- BEGIN INNER FOOTER -->
 		<div class="page-footer">
 			<div class="container">@datetime('Y') &copy; <a href="http://www.milax.com/" target="_blank">Milax</a>
-                <div class="pull-right"><a href="https://github.com/milaxcom/mconsole/releases/tag/{{ app_version }}" target="_blank">mconsole {{ app_version }}</a></div>
+                <div class="pull-right"><a href="https://github.com/milaxcom/mconsole/releases/tag/{{ app('API')->info->version }}" target="_blank">mconsole {{ app('API')->info->version }}</a></div>
             </div>
 		</div>
 		<div class="scroll-to-top">

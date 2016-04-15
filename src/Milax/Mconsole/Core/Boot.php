@@ -23,21 +23,9 @@ class Boot
      */
     public static function run()
     {
-        self::setAppVersion();
+        app('API')->info->setAppVersion('0.3.2');
         self::setLang();
         self::loadViewComposers();
-    }
-    
-    /**
-     * Set Application version from latest git tag
-     *
-     * @return void
-     */
-    public static function setAppVersion()
-    {
-        if (!defined('app_version')) {
-            define('app_version', '0.3.2');
-        }
     }
     
     /**
