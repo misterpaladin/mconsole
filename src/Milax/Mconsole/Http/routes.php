@@ -28,6 +28,7 @@ Route::group([
     
     // Resources
     Route::resource('/users', 'UsersController');
+    Route::resource('/tags', 'TagsController');
     Route::resource('/roles', 'RolesController');
     Route::resource('/presets', 'PresetsController');
     

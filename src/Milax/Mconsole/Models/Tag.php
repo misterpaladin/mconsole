@@ -10,7 +10,17 @@ class Tag extends Model
 {
     use \Cacheable;
     
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'color'];
+    
+    /**
+     * Count all tagged elements
+     * 
+     * @return int
+     */
+    public function count()
+    {
+        return Taggable::where('tag_id', $this->id)->count();
+    }
     
     /**
      * Get tagged query by class name
