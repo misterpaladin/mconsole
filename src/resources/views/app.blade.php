@@ -47,6 +47,9 @@
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="/massets/css/mconsole.css" rel="stylesheet" type="text/css" />
+        
+        @yield('page.styles')
+        
 		<!-- END THEME LAYOUT STYLES -->
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
