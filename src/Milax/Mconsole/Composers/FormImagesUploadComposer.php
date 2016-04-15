@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Http\Composers;
+namespace Milax\Mconsole\Composers;
 
 use Illuminate\View\View;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
