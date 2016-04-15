@@ -26,6 +26,7 @@
                         @include('mconsole::forms.colorpicker', [
                             'label' => trans('mconsole::tags.form.color.label'),
                             'name' => 'color',
+                            'value' => isset($item) ? $item->color : '#0E76B3'
                         ])
                         
                     </div>
