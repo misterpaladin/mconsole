@@ -173,6 +173,7 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->search->register(function ($text) {
             return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($user) {
                 return [
+                    'icon' => 'user',
                     'title' => $user->name,
                     'description' => $user->email,
                     'link' => sprintf('/mconsole/users/%s/edit', $user->id),
