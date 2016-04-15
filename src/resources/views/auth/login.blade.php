@@ -52,6 +52,13 @@
 			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/login', 'class' => 'login-form']) !!}
 				<h3 class="form-title font-green">{{ trans('mconsole::login.headings.signin') }}</h3>
 				
+                @if (env('APP_DEMO'))
+                    <div class="alert alert-warning">
+                        <p>Email: <strong>demo@milax.com</strong></p>
+                        <p>{{ trans('mconsole::login.inputs.password') }}: <strong>demo</strong></p>
+                    </div>
+                @endif
+                
 				@if ($errors->any())
 					<div class="alert alert-danger">
 						<button class="close" data-close="alert"></button>
@@ -94,7 +101,7 @@
 			<form class="forget-form" action="index.html" method="post">
 				<h3 class="font-green">{{ trans('mconsole::login.headings.forgot') }}</h3>
 				<p> {{ trans('mconsole::login.text.forgot_enter_email') }} </p>
-				<div class="form-group">
+                <div class="form-group">
 					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> 
 				</div>
 				<div class="form-actions">
