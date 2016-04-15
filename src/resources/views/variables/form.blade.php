@@ -13,7 +13,10 @@
                             'title' => trans('mconsole::variables.menu.name'),
                         ])
         				<div class="portlet-body">
-                            <p>{!! trans('mconsole::variables.form.info') !!}</p>
+                            @include('mconsole::partials.note', [
+                                'title' => trans('mconsole::variables.form.info.title'),
+                                'text' => trans('mconsole::variables.form.info.text'),
+                            ])
                             <div class="variables-template hide">
                                 <div class="row">
                                     <div class="col-sm-4 col-xs-12">
