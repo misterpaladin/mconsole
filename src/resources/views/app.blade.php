@@ -83,7 +83,7 @@
                                                     <a href="{{ $qmItem->link }}">
                                                         <span class="details">
                                                             @if ($qmItem->icon)
-                                                            <span class="label label-sm label-icon {{ isset($qmItem->color) ? $qmItem->color : null }}"><i class="{{ $qmItem->icon }}"></i></span>
+                                                                <i class="{{ $qmItem->icon }}"></i>
                                                             @endif
                                                             {{ $qmItem->text }} </span>
                                                     </a>
