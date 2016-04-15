@@ -26,7 +26,6 @@
                         @include('mconsole::forms.colorpicker', [
                             'label' => trans('mconsole::tags.form.color.label'),
                             'name' => 'color',
-                            'value' => isset($item) ? $item->color : '#0E76B3'
                         ])
                         
                     </div>
@@ -48,6 +47,7 @@
     <script src="/massets/global/plugins/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>
     <script>
         $('.color-picker').minicolors({
+            defaultValue: '#0088cc',
             theme: 'bootstrap'
         });
     </script>
