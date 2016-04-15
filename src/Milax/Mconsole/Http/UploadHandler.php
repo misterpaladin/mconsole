@@ -484,7 +484,7 @@ class UploadHandler
     protected function get_unique_filename($file_path, $name, $size, $type, $error,
             $index, $content_range)
     {
-        return sprintf('%s-%s.%s', str_slug(pathinfo($name, PATHINFO_FILENAME)), str_random(10), pathinfo($name, PATHINFO_EXTENSION));
+        return sprintf('%s-%s.%s', str_slug(pathinfo($name, PATHINFO_FILENAME)), md5(str_random(10) . time()), pathinfo($name, PATHINFO_EXTENSION));
     }
 
     protected function fix_file_extension($file_path, $name, $size, $type, $error,

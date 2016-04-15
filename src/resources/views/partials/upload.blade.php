@@ -1,8 +1,17 @@
 <div class="uploadable" action="/mconsole/api/images/upload" method="POST" enctype="multipart/form-data">
-    <input type="hidden" class="uploadable-preset" name="uploadable[{{ $group }}][preset]" value="{{ $preset }}"/>
-    <input type="hidden" class="uploadable-class" name="uploadable[{{ $group }}][related_class]" value="{{ $model }}"/>
     <input type="hidden" class="uploadable-id" name="related_id" value="{{ $id }}" />
     <input type="hidden" class="uploadable-group" name="group" value="{{ $group }}" />
+    <input type="hidden" class="uploadable-class" name="uploadable[{{ $group }}][related_class]" value="{{ $model }}"/>
+    @if (app('API')->options->get('gallery_show_presets') == true)
+        @include('mconsole::forms.select', [
+            'label' => trans('mconsole::gallery.form.preset.name'),
+            'name' => sprintf('uploadable[%s][preset]', $group),
+            'options' => $presets->lists('name', 'id'),
+            'value' => $presets->where('key', $preset)->first()->id
+        ])
+    @else
+        <input type="hidden" class="uploadable-preset" name="uploadable[{{ $group }}][preset]" value="{{ $preset }}"/>
+    @endif
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
         <div class="col-xs-12">

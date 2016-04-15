@@ -173,7 +173,12 @@ class Images
                     break;
                 }
                 
-                $preset = $this->presets->where('key', $input['preset'])->first();
+                if (is_numeric($input['preset'])) {
+                    $preset = $this->presets->where('id', (int) $input['preset'])->first();
+                } else {
+                    $preset = $this->presets->where('key', $input['preset'])->first();
+                }
+                
                 $model = $input['related_class'];
                 $path = sprintf('%s/%s', $this->imagesPath, $preset->path);
                 
@@ -202,7 +207,7 @@ class Images
                         
                         $this->deleteTmp($file);
                     } else { // Or get Image object from database
-                        $image = ImageModel::where('preset_id', $preset->id)->where('related_class', $model)->where('filename', basename($file))->first();
+                        $image = ImageModel::where('related_class', $model)->where('filename', basename($file))->first();
                         $image->update([
                             'language_id' => $language,
                             'title' => $title,
