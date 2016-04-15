@@ -4,10 +4,11 @@ namespace Milax\Mconsole\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
-use Milax\Mconsole\Models\TagsToAny;
 
 class Tag extends Model
 {
+    use \Cacheable;
+    
     protected $fillable = ['name'];
     
     /**
@@ -18,8 +19,7 @@ class Tag extends Model
      */
     public function tagged($class)
     {
-        $instance = new $class;
-        return new BelongsToMany($instance->newQuery()->where('related_class', $class), $this, (new TagsToAny)->getTable(), 'tag_id', 'related_id', null);
+        return $this->morphedByMany($class, 'taggable');
     }
     
     /**
@@ -30,6 +30,6 @@ class Tag extends Model
      */
     public function getTagged($class)
     {
-        return $this->tagged($class)->get();
+        return $this->morphedByMany($class, 'taggable')->get();
     }
 }
