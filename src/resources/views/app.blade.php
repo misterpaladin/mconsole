@@ -38,6 +38,8 @@
         <link href="/massets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
@@ -293,6 +295,7 @@
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
+        <script src="/massets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
@@ -302,6 +305,7 @@
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
 		<script src="/massets/js/links-editor.js" type="text/javascript"></script>
+		<script src="/massets/js/tags.js" type="text/javascript"></script>
 		<!-- END PAGE LEVEL SCRIPTS -->
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
