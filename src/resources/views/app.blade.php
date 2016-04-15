@@ -212,23 +212,28 @@
                             @yield('content', '<div class="row">
                                 <div class="col-xs-12">
                                     <div class="portlet light">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="icon-bulb font-dark"></i>
-                                            <span class="caption-subject font-dark bold uppercase">Мудрость минуты</span>
-                                        </div>
-                                    </div>
-                                        <div class="portlet-body form">
-                                            <div class="table-scrollable table-scrollable-borderless">
-                                                <blockquote>
-                                                    <p>“ ' . app('API')->quotes->getText() . ' „</p>
-                                                    <small><cite title="Source Title">' . app('API')->quotes->getAuthor() . '</cite></small>
-                                                </blockquote>
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="icon-bulb font-dark"></i>
+                                                <span class="caption-subject font-dark bold uppercase">Мудрость минуты</span>
                                             </div>
+                                        </div>
+                                        <div class="portlet-body form">
+                                            <ul class="media-list">
+                                                <li class="media">
+                                                    <img width="95px" class="media-object pull-left hidden-xs" src="/massets/mudrec.png">
+                                                    <div class="media-body">
+                                                        <blockquote>
+                                                            <p>“ ' . app('API')->quotes->getText() . ' „</p>
+                                                            <small><cite title="Source Title">' . app('API')->quotes->getAuthor() . '</cite></small>
+                                                        </blockquote>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </test>')
+                            </div>')
 							
 							@if (isset($paging))
 							<div class="row">
