@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="portlet light">
-            @if (isset($actoins))
+            @if (isset($actions))
                 @include('mconsole::partials.portlet-title', [
                     'actions' => $actions,
                 ])
