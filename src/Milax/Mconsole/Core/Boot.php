@@ -3,10 +3,8 @@
 namespace Milax\Mconsole\Core;
 
 use Cache;
-use Auth;
 use View;
 use DB;
-use App;
 use File;
 
 /**
@@ -24,22 +22,8 @@ class Boot
     public static function run()
     {
         app('API')->info->setAppVersion('0.3.2');
-        self::setLang();
+        app('API')->translations->setUserLocale();
         self::loadViewComposers();
-    }
-    
-    /**
-     * Set language depending on user settings.
-     * 
-     * @access public
-     * @static
-     * @return void
-     */
-    public static function setLang()
-    {
-        if (strlen($lang = Auth::user()->lang) > 0) {
-            App::setLocale($lang);
-        }
     }
     
     /**

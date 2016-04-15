@@ -66,4 +66,14 @@ class Translations
             }
         }
     }
+    
+    /**
+     * Set Application locale for current user settings
+     */
+    public function setUserLocale()
+    {
+        if (strlen($lang = \Auth::user()->lang) > 0) {
+            \App::setLocale($lang);
+        }
+    }
 }
