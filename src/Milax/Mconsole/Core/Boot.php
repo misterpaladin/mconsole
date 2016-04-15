@@ -12,7 +12,7 @@ use File;
 /**
  * Core Mconsole class.
  */
-class Mconsole
+class Boot
 {
     /**
      * Boot mconsole support vars.
@@ -21,7 +21,7 @@ class Mconsole
      * @static
      * @return void
      */
-    public static function boot()
+    public static function run()
     {
         self::setAppVersion();
         self::setLang();

@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Http\Middleware;
 
-use Milax\Mconsole\Core\Mconsole;
+use Milax\Mconsole\Core\Boot;
 use Closure;
 use Auth;
 
@@ -29,7 +29,7 @@ class MconsoleMiddleware
         
         // Build Mconsole UI if authenticated
         if (Auth::check()) {
-            Mconsole::boot();
+            Boot::run();
         }
         
         if (!$request->is('mconsole/login') && Auth::user()->role->key != 'root') {
