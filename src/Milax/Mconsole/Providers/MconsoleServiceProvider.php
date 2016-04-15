@@ -18,6 +18,7 @@ class MconsoleServiceProvider extends ServiceProvider
             \Milax\Mconsole\Providers\CommandsServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
+            \Milax\Mconsole\Providers\ViewComposersServiceProvider::class,
         ],
         
         'aliases' => [
@@ -113,8 +114,9 @@ class MconsoleServiceProvider extends ServiceProvider
             return $api;
         });
         
-        // Run one time scans
+        // Run one time setup
         app('API')->modules->scan();
+        app('API')->info->setAppVersion('0.3.2');
         
         if (env('APP_ENV') == 'local') {
             app('API')->translations->load();

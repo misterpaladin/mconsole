@@ -2,7 +2,6 @@
 
 namespace Milax\Mconsole\Http\Middleware;
 
-use Milax\Mconsole\Core\Boot;
 use Closure;
 use Auth;
 
@@ -27,9 +26,9 @@ class MconsoleMiddleware
             return redirect('/mconsole/login');
         }
         
-        // Build Mconsole UI if authenticated
+        // Set user locale if authenticated
         if (Auth::check()) {
-            Boot::run();
+            app('API')->translations->setUserLocale();
         }
         
         if (!$request->is('mconsole/login') && Auth::user()->role->key != 'root') {
