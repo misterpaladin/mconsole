@@ -7,6 +7,7 @@ use File;
 use Illuminate\Console\Command;
 use Milax\Mconsole\Seeds\MconsoleOptionsSeeder;
 use Milax\Mconsole\Seeds\MconsoleRolesSeeder;
+use Milax\Mconsole\Seeds\MconsoleLanguaugeSeeder;
 
 class Installer extends Command
 {
@@ -98,6 +99,7 @@ class Installer extends Command
         
         $this->info(MconsoleOptionsSeeder::run());
         $this->info(MconsoleRolesSeeder::run());
+        $this->info(MconsoleLanguaugeSeeder::run());
         
         $this->info('Done!');
         $this->comment(null);
@@ -160,6 +162,7 @@ class Installer extends Command
         });
         
         $this->comment('Updating translations..');
+        File::deleteDirectory(storage_path('app/lang'));
         app('API')->translations->load();
     }
     
@@ -171,7 +174,6 @@ class Installer extends Command
      */
     protected function cleanup()
     {
-        File::deleteDirectory(storage_path('app/lang'));
         $this->call('cache:clear');
         $this->call('view:clear');
         $this->call('route:clear');
