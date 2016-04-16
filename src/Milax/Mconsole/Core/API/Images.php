@@ -68,7 +68,7 @@ class Images
         ImageModel::where('group', $group)->where('related_class', $class)->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($image) use (&$images, &$url, &$scriptURL) {
             if (File::exists(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename))) {
                 $images->get('files')->push([
-                    'name' => $image->filename,
+                    'name' => str_limit($image->filename, 20),
                     'language_id' => $image->language_id,
                     'title' => $image->title,
                     'description' => $image->description,
