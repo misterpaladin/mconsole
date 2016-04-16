@@ -54,7 +54,7 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 	</head>
 	<!-- END HEAD -->
-	<body class="page-container-bg-solid page-boxed page-md">
+	<body class="page-container-bg-solid page-boxed page-md page-header-menu-fixed">
 		<!-- BEGIN HEADER -->
 		<div class="page-header">
 			<!-- BEGIN HEADER TOP -->
