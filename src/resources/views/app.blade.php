@@ -130,7 +130,7 @@
 								</a>
 								<ul class="dropdown-menu dropdown-menu-default">
 									<li>
-										<a href="#">
+										<a href="/mconsole/settings">
 										<i class="icon-settings"></i> {{ trans('mconsole::profile.links.settings') }} </a>
 									</li>
 									<li class="divider"> </li>

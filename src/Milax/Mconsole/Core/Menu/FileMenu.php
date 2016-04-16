@@ -206,7 +206,7 @@ class FileMenu implements Menu
                         'url' => 'settings',
                         'description' => 'settings.menu.description',
                         'route' => 'mconsole.settings.index',
-                        'visible' => true,
+                        'visible' => false,
                         'enabled' => true,
                     ],
                     'settings_form' => [
