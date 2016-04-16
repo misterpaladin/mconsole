@@ -56,7 +56,7 @@ trait HasRedirects
     {
         // Check if $redirectTo is set
         if (empty($this->redirectTo)) {
-            throw new RedirectToPropertyException('You must set protected $redirectTo property in your controller.');
+            throw new RedirectToPropertyException(sprintf('You must set protected $redirectTo property in your controller %s.', __CLASS__));
         }
         
         // Check if $redirectTo is array
