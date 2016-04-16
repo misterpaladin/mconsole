@@ -1,3 +1,25 @@
+## 0.3.4
+
+Added:
+  - `Mconsole Middleware` routes exceptions
+  - APIs ajax check
+  - New Notifications API
+  - Dashboard link in menu
+  - System menu
+
+Fixed:
+  - Images API get() urlencode
+  - Roles routes check
+  - Only root user can set user role
+  - All users can use search bar
+  - Dashboard quotes author
+
+Updated:
+  - Modules sorted by name and installation state
+  - APIs controllers moved to `\Http\Controllers\API`
+  - Image names display limited to 10 characters
+  - Fixed menu bar
+
 ## 0.3.3
 
 Added:
