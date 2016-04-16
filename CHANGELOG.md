@@ -1,3 +1,13 @@
+## 0.3.3
+
+Added:
+  - Tags editor
+  - `HasTags` trait
+  - Back button in portlet title
+
+Updated:
+  - Deletion observing on models that using `HasImage` trait
+
 ## 0.3.2
 
 Added:
