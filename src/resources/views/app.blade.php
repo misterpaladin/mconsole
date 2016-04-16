@@ -42,7 +42,8 @@
         <link href="/massets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<!-- END PAGE LEVEL PLUGINS -->
+		<link href="/massets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
@@ -98,22 +99,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <!-- BEGIN NOTIFICATION DROPDOWN -->
-                            <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="icon-bell"></i>
-                                    <span class="badge badge-default notifications-count"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="external">
-                                        <h3>Уведомления</h3>
-                                    </li>
-                                    <li>
-                                        <ul class="dropdown-menu-list scroller notifications-container" style="height: 250px;" data-handle-color="#637283"></ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- END NOTIFICATION DROPDOWN -->
                             <li class="dropdown">
                                 <a href="{{ app('API')->options->get('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
                                     <i class="icon-share-alt"></i>
@@ -192,8 +177,6 @@
 					<div class="container">
 						<!-- BEGIN PAGE CONTENT INNER -->
 						<div class="page-content-inner">
-							
-							@include('mconsole::partials.messages')
 							
 							@if (isset($filters))
     							<div class="portlet light">
@@ -282,21 +265,20 @@
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-		<!-- END PAGE LEVEL PLUGINS -->
-		<!-- BEGIN THEME GLOBAL SCRIPTS -->
+		<script src="/massets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
-		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
+		<script src="/massets/js/search.js" type="text/javascript"></script>
 		<script src="/massets/js/form-images-upload.js" type="text/javascript"></script>
-		<!-- END THEME GLOBAL SCRIPTS -->
-		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
 		<script src="/massets/js/links-editor.js" type="text/javascript"></script>
 		<script src="/massets/js/tags.js" type="text/javascript"></script>
-		<!-- END PAGE LEVEL SCRIPTS -->
+		<script src="/massets/js/notifications.js" type="text/javascript"></script>
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
 		<!-- END THEME LAYOUT SCRIPTS -->
         @yield('page.scripts')
+        @include('mconsole::partials.messages')
 	</body>
 </html>
