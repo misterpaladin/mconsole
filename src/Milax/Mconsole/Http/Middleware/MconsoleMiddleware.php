@@ -9,7 +9,7 @@ class MconsoleMiddleware
 {
     protected $exceptions = [
         'mconsole',
-        'api',
+        'mconsole/api/search',
     ];
     
     /**
