@@ -12,7 +12,10 @@ Route::group([
     Route::get('/logout', 'MconsoleController@logout');
     
     // Mconsole root
-    Route::get('/', 'MconsoleController@index');
+    Route::get('/', function () {
+        return redirect('/mconsole/dashboard');
+    });
+    Route::get('/dashboard', 'MconsoleController@index');
     
     // API
     Route::group([

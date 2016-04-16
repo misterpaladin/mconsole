@@ -14,6 +14,16 @@ class FileMenu implements Menu
     public function __construct()
     {
         $this->menu = [
+            'dashboard' => [
+                'name' => 'Dashboard',
+                'translation' => 'menu.dashboard.name',
+                'url' => 'dashboard',
+                'description' => 'menu.dashboard.description',
+                'route' => 'mconsole.index',
+                'visible' => true,
+                'enabled' => true,
+                'child' => [],
+            ],
             'content' => [
                 'name' => 'Content',
                 'key' => 'content',
