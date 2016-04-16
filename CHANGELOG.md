@@ -1,20 +1,20 @@
 ## 0.3.4
 
-Added:
+##### Added
   - `Mconsole Middleware` routes exceptions
   - APIs ajax check
   - New Notifications API
   - Dashboard link in menu
   - System menu
 
-Fixed:
+##### Fixed
   - Images API get() urlencode
   - Roles routes check
   - Only root user can set user role
   - All users can use search bar
   - Dashboard quotes author
 
-Updated:
+##### Updated
   - Modules sorted by name and installation state
   - APIs controllers moved to `\Http\Controllers\API`
   - Image names display limited to 10 characters
@@ -22,47 +22,47 @@ Updated:
 
 ## 0.3.3
 
-Added:
+##### Added
   - Tags editor
   - `HasTags` trait
   - Back button in portlet title
 
-Updated:
+##### Updated
   - Deletion observing on models that using `HasImage` trait
 
 ## 0.3.2
 
-Added:
+##### Added
   - Search bar with an API
   - Settings groups
   - CKEditor
 
-Updated:
+##### Updated
   - Trats renamed
   - Installer `--quick` option to skip long assets copy
   - Translations updater moved from Modules to Settings page
 
 ## 0.3.1
 
-Added:
+##### Added
   - Tags support
   - Copy module public assets to `/public/massets/modules` directory
   - `doctrine/dbal` dependency for migrations
 
-Updated:
+##### Updated
   - `milax/mconsole-base-components` dependency to any version
   - Module generator creates public assets directories
 
-Fixed:
+##### Fixed
   - Images API
   - Image model
 
-Removed:
+##### Removed
   - Caching test
 
 ## 0.3
 
-Added:
+##### Added
   - Module service provider support
   - `php artisan make:module --package` option for module packaging including composer.json
   - Detailed modules information
@@ -71,20 +71,20 @@ Added:
   - Images Uploader (with inputs and sortable)
   - Some new cool quotes
 
-Fixed:
+##### Fixed
   - Empty input values in settings
   - Module install buttons
   - Migrations with `doctrine/dbal` package
   - Empty rows in variables editor
 
-Updated:
+##### Updated
   - Some RU translations
   - Module blueprints
   - Images accessible with public path by symbolic links
 
 ## 0.2.4
 
-Added:
+##### Added
   - Quick menu API
   - Modules extending in modules interface
   - RU translation for modules interface
@@ -93,21 +93,21 @@ Added:
   - Settings interface
   - Variables editor interface
 
-Fixed:
+##### Fixed
   - Some RU translation strings
   - Modules tests
 
 ## 0.2.3
 
-Added:
+##### Added
   - HasImages trait for Eloquent models (provides `hasMany Image` relationship)
 
-Fixed:
+##### Fixed
   - Pages module tests
 
 ## 0.2
 
-Added:
+##### Added
   - Modular application structure
       - Module loader
       - Module installer
@@ -129,71 +129,71 @@ Added:
   - Notifications bar
   - Search bar
 
-Updated:
+##### Updated
   - ACL system
   - System font from Open Sans to PT Sans
 
-Fixed:
+##### Fixed
   - Date picker component
   - Custom validators
   - Editing `root` user
   - Pages module table multi language heading field
 
-Removed:
+##### Removed
   - All localization files removed, will be localized at 1.0
   - News section removed, available as composer package `milax/mconsole-news`
   - Database menu
 
 ## 0.1.2
 
-Added:
+##### Added
   - Page section
   - News section
   - Date form component with assets
   - Textarea form component
   - MergedMenu class (for merging database + file menu)
 
-Updated:
+##### Updated
   - Database menu is system now, custom menu will be located in `/config/mconsole.php` file
 
-Fixed:
+##### Fixed
   - Installer fixed
 
 ## 0.1.1
 
-Added:
+##### Added
   - User roles
   - Blade directive for new Variable model
   - HasRedirects class (trait for controllers)
   - HasFilters class (trait for controllers)
   - HasPaginator class (trait for controllers)
 
-Removed:
+##### Removed
   - CMSController class
   - 50 megabytes of theme assets
 
 ## 0.1.0
 
-Added:
+##### Added
   - Travis CI config
   - PHPUnit tests
   - MconsoleUploadPreset model (for future functional)
   - Status badges in readme
   - MconsoleRole installer with predefined user roles
 
-Updated:
+##### Updated
   - Updated localization
 
 ## 0.0.10
 
-Added:
+##### Added
   - User localization settings
   - Menu localization
   - Menu installation
 
 ## 0.0.9
 
-Added:
+##### Added
   - Users section
   - First Blade directive
   - Localization
@@ -202,16 +202,16 @@ Added:
   - Version display in dashboard
   - Admin creation prompt when installing mconsole
 
-Fixed:
+##### Fixed
   - Fixed installer error while seeding database
 
 ## 0.0.8
 
-Added:
+##### Added
   - Package self installer `php artisan mconsole:install`
   - `BladeRenderer` class
   - Models: MconsoleRole, MconsoleMenu, MconsoleUser
 
-Updated:
+##### Updated
   - Models not publishing to app anymore
   - Views moved in `views/mconsole` directory
