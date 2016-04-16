@@ -17,13 +17,14 @@ Route::group([
     // API
     Route::group([
         'prefix' => 'api',
+        'namespace' => 'API',
     ], function () {
-        Route::get('/notifications', 'APIController@getNotifications');
-        Route::get('/notifications/{id}/seen', 'APIController@seeNotification');
-        Route::get('/search', 'APIController@doSearch');
-        Route::any('/images/upload', 'API\ImagesController@uploadImage');
-        Route::get('/images/get', 'API\ImagesController@get');
-        Route::get('/images/delete/{file}', 'API\ImagesController@deleteImage');
+        Route::get('/notifications', 'NotificationsController@handle');
+        Route::get('/notifications/{id}/seen', 'NotificationsController@markAsSeen');
+        Route::get('/search', 'SearchController@handle');
+        Route::any('/images/upload', 'ImagesController@uploadImage');
+        Route::get('/images/get', 'ImagesController@get');
+        Route::get('/images/delete/{file}', 'ImagesController@deleteImage');
     });
     
     // Resources
