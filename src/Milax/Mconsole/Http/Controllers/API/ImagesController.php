@@ -29,7 +29,7 @@ class ImagesController extends Controller
     public function get(Request $request)
     {
         $input = $request->all();
-        $input['related_class'] = urldecode($input['related']);
+        $input['related_class'] = urldecode($input['related_class']);
         return app('API')->images->get($input['group'], $input['related_class'], $input['related_id'], $this->previewUrl, $this->scriptUrl);
     }
     
