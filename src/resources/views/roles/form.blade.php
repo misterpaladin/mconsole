@@ -13,11 +13,10 @@
 			<div class="row">
                 <div class="col-md-4">
                     <div class="portlet light">
-        				<div class="portlet-title">
-        					<div class="caption">
-        						<span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::roles.form.main') }}</span>
-        					</div>
-        				</div>
+                        @include('mconsole::partials.portlet-title', [
+                            'back' => '/mconsole/roles',
+                            'title' => trans('mconsole::roles.form.main'),
+                        ])
         				<div class="portlet-body form">
                             @include('mconsole::forms.text', [
                                 'label' => trans('mconsole::roles.form.name.label'),

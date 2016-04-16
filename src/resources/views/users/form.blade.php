@@ -5,11 +5,10 @@
 <div class="row">
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
-            <div class="portlet-title">
-                <div class="caption">
-                    <span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::presets.form.main') }}</span>
-                </div>
-            </div>
+            @include('mconsole::partials.portlet-title', [
+                    'back' => '/mconsole/users',
+                    'title' => trans('mconsole::users.form.main'),
+                ])
             <div class="portlet-body form">
         		@if (isset($item))
         			{!! Form::model($item, ['method' => 'PUT', 'route' => ['mconsole.users.update', $item->id]]) !!}

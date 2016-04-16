@@ -5,11 +5,10 @@
 <div class="row">
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
-            <div class="portlet-title">
-                <div class="caption">
-                    <span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::presets.form.main') }}</span>
-                </div>
-            </div>
+            @include('mconsole::partials.portlet-title', [
+                    'back' => '/mconsole/tags',
+                    'title' => trans('mconsole::presets.form.main'),
+                ])
             <div class="portlet-body form">
             		<div class="form-body">
                         @if (isset($item))

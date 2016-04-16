@@ -38,6 +38,7 @@ return [
             'label' => 'Эл. почта',
             'placeholder' => 'example@milax.com',
         ],
+        'main' => 'Основное',
         'language' => 'Язык интерфейса',
         'role' => 'Группа',
         'password' => [

@@ -8,7 +8,7 @@
         @if (isset($back))
             @include('mconsole::partials.title-button', [
                 'href' => $back,
-                'color' => 'blue',
+                'color' => 'grey-salsa',
                 'icon' => 'rotate-left',
                 'text' => trans('mconsole::tables.back'),
             ])
