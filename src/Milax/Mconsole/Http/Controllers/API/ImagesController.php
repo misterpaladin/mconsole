@@ -28,7 +28,9 @@ class ImagesController extends Controller
      */
     public function get(Request $request)
     {
-        return app('API')->images->get($request->query('group'), $request->query('related_class'), $request->query('related_id'), $this->previewUrl, $this->scriptUrl);
+        $input = $request->all();
+        $input['related_class'] = urldecode($input['related']);
+        return app('API')->images->get($input['group'], $input['related_class'], $input['related_id'], $this->previewUrl, $this->scriptUrl);
     }
     
     /**
