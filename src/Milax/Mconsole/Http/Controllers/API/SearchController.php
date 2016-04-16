@@ -15,6 +15,10 @@ class SearchController extends Controller
      */
     public function handle(Request $request)
     {
+        if (!$request->ajax()) {
+            return redirect('/mconsole');
+        }
+        
         return app('API')->search->handle($request->query('query'));
     }
 }

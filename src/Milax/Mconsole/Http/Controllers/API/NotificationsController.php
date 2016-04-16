@@ -12,8 +12,12 @@ class NotificationsController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function handle()
+    public function handle(Request $request)
     {
+        if (!$request->ajax()) {
+            return redirect('/mconsole');
+        }
+        
         return app('API')->notifications->get();
     }
     
@@ -22,6 +26,10 @@ class NotificationsController extends Controller
      */
     public function markAsSeen(Request $request, $id)
     {
+        if (!$request->ajax()) {
+            return redirect('/mconsole');
+        }
+        
         app('API')->notifications->update($id, [
             'seen' => true,
         ]);
