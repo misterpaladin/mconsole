@@ -2,7 +2,7 @@
 
 return [
     'links' => [
-        'settings' => 'Настройки',
+        'settings' => 'Профиль',
         'logout' => 'Выйти',
     ],
 ];

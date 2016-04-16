@@ -201,6 +201,15 @@ class FileMenu implements Menu
                         'visible' => false,
                         'enabled' => true,
                     ],
+                ],
+            ],
+            'system' => [
+                'name' => 'System',
+                'key' => 'system',
+                'translation' => 'menu.system.name',
+                'visible' => true,
+                'enabled' => true,
+                'child' => [
                     'manage_modules' => [
                         'name' => 'Manage modules',
                         'translation' => 'modules.menu.name',
@@ -216,7 +225,7 @@ class FileMenu implements Menu
                         'url' => 'settings',
                         'description' => 'settings.menu.description',
                         'route' => 'mconsole.settings.index',
-                        'visible' => false,
+                        'visible' => true,
                         'enabled' => true,
                     ],
                     'settings_form' => [

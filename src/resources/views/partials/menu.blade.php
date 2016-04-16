@@ -6,8 +6,12 @@
 		@foreach ($mconsole_menu as $menu)
             @if ($menu->visible)
     			<li class="menu-dropdown classic-menu-dropdown ">
-    				@if (!isset($menu->child))
-    					<a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+    				@if (count($menu->child) == 0)
+                        @if (isset($menu->route))
+                            <a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                        @else
+                            <a href="#">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                        @endif
     				@else
     					<a href="#">{{ trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
     					<ul class="dropdown-menu pull-left">

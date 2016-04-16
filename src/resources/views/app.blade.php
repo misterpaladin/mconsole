@@ -115,7 +115,7 @@
 								</a>
 								<ul class="dropdown-menu dropdown-menu-default">
 									<li>
-										<a href="/mconsole/settings">
+										<a href="/mconsole/users/{{ Auth::id() }}/edit">
 										<i class="icon-settings"></i> {{ trans('mconsole::profile.links.settings') }} </a>
 									</li>
 									<li class="divider"> </li>
