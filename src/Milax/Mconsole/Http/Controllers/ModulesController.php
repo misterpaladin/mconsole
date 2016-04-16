@@ -29,7 +29,7 @@ class ModulesController extends Controller
             }
         });
         
-        return view('mconsole::modules.list', ['items' => app('API')->modules->get('all')]);
+        return view('mconsole::modules.list', ['items' => app('API')->modules->get('all')->sortByDesc('name')->sortByDesc('installed')]);
     }
     
     /**
