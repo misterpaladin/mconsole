@@ -1,0 +1,1 @@
+<a href="{{ $href }}" class="btn btn-circle {{ $color }}"><i class="fa fa-{{ $icon }}"></i> {{ $text }}</a>

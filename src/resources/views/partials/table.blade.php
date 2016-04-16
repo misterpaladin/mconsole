@@ -2,8 +2,10 @@
 	<div class="col-xs-12">
 		<div class="portlet light">
                 @include('mconsole::partials.portlet-title', [
-                    'title' => isset($title) ? $title : '',
-                    'actions' => isset($actions) ? $actions : '',
+                    'back' => isset($back) ? $back : null,
+                    'title' => isset($title) ? $title : null,
+                    'actions' => isset($actions) ? $actions : null,
+                    'add' => isset($add) ? $add : null,
                 ])
 			<div class="portlet-body form">
 				<div class="table-scrollable table-scrollable-borderless">
