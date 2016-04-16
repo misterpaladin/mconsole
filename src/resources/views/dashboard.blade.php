@@ -18,7 +18,7 @@
                             <div class="media-body">
                                 <blockquote>
                                     <p>“ {{ $quote['text'] }} „</p>
-                                    <small><cite title="Source Title">{{ $quote['text'] }}</cite></small>
+                                    <small><cite title="Source Title">{{ $quote['author'] }}</cite></small>
                                 </blockquote>
                             </div>
                         </li>
