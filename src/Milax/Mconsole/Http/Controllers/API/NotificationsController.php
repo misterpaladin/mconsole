@@ -16,4 +16,14 @@ class NotificationsController extends Controller
     {
         return app('API')->notifications->get();
     }
+    
+    /**
+     * Mark notification as seen
+     */
+    public function markAsSeen(Request $request, $id)
+    {
+        app('API')->notifications->update($id, [
+            'seen' => true,
+        ]);
+    }
 }

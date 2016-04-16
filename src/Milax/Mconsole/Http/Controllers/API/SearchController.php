@@ -17,14 +17,4 @@ class SearchController extends Controller
     {
         return app('API')->search->handle($request->query('query'));
     }
-    
-    /**
-     * Mark notification as seen
-     */
-    public function markAsSeen($id)
-    {
-        app('API')->notifications->update($id, [
-            'seen' => true,
-        ]);
-    }
 }
