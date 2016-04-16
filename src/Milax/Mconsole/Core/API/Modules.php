@@ -343,7 +343,6 @@ class Modules extends ModelAPI
                 if (File::exists(sprintf('%s/assets/public/%s', $path, $type))) {
                     if ($allFiles = File::allFiles(sprintf('%s/assets/public/%s', $path, $type))) {
                         foreach ($allFiles as $file) {
-                            dump('installed ' . $file);
                             array_push($module->public[$type], sprintf('/massets/modules/%s/%s/%s', $module->identifier, $type, $file->getRelativePathname()));
                         }
                     }
