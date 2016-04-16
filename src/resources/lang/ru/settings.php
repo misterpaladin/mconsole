@@ -23,6 +23,7 @@ return [
         'editor' => 'Тип HTML редактора',
     ],
     'options' => [
+        'enabled' => 'Состояние',
         'group' => [
             'name' => 'Основные',
             'other' => 'Остальные',
