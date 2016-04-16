@@ -25,6 +25,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');
+        $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }
     
     /**

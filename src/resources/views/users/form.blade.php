@@ -34,12 +34,14 @@
     					],
     				])
     				
-                    @if (!isset($item) || $item->role->key != 'root')
-                        @include('mconsole::forms.select', [
-        					'label' => trans('mconsole::users.form.role'),
-        					'name' => 'role_id',
-        					'options' => $roles,
-        				])
+                    @if (Auth::user()->role->key == 'root')
+                        @if ($item->id != Auth::id())
+                            @include('mconsole::forms.select', [
+            					'label' => trans('mconsole::users.form.role'),
+            					'name' => 'role_id',
+            					'options' => $roles,
+            				])
+                        @endif
                     @endif
                     
     				@if (!isset($item))
