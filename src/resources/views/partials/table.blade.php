@@ -1,13 +1,10 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="portlet light">
-            @if (isset($actions))
                 @include('mconsole::partials.portlet-title', [
-                    'actions' => $actions,
+                    'title' => isset($title) ? $title : '',
+                    'actions' => isset($actions) ? $actions : '',
                 ])
-            @else
-                @include('mconsole::partials.portlet-title')
-            @endif
 			<div class="portlet-body form">
 				<div class="table-scrollable table-scrollable-borderless">
 					@if (isset($items) && $items->count() > 0)
