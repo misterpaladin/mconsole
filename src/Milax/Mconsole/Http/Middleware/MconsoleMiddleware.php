@@ -7,6 +7,11 @@ use Auth;
 
 class MconsoleMiddleware
 {
+    protected $exceptions = [
+        'mconsole',
+        'api',
+    ];
+    
     /**
      * Check for mconsole access.
      *
@@ -58,7 +63,7 @@ class MconsoleMiddleware
         $method = $request->method();
         
         // Allow everyone to visit dashboard
-        if ($request->path() == 'mconsole') {
+        if (in_array($request->path(), $this->exceptions)) {
             return true;
         }
         
