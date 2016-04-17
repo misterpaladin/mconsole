@@ -61,7 +61,7 @@ class LoginInterfaceTest extends TestCase
             ->type($this->user->email, 'login')
             ->type('testing', 'password')
             ->press(trans('mconsole::login.buttons.login'))
-            ->seePageIs('/mconsole')
+            ->seePageIs('/mconsole/dashboard')
             ->see($this->user->name);
     }
 
