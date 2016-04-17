@@ -5,6 +5,9 @@
 		</div>
     @endif
     <div class="actions">
+        @if (isset($filters))
+            <a class="btn yellow-casablanca btn-circle" data-toggle="modal" href="#filters"><i class="fa fa-search"></i> {{ trans('mconsole::traits.filters.filter') }}</a>
+        @endif
         @if (isset($back))
             @include('mconsole::partials.title-button', [
                 'href' => $back,

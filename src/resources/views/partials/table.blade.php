@@ -1,12 +1,13 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="portlet light">
-                @include('mconsole::partials.portlet-title', [
-                    'back' => isset($back) ? $back : null,
-                    'title' => isset($title) ? $title : null,
-                    'actions' => isset($actions) ? $actions : null,
-                    'add' => isset($add) ? $add : null,
-                ])
+            @include('mconsole::partials.portlet-title', [
+                'filters' => isset($filters) ? true : false,
+                'back' => isset($back) ? $back : null,
+                'title' => isset($title) ? $title : null,
+                'actions' => isset($actions) ? $actions : null,
+                'add' => isset($add) ? $add : null,
+            ])
 			<div class="portlet-body form">
 				<div class="table-scrollable table-scrollable-borderless">
 					@if (isset($items) && $items->count() > 0)
@@ -43,3 +44,25 @@
 		</div>
 	</div>
 </div>
+
+@if (isset($filters))
+    <div class="modal fade" id="filters" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ Request::url() }}" method="GET" class="form-horizontal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">{{ trans('mconsole::traits.filters.filter') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        @include('mconsole::traits.filters')
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm yellow-casablanca">{{ trans('mconsole::traits.filters.apply') }}</button>
+        				<a href="{{ Request::url() }}" class="btn btn-sm">{{ trans('mconsole::traits.filters.reset') }}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endif
