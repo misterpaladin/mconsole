@@ -3,7 +3,7 @@
 namespace Milax\Mconsole\Seeds;
 
 use DB;
-use Milax\Mconsole\Models\Language;
+use Milax\Mconsole\Models\Menu;
 
 class MconsoleMenusSeeder
 {
@@ -35,11 +35,11 @@ class MconsoleMenusSeeder
     public static function run()
     {
         collect(self::$menus)->each(function ($menu) {
-            if (DB::table('languages')->where('key', $menu['key'])->count() == 0) {
-                DB::table('languages')->insert([
+            if (Menu::where('key', $menu['key'])->count() == 0) {
+                Menu::create([
                     'key' => $menu['key'],
                     'name' => $menu['name'],
-                    'tree' => $menu['tree'],
+                    'tree' => json_encode($menu['tree']),
                     'system' => $menu['system'],
                 ]);
             }
