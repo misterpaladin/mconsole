@@ -65,7 +65,7 @@ trait HasFilters
     {
         $filtered = false;
         foreach ($this->filters as $filter) {
-            if (Request::query($filter['key'])) {
+            if (strlen(Request::query($filter['key'])) > 0 && Request::query($filter['key']) != -1) {
                 $filtered = true;
                 if ($filter['exact']) {
                     $query->where($filter['key'], Request::query($filter['key']));
