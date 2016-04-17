@@ -5,9 +5,7 @@ namespace Milax\Mconsole\Commands;
 use DB;
 use File;
 use Illuminate\Console\Command;
-use Milax\Mconsole\Seeds\MconsoleOptionsSeeder;
-use Milax\Mconsole\Seeds\MconsoleRolesSeeder;
-use Milax\Mconsole\Seeds\MconsoleLanguaugeSeeder;
+use Milax\Mconsole\Seeds;
 
 class Installer extends Command
 {
@@ -97,9 +95,10 @@ class Installer extends Command
             $this->comment('Installing database components..');
         }
         
-        $this->info(MconsoleOptionsSeeder::run());
-        $this->info(MconsoleRolesSeeder::run());
-        $this->info(MconsoleLanguaugeSeeder::run());
+        $this->info(Seeds\MconsoleOptionsSeeder::run());
+        $this->info(Seeds\MconsoleRolesSeeder::run());
+        $this->info(Seeds\MconsoleLanguaugeSeeder::run());
+        $this->info(Seeds\MconsoleMenusSeeder::run());
         
         $this->info('Done!');
         $this->comment(null);

@@ -35,6 +35,7 @@ Route::group([
     Route::resource('/tags', 'TagsController');
     Route::resource('/roles', 'RolesController');
     Route::resource('/presets', 'PresetsController');
+    Route::resource('/menus', 'MenusController');
     
     // Modules
     Route::group([
