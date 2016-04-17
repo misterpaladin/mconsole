@@ -7,7 +7,7 @@
         <div class="portlet light">
             @include('mconsole::partials.portlet-title', [
                     'back' => '/mconsole/tags',
-                    'title' => trans('mconsole::presets.form.main'),
+                    'title' => trans('mconsole::tags.form.main'),
                 ])
             <div class="portlet-body form">
             		<div class="form-body">
