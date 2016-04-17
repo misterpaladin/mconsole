@@ -1,0 +1,1 @@
+var trans=function(n){var a="trans-"+n;return $('input[name="'+a+'"]').val()};
