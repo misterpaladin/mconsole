@@ -108,10 +108,10 @@
                         ])
         				<div class="portlet-body">
                             <div class="form-group">
-                                <a href="{{ url('mconsole/settings/clearcache') }}" class="btn blue form-control popovers" data-lang-process="{{ trans('mconsole::settings.reloadtransprocess') }}" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::settings.reloadtrans.content') }}">{{ trans('mconsole::settings.reloadtrans.title') }}</a>
+                                <a href="{{ url('mconsole/settings/reloadtrans') }}" class="btn blue form-control popovers" data-lang-process="{{ trans('mconsole::settings.reloadtransprocess') }}" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::settings.reloadtrans.content') }}">{{ trans('mconsole::settings.reloadtrans.title') }}</a>
                             </div>
                             <div class="form-group">
-                                <a href="{{ url('mconsole/settings/reloadtrans') }}" class="btn btn-danger form-control">{{ trans('mconsole::settings.additional.cacheclear') }}</a>
+                                <a href="{{ url('mconsole/settings/clearcache') }}" class="btn btn-danger form-control">{{ trans('mconsole::settings.additional.cacheclear') }}</a>
                             </div>
         				</div>
         			</div>
