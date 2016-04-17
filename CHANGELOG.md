@@ -1,3 +1,15 @@
+## 0.3.5
+
+##### Added
+  - Menu editor
+  - Menu seeder
+  - Trans partial
+  - `trans` javascript helper function
+  - `notification` javascript helper function
+
+##### Fixed
+  - Tags translations
+
 ## 0.3.4
 
 ##### Added
