@@ -48,9 +48,11 @@
         				])
                         @include('mconsole::partials.trans', [
                             'lang' => [
-                                'menu-editor-text' => trans('mconsole::menus.form.placeholders.text'),
-                                'menu-editor-link' => trans('mconsole::menus.form.placeholders.link'),
-                                'menu-editor-blank' => trans('mconsole::menus.form.placeholders.blank'),
+                                'menu-editor-text' => trans('mconsole::menus.form.text'),
+                                'menu-editor-add' => trans('mconsole::menus.form.add'),
+                                'menu-editor-delete' => trans('mconsole::menus.form.delete'),
+                                'menu-editor-link' => trans('mconsole::menus.form.link'),
+                                'menu-editor-blank' => trans('mconsole::menus.form.blank'),
                             ],
                         ])
                     </div>
