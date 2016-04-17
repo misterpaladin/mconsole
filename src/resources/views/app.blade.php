@@ -11,7 +11,7 @@
 	<!-- BEGIN HEAD -->
 	<head>
 		<meta charset="utf-8" />
-		<title>{{ (isset($pageTitle)) ? $pageTitle : 'Mconsole' }}</title>
+		<title>{{ (isset($pageTitle)) ? sprintf('%s / Mconsole', $pageTitle, app('API')->options->get('project_name')) : sprintf('%s / Mconsole', app('API')->options->get('project_name')) }}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
