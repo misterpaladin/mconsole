@@ -29,7 +29,7 @@ class Translations
     public function load()
     {
         if (!File::exists(storage_path('app/lang'))) {
-            File::makeDirectory(storage_path('app/lang'));
+            File::makeDirectory(storage_path('app/lang'), 0777, true, true);
         }
         
         if (!Schema::hasTable(Language::getQuery()->from)) {
@@ -45,7 +45,7 @@ class Translations
                     if (File::exists($translation . '/'. $language->key . '/' . basename($lg))) {
                         // Create if language directory is not exists
                         if (!File::exists(storage_path('app/lang/' . $language->key))) {
-                            File::makeDirectory(storage_path('app/lang/' . $language->key), 0775, true, true);
+                            File::makeDirectory(storage_path('app/lang/' . $language->key), 0777, true, true);
                         }
                         
                         // Copy new or merge existing translation file
