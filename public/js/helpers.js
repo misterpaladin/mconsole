@@ -1,1 +1,1 @@
-var trans=function(n){var a="trans-"+n;return $('input[name="'+a+'"]').val()};
+var trans=function(n){var t="trans-"+n;return $('input[name="'+t+'"]').val()},notification=function(n,t,i){notifications.push(n,t,i)};
