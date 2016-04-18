@@ -88,9 +88,6 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function __construct($app)
     {
-        define('MX_UPLOADTYPE_IMAGE', 'image');
-        define('MX_UPLOADTYPE_DOCUMENT', 'document');
-        
         parent::__construct($app);
     }
     
@@ -101,6 +98,8 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        require (sprintf('%s/../Core/defines.php', __DIR__));
+        
         // Register API singleton
         $this->app->singleton('API', function ($app) {
             $api = new \stdClass;
