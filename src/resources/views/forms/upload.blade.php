@@ -7,7 +7,7 @@
         @include('mconsole::forms.select', [
             'label' => trans('mconsole::gallery.form.preset.name'),
             'name' => sprintf('uploads[%s][%s][preset]', $type, $group),
-            'options' => $presets->lists('name', 'id'),
+            'options' => $presets->where('type', $type)->lists('name', 'id'),
             'value' => $presets->where('key', $preset)->first()->id
         ])
     @else
