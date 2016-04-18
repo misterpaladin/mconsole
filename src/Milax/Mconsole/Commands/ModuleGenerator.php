@@ -102,7 +102,7 @@ class ModuleGenerator extends Command
         
         File::makeDirectory(sprintf('%s/Http/Controllers', $root), 0775, true, true);
         File::put(sprintf('%s/%s', $root, $this->blueprint['bootstrap']['destination']), sprintf($this->blueprint['bootstrap']['file'], $namespace, $class, $class, $class, strtolower($class), $namespace, $class));
-        File::put(sprintf('%s/%s', $root, $this->blueprint['routes']['destination']), sprintf($this->blueprint['routes']['file'], $class, $class));
+        File::put(sprintf('%s/%s', $root, $this->blueprint['routes']['destination']), sprintf($this->blueprint['routes']['file'], $class, $namespace, $class));
         File::put(sprintf('%s/%s', $root, sprintf($this->blueprint['controller']['destination'], $class)), sprintf($this->blueprint['controller']['file'], $namespace, $class, $class, $class));
         File::put(sprintf('%s/%s', $root, $this->blueprint['installer']['destination']), sprintf($this->blueprint['installer']['file'], $namespace, $class));
         File::put(sprintf('%s/%s', $root, $this->blueprint['serviceprovider']['destination']), sprintf($this->blueprint['serviceprovider']['file'], $namespace, $class));
