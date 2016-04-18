@@ -8,7 +8,7 @@ class MconsoleUploadPreset extends Model
 {
     use \Cacheable;
     
-    protected $fillable = ['operations', 'key', 'name', 'path', 'width', 'height', 'watermark', 'position', 'quality', 'extensions', 'min_width', 'min_height'];
+    protected $fillable = ['type', 'operations', 'key', 'name', 'path', 'width', 'height', 'watermark', 'position', 'quality', 'extensions', 'min_width', 'min_height'];
     
     protected $casts = [
         'extensions' => 'array',
@@ -23,6 +23,11 @@ class MconsoleUploadPreset extends Model
     public function images()
     {
         return $this->hasMany('Milax\Mconsole\Models\Image', 'preset_id');
+    }
+    
+    public function files()
+    {
+        return $this->hasMany('Milax\Mconsole\Models\File', 'preset_id');
     }
     
     /**
