@@ -83,7 +83,7 @@ class ModuleGenerator extends Command
         $class = $this->argument('class');
         
         if ($package) {
-            $namespace = 'Milax\Mconsole';
+            $namespace = 'Milax';
             $path = base_path(sprintf('workbench/milax/mconsole-%s', strtolower($class)));
             $root = sprintf('%s/src/Milax/Mconsole/%s', $path, $class);
         } else {
