@@ -181,6 +181,12 @@ class Images
                 $path = sprintf('%s/%s', $this->imagesPath, $preset->path);
                 
                 foreach ($input['files'] as $key => $file) {
+                    
+                    // Check if file is allowed
+                    if (!in_array(pathinfo($file, PATHINFO_EXTENSION), $preset->extensions)) {
+                        continue;
+                    }
+                    
                     $file = sprintf('%s/%s', storage_path('tmp/images'), $file);
                     
                     $language = $input['language_id'][$key];
