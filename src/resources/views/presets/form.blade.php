@@ -16,6 +16,14 @@
 					</div>
 				</div>
 				<div class="portlet-body form">
+                    @include('mconsole::forms.select', [
+                        'label' => trans('mconsole::presets.form.type'),
+                        'name' => 'type',
+                        'options' => [
+                            'image' => trans('mconsole::presets.types.image'),
+                            'document' => trans('mconsole::presets.types.document'),
+                        ],
+                    ])
                     @include('mconsole::forms.text', [
                         'label' => trans('mconsole::presets.form.name'),
                         'name' => 'name',
@@ -24,14 +32,16 @@
                         'label' => trans('mconsole::presets.form.extensions'),
                         'name' => 'extensions',
                     ])
-                    @include('mconsole::forms.text', [
-                        'label' => trans('mconsole::presets.form.minwidth'),
-                        'name' => 'min_width',
-                    ])
-                    @include('mconsole::forms.text', [
-                        'label' => trans('mconsole::presets.form.minheight'),
-                        'name' => 'min_height',
-                    ])
+                    <span data-only="image">
+                        @include('mconsole::forms.text', [
+                            'label' => trans('mconsole::presets.form.minwidth'),
+                            'name' => 'min_width',
+                        ])
+                        @include('mconsole::forms.text', [
+                            'label' => trans('mconsole::presets.form.minheight'),
+                            'name' => 'min_height',
+                        ])
+                    </span>
                     @include('mconsole::forms.text', [
                         'label' => trans('mconsole::presets.form.path'),
                         'name' => 'path',
@@ -50,7 +60,10 @@
 						<span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::presets.form.operations.title') }}</span>
 					</div>
 				</div>
-				<div class="portlet-body form">
+                <div class="portlet-body form hide" data-only="document">
+                    <p>{{ trans('mconsole::presets.form.imageonly') }}</p>
+                </div>
+				<div class="portlet-body form hide" data-only="image">
                     <div class="operations-list"></div>
                     <div class="help-block">{{ trans('mconsole::presets.form.sequence') }}</div>
                     <div class="btn btn-sm blue preset-add-operation">{{ trans('mconsole::presets.form.operations.add') }}</div>
@@ -171,5 +184,5 @@
 @endsection
 
 @section('page.scripts')
-    <script src="/massets/js/presets.js" type="text/javascript">
+    <script src="/massets/js/presets.js" type="text/javascript"></script>
 @endsection
