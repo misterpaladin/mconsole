@@ -25,6 +25,11 @@ class MconsoleUploadPreset extends Model
         return $this->hasMany('Milax\Mconsole\Models\Image', 'preset_id');
     }
     
+    /**
+     * Relationship to File
+     * 
+     * @return HasMany
+     */
     public function files()
     {
         return $this->hasMany('Milax\Mconsole\Models\File', 'preset_id');
