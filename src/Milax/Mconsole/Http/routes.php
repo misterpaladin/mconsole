@@ -25,9 +25,9 @@ Route::group([
         Route::get('/notifications', 'NotificationsController@handle');
         Route::get('/notifications/{id}/seen', 'NotificationsController@markAsSeen');
         Route::get('/search', 'SearchController@handle');
-        Route::any('/images/upload', 'ImagesController@uploadImage');
-        Route::get('/images/get', 'ImagesController@get');
-        Route::get('/images/delete/{file}', 'ImagesController@deleteImage');
+        Route::any('/uploads/upload', 'UploadsController@upload');
+        Route::get('/uploads/get', 'UploadsController@get');
+        Route::get('/uploads/delete/{file}', 'UploadsController@delete');
     });
     
     // Resources

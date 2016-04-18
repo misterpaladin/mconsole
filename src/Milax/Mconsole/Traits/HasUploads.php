@@ -4,16 +4,16 @@ namespace Milax\Mconsole\Traits;
 
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 
-trait HasImages
+trait HasUploads
 {
     /**
      * Dynamic hasMany relationship on Image model
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function images()
+    public function uploads()
     {
-        $instance = new \Milax\Mconsole\Models\Image;
+        $instance = new \Milax\Mconsole\Models\Upload;
         return new HasMany($instance->newQuery()->where('related_class', __CLASS__), $this, $instance->getTable().'.'.'related_id', 'id');
     }
     

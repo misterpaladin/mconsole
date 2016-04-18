@@ -15,3 +15,19 @@
         'text' => Session::get('status'),
     ])
 @endif
+
+@if (Session::has('warning'))
+    @if (is_array(Session::get('warning')) && count(Session::get('warning')) > 0)
+        @foreach (Session::get('warning') as $warning)
+            @include('mconsole::partials.notification', [
+                'type' => 'warning',
+                'text' => $warning,
+            ])
+        @endforeach
+    @elseif (strlen(Session::get('warning')) > 0)
+        @include('mconsole::partials.notification', [
+            'type' => 'warning',
+            'text' => Session::get('warning'),
+        ])
+    @endif
+@endif

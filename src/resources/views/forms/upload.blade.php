@@ -1,16 +1,17 @@
-<div class="uploadable" action="/mconsole/api/images/upload" method="POST" enctype="multipart/form-data">
-    <input type="hidden" class="uploadable-id" name="related_id" value="{{ $id }}" />
-    <input type="hidden" class="uploadable-group" name="group" value="{{ $group }}" />
-    <input type="hidden" class="uploadable-class" name="uploadable-images[{{ $group }}][related_class]" value="{{ $model }}"/>
-    @if (app('API')->options->get('gallery_show_presets') == true)
+<div class="uploadable" action="/mconsole/api/uploads/upload" method="POST" enctype="multipart/form-data">
+    <input type="hidden" class="uploadable-id" value="{{ $id }}" />
+    <input type="hidden" class="uploadable-group" value="{{ $group }}" />
+    <input type="hidden" class="uploadable-type" name="uploads[{{ $type }}][{{ $group }}][type]" value="{{ $type }}" />
+    <input type="hidden" class="uploadable-class" name="uploads[{{ $type }}][{{ $group }}][related_class]" value="{{ $model }}"/>
+    @if (isset($presets) && $presets === true)
         @include('mconsole::forms.select', [
             'label' => trans('mconsole::gallery.form.preset.name'),
-            'name' => sprintf('uploadable-images[%s][preset]', $group),
+            'name' => sprintf('uploads[%s][%s][preset]', $type, $group),
             'options' => $presets->lists('name', 'id'),
             'value' => $presets->where('key', $preset)->first()->id
         ])
     @else
-        <input type="hidden" class="uploadable-preset" name="uploadable-images[{{ $group }}][preset]" value="{{ $preset }}"/>
+        <input type="hidden" class="uploadable-preset" name="uploads[{{ $type }}][{{ $group }}][preset]" value="{{ $preset }}"/>
     @endif
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
@@ -77,9 +78,11 @@
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <script id="template-upload-{{ $group }}" type="text/x-tmpl"> {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
+        @if ($type == 'image')
         <td width="1%" colspan="2">
             <span class="preview"></span>
         </td>
+        @endif
         <td>
             <p class="name">{%=file.name%}</p>
             <strong class="error label label-danger"></strong>
@@ -106,15 +109,17 @@
             <input type="checkbox" name="delete" value="1" class="toggle">
         </td>
         {% } %}
+        @if ($type == 'image')
         <td width="1%">
             <span class="preview"> {% if (file.thumbnailUrl) { %}
                 <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery>
                     <img src="{%=file.thumbnailUrl%}">
                 </a> {% } %} </span>
         </td>
+        @endif
         <td>
             <input type="hidden" class="uploadable-language-id" value="{%=file.language_id%}">
-            <input type="hidden" class="uploadable-filename" name="uploadable-images[{{ $group }}][files][]" value="{%=file.name%}">
+            <input type="hidden" class="uploadable-filename" name="uploads[{{ $type }}][{{ $group }}][files][]" value="{%=file.name%}">
             <p class="name"> {% if (file.url) { %}
                 <span class="size">{%=o.formatFileSize(file.size)%}</span>
                 <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl? 'data-gallery': ''%}>{%=file.name%}</a> {% } else { %}
@@ -123,13 +128,13 @@
                 <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %}
                 <div class="description hide">
                     <div class="form-group">
-                        {!! Form::select(sprintf('uploadable-images[%s][language_id][]', $group), $languages->lists('name', 'id'), null, ['class' => 'form-control input-sm']) !!}
+                        {!! Form::select(sprintf('uploads[%s][%s][language_id][]', $type, $group), $languages, null, ['class' => 'form-control input-sm']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text(sprintf('uploadable-images[%s][title][]', $group), '{%=file.title%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.title')]) !!}
+                        {!! Form::text(sprintf('uploads[%s][%s][title][]', $type, $group), '{%=file.title%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.title')]) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text(sprintf('uploadable-images[%s][description][]', $group), '{%=file.description%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.description')]) !!}
+                        {!! Form::text(sprintf('uploads[%s][%s][description][]', $type, $group), '{%=file.description%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.description')]) !!}
                     </div>
                 </div>
         </td>

@@ -4,9 +4,9 @@ namespace Milax\Mconsole\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Upload extends Model
 {
-    protected $fillable = ['path', 'preset_id', 'filename', 'copies', 'related_id', 'related_class', 'group', 'order', 'unique', 'language_id', 'title', 'description'];
+    protected $fillable = ['type', 'path', 'preset_id', 'filename', 'copies', 'related_id', 'related_class', 'group', 'order', 'unique', 'language_id', 'title', 'description'];
     
     protected $casts = [
         'copies' => 'array',

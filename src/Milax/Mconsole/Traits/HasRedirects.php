@@ -34,6 +34,9 @@ trait HasRedirects
      */
     protected function redirect()
     {
+        // Repeat warning flash message
+        Session::flash('warning', Session::get('warning'));
+        
         // Show message depending on
         switch (Request::method()) {
             case 'POST':

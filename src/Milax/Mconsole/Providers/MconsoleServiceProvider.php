@@ -38,7 +38,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'HasPaginator' => \Milax\Mconsole\Traits\HasPaginator::class,
             'HasFilters' => \Milax\Mconsole\Traits\HasFilters::class,
             'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
-            'HasImages' => \Milax\Mconsole\Traits\HasImages::class,
+            'HasUploads' => \Milax\Mconsole\Traits\HasUploads::class,
             'HasTags' => \Milax\Mconsole\Traits\HasTags::class,
         ],
         
@@ -88,6 +88,9 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function __construct($app)
     {
+        define('MX_UPLOADTYPE_IMAGE', 'image');
+        define('MX_UPLOADTYPE_DOCUMENT', 'document');
+        
         parent::__construct($app);
     }
     
@@ -109,7 +112,7 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->options = new \Milax\Mconsole\Core\API\Options(\Milax\Mconsole\Models\MconsoleOption::class);
             $api->translations = new \Milax\Mconsole\Core\API\Translations($this);
             $api->quickmenu = new \Milax\Mconsole\Core\API\QuickMenu;
-            $api->images = new \Milax\Mconsole\Core\API\Images;
+            $api->uploads = new \Milax\Mconsole\Core\API\Uploads;
             $api->info = new \Milax\Mconsole\Core\API\Info;
             return $api;
         });

@@ -3,20 +3,22 @@
 namespace Milax\Mconsole\Core\API;
 
 use Milax\Mconsole\Http\UploadHandler;
-use Milax\Mconsole\Models\Image as ImageModel;
+use Milax\Mconsole\Models\MconsoleUploadPreset;
+use Milax\Mconsole\Models\Upload;
 use File;
 use Image;
 use Request;
-use Milax\Mconsole\Models\MconsoleUploadPreset;
+use Session;
+use String;
 
-class Images
+class Uploads
 {
-    protected $imagesPath;
+    protected $filesPath;
     
     public function __construct()
     {
-        $this->imagesPath = storage_path('app/public/images');
-        $this->request = Request::all();
+        $this->filesPath = storage_path('app/public/images');
+        $this->requestData = Request::all();
         $this->presets = MconsoleUploadPreset::getCached();
     }
     
@@ -24,7 +26,7 @@ class Images
      * Attach images collection to given object
      * 
      * @param  string $group   [Group name]
-     * @param  Collection $images  [Images collection]
+     * @param  Collection $files  [Images collection]
      * @param  mixed $related [Related object]
      * @param  mixed $unique [Should be unique]
      * @return mixed
@@ -35,8 +37,8 @@ class Images
             return null;
         }
         
-        $data['images']->get($data['group'])->each(function ($image, $key) use (&$data) {
-            $image->update([
+        $data['images']->get($data['group'])->each(function ($file, $key) use (&$data) {
+            $file->update([
                 'related_id' => $data['related']->id,
                 'order' => $key,
             ]);
@@ -58,28 +60,39 @@ class Images
      * @param  string $url   [Prefix URL]
      * @return Illuminate\Support\Collection
      */
-    public function get($group, $class, $id, $url, $scriptURL)
+    public function get($type, $group, $class, $id, $url, $scriptURL)
     {
-        $images = collect([
+        $files = collect([
             'files' => collect(),
         ]);
-        ImageModel::where('group', $group)->where('related_class', $class)->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($image) use (&$images, &$url, &$scriptURL) {
-            if (File::exists(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename))) {
-                $images->get('files')->push([
-                    'name' => $image->filename,
-                    'language_id' => $image->language_id,
-                    'title' => $image->title,
-                    'description' => $image->description,
-                    'size' => File::size(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename)),
-                    'url' => sprintf('%s%s/original/%s', $url, $image->path, $image->filename),
-                    'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $image->path, $image->filename),
-                    'deleteUrl' => sprintf('%s%s', $scriptURL, $image->id),
+        
+        switch ($type) {
+            case 'image':
+                $suffix = 'original/';
+                break;
+            default:
+                $suffix = '';
+                break;
+        }
+        
+        Upload::where('type', $type)->where('group', $group)->where('related_class', $class)->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($file) use (&$suffix, &$type, &$files, &$url, &$scriptURL) {
+            if (File::exists(sprintf('%s/%s/%s%s', $this->filesPath, $file->path, $suffix, $file->filename))) {
+                $files->get('files')->push([
+                    'name' => $file->filename,
+                    'type' => $file->type,
+                    'language_id' => $file->language_id,
+                    'title' => $file->title,
+                    'description' => $file->description,
+                    'size' => File::size(sprintf('%s/%s/%s%s', $this->filesPath, $file->path, $suffix, $file->filename)),
+                    'url' => sprintf('%s%s/%s%s', $url, $file->path, $suffix, $file->filename),
+                    'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $file->path, $file->filename),
+                    'deleteUrl' => sprintf('%s%s', $scriptURL, $file->id),
                     'deleteType' => 'GET',
                 ]);
             }
         });
         
-        return $images;
+        return $files;
     }
     
     /**
@@ -92,15 +105,15 @@ class Images
     public function preview($dir, $fileID = null)
     {
         if (is_null($fileID)) {
-            $image = ImageModel::find((int) $dir);
-            $image = Image::make(sprintf('%s/original/%s', $image->path, $image->filename));
+            $file = Upload::find((int) $dir);
+            $file = Image::make(sprintf('%s/original/%s', $file->path, $file->filename));
         } else {
-            $image = ImageModel::find((int) $fileID);
-            $image = Image::make(sprintf('%s/%s/%s', $image->path, $dir, $image->filename));
+            $file = Upload::find((int) $fileID);
+            $file = Image::make(sprintf('%s/%s/%s', $file->path, $dir, $file->filename));
         }
         
-        header(sprintf('Content-Type: ', $image->mime()));
-        echo $image->encode();
+        header(sprintf('Content-Type: ', $file->mime()));
+        echo $file->encode();
     }
     
     /**
@@ -112,7 +125,7 @@ class Images
     public function upload($config = [])
     {
         $defaultConfig = [
-            'upload_dir' => storage_path('tmp/images/'),
+            'upload_dir' => storage_path('tmp/uploads/'),
             'upload_url' => '/images/preview/',
             'print_response' => false,
             'script_url' => '/mconsole/api/images/delete/',
@@ -137,7 +150,7 @@ class Images
      */
     public function delete($id)
     {
-        ImageModel::destroy($id);
+        Upload::destroy($id);
     }
     
     /**
@@ -158,73 +171,95 @@ class Images
      */
     protected function handleUpload()
     {
-        // Get request from app container
-        // $request = app('Milax\Mconsole\Http\Requests\UploadableRequest');
-
-        $images = collect();
+        $files = collect();
+        $errors = [];
         
-        if (isset($this->request['uploadable-images'])) {
-            foreach ($this->request['uploadable-images'] as $group => $input) {
-                $images->put($group, collect());
-                
-                if (!isset($input['files']) || count($input['files']) == 0) {
-                    break;
-                }
-                
-                if (is_numeric($input['preset'])) {
-                    $preset = $this->presets->where('id', (int) $input['preset'])->first();
-                } else {
-                    $preset = $this->presets->where('key', $input['preset'])->first();
-                }
-                
-                $model = $input['related_class'];
-                $path = sprintf('%s/%s', $this->imagesPath, $preset->path);
-                
-                foreach ($input['files'] as $key => $file) {
+        if (isset($this->requestData['uploads']) && count($this->requestData['uploads']) > 0) {
+            foreach ($this->requestData['uploads'] as $type => $groups) {
+                foreach ($groups as $group => $input) {
+                    $files->put($group, collect());
                     
-                    // Check if file is allowed
-                    if (!in_array(pathinfo($file, PATHINFO_EXTENSION), $preset->extensions)) {
-                        continue;
+                    if (!isset($input['files']) || count($input['files']) == 0) {
+                        break;
                     }
                     
-                    $file = sprintf('%s/%s', storage_path('tmp/images'), $file);
-                    
-                    $language = $input['language_id'][$key];
-                    $title = $input['title'][$key];
-                    $description = $input['description'][$key];
-                    
-                    // Load image from tmp storage
-                    if (File::exists($file)) {
-                        $copies = $this->handleImage($preset, $file, $path);
-                        
-                        $image = ImageModel::create([
-                            'preset_id' => $preset->id,
-                            'language_id' => $language,
-                            'title' => $title,
-                            'description' => $description,
-                            'group' => $group,
-                            'path' => $preset->path,
-                            'filename' => basename($file),
-                            'related_class' => $model,
-                            'copies' => $copies,
-                        ]);
-                        
-                        $this->deleteTmp($file);
-                    } else { // Or get Image object from database
-                        $image = ImageModel::where('related_class', $model)->where('filename', basename($file))->first();
-                        $image->update([
-                            'language_id' => $language,
-                            'title' => $title,
-                            'description' => $description,
-                        ]);
+                    if (is_numeric($input['preset'])) {
+                        $preset = $this->presets->where('id', (int) $input['preset'])->first();
+                    } else {
+                        $preset = $this->presets->where('key', $input['preset'])->first();
                     }
                     
-                    $images->get($group)->push($image);
+                    $model = $input['related_class'];
+                    $path = sprintf('%s/%s', $this->filesPath, $preset->path);
+                    $type = $input['type'];
+                    
+                    foreach ($input['files'] as $key => $file) {
+                        
+                        // Check if file is allowed
+                        if (!in_array(pathinfo($file, PATHINFO_EXTENSION), $preset->extensions)) {
+                            $errored = new String($file);
+                            array_push($errors, trans('mconsole::mconsole.errors.extension', [
+                                'file' => $errored->getOriginalFileName(),
+                            ]));
+                            continue;
+                        }
+                        
+                        $file = sprintf('%s/%s', storage_path('tmp/uploads'), $file);
+                        
+                        $language = $input['language_id'][$key];
+                        $title = $input['title'][$key];
+                        $description = $input['description'][$key];
+                        
+                        File::makeDirectory($path, 0755, true, true);
+                        
+                        // Load image from tmp storage
+                        if (File::exists($file)) {
+                            $copies = [];
+                            
+                            switch ($type) {
+                                case 'image':
+                                    $copies = $this->handleImage($preset, $file, $path);
+                                    break;
+                                default:
+                                    File::copy($file, sprintf('%s/%s', $path, basename($file)));
+                                    break;
+                            }
+                            
+                            $upload = Upload::create([
+                                'preset_id' => $preset->id,
+                                'language_id' => $language,
+                                'title' => $title,
+                                'description' => $description,
+                                'group' => $group,
+                                'path' => $preset->path,
+                                'filename' => basename($file),
+                                'related_class' => $model,
+                                'copies' => $copies,
+                                'type' => $type,
+                            ]);
+                            
+                            $this->deleteTmp($file);
+                        } else { // Or get Image object from database
+                            $upload = Upload::where('related_class', $model)->where('filename', basename($file))->first();
+                            $upload->update([
+                                'language_id' => $language,
+                                'title' => $title,
+                                'description' => $description,
+                                'type' => $type,
+                            ]);
+                        }
+                        
+                        $files->get($group)->push($upload);
+                    }
                 }
             }
         }
         
-        return $images;
+        if (count($errors) > 0) {
+            Session::flash('warning', $errors);
+        }
+        
+        return $files;
     }
     
     /**
@@ -256,7 +291,6 @@ class Images
      */
     protected function handleImage($preset, $file, $path)
     {
-        File::makeDirectory($path, 0755, true, true);
         File::makeDirectory(sprintf('%s/original', $path), 0755, true, true);
         File::makeDirectory(sprintf('%s/mconsole', $path), 0755, true, true);
         

@@ -26,7 +26,7 @@ class ViewComposersServiceProvider extends ServiceProvider
         view()->composer('mconsole::app', 'Milax\Mconsole\Composers\SectionComposer');
         view()->composer('mconsole::partials.menu', 'Milax\Mconsole\Composers\MenuComposer');
         view()->composer('mconsole::app', 'Milax\Mconsole\Composers\OptionsComposer');
-        view()->composer('mconsole::partials.upload', 'Milax\Mconsole\Composers\FormImagesUploadComposer');
+        view()->composer('mconsole::forms.upload', 'Milax\Mconsole\Composers\UploadFormComposer');
         view()->composer('mconsole::forms.tags', 'Milax\Mconsole\Composers\TagsInputComposer');
     }
 }

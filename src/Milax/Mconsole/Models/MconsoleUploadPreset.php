@@ -16,26 +16,6 @@ class MconsoleUploadPreset extends Model
     ];
     
     /**
-     * Relationship to Image
-     * 
-     * @return HasMany
-     */
-    public function images()
-    {
-        return $this->hasMany('Milax\Mconsole\Models\Image', 'preset_id');
-    }
-    
-    /**
-     * Relationship to File
-     * 
-     * @return HasMany
-     */
-    public function files()
-    {
-        return $this->hasMany('Milax\Mconsole\Models\File', 'preset_id');
-    }
-    
-    /**
      * Trim slashes
      * 
      * @param string $value [Original path]

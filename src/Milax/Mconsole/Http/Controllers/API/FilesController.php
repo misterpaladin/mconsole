@@ -4,11 +4,11 @@ namespace Milax\Mconsole\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Milax\Mconsole\Models\Image as ImageModel;
+use Milax\Mconsole\Models\Upload;
 use Image;
 use File;
 
-class ImagesController extends Controller
+class FilesController extends Controller
 {
     protected $uploadDir;
     protected $uploadUrl;
@@ -16,13 +16,13 @@ class ImagesController extends Controller
     
     public function __construct()
     {
-        $this->uploadDir = storage_path('tmp/images/');
+        $this->uploadDir = storage_path('tmp/uploads/');
         $this->previewUrl = '/storage/images/';
         $this->scriptUrl = '/mconsole/api/images/delete/';
     }
     
     /**
-     * Get all images for given model and id
+     * Get all files for given model and id
      * 
      * @return Resposne
      */
@@ -30,18 +30,18 @@ class ImagesController extends Controller
     {
         $input = $request->all();
         $input['related_class'] = urldecode($input['related_class']);
-        return app('API')->images->get($input['group'], $input['related_class'], $input['related_id'], $this->previewUrl, $this->scriptUrl);
+        return app('API')->files->get($input['type'], $input['group'], $input['related_class'], $input['related_id'], $this->previewUrl, $this->scriptUrl);
     }
     
     /**
-     * Upload images
+     * Upload files
      * 
      * @param  Request $request
      * @return Response
      */
     public function uploadImage()
     {
-        echo app('API')->images->upload();
+        echo app('API')->files->upload();
     }
     
     /**
@@ -52,6 +52,6 @@ class ImagesController extends Controller
      */
     public function deleteImage($id)
     {
-        app('API')->images->delete($id);
+        app('API')->files->delete($id);
     }
 }

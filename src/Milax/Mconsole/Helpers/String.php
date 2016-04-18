@@ -20,6 +20,22 @@ class String
     }
     
     /**
+     * Remove mconsole uploads suffix from filename
+     * 
+     * @return string
+     */
+    public function getOriginalFileName()
+    {
+        $errname = [];
+        $errname['original'] = $this->string;
+        $errname['extension'] = pathinfo($errname['original'], PATHINFO_EXTENSION);
+        $errname['exploded'] = explode('-', $errname['original']);
+        array_pop($errname['exploded']);
+        $errname['final'] = implode('-', $errname['exploded']);
+        return sprintf('%s.%s', $errname['final'], $errname['extension']);
+    }
+    
+    /**
      * Get string
      * 
      * @return string

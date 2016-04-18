@@ -7,7 +7,7 @@ use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Models\Language;
 use Request;
 
-class FormImagesUploadComposer
+class UploadFormComposer
 {
     /**
      * Compose pages title and caption
