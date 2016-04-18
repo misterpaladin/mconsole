@@ -11,8 +11,6 @@ use Milax\Mconsole\Models\MconsoleUploadPreset;
 
 class Images
 {
-    protected $uploadables = 'uploadable';
-    protected $files;
     protected $imagesPath;
     
     public function __construct()
@@ -68,7 +66,7 @@ class Images
         ImageModel::where('group', $group)->where('related_class', $class)->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($image) use (&$images, &$url, &$scriptURL) {
             if (File::exists(sprintf('%s/%s/original/%s', $this->imagesPath, $image->path, $image->filename))) {
                 $images->get('files')->push([
-                    'name' => str_limit($image->filename, 20),
+                    'name' => $image->filename,
                     'language_id' => $image->language_id,
                     'title' => $image->title,
                     'description' => $image->description,
@@ -165,8 +163,8 @@ class Images
 
         $images = collect();
         
-        if (isset($this->request['uploadable'])) {
-            foreach ($this->request['uploadable'] as $group => $input) {
+        if (isset($this->request['uploadable-images'])) {
+            foreach ($this->request['uploadable-images'] as $group => $input) {
                 $images->put($group, collect());
                 
                 if (!isset($input['files']) || count($input['files']) == 0) {
