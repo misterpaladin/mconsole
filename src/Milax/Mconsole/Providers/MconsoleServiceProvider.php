@@ -76,7 +76,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public $require = [
         __DIR__ . '/../Core/defines.php',
         __DIR__ . '/../Core/helpers.php',
-    ],
+    ];
     
     /**
      * Indicates if loading of the provider is deferred.
