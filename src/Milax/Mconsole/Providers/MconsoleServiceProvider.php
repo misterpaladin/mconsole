@@ -104,7 +104,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public function boot()
     {
         // Required files
-        foreach ($require as $file) {
+        foreach ($this->require as $file) {
             require ($file);
         }
         
