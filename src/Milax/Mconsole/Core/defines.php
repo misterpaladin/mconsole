@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * All application constants
+ */
+
 $defines = [
     // Upload types
     'MX_UPLOAD_TYPE_IMAGE' => 'image',
@@ -12,6 +16,7 @@ $defines = [
     'BOOTSTRAPFILE' => 'bootstrap.php',
 ];
 
+// Define values
 foreach ($defines as $key => $value) {
     if (!defined($key)) {
         define($key, $value);

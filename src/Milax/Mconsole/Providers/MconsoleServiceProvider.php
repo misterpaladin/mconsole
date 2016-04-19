@@ -73,6 +73,11 @@ class MconsoleServiceProvider extends ServiceProvider
         __DIR__ . '/../../../resources/views',
     ];
     
+    public $require = [
+        __DIR__ . '/../Core/defines.php',
+        __DIR__ . '/../Core/helpers.php',
+    ],
+    
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -98,7 +103,10 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require (sprintf('%s/../Core/defines.php', __DIR__));
+        // Required files
+        foreach ($require as $file) {
+            require ($file);
+        }
         
         // Register API singleton
         $this->app->singleton('API', function ($app) {
