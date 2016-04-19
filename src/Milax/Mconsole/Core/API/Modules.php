@@ -132,9 +132,10 @@ class Modules extends ModelAPI
      * Install module package migrations, assets
      * 
      * @param  MconsoleModule $module [Module object]
+     * @param  bool $update [Disable database queries]
      * @return Modules
      */
-    public function install($module)
+    public function install($module, $update = false)
     {
         $model = $this->model;
         foreach ($module->migrations as $migration) {
@@ -143,14 +144,16 @@ class Modules extends ModelAPI
         
         Artisan::call('migrate');
         
-        $dbMod = $model::where('identifier', $module->identifier)->first();
-        
-        if ($dbMod) {
-            $dbMod->installed = true;
-        } else {
-            $dbMod = new $model;
-            $dbMod->identifier = $identifier;
-            $dbMod->installed = true;
+        if (!$update) {
+            $dbMod = $model::where('identifier', $module->identifier)->first();
+            
+            if ($dbMod) {
+                $dbMod->installed = true;
+            } else {
+                $dbMod = new $model;
+                $dbMod->identifier = $identifier;
+                $dbMod->installed = true;
+            }
         }
         
         // Install public assets
@@ -163,7 +166,9 @@ class Modules extends ModelAPI
             $install();
         }
         
-        $dbMod->save();
+        if (!$update) {
+            $dbMod->save();
+        }
         
         File::deleteDirectory(storage_path('app/lang'));
         

@@ -157,7 +157,7 @@ class Installer extends Command
     {
         $this->comment('Updating modules components..');
         app('API')->modules->get('installed')->each(function ($module) {
-            app('API')->modules->install($module);
+            app('API')->modules->install($module, true);
         });
         
         $this->comment('Updating translations..');
