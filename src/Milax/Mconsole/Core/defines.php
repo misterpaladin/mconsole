@@ -14,6 +14,11 @@ $defines = [
     // modules
     'MODULESEARCH' => 'Mconsole',
     'BOOTSTRAPFILE' => 'bootstrap.php',
+    
+    // forms
+    'MX_SELECT_STATE' => 'state',
+    'MX_SELECT_YESNO' => 'yesno',
+    'MX_SELECT_SHOW' => 'show',
 ];
 
 // Define values
