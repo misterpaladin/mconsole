@@ -15,17 +15,4 @@ trait HasTags
     {
         return $this->morphToMany('Milax\Mconsole\Models\Tag', 'taggable');
     }
-    
-    /**
-     * Automatically delete related data
-     * 
-     * @return void
-     */
-    public static function boot()
-    {
-        parent::boot();
-        static::deleting(function ($object) {
-            $object->tags()->detach();
-        });
-    }
 }
