@@ -9,9 +9,6 @@ use Storage;
 use Schema;
 use DB;
 
-define('MODULESEARCH', 'Mconsole');
-define('BOOTSTRAPFILE', 'bootstrap.php');
-
 class Modules extends ModelAPI
 {
     public $modules;
