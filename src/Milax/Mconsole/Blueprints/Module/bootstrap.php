@@ -9,6 +9,7 @@ return [
     'name' => '%s',
     'identifier' => 'mconsole-%s',
     'description' => '',
+    'depends' => [],
     'menu' => [],
     'register' => [
         'middleware' => [],

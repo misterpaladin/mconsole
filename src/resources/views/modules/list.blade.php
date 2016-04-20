@@ -32,6 +32,27 @@
                                                     <div class="col-xs-12">
                                                         <div class="jstree small">
                                                             <ul>
+                                                                @if ($item->depends)
+                                                                    <li data-jstree='{ "icon" : "fa fa-cog" }'>
+                                                                        {{ trans('mconsole::modules.table.depends') }}
+                                                                        <ul>
+                                                                            @foreach ($item->depends as $dependency)
+                                                                                <li data-jstree='{ "type" : "file" }'>{{ $dependency }}
+                                                                                    @if (app('API')->modules->get('installed')->where('identifier', $dependency)->count() > 0)
+                                                                                        <span class="text-success">({{ trans('mconsole::modules.table.installed') }})</span>
+                                                                                        <input type="hidden" name="installed[]" value="{{ $dependency }}" />
+                                                                                    @elseif (app('API')->modules->get('available')->where('identifier', $dependency)->count() > 0)
+                                                                                        <span class="text-info">({{ trans('mconsole::modules.table.available') }})</span>
+                                                                                        <input type="hidden" name="available[]" value="{{ $dependency }}" />
+                                                                                    @else
+                                                                                        <span class="text-danger">({{ trans('mconsole::modules.table.notavailable') }})</span>
+                                                                                        <input type="hidden" name="notavailable[]" value="{{ $dependency }}" />
+                                                                                    @endif
+                                                                                </li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </li>
+                                                                @endif
                                                                 <li data-jstree='{ "icon" : "fa fa-cubes" }'>
                                                                     {{ trans('mconsole::modules.table.components') }}
                                                                     <ul>@include('mconsole::modules.module-info-block', ['item' => $item])</ul>
@@ -97,9 +118,6 @@
                 },
                 "plugins": ["types"]
             });
-            
-            $('.install-module, .uninstall-module, .extendable').removeClass('disabled');
-            
         });
     </script>
 @endsection

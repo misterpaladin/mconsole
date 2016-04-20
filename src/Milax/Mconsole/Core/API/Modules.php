@@ -130,11 +130,26 @@ class Modules extends ModelAPI
      * 
      * @param  MconsoleModule $module [Module object]
      * @param  bool $update [Disable database queries]
+     * @param  bool $dump [Call composer dump-autoload]
      * @return Modules
      */
-    public function install($module, $update = false)
+    public function install($module, $update = false, $dump = true)
     {
         $model = $this->model;
+        
+        // Install dependencies
+        if (isset($module->depends) && count($module->depends) > 0) {
+            foreach ($module->depends as $dependency) {
+                if (app('API')->modules->get('all')->where('identifier', $dependency)->count() == 0) {
+                    return ['status' => 'failed', 'dependency' => $dependency];
+                }
+            }
+            foreach ($module->depends as $dependency) {
+                $submodule = $this->get('all')->where('identifier', $dependency)->first();
+                $this->install($submodule, false, false);
+            }
+        }
+        
         foreach ($module->migrations as $migration) {
             File::copy($migration, database_path(sprintf('migrations/%s.php', pathinfo($migration, PATHINFO_FILENAME))));
         }
@@ -158,8 +173,10 @@ class Modules extends ModelAPI
             File::copyDirectory(sprintf('%s/assets/public', $module->path), sprintf('%s/%s/', public_path('massets/modules'), $module->identifier));
         }
         
-        chdir(base_path());
-        exec('composer dump-autoload');
+        if ($dump) {
+            chdir(base_path());
+            exec('composer dump-autoload');
+        }
         
         // Call install function if exists
         if (!is_null($install = $module->install)) {
@@ -269,6 +286,7 @@ class Modules extends ModelAPI
         $module->description = $config['description'];
         $module->register = $config['register'];
         $module->menu = isset($config['menu']) ? $config['menu'] : [];
+        $module->depends = isset($config['depends']) ? $config['depends'] : [];
         $module->type = $type;
         $module->routes = [];
         $module->migrations = [];
