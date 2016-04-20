@@ -158,6 +158,9 @@ class Modules extends ModelAPI
             File::copyDirectory(sprintf('%s/assets/public', $module->path), sprintf('%s/%s/', public_path('massets/modules'), $module->identifier));
         }
         
+        chdir(base_path());
+        exec('composer dump-autoload');
+        
         // Call install function if exists
         if (!is_null($install = $module->install)) {
             $install();
@@ -190,6 +193,7 @@ class Modules extends ModelAPI
             }
             
             Artisan::call('migrate:rollback');
+            
             foreach ($module->migrations as $migration) {
                 File::delete(database_path(sprintf('migrations/%s.php', pathinfo($migration, PATHINFO_FILENAME))));
             }
