@@ -80,11 +80,9 @@
         <td> {% if (!i && !o.options.autoUpload) { %}
             <button class="btn btn-xs blue start" disabled>
                 <i class="fa fa-upload"></i>
-                <span>{{ trans('mconsole::uploader.upload') }}</span>
             </button> {% } %} {% if (!i) { %}
             <button class="btn btn-xs red cancel">
                 <i class="fa fa-ban"></i>
-                <span>{{ trans('mconsole::uploader.cancel') }}</span>
             </button> {% } %} </td>
     </tr> {% } %} </script>
 <!-- The template to display files available for download -->
