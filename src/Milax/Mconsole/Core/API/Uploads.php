@@ -26,25 +26,25 @@ class Uploads
      * Attach images collection to given object
      * 
      * @param  string $group   [Group name]
-     * @param  Collection $files  [Images collection]
+     * @param  Collection $files  [Files collection]
      * @param  mixed $related [Related object]
      * @param  mixed $unique [Should be unique]
      * @return mixed
      */
     public function attach($data)
     {
-        if (!$data['images']->has($data['group'])) {
+        if (!$data['uploads']->has($data['group'])) {
             return null;
         }
         
-        $data['images']->get($data['group'])->each(function ($file, $key) use (&$data) {
+        $data['uploads']->get($data['group'])->each(function ($file, $key) use (&$data) {
             $file->update([
                 'related_id' => $data['related']->id,
                 'order' => $key,
             ]);
             if (isset($data['unique']) && $data['unique'] === true) {
-                $last = $data['related']->images()->select('id')->where('group', $data['group'])->orderBy('id', 'desc')->first();
-                $data['related']->images()->where('group', $data['group'])->where('id', '!=', $last->id)->delete();
+                $last = $data['related']->uploads()->select('id')->where('group', $data['group'])->orderBy('id', 'desc')->first();
+                $data['related']->uploads()->where('group', $data['group'])->where('id', '!=', $last->id)->delete();
             }
         });
         
@@ -180,7 +180,7 @@ class Uploads
                     $files->put($group, collect());
                     
                     if (!isset($input['files']) || count($input['files']) == 0) {
-                        break;
+                        continue;
                     }
                     
                     if (is_numeric($input['preset'])) {
