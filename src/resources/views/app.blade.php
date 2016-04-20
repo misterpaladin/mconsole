@@ -251,7 +251,7 @@
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
         <script src="/massets/js/helpers.js" type="text/javascript"></script>
 		<script src="/massets/js/search.js" type="text/javascript"></script>
-		<script src="/massets/js/form-images-upload.js" type="text/javascript"></script>
+		<script src="/massets/js/form-multi-upload.js" type="text/javascript"></script>
 		<script src="/massets/js/date-pickers.js" type="text/javascript"></script>
 		<script src="/massets/js/links-editor.js" type="text/javascript"></script>
 		<script src="/massets/js/tags.js" type="text/javascript"></script>

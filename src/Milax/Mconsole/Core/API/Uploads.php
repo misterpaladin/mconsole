@@ -139,6 +139,7 @@ class Uploads
         foreach ($response['files'] as $key => $file) {
             $response['files'][$key]->deleteUrl = sprintf('%s%s', $config['script_url'], $file->name);
         }
+        
         return json_encode($response);
     }
     

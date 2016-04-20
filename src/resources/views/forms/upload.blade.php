@@ -57,7 +57,7 @@
         </div>
     </div>
     <!-- The table listing the files available for upload/download -->
-    <table role="presentation" class="table table-striped clearfix">
+    <table role="presentation" class="clearfix">
         <tbody class="files sortable"></tbody>
     </table>
     <div class="row">
@@ -66,24 +66,10 @@
         </div>
     </div>
 </div>
-<div id="blueimp-gallery-{{ $group }}" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-    <div class="slides"> </div>
-    <h3 class="title"></h3>
-    <a class="prev"> ‹ </a>
-    <a class="next"> › </a>
-    <a class="close white"> </a>
-    <a class="play-pause"> </a>
-    <ol class="indicator"> </ol>
-</div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <script id="template-upload-{{ $group }}" type="text/x-tmpl"> {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
-        @if ($type == 'image')
-        <td width="1%" colspan="2">
-            <span class="preview"></span>
-        </td>
-        @endif
-        <td>
+        <td class="file-info" colspan="3">
             <p class="name">{%=file.name%}</p>
             <strong class="error label label-danger"></strong>
             <p class="size">{{ trans('mconsole::uploader.processing') }}</p>
@@ -91,7 +77,7 @@
                 <div class="progress-bar progress-bar-success" style="width:0%;"></div>
             </div>
         </td>
-        <td width="1%"> {% if (!i && !o.options.autoUpload) { %}
+        <td> {% if (!i && !o.options.autoUpload) { %}
             <button class="btn btn-xs blue start" disabled>
                 <i class="fa fa-upload"></i>
                 <span>{{ trans('mconsole::uploader.upload') }}</span>
@@ -110,18 +96,21 @@
         </td>
         {% } %}
         @if ($type == 'image')
-        <td width="1%">
-            <span class="preview"> {% if (file.thumbnailUrl) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery>
-                    <img src="{%=file.thumbnailUrl%}">
-                </a> {% } %} </span>
-        </td>
+            <td>
+                <span class="preview">
+                    {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery>
+                        <img src="{%=file.thumbnailUrl%}">
+                    </a>
+                    {% } %}
+                </span>
+            </td>
         @endif
-        <td>
+        <td class="file-info">
             <input type="hidden" class="uploadable-language-id" value="{%=file.language_id%}">
             <input type="hidden" class="uploadable-filename" name="uploads[{{ $type }}][{{ $group }}][files][]" value="{%=file.name%}">
             <p class="name"> {% if (file.url) { %}
-                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                <span class="size">{%=o.formatFileSize(file.size)%}</span><br/>
                 <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl? 'data-gallery': ''%}>{%=file.name%}</a> {% } else { %}
                 <span>{%=file.name%}</span> {% } %} </p> {% if (file.error) { %}
             <div class="help-block">
@@ -138,13 +127,13 @@
                     </div>
                 </div>
         </td>
-        <td class="controls"><div class="btn btn-xs blue drag"><i class="fa fa-bars"></i></div>
+        <td class="controls">
+            <div class="btn btn-xs blue drag"><i class="fa fa-bars"></i></div>
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-xs btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}' {%
             } %}><i class="fa fa-trash"></i></button>
             {% } else { %}
             <button class="btn yellow cancel btn-xs">
                 <i class="fa fa-ban"></i>
-                <span>Cancel</span>
             </button> {% } %}</td>
     </tr> {% } %} </script>
