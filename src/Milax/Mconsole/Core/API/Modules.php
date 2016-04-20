@@ -268,7 +268,7 @@ class Modules extends ModelAPI
         $module->identifier = $config['identifier'];
         $module->description = $config['description'];
         $module->register = $config['register'];
-        $module->menu = $config['menu'];
+        $module->menu = isset($config['menu']) ? $config['menu'] : [];
         $module->type = $type;
         $module->routes = [];
         $module->migrations = [];

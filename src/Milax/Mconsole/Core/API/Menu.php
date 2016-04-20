@@ -45,4 +45,17 @@ class Menu
             return $menu;
         }
     }
+    
+    /**
+     * Push menu item to given category
+     * 
+     * @param  string $category [Root category key]
+     * @param  string $key      [Menu key]
+     * @param  array $menu     [Menu contents]
+     * @return void
+     */
+    public function push($category, $key, $menu)
+    {
+        $this->loader->push($category, $key, $menu);
+    }
 }
