@@ -117,6 +117,7 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->menu = new \Milax\Mconsole\Core\API\Menu(new \Milax\Mconsole\Core\Menu\FileMenu);
             $api->quotes = new \Milax\Mconsole\Core\API\Quotes;
             $api->options = new \Milax\Mconsole\Core\API\Options(\Milax\Mconsole\Models\MconsoleOption::class);
+            $api->presets = new \Milax\Mconsole\Core\API\Presets(\Milax\Mconsole\Models\MconsoleUploadPreset::class);
             $api->translations = new \Milax\Mconsole\Core\API\Translations($this);
             $api->quickmenu = new \Milax\Mconsole\Core\API\QuickMenu;
             $api->uploads = new \Milax\Mconsole\Core\API\Uploads;
