@@ -14,7 +14,7 @@ class ModuleGenerator extends Command
      *
      * @var string
      */
-    protected $signature = 'make:module {class : Module class name} {--namespace= : Specify module namespace} {--package : Add composer.json to the project, set namespaces and workbench directories}';
+    protected $signature = 'make:module {class : Module class name} {--namespace= : Specify module namespace} {--model= : Generate model with given class name} {--request= : Generate request with given class name} {--package : Add composer.json to the project, set namespaces and workbench directories}';
 
     /**
      * The console command description.
@@ -62,7 +62,6 @@ class ModuleGenerator extends Command
             'assets/public/img',
             'assets/public/js',
             'assets/resources/views',
-            'Models',
         ];
         
         if (Schema::hasTable(Language::getQuery()->from)) {
@@ -100,6 +99,7 @@ class ModuleGenerator extends Command
             return $this->error(sprintf('Module "%s" already exists!', $class));
         }
         
+        // Base files
         File::makeDirectory(sprintf('%s/Http/Controllers', $root), 0775, true, true);
         File::put(sprintf('%s/%s', $root, $this->blueprint['bootstrap']['destination']), sprintf($this->blueprint['bootstrap']['file'], $namespace, $class, $class, $class, strtolower($class), $namespace, $class));
         File::put(sprintf('%s/%s', $root, $this->blueprint['routes']['destination']), sprintf($this->blueprint['routes']['file'], $class, $namespace, $class));
@@ -107,10 +107,23 @@ class ModuleGenerator extends Command
         File::put(sprintf('%s/%s', $root, $this->blueprint['installer']['destination']), sprintf($this->blueprint['installer']['file'], $namespace, $class));
         File::put(sprintf('%s/%s', $root, $this->blueprint['serviceprovider']['destination']), sprintf($this->blueprint['serviceprovider']['file'], $namespace, $class));
         
+        // Model
+        if ($this->option('model')) {
+            File::makeDirectory(sprintf('%s/Models', $root), 0775, true, true);
+            File::put(sprintf('%s/%s', $root, sprintf('Models/%s.php', $this->option('model'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Models/Model.php'), $namespace, $class, $this->option('model')));
+        }
+        
+        // Request
+        if ($this->option('request')) {
+            File::makeDirectory(sprintf('%s/Http/Requests', $root), 0775, true, true);
+            File::put(sprintf('%s/%s', $root, sprintf('Http/Requests/%s.php', $this->option('request'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Requests/Request.php'), $namespace, $class, $this->option('request')));
+        }
+        
         foreach ($this->directories as $dir) {
             File::makeDirectory(sprintf('%s/%s', $root, sprintf($dir, $class)), 0775, true, true);
+            File::put(sprintf('%s/%s/.gitkeep', $root, sprintf($dir, $class)), '');
         }
-
+        
         if ($package) {
             File::put(sprintf('%s/composer.json', $path), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/composer.json'), strtolower($class), $class, $class));
             $this->info(sprintf('Package module "%s" was created! Don\'t forget to edit your composer.json file!', $class));
