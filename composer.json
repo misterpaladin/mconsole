@@ -15,7 +15,8 @@
         "doctrine/dbal": "^2.5",
 		"milax/gravatar": "*",
         "milax/cacheable": "*",
-        "milax/mconsole-base-components": "^1.1"
+        "milax/mconsole-base-components": "^1.1",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "autoload": {
         "psr-4": {
