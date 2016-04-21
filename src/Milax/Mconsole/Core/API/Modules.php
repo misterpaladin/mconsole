@@ -300,6 +300,7 @@ class Modules extends ModelAPI
         $module->install = null;
         $module->uninstall = null;
         $module->path = $path;
+        $module->package = null;
         $module->public = [
             'css' => [],
             'img' => [],
@@ -372,6 +373,11 @@ class Modules extends ModelAPI
                     }
                 }
             }
+        }
+        
+        // composer.json
+        if (File::exists(sprintf('%s/../../../../composer.json', $path))) {
+            $module->package = json_decode(File::get(sprintf('%s/../../../../composer.json', $path)));
         }
         
         return $module;

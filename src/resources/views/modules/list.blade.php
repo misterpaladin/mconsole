@@ -9,7 +9,9 @@
     <div class="row">
     	<div class="col-xs-12">
     		<div class="portlet light">
-                @include('mconsole::partials.portlet-title')
+                @include('mconsole::partials.portlet-title', [
+                    'title' => trans('mconsole::modules.table.title'),
+                ])
     			<div class="portlet-body form">
     				<div class="table-scrollable table-scrollable-borderless">
     					@if (isset($items) && $items->count() > 0)
@@ -25,7 +27,7 @@
     								@foreach ($items as $item)
                                         <tr data-identifier="{{ $item->identifier }}">
                                             <td>
-                                                <i class="fa fa-cubes popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::tables.modules.module') }}" data-original-title="{{ $item->name }}"></i>
+                                                <i class="fa fa-cubes"></i>
                                             </td>
                                             <td>
                                                 <p>
@@ -99,6 +101,61 @@
     		</div>
     	</div>
     </div>
+    
+    <div class="row">
+    	<div class="col-xs-12">
+    		<div class="portlet light">
+                @include('mconsole::partials.portlet-title', [
+                    'title' => trans('mconsole::modules.table.suggested'),
+                ])
+    			<div class="portlet-body form">
+    				<div class="table-scrollable table-scrollable-borderless">
+    					@if (isset($suggested) && count($suggested) > 0)
+    						<table id="modules-table" class="table table-striped">
+    							<thead>
+    								<tr class="uppercase">
+                                        <th width="1%"></th>
+                                        <th>{{ trans('mconsole::modules.table.info') }}</th>
+    									<th width="30%">{{ trans('mconsole::modules.table.install.package') }}</th>
+    								</tr>
+    							</thead>
+    							<tbody>
+    								@foreach ($suggested as $package)
+                                        <tr>
+                                            <td>
+                                                <i class="fa fa-cubes"></i>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    <strong>{{ $package->name }}</strong>
+                                                </p>
+                                                @if (isset($package->description) && strlen($package->description) > 0)
+                                                    <p>
+                                                        {{ $package->description }}
+                                                    </p>
+                                                @endif
+                                                <p>
+                                                    <a href="{{ $package->url }}" target="_blank">{{ $package->url }}</a>
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-download"></i> {{ $package->downloads }}<br/>
+                                                    <i class="fa fa-heart"></i> {{ $package->favers }}
+                                                </p>
+                                            </td>
+                                            <td>composer require {{ $package->name }}</td>
+    									</tr>
+    								@endforeach
+    							</tbody>
+    						</table>
+    					@else
+                            <p>Все возможные пакеты установлены</p>
+                        @endif
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
 @endsection
 
 @section('page.scripts')
