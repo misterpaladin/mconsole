@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\TagRequest;
 use Milax\Mconsole\Models\Tag;
+use ListRenderer;
 
 class TagsController extends Controller
 {
@@ -14,13 +15,21 @@ class TagsController extends Controller
     protected $model = 'Milax\Mconsole\Models\Tag';
     
     /**
+     * Create new class instance
+     */
+    public function __construct(ListRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return $this->run('mconsole::tags.list', function ($item) {
+        return $this->renderer->setQuery(Tag::query())->setPerPage(20)->render('tags/create', function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::tags.table.updated') => $item->updated_at->format('m.d.Y'),

@@ -7,16 +7,22 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleUploadPresetRequest;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Contracts\Localizator;
-use HasPaginator;
-use HasRedirects;
-use HasQueryTraits;
+use ListRenderer;
 
 class PresetsController extends Controller
 {
-    use HasQueryTraits, HasRedirects, HasPaginator;
+    use \HasRedirects;
 
     protected $redirectTo = '/mconsole/presets';
     protected $model = 'Milax\Mconsole\Models\MconsoleUploadPreset';
+    
+    /**
+     * Create new class instance
+     */
+    public function __construct(ListRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
     
     /**
      * Display a listing of the resource.
@@ -25,7 +31,7 @@ class PresetsController extends Controller
      */
     public function index()
     {
-        return $this->setPerPage(20)->run('mconsole::presets.list', function ($item) {
+        return $this->renderer->setQuery(MconsoleUploadPreset::query())->setPerPage(20)->render('presets/create', function ($item) {
             return [
                 trans('mconsole::presets.table.id') => $item->id,
                 trans('mconsole::presets.table.name') => $item->name,

@@ -5,22 +5,20 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
-use HasRedirects;
-use HasPaginator;
-use HasQueryTraits;
+use ListRenderer;
 
 class RolesController extends Controller
 {
-    use HasQueryTraits, HasRedirects, HasPaginator;
+    use \HasRedirects;
 
     protected $model = 'Milax\Mconsole\Models\MconsoleRole';
-
+    protected $redirectTo = '/mconsole/roles';
     /**
      * Create new class instance
      */
-    public function __construct()
+    public function __construct(ListRenderer $renderer)
     {
-        $this->setRedirects(['/mconsole/roles', '/mconsole/roles', '/mconsole/roles']);
+        $this->renderer = $renderer;
     }
 
     /**
@@ -30,7 +28,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return $this->setQuery(MconsoleRole::notRoot())->setPerPage(20)->run('mconsole::roles.list', function ($item) {
+        return $this->renderer->setQuery(MconsoleRole::notRoot())->setPerPage(20)->render('roles/create', function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::roles.table.name') => $item->name,

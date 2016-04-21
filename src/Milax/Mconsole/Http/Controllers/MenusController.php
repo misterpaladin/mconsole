@@ -21,7 +21,7 @@ class MenusController extends Controller
      */
     public function index()
     {
-        return $this->run('mconsole::menu.list', function ($item) {
+        return $this->render('mconsole::menu.list', function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::menus.table.name') => $item->name,

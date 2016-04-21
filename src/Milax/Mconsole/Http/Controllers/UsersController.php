@@ -7,14 +7,11 @@ use Milax\Mconsole\Http\Requests\UserRequest;
 use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
 use Request;
-use HasFilters;
-use HasPaginator;
-use HasRedirects;
-use HasQueryTraits;
+use ListRenderer;
 
 class UsersController extends Controller
 {
-    use HasQueryTraits, HasRedirects, HasFilters, HasPaginator;
+    use \HasRedirects;
     
     protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';
@@ -22,8 +19,9 @@ class UsersController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct()
+    public function __construct(ListRenderer $renderer)
     {
+        $this->renderer = $renderer;
         $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }
@@ -35,11 +33,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $this->setText(trans('mconsole::users.filter.email'), 'email', true)
+        $this->renderer->setText(trans('mconsole::users.filter.email'), 'email', true)
             ->setText(trans('mconsole::users.filter.id'), 'id', true)
             ->setSelect(trans('mconsole::users.filter.role'), 'role_id', $this->roles, true);
         
-        return $this->setPerPage(20)->run('mconsole::users.list', function ($item) {
+        return $this->renderer->setQuery(User::query())->setPerPage(20)->render('users/create', function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::users.table.updated') => $item->updated_at->format('m.d.Y'),

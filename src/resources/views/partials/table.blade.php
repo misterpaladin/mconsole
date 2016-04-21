@@ -2,7 +2,7 @@
 	<div class="col-xs-12">
 		<div class="portlet light">
             @include('mconsole::partials.portlet-title', [
-                'filters' => isset($filters) ? $filters : null,
+                'filters' => (isset($filters) && count($filters) > 0) ? $filters : null,
                 'back' => isset($back) ? $back : null,
                 'title' => isset($title) ? $title : null,
                 'actions' => isset($actions) ? $actions : null,

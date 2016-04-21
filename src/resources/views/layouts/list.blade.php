@@ -3,7 +3,7 @@
 @section('content')
 
 @include('mconsole::partials.table', [
-    'add' => '/mconsole/users/create',
+    'add' => $add,
 ])
 
 @endsection

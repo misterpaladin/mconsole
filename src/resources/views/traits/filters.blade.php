@@ -9,9 +9,13 @@
 			@elseif ($filter['type'] == 'select')
 				<div class="col-sm-6">
 					<select name="{{ $filter['key'] }}" class="form-control">
-						<option value="">{{ trans('mconsole::traits.filters.notselected') }}</option>
-						@foreach ($filter['options'] as $key => $name)
-							@if (Request::query($filter['key']) == $key)
+                        @if (!Request::has($filter['key']))
+						    <option value="-1" selected="selected">{{ trans('mconsole::traits.filters.notselected') }}</option>
+                        @else
+                            <option value="-1">{{ trans('mconsole::traits.filters.notselected') }}</option>
+                        @endif
+                        @foreach ($filter['options'] as $key => $name)
+							@if (Request::has($filter['key']) && Request::query($filter['key']) == $key)
 								<option value="{{ $key }}" selected="selected">{{ $name }}</option>
 							@else
 								<option value="{{ $key }}">{{ $name }}</option>

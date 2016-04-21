@@ -35,17 +35,16 @@ class MconsoleServiceProvider extends ServiceProvider
             // Traits
             'Cacheable' => \Milax\Cacheable::class,
             'HasRedirects' => \Milax\Mconsole\Traits\HasRedirects::class,
-            'HasPaginator' => \Milax\Mconsole\Traits\HasPaginator::class,
-            'HasFilters' => \Milax\Mconsole\Traits\HasFilters::class,
-            'HasQueryTraits' => \Milax\Mconsole\Traits\HasQueryTraits::class,
             'HasUploads' => \Milax\Mconsole\Traits\HasUploads::class,
             'HasTags' => \Milax\Mconsole\Traits\HasTags::class,
+            'ListRenderer' => \Milax\Mconsole\Contracts\ListRenderer::class,
         ],
         
         // Interface to Implementation bindings
         'bindings' => [
             'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
             'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
+            'Milax\Mconsole\Contracts\ListRenderer' => \Milax\Mconsole\Renderers\GenericListRenderer::class,
         ],
         
         // Dependencies for injection
@@ -53,6 +52,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
             'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
             'ModuleInstaller' => \Milax\Mconsole\Core\ModuleInstaller::class,
+            'GetFilterHandler' => \Milax\Mconsole\Handlers\Filters\GetFilterHandler::class,
         ],
         
     ];
