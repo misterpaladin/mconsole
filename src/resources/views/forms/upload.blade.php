@@ -57,7 +57,7 @@
         </div>
     </div>
     <!-- The table listing the files available for upload/download -->
-    <table role="presentation" class="clearfix">
+    <table role="presentation" class="clearfix" style="width: 100%;">
         <tbody class="files sortable"></tbody>
     </table>
     <div class="row">
@@ -118,10 +118,10 @@
                         {!! Form::select(sprintf('uploads[%s][%s][language_id][]', $type, $group), $languages, null, ['class' => 'form-control input-sm']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text(sprintf('uploads[%s][%s][title][]', $type, $group), '{%=file.title%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.title')]) !!}
+                        <input type="text" class="form-control input-sm" name="{{ sprintf('uploads[%s][%s][title][]', $type, $group) }}" value="{%=file.title%}" placeholder="{{ trans('mconsole::uploader.title') }}">
                     </div>
                     <div class="form-group">
-                        {!! Form::text(sprintf('uploads[%s][%s][description][]', $type, $group), '{%=file.description%}', ['class' => 'form-control input-sm', 'placeholder' => trans('mconsole::uploader.description')]) !!}
+                        <input type="text" class="form-control input-sm" name="{{ sprintf('uploads[%s][%s][description][]', $type, $group) }}" value="{%=file.description%}" placeholder="{{ trans('mconsole::uploader.description') }}">
                     </div>
                 </div>
         </td>
