@@ -19,13 +19,13 @@
                             ])
                             <div class="variables-template hide">
                                 <div class="row">
-                                    <div class="col-sm-4 col-xs-12">
+                                    <div class="col-sm-2 col-xs-12">
                                         <div class="form-group">
                                             <label>{{ trans('mconsole::variables.form.key') }}</label>
                                             <input data-name="key" class="form-control" type="text">
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-xs-12">
+                                    <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label>{{ trans('mconsole::variables.form.value') }}</label>
                                             <input data-name="value" class="form-control" type="text">
@@ -48,14 +48,14 @@
                             <div class="variables-list">
                                 @forelse ($variables as $key => $variable)
                                     <div class="row">
-                                        <div class="col-sm-4 col-xs-12">
+                                        <div class="col-sm-2 col-xs-12">
                                             @include('mconsole::forms.text', [
                                                 'label' => trans('mconsole::variables.form.key'),
                                                 'name' => sprintf('variables[%s][key]', $key),
                                                 'value' => $variable->key,
                                             ])
                                         </div>
-                                        <div class="col-sm-4 col-xs-12">
+                                        <div class="col-sm-6 col-xs-12">
                                             @include('mconsole::forms.text', [
                                                 'label' => trans('mconsole::variables.form.value'),
                                                 'name' => sprintf('variables[%s][value]', $key),
@@ -102,5 +102,5 @@
 @endsection
 
 @section('page.scripts')
-    <script src="/massets/js/variables.js" type="text/javascript">
+    <script src="/massets/js/variables.js" type="text/javascript"></script>
 @endsection

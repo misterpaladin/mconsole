@@ -43,11 +43,16 @@ class MconsoleBladeExtensions extends ServiceProvider
         
         Blade::directive('variable', function ($expression) {
             $string = new String($expression);
-            $expression = $string->removeQuote()->removeParenthesis()->getString();
-            $variable = Variable::getCached()->where('key', $expression)->first();
-            $value = ($variable) ? $variable->value : null;
+            $string = $string->removeParenthesis()->getString();
             
-            return "<?php echo \"{$value}\"; ?>";
+            return '<?php
+                $args = [' . $string . '];
+                $variable = \Milax\Mconsole\Models\Variable::getCached()->where("key", $args[0])->first();
+                if ($variable) {
+                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, $args[1]);
+                    echo $renderer->render();
+                }
+            ?>';
         });
     }
 }
