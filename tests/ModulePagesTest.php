@@ -57,7 +57,9 @@ class ModulePagesTest extends TestCase
         
         $response = $this->auth()->call('POST', '/mconsole/pages', [
             'slug' => $slug,
-            'heading' => $slug,
+            'heading' => [
+                'en' => $slug,
+            ],
         ]);
         
         $this->assertEquals(302, $response->status());
