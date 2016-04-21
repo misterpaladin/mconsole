@@ -9,7 +9,7 @@ use ListRenderer;
 
 class TagsController extends Controller
 {
-    use \HasQueryTraits, \HasRedirects;
+    use \HasRedirects;
     
     protected $redirectTo = '/mconsole/tags';
     protected $model = 'Milax\Mconsole\Models\Tag';

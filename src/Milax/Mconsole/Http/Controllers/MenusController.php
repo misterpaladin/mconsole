@@ -9,7 +9,7 @@ use Milax\Mconsole\Http\Requests\MenuRequest;
 
 class MenusController extends Controller
 {
-    use \HasQueryTraits, \HasRedirects;
+    use \HasRedirects;
     
     protected $model = 'Milax\Mconsole\Models\Menu';
     protected $redirectTo = '/mconsole/menus';
