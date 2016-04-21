@@ -77,8 +77,10 @@ trait HasRedirects
             ];
         }
         
+        $errors = !is_null(session('errors'));
+        
         // If we need to redirect to edit saved object
-        if (app('API')->options->get('editredirect')) {
+        if (!$errors && app('API')->options->get('editredirect')) {
             
             // Ensure that we have protected $model property in our controller
             if (strlen($this->model) == 0) {
