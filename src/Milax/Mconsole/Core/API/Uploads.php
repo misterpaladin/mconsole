@@ -33,7 +33,7 @@ class Uploads
      */
     public function attach($data)
     {
-        if (!$data['uploads']->has($data['group'])) {
+        if (!isset($data['uploads']) || !$data['uploads']->has($data['group'])) {
             return null;
         }
         
