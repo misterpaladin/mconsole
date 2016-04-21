@@ -31,16 +31,16 @@
                                             <input data-name="value" class="form-control" type="text">
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 col-xs-12">
+                                    <div class="col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label>{{ trans('mconsole::variables.form.description') }}</label>
                                             <input data-name="description" class="form-control" type="text">
                                         </div>
                                     </div>
-                                    <div class="col-sm-1 col-xs-12 text-right">
-                                        <span class="btn btn-xs btn-danger remove-variable"><i class="fa fa-remove"></i></span>
-                                    </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 text-right">
+                                        <span class="btn btn-xs blue-soft copy-variable"><i class="fa fa-copy"></i> {{ trans('mconsole::variables.form.copy.single') }}</span>
+                                        <span class="btn btn-xs blue-soft copy-variable multiline"><i class="fa fa-copy"></i> {{ trans('mconsole::variables.form.copy.multiline') }}</span>
+                                        <span class="btn btn-xs btn-danger remove-variable"><i class="fa fa-remove"></i> {{ trans('mconsole::variables.form.delete') }}</span>
                                         <hr/>
                                     </div>
                                 </div>
@@ -62,17 +62,17 @@
                                                 'value' => $variable->value,
                                             ])
                                         </div>
-                                        <div class="col-sm-3 col-xs-12">
+                                        <div class="col-sm-4 col-xs-12">
                                             @include('mconsole::forms.text', [
                                                 'label' => trans('mconsole::variables.form.description'),
                                                 'name' => sprintf('variables[%s][description]', $key),
                                                 'value' => $variable->description,
                                             ])
                                         </div>
-                                        <div class="col-sm-1 col-xs-12 text-right">
-                                            <span class="btn btn-xs btn-danger remove-variable"><i class="fa fa-remove"></i></span>
-                                        </div>
-                                        <div class="col-xs-12">
+                                        <div class="col-xs-12 text-right">
+                                            <span class="btn btn-xs blue-soft copy-variable"><i class="fa fa-copy"></i> {{ trans('mconsole::variables.form.copy.single') }}</span>
+                                            <span class="btn btn-xs blue-soft copy-variable multiline"><i class="fa fa-copy"></i> {{ trans('mconsole::variables.form.copy.multiline') }}</span>
+                                            <span class="btn btn-xs btn-danger remove-variable"><i class="fa fa-remove"></i> {{ trans('mconsole::variables.form.delete') }}</span>
                                             <hr/>
                                         </div>
                                     </div>

@@ -100,6 +100,7 @@ class Installer extends Command
         $this->info(Seeds\MconsoleRolesSeeder::run());
         $this->info(Seeds\MconsoleLanguaugeSeeder::run());
         $this->info(Seeds\MconsoleMenusSeeder::run());
+        $this->info(Seeds\MconsoleVariablesSeeder::run());
         
         $this->info('Done!');
         $this->comment(null);

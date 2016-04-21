@@ -228,6 +228,7 @@
         <script src="/massets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/ckeditor/config.js" type="text/javascript"></script>
+        <script src="/massets/js/clipboard.min.js" type="text/javascript"></script>
 		<!-- END CORE PLUGINS -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
 		<script src="/massets/global/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.js" type="text/javascript"></script>
