@@ -191,6 +191,9 @@ class Installer extends Command
      */
     protected function finish()
     {
+        chdir(base_path());
+        exec('composer dump-autoload');
+        
         if ($this->option('update')) {
             $this->info('Update completed!');
         } else {
