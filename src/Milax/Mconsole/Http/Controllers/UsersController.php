@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\UserRequest;
 use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
-use Request;
 use ListRenderer;
 
 class UsersController extends Controller

@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Milax\Mconsole\Models\Menu;
 use Milax\Mconsole\Http\Requests\MenuRequest;
+use Milax\Mconsole\Models\Menu;
+use ListRenderer;
 
 class MenusController extends Controller
 {
@@ -13,6 +13,13 @@ class MenusController extends Controller
     
     protected $model = 'Milax\Mconsole\Models\Menu';
     protected $redirectTo = '/mconsole/menus';
+    /**
+     * Create new class instance
+     */
+    public function __construct(ListRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
     
     /**
      * Display a listing of the resource.
@@ -21,7 +28,7 @@ class MenusController extends Controller
      */
     public function index()
     {
-        return $this->render('mconsole::menu.list', function ($item) {
+        return $this->renderer->setQuery(Menu::query())->setPerPage(20)->render('menus/create', function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::menus.table.name') => $item->name,
