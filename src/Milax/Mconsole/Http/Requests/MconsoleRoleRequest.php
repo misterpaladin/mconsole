@@ -27,4 +27,17 @@ class MconsoleRoleRequest extends Request
             'name' => 'required',
         ];
     }
+    
+    /**
+     * Set custom validator attribute names
+     *
+     * @return Validator
+     */
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+        $validator->setAttributeNames(trans('mconsole::roles.form'));
+        
+        return $validator;
+    }
 }

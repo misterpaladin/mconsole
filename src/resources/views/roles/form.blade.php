@@ -19,9 +19,9 @@
                         ])
         				<div class="portlet-body form">
                             @include('mconsole::forms.text', [
-                                'label' => trans('mconsole::roles.form.name.label'),
+                                'label' => trans('mconsole::roles.form.name'),
                                 'name' => 'name',
-                                'placeholder' => trans('mconsole::roles.form.name.placeholder')
+                                'placeholder' => trans('mconsole::roles.form.placeholder')
                             ])
         				</div>
         			</div>

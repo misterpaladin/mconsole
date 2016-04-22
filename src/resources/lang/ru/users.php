@@ -30,21 +30,17 @@ return [
         'role' => 'Группа',
     ],
     'form' => [
-        'name' => [
-            'label' => 'Имя',
-            'placeholder' => 'Иван Апельсинов',
-        ],
-        'email' => [
-            'label' => 'Эл. почта',
-            'placeholder' => 'example@milax.com',
+        'name' => 'Имя',
+        'email' => 'Эл. почта',
+        'password' => 'Пароль',
+        'placeholder' => [
+            'name' => 'Иван Апельсинов',
+            'email' => 'example@milax.com',
+            'password' => 'Пароль',
         ],
         'main' => 'Основное',
         'language' => 'Язык интерфейса',
         'role' => 'Группа',
-        'password' => [
-            'label' => 'Пароль',
-            'placeholder' => 'Пароль',
-        ],
     ],
     'types' => [
         'generic' => 'Обычный пользователь',

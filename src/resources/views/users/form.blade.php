@@ -16,14 +16,14 @@
         			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/users']) !!}
         		@endif
     				@include('mconsole::forms.text', [
-    					'label' => trans('mconsole::users.form.name.label'),
+    					'label' => trans('mconsole::users.form.name'),
     					'name' => 'name',
-    					'placeholder' => trans('mconsole::users.form.name.placeholder')
+    					'placeholder' => trans('mconsole::users.form.placeholder.name')
     				])
     				@include('mconsole::forms.text', [
-    					'label' => trans('mconsole::users.form.email.label'),
+    					'label' => trans('mconsole::users.form.email'),
     					'name' => 'email',
-    					'placeholder' => trans('mconsole::users.form.email.placeholder')
+    					'placeholder' => trans('mconsole::users.form.placeholder.email')
     				])
     				@include('mconsole::forms.select', [
     					'label' => trans('mconsole::users.form.language'),
@@ -35,7 +35,7 @@
     				])
     				
                     @if (Auth::user()->role->key == 'root')
-                        @if ($item->id != Auth::id())
+                        @if (isset($item->id) && $item->id != Auth::id())
                             @include('mconsole::forms.select', [
             					'label' => trans('mconsole::users.form.role'),
             					'name' => 'role_id',
@@ -46,9 +46,9 @@
                     
     				@if (!isset($item))
     					@include('mconsole::forms.password', [
-    						'label' => trans('mconsole::users.form.password.label'),
+    						'label' => trans('mconsole::users.form.password'),
     						'name' => 'password',
-    						'placeholder' => trans('mconsole::users.form.password.placeholder'),
+    						'placeholder' => trans('mconsole::users.form.placeholder.password'),
     					])
     				@endif
         			<div class="form-actions">

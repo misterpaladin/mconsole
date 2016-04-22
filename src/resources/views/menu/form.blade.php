@@ -22,9 +22,9 @@
                 			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/menus']) !!}
                 		@endif
         				@include('mconsole::forms.text', [
-        					'label' => trans('mconsole::menus.form.name.label'),
+        					'label' => trans('mconsole::menus.form.name'),
         					'name' => 'name',
-        					'placeholder' => trans('mconsole::menus.form.name.placeholder')
+        					'placeholder' => trans('mconsole::menus.form.placeholder')
         				])
                         @include('mconsole::forms.state')
                     </div>

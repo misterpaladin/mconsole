@@ -17,13 +17,13 @@
                 			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/tags']) !!}
                 		@endif
         				@include('mconsole::forms.text', [
-        					'label' => trans('mconsole::tags.form.name.label'),
+        					'label' => trans('mconsole::tags.form.name'),
         					'name' => 'name',
-        					'placeholder' => trans('mconsole::tags.form.name.placeholder')
+        					'placeholder' => trans('mconsole::tags.form.placeholder')
         				])
                         
                         @include('mconsole::forms.colorpicker', [
-                            'label' => trans('mconsole::tags.form.color.label'),
+                            'label' => trans('mconsole::tags.form.color'),
                             'name' => 'color',
                         ])
                         

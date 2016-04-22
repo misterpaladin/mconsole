@@ -27,4 +27,17 @@ class MenuRequest extends Request
             'name' => 'required',
         ];
     }
+    
+    /**
+     * Set custom validator attribute names
+     *
+     * @return Validator
+     */
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+        $validator->setAttributeNames(trans('mconsole::menus.form'));
+        
+        return $validator;
+    }
 }

@@ -32,4 +32,17 @@ class MconsoleUploadPresetRequest extends Request
             'operations' => 'json',
         ];
     }
+    
+    /**
+     * Set custom validator attribute names
+     *
+     * @return Validator
+     */
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+        $validator->setAttributeNames(trans('mconsole::presets.form'));
+        
+        return $validator;
+    }
 }
