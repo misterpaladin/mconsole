@@ -8,6 +8,12 @@
                 'actions' => isset($actions) ? $actions : null,
                 'add' => isset($add) ? $add : null,
             ])
+            @trans([
+                'delete-modal-title' => trans('mconsole::tables.deletemodal.title'),
+                'delete-modal-body' => trans('mconsole::tables.deletemodal.body'),
+                'delete-modal-ok' => trans('mconsole::tables.deletemodal.ok'),
+                'delete-modal-cancel' => trans('mconsole::tables.deletemodal.cancel'),
+            ])
 			<div class="portlet-body form">
 				<div class="table-scrollable table-scrollable-borderless">
 					@if (isset($items) && $items->count() > 0)
@@ -29,7 +35,7 @@
 										<td>
 											{!! Form::open(['method' => 'DELETE', 'url' => Request::url() . '/' . $item->values()->first()]) !!}
 											<a href="{{ Request::url() }}/{{ $item->values()->first() }}/edit" class="btn btn-xs blue">{{ trans('mconsole::tables.edit') }}</a>
-											{!! Form::submit(trans('mconsole::tables.delete'), ['class' => 'btn btn-xs btn-danger']) !!}
+											{!! Form::submit(trans('mconsole::tables.delete'), ['class' => 'btn btn-xs btn-danger delete-confirm']) !!}
 											{!! Form::close() !!}
 										</td>
 									</tr>

@@ -249,6 +249,8 @@
         <script src="/massets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
+		<script src="/massets/js/confirm.js" type="text/javascript"></script>
+		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
 		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
         <script src="/massets/js/helpers.js" type="text/javascript"></script>
 		<script src="/massets/js/search.js" type="text/javascript"></script>
