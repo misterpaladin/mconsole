@@ -10,10 +10,10 @@
                         @if (isset($menu->route))
                             <a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
                         @else
-                            <a href="#">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                            <a href="javascript:;">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
                         @endif
     				@else
-    					<a href="#">{{ trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+    					<a href="javascript:;">{{ trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
     					<ul class="dropdown-menu pull-left">
     						@foreach ($menu->child as $child)
     					        @if ($child->visible)
@@ -27,6 +27,14 @@
     			</li>
             @endif
 		@endforeach
+        <li class="menu-dropdown classic-menu-dropdown ">
+            <a href="javascript:;"><i class="fa fa-ellipsis-v"></i><span class="arrow"></span></a>
+            <ul class="dropdown-menu pull-left">
+                <li>
+                    <a href="javascript:;" class="nav-link toggle-variables-helper">Variables</a>
+                </li>
+            </ul>
+        </li>
 	</ul>
 </div>
 <!-- END MEGA MENU -->

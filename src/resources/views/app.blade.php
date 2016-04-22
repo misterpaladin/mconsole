@@ -48,6 +48,7 @@
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="/massets/css/mconsole.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/css/variables-helper.css" rel="stylesheet" type="text/css" />
         
         @yield('page.styles')
         
@@ -56,6 +57,9 @@
 	</head>
 	<!-- END HEAD -->
 	<body class="page-container-bg-solid page-boxed page-md page-header-menu-fixed">
+        
+        @include('mconsole::helpers.variables')
+        
 		<!-- BEGIN HEADER -->
 		<div class="page-header">
 			<!-- BEGIN HEADER TOP -->
@@ -259,6 +263,7 @@
 		<script src="/massets/js/links-editor.js" type="text/javascript"></script>
 		<script src="/massets/js/tags.js" type="text/javascript"></script>
 		<script src="/massets/js/notifications.js" type="text/javascript"></script>
+        <script src="/massets/js/variables-helper.js" type="text/javascript"></script>
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
