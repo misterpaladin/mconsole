@@ -35,7 +35,9 @@ class VariablesController extends Controller
         });
         if ($data->count() > 0) {
             Variable::insert($data->toArray());
-        }        
+        }
+        
+        Variable::dropCache();
         
         return redirect()->back()->with('status', trans('mconsole::variables.saved'));
     }

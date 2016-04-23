@@ -5,7 +5,7 @@ namespace Milax\Mconsole\Composers;
 use Illuminate\View\View;
 use Milax\Mconsole\Models\Variable;
 
-class VariablesHelperViewComposer
+class BladeHelperViewComposer
 {
     /**
      * Compose pages title and caption

@@ -193,12 +193,16 @@ class MconsoleServiceProvider extends ServiceProvider
         }, 'users');
         
         app('API')->search->register(function ($text) {
-            return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($file) {
+            return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->orderBy('type')->get()->transform(function ($file) {
                 return [
                     'icon' => 'file',
                     'title' => $file->filename,
+                    'path' => $file->path,
                     'description' => '',
+                    'basepath' => '/storage/uploads',
+                    'original' => $file->type == 'image' ? sprintf('/storage/uploads/%s/original/%s', $file->path, $file->filename) : sprintf('/storage/uploads/%s/%s', $file->path, $file->filename),
                     'copies' => $file->copies,
+                    'preview' => $file->type == 'image' ? sprintf('/storage/uploads/%s/mconsole/%s', $file->path, $file->filename) : '',
                     'link' => '#',
                 ];
             });

@@ -27,13 +27,8 @@
     			</li>
             @endif
 		@endforeach
-        <li class="menu-dropdown classic-menu-dropdown ">
-            <a href="javascript:;"><i class="fa fa-ellipsis-v"></i><span class="arrow"></span></a>
-            <ul class="dropdown-menu pull-left">
-                <li>
-                    <a href="javascript:;" class="nav-link toggle-variables-helper">Variables</a>
-                </li>
-            </ul>
+        <li class="menu-dropdown classic-menu-dropdown toggle-blade-helper">
+            <a href="javascript:;">{{ trans('mconsole::widget.name') }}</a>
         </li>
 	</ul>
 </div>

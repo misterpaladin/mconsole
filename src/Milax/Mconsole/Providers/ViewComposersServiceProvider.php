@@ -28,6 +28,6 @@ class ViewComposersServiceProvider extends ServiceProvider
         view()->composer('mconsole::app', 'Milax\Mconsole\Composers\OptionsComposer');
         view()->composer('mconsole::forms.upload', 'Milax\Mconsole\Composers\UploadFormComposer');
         view()->composer('mconsole::forms.tags', 'Milax\Mconsole\Composers\TagsInputComposer');
-        view()->composer('mconsole::helpers.variables', 'Milax\Mconsole\Composers\VariablesHelperViewComposer');
+        view()->composer('mconsole::helpers.blade', 'Milax\Mconsole\Composers\BladeHelperViewComposer');
     }
 }
