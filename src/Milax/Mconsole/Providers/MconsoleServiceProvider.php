@@ -131,7 +131,7 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Run one time setup
         app('API')->modules->scan();
-        app('API')->info->setAppVersion('0.3.5');
+        app('API')->info->setAppVersion('0.3.6');
         
         if (env('APP_ENV') == 'local') {
             app('API')->translations->load();

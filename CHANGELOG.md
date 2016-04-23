@@ -1,3 +1,47 @@
+## 0.3.6
+
+##### Added
+  - Blade Helper widget (helper for using variables feature)
+  - ListRenderer interface for showing records lists
+  - Search API namespaces support
+  - English localization
+  - Variables seeders
+  - HasState and System model traits
+  - Modal delete confirmation
+  - Modules suggestions from packagist.org
+  - Variables clipboard copy
+  - `@trans` blade template with `trans()` javascript helper for translating javascript values
+  - Modules dependency system
+  - Menu API push method
+  - Presets API
+  - `defines.php` file for constants
+  - Default laravel migrations (users, password_resets)
+  - Upload presets file types
+  - Upload files extensions validation
+  - `--model` and `--request` options for module generator
+
+##### Updated
+  - Upload form visuals
+  - Installer now run `composer dump-autoload` command
+  - Menu reordered
+  - Run `composer dump-autoload` after installing module
+  - Installer optimizations, now mconsole install/updates faster
+  - Filters in modals
+
+##### Fixed
+  - Uploads API POST without files error
+  - Upload form json errors
+  - HasRedirects trait with session errors
+  - Modules uninstall migrations errors
+  - UserInterface, Pages tests errors
+  - Fill `created_at` and `updated_at` fields when creating root user with Installer
+  - Clear cache link in settings
+  - MconsoleMiddleware routes exceptions
+
+##### Removed
+  - Travis CI builds
+  - HasFilters, HasPaginator and HasQuery traits
+
 ## 0.3.5
 
 ##### Added
