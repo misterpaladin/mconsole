@@ -3,19 +3,19 @@
 return [
     'menu' => [
         'list' => [
-            'name' => 'Upload templates',
-            'description' => 'List of templates',
+            'name' => 'Upload presets',
+            'description' => 'List of presets',
         ],
         'create' => [
-            'name' => 'Add template',
-            'description' => 'Add a new template for upload files',
+            'name' => 'Add preset',
+            'description' => 'Add a new preset for upload files',
         ],
         'update' => [
-            'name' => 'Edit template',
+            'name' => 'Edit preset',
             'description' => 'Change the requirements for the uploaded files, as well as add/delete operations of image processing',
         ],
         'delete' => [
-            'name' => 'Delete template',
+            'name' => 'Delete preset',
             'description' => '',
         ],
     ],
@@ -74,7 +74,7 @@ return [
             ],
         ],
         'sequence' => 'All operations are executed sequentially',
-        'name' => 'Template name',
+        'name' => 'Preset name',
         'extensions' => 'Allowed file extensions (wihout dots, separated by comma)',
         'minwidth' => 'Minimum width',
         'minheight' => 'Minimum height',
