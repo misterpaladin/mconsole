@@ -13,11 +13,11 @@ use String;
 
 class Uploads
 {
-    protected $filesPath;
+    protected $uploadsPath;
     
     public function __construct()
     {
-        $this->filesPath = MX_UPLOADS_PATH;
+        $this->uploadsPath = MX_UPLOADS_PATH;
         $this->requestData = Request::all();
         $this->presets = MconsoleUploadPreset::getCached();
     }
@@ -76,14 +76,14 @@ class Uploads
         }
         
         Upload::where('type', $type)->where('group', $group)->where('related_class', urldecode($class))->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($file) use (&$suffix, &$type, &$files, &$url, &$scriptURL) {
-            if (File::exists(sprintf('%s/%s/%s%s', $this->filesPath, $file->path, $suffix, $file->filename))) {
+            if (File::exists(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename))) {
                 $files->get('files')->push([
                     'name' => $file->filename,
                     'type' => $file->type,
                     'language_id' => $file->language_id,
                     'title' => $file->title,
                     'description' => $file->description,
-                    'size' => File::size(sprintf('%s/%s/%s%s', $this->filesPath, $file->path, $suffix, $file->filename)),
+                    'size' => File::size(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename)),
                     'url' => sprintf('%s%s/%s%s', $url, $file->path, $suffix, $file->filename),
                     'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $file->path, $file->filename),
                     'deleteUrl' => sprintf('%s%s', $scriptURL, $file->id),
@@ -191,7 +191,7 @@ class Uploads
                     }
                     
                     $model = $input['related_class'];
-                    $path = sprintf('%s/%s', $this->filesPath, $preset->path);
+                    $path = sprintf('%s/%s', $this->uploadsPath, $preset->path);
                     $type = $input['type'];
                     
                     foreach ($input['files'] as $key => $file) {
