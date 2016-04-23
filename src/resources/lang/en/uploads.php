@@ -18,4 +18,8 @@ return [
         'copies' => 'Copies',
         'related' => 'Related object',
     ],
+    'filter' => [
+        'filename' => 'File name',
+        'type' => 'Type',
+    ],
 ];
