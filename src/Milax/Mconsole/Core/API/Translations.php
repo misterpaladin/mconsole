@@ -70,8 +70,12 @@ class Translations
     /**
      * Set Application locale for current user settings
      */
-    public function setUserLocale()
+    public function setUserLocale($locale = null)
     {
+        if (!is_null($locale)) {
+            return \App::setLocale($locale);
+        }
+        
         if (strlen($lang = \Auth::user()->lang) > 0) {
             \App::setLocale($lang);
         }
