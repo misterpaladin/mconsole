@@ -29,7 +29,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(Tag::query())->setPerPage(20)->render('tags/create', function ($item) {
+        return $this->renderer->setQuery(Tag::query())->setPerPage(20)->setAddAction('tags/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::tags.table.updated') => $item->updated_at->format('m.d.Y'),

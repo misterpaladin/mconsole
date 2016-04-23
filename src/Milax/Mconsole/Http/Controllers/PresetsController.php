@@ -31,7 +31,7 @@ class PresetsController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(MconsoleUploadPreset::query())->setPerPage(20)->render('presets/create', function ($item) {
+        return $this->renderer->setQuery(MconsoleUploadPreset::query())->setPerPage(20)->setAddAction('presets/create')->render(function ($item) {
             return [
                 trans('mconsole::presets.table.id') => $item->id,
                 trans('mconsole::presets.table.name') => $item->name,

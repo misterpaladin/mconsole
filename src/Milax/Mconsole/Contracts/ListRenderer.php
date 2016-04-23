@@ -5,6 +5,22 @@ namespace Milax\Mconsole\Contracts;
 interface ListRenderer
 {
     /**
+     * Set add button action link
+     * $renderer->setAddAction(pages/create);
+     * 
+     * @param $this
+     */
+    public function setAddAction($action);
+    
+    /**
+     * Remove add button action
+     * $renderer->removeAddAction();
+     * 
+     * @return $this
+     */
+    public function removeAddAction();
+    
+    /**
      * Add text input filter
      * 
      * @param  string $label		Label for input
@@ -36,11 +52,11 @@ interface ListRenderer
     /**
      * Run queries, process items with callback and return view
      *
-     * @param mixed $view [view name or link]
      * @param Closure $cb [Callback function]
+     * @param mixed $view [View name]
      * @return View
      */
-    public function render($view, $cb);
+    public function render($cb, $view = null);
     
     /**
      * Set paginator per page number

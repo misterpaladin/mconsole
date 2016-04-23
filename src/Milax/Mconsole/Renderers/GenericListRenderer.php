@@ -13,12 +13,25 @@ class GenericListRenderer implements ListRenderer
 {
     public $query;
     public $perPage = 0;
+    public $action;
+    public $defaultView = 'mconsole::layouts.list';
     
     public $filterHandler;
     
     public function __construct(GetFilterHandler $filterHandler)
     {
         $this->filterHandler = $filterHandler;
+    }
+    
+    public function setAddAction($action)
+    {
+        $this->action = $action;
+        return $this;
+    }
+    
+    public function removeAddAction()
+    {
+        return $this;
     }
     
     public function setText($label, $key, $exact = false)
@@ -37,7 +50,7 @@ class GenericListRenderer implements ListRenderer
         return $this;
     }
     
-    public function render($view, $cb)
+    public function render($cb, $view = null)
     {
         $this->query = $this->filterHandler->handleFilterQuery($this->query);
         
@@ -48,16 +61,18 @@ class GenericListRenderer implements ListRenderer
             $this->items = $this->query->get();
         }
         
-        if (!View::exists($view)) {
-            $add = $view;
-            $view = 'mconsole::layouts.list';
+        if (!is_null($view) && View::exists($view)) {
             return view($view, [
                 'items' => TableProcessor::processItems($cb, $this->items),
-                'add' => (str_contains($add, 'mconsole')) ? $add : sprintf('/mconsole/%s', trim($add, '/')),
             ]);
         } else {
-            return view($view, [
+            $addAction = isset($this->action) ? $this->action : null;
+            if (!is_null($addAction)) {
+                $addAction = (str_contains($addAction, 'mconsole')) ? $addAction : sprintf('/mconsole/%s', trim($addAction, '/'));
+            }
+            return view($this->defaultView, [
                 'items' => TableProcessor::processItems($cb, $this->items),
+                'add' => $addAction,
             ]);
         }
     }

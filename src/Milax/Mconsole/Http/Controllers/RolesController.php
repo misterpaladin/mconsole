@@ -28,7 +28,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(MconsoleRole::notRoot())->setPerPage(20)->render('roles/create', function ($item) {
+        return $this->renderer->setQuery(MconsoleRole::notRoot())->setPerPage(20)->setAddAction('roles/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::roles.table.name') => $item->name,
