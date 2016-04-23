@@ -19,8 +19,16 @@ class MconsoleVariablesSeeder
             'value' => '<a href="{{ $href }}" target="{{ $target }}">{{ $text }}</a>',
         ],
         [
-            'key' => 'copyright',
-            'value' => '<a href="http://www.milax.com" target="_blank">Milax</a>',
+            'key' => 'image-left',
+            'value' => '<img src="{{ $src }}" class="content-image-left" alt="" />',
+        ],
+        [
+            'key' => 'image-right',
+            'value' => '<img src="{{ $src }}" class="content-image-right" alt="" />',
+        ],
+        [
+            'key' => 'image-center',
+            'value' => '<img src="{{ $src }}" class="content-image-center" alt="" />',
         ],
     ];
     
