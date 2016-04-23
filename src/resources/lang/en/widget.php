@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Blade helper',
     'code' => 'Code to insert',
     'copied' => 'Code copied to clipboard',
     'copy' => 'Copy to clipboard',
