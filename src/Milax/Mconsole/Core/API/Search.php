@@ -12,27 +12,39 @@ class Search implements ServiceAPI
      * Register search engine callback
      * 
      * @param  Closure $callback
+     * @param  string $namespace [Search provider namespace]
      * @return void
      */
-    public function register($callback)
+    public function register($callback, $namespace = null)
     {
-        $this->stack[] = $callback;
+        $this->stack[] = [
+            'callback' => $callback,
+            'namespace' => $namespace,
+        ];
     }
     
     /**
      * Handle search
      * 
      * @param  string $text
+     * @param  string $namespace [Search provider namespace]
      * @return Illuminate\Support\Collection
      */
-    public function handle($text)
+    public function handle($text, $namespace = null)
     {
         $results = collect();
         foreach ($this->stack as $callback) {
-            if ($result = $callback($text)) {
+            if (!is_null($namespace)) {
+                if ($callback['namespace'] != $namespace) {
+                    continue;
+                }
+            }
+            
+            if ($result = $callback['callback']($text)) {
                 $results = $results->merge($result);
             }
         }
+        
         return $results;
     }
 }

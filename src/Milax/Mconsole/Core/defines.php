@@ -5,6 +5,9 @@
  */
 
 $defines = [
+    // Uploads
+    'MX_UPLOADS_PATH' => storage_path('app/public/uploads'),
+    
     // Upload types
     'MX_UPLOAD_TYPE_IMAGE' => 'image',
     'MX_UPLOAD_TYPE_DOCUMENT' => 'document',

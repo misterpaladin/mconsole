@@ -190,7 +190,19 @@ class MconsoleServiceProvider extends ServiceProvider
                     'link' => sprintf('/mconsole/users/%s/edit', $user->id),
                 ];
             });
-        });
+        }, 'users');
+        
+        app('API')->search->register(function ($text) {
+            return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($file) {
+                return [
+                    'icon' => 'file',
+                    'title' => $file->filename,
+                    'description' => '',
+                    'copies' => $file->copies,
+                    'link' => '#',
+                ];
+            });
+        }, 'uploads');
     }
 
     /**

@@ -13,12 +13,12 @@ class SearchController extends Controller
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function handle(Request $request)
+    public function handle(Request $request, $namespace = null)
     {
         if (!$request->ajax()) {
             return redirect('/mconsole');
         }
         
-        return app('API')->search->handle($request->query('query'));
+        return app('API')->search->handle($request->query('query'), $namespace);
     }
 }
