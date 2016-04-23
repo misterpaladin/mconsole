@@ -37,6 +37,7 @@ Route::group([
     Route::resource('/roles', 'RolesController');
     Route::resource('/presets', 'PresetsController');
     Route::resource('/menus', 'MenusController');
+    Route::resource('/uploads', 'UploadsController');
     
     // Modules
     Route::group([
