@@ -6,14 +6,6 @@ return [
             'name' => 'Uploads',
             'description' => 'List of uploaded files',
         ],
-        'create' => [
-            'name' => 'Add file',
-            'description' => 'Upload file',
-        ],
-        'update' => [
-            'name' => 'Edit file',
-            'description' => '',
-        ],
         'delete' => [
             'name' => 'Delete file',
             'description' => '',
