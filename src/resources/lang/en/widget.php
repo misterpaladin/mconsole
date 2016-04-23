@@ -2,6 +2,7 @@
 
 return [
     'name' => 'Blade helper',
+    'pick' => 'Select a template',
     'code' => 'Code to insert',
     'copied' => 'Code copied to clipboard',
     'copy' => 'Copy to clipboard',

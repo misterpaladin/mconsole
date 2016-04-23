@@ -6,6 +6,7 @@
     <div class="helper-title sbold uppercase">{{ trans('mconsole::widget.name') }} <span class="btn btn-xs default helper-close blade-helper-close"><i class="fa fa-remove"></i></span></div>
     <div class="helper-body">
         <div class="list">
+            <div class="form-group"><strong>{{ trans('mconsole::widget.pick') }}</strong></div>
             @foreach ($variables as $variable)
                 <div class="btn btn-xs bg-default bg-font-default blade-item" data-key="{{ $variable->key }}" data-value="{{ $variable->value }}">{{ $variable->key }}</div>
             @endforeach
