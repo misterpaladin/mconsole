@@ -51,7 +51,7 @@ class Translations
                         // Copy new or merge existing translation file
                         if (File::exists(storage_path('app/lang/' . $language->key . '/' . basename($lg)))) {
                             $baseLang = include storage_path('app/lang/' . $language->key . '/' . basename($lg));
-                            $customLang = include $lg;
+                            $customLang = include sprintf('%s/%s/%s', $translation, $language->key, basename($lg));
                             if (is_array($baseLang)) {
                                 $baseLang = array_merge($baseLang, $customLang);
                             } else {
