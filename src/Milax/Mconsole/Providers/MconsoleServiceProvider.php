@@ -194,9 +194,11 @@ class MconsoleServiceProvider extends ServiceProvider
         
         app('API')->search->register(function ($text) {
             return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->orderBy('type')->get()->transform(function ($file) {
+                $string = new \String($file->filename);
                 return [
                     'icon' => 'file',
-                    'title' => $file->filename,
+                    'title' => $string->getOriginalFileName(),
+                    'filepath' => $file->filename,
                     'path' => $file->path,
                     'description' => '',
                     'basepath' => '/storage/uploads',

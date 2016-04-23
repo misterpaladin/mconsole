@@ -17,12 +17,12 @@
         </div>
     </div>
     <div class="bg-dark bg-font-dark blade-helper-search">
-        <div class="helper-title sbold uppercase">FILE SEARCH <span class="btn btn-xs default helper-close blade-helper-search-close"><i class="fa fa-remove"></i></span></div>
+        <div class="helper-title sbold uppercase">{{ trans('mconsole::widget.search') }} <span class="btn btn-xs default helper-close blade-helper-search-close"><i class="fa fa-remove"></i></span></div>
         <div class="helper-body">
             <div class="form-group">
                 <div class="input-icon input-icon-sm right">
                     <i class="fa fa-spin"></i>
-                    <input class="form-control input-sm" name="search" placeholder="Search for file" type="text">
+                    <input class="form-control input-sm" name="search" placeholder="{{ trans('mconsole::widget.placeholders.search') }}" type="text">
                 </div>
             </div>
             <ul class="media-list blade-search-results">
