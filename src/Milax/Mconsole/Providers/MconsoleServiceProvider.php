@@ -37,6 +37,10 @@ class MconsoleServiceProvider extends ServiceProvider
             'HasRedirects' => \Milax\Mconsole\Traits\HasRedirects::class,
             'HasUploads' => \Milax\Mconsole\Traits\HasUploads::class,
             'HasTags' => \Milax\Mconsole\Traits\HasTags::class,
+            'HasState' => \Milax\Mconsole\Traits\HasState::class,
+            'System' => \Milax\Mconsole\Traits\System::class,
+            
+            // Own classes
             'ListRenderer' => \Milax\Mconsole\Contracts\ListRenderer::class,
         ],
         
