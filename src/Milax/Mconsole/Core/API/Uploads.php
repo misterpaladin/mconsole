@@ -75,7 +75,7 @@ class Uploads
                 break;
         }
         
-        Upload::where('type', $type)->where('group', $group)->where('related_class', $class)->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($file) use (&$suffix, &$type, &$files, &$url, &$scriptURL) {
+        Upload::where('type', $type)->where('group', $group)->where('related_class', urldecode($class))->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($file) use (&$suffix, &$type, &$files, &$url, &$scriptURL) {
             if (File::exists(sprintf('%s/%s/%s%s', $this->filesPath, $file->path, $suffix, $file->filename))) {
                 $files->get('files')->push([
                     'name' => $file->filename,
