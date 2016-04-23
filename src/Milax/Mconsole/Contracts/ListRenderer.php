@@ -12,7 +12,7 @@ interface ListRenderer
      * @param  bool $exact			Set to true if input value and property value must be equal
      * @return $this
      */
-    public function setText($label, $key, $exact);
+    public function setText($label, $key, $exact = false);
     
     /**
      * Add select input filter
@@ -23,7 +23,7 @@ interface ListRenderer
      * @param  bool $exact			Set to true if input value and property value must be equal
      * @return $this
      */
-    public function setSelect($label, $key, $selects, $exact);
+    public function setSelect($label, $key, $selects, $exact = false);
     
     /**
      * Set query

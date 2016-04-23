@@ -21,12 +21,12 @@ class GenericListRenderer implements ListRenderer
         $this->filterHandler = $filterHandler;
     }
     
-    public function setText($label, $key, $exact)
+    public function setText($label, $key, $exact = false)
     {
         return $this->filterHandler->setText($label, $key, $exact);
     }
     
-    public function setSelect($label, $key, $selects, $exact)
+    public function setSelect($label, $key, $selects, $exact = false)
     {
         return $this->filterHandler->setSelect($label, $key, $selects, $exact);
     }
