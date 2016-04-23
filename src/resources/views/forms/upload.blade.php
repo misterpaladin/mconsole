@@ -70,7 +70,7 @@
 <script id="template-upload-{{ $group }}" type="text/x-tmpl"> {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
         <td class="file-info" colspan="3">
-            <p class="name">{%=file.name%}</p>
+            <div class="name">{%=file.name%}</div>
             <strong class="error label label-danger"></strong>
             <p class="size">{{ trans('mconsole::uploader.processing') }}</p>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -107,10 +107,10 @@
         <td class="file-info">
             <input type="hidden" class="uploadable-language-id" value="{%=file.language_id%}">
             <input type="hidden" class="uploadable-filename" name="uploads[{{ $type }}][{{ $group }}][files][]" value="{%=file.name%}">
-            <p class="name"> {% if (file.url) { %}
+            <div class="name"> {% if (file.url) { %}
                 <span class="size">{%=o.formatFileSize(file.size)%}</span><br/>
                 <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl? 'data-gallery': ''%}>{%=file.name%}</a> {% } else { %}
-                <span>{%=file.name%}</span> {% } %} </p> {% if (file.error) { %}
+                <span>{%=file.name%}</span> {% } %} </div> {% if (file.error) { %}
             <div class="help-block">
                 <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %}
                 <div class="description hide">
