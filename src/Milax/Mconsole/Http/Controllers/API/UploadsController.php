@@ -16,7 +16,7 @@ class UploadsController extends Controller
     public function __construct()
     {
         $this->uploadDir = storage_path('tmp/uploads/');
-        $this->previewUrl = '/storage/images/';
+        $this->previewUrl = '/storage/uploads/';
         $this->scriptUrl = '/mconsole/api/uploads/delete/';
     }
     

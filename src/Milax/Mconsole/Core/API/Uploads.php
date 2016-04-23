@@ -17,7 +17,7 @@ class Uploads
     
     public function __construct()
     {
-        $this->filesPath = storage_path('app/public/images');
+        $this->filesPath = MX_UPLOADS_PATH;
         $this->requestData = Request::all();
         $this->presets = MconsoleUploadPreset::getCached();
     }
@@ -126,7 +126,7 @@ class Uploads
     {
         $defaultConfig = [
             'upload_dir' => storage_path('tmp/uploads/'),
-            'upload_url' => '/images/preview/',
+            'upload_url' => '/uploads/preview/',
             'print_response' => false,
             'script_url' => '/mconsole/api/images/delete/',
             'delete_type' => 'GET',
@@ -314,7 +314,11 @@ class Uploads
                     File::makeDirectory($saveTo, 0755, true, true);
                     $copyPath = sprintf('%s/%s', $saveTo, basename($file));
                     $workingCopy->save($copyPath, strlen($operation['quality']) > 0 ? $operation['quality'] : 95);
-                    array_push($copies, sprintf('%s/%s/%s', $preset->path, trim($operation['path'], '/'), basename($file)));
+                    array_push($copies, [
+                        'width' => $workingCopy->width(),
+                        'height' => $workingCopy->height(),
+                        'path' => trim($operation['path'], '/'),
+                    ]);
                     break;
                 
                 case 'resize':

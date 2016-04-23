@@ -40,17 +40,20 @@ class Upload extends Model
     public static function boot()
     {
         parent::boot();
-        static::deleting(function ($image) {
-            if (\File::exists(sprintf('%s/original/%s', $image->path, $image->filename))) {
-                \File::delete(sprintf('%s/original/%s', $image->path, $image->filename));
+        static::deleting(function ($file) {
+            if (\File::exists(sprintf('%s/%s/%s', MX_UPLOADS_PATH, $file->path, $file->filename))) {
+                \File::delete(sprintf('%s/%s/%s', MX_UPLOADS_PATH, $file->path, $file->filename));
             }
-            if (\File::exists(sprintf('%s/mconsole/%s', $image->path, $image->filename))) {
-                \File::delete(sprintf('%s/mconsole/%s', $image->path, $image->filename));
+            if (\File::exists(sprintf('%s/%s/original/%s', MX_UPLOADS_PATH, $file->path, $file->filename))) {
+                \File::delete(sprintf('%s/%s/original/%s', MX_UPLOADS_PATH, $file->path, $file->filename));
             }
-            if ($image->copies && count($image->copies) > 0) {
-                foreach ($image->copies as $copy) {
-                    if (\File::exists($copy)) {
-                        \File::delete($copy);
+            if (\File::exists(sprintf('%s/%s/mconsole/%s', MX_UPLOADS_PATH, $file->path, $file->filename))) {
+                \File::delete(sprintf('%s/%s/mconsole/%s', MX_UPLOADS_PATH, $file->path, $file->filename));
+            }
+            if ($file->copies && count($file->copies) > 0) {
+                foreach ($file->copies as $copy) {
+                    if (\File::exists(sprintf('%s/%s/%s/%s', MX_UPLOADS_PATH, $file->path, $copy['path'], $file->filename))) {
+                        \File::delete(sprintf('%s/%s/%s/%s', MX_UPLOADS_PATH, $file->path, $copy['path'], $file->filename));
                     }
                 }
             }
