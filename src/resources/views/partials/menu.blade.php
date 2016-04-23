@@ -28,7 +28,7 @@
             @endif
 		@endforeach
         <li class="menu-dropdown classic-menu-dropdown toggle-blade-helper">
-            <a href="javascript:;">{{ trans('mconsole::widget.name') }}</a>
+            <a href="javascript:;"><i class="fa fa-magic"></i></a>
         </li>
 	</ul>
 </div>

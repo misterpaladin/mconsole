@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'name' => 'Widget',
     'code' => 'Code to insert',
     'copied' => 'Code copied to clipboard',
     'copy' => 'Copy to clipboard',
