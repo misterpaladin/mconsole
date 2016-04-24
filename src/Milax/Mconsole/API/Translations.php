@@ -3,11 +3,12 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Providers\MconsoleServiceProvider;
+use Milax\Mconsole\Contracts\API\GenericAPI;
 use Milax\Mconsole\Models\Language;
 use File;
 use Schema;
 
-class Translations
+class Translations implements GenericAPI
 {
     protected $provider;
     

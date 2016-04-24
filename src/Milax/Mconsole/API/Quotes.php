@@ -2,7 +2,9 @@
 
 namespace Milax\Mconsole\API;
 
-class Quotes
+use Milax\Mconsole\Contracts\API\GenericAPI;
+
+class Quotes implements GenericAPI
 {
     public $quotes = [
         [

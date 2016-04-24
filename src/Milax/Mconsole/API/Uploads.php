@@ -2,6 +2,7 @@
 
 namespace Milax\Mconsole\API;
 
+use Milax\Mconsole\Contracts\API\GenericAPI;
 use Milax\Mconsole\Http\UploadHandler;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Models\Upload;
@@ -11,7 +12,7 @@ use Request;
 use Session;
 use String;
 
-class Uploads
+class Uploads implements GenericAPI
 {
     protected $uploadsPath;
     

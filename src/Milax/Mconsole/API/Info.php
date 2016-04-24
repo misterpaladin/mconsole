@@ -2,7 +2,9 @@
 
 namespace Milax\Mconsole\API;
 
-class Info
+use Milax\Mconsole\Contracts\API\GenericAPI;
+
+class Info implements GenericAPI
 {
     public $version;
     

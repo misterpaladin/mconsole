@@ -3,8 +3,9 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\Menu as MenuLoader;
+use Milax\Mconsole\Contracts\API\GenericAPI;
 
-class Menu
+class Menu implements GenericAPI
 {
     public $menu;
     protected $loader;

@@ -2,7 +2,9 @@
 
 namespace Milax\Mconsole\API;
 
-class QuickMenu
+use Milax\Mconsole\Contracts\API\GenericAPI;
+
+class QuickMenu implements GenericAPI
 {
     protected $stack = [];
     
