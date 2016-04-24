@@ -42,6 +42,7 @@ class MconsoleServiceProvider extends ServiceProvider
             
             // Own classes
             'ListRenderer' => \Milax\Mconsole\Contracts\ListRenderer::class,
+            'DocsParser' => \Milax\Mconsole\Docs\DocsParser::class,
         ],
         
         // Interface to Implementation bindings
@@ -56,6 +57,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'FileMenu' => \Milax\Mconsole\Menu\FileMenu::class,
             'DatabaseMenu' => \Milax\Mconsole\Menu\DatabaseMenu::class,
             'GetFilterHandler' => \Milax\Mconsole\Handlers\Filters\GetFilterHandler::class,
+            'ParseDown' => \Parsedown::class,
         ],
         
     ];

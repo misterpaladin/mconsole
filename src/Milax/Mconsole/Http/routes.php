@@ -58,5 +58,7 @@ Route::group([
     // Variables
     Route::get('/variables', 'VariablesController@index');
     Route::post('/variables', 'VariablesController@save');
-
+    
+    // Docs
+    Route::get('/docs', 'DocsController@index');
 });
