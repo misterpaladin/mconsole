@@ -46,16 +46,15 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Interface to Implementation bindings
         'bindings' => [
-            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
+            'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Menu\FileMenu::class,
             'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
             'Milax\Mconsole\Contracts\ListRenderer' => \Milax\Mconsole\Renderers\GenericListRenderer::class,
         ],
         
         // Dependencies for injection
         'dependencies' => [
-            'FileMenu' => \Milax\Mconsole\Core\Menu\FileMenu::class,
-            'DatabaseMenu' => \Milax\Mconsole\Core\Menu\DatabaseMenu::class,
-            'ModuleInstaller' => \Milax\Mconsole\Core\ModuleInstaller::class,
+            'FileMenu' => \Milax\Mconsole\Menu\FileMenu::class,
+            'DatabaseMenu' => \Milax\Mconsole\Menu\DatabaseMenu::class,
             'GetFilterHandler' => \Milax\Mconsole\Handlers\Filters\GetFilterHandler::class,
         ],
         
@@ -78,8 +77,8 @@ class MconsoleServiceProvider extends ServiceProvider
     ];
     
     public $require = [
-        __DIR__ . '/../Core/defines.php',
-        __DIR__ . '/../Core/helpers.php',
+        __DIR__ . '/../defines.php',
+        __DIR__ . '/../helpers.php',
     ];
     
     /**
@@ -115,17 +114,17 @@ class MconsoleServiceProvider extends ServiceProvider
         // Register API singleton
         $this->app->singleton('API', function ($app) {
             $api = new \stdClass;
-            $api->notifications = new \Milax\Mconsole\Core\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
-            $api->search = new \Milax\Mconsole\Core\API\Search;
-            $api->modules = new \Milax\Mconsole\Core\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
-            $api->menu = new \Milax\Mconsole\Core\API\Menu(new \Milax\Mconsole\Core\Menu\FileMenu);
-            $api->quotes = new \Milax\Mconsole\Core\API\Quotes;
-            $api->options = new \Milax\Mconsole\Core\API\Options(\Milax\Mconsole\Models\MconsoleOption::class);
-            $api->presets = new \Milax\Mconsole\Core\API\Presets(\Milax\Mconsole\Models\MconsoleUploadPreset::class);
-            $api->translations = new \Milax\Mconsole\Core\API\Translations($this);
-            $api->quickmenu = new \Milax\Mconsole\Core\API\QuickMenu;
-            $api->uploads = new \Milax\Mconsole\Core\API\Uploads;
-            $api->info = new \Milax\Mconsole\Core\API\Info;
+            $api->notifications = new \Milax\Mconsole\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
+            $api->search = new \Milax\Mconsole\API\Search;
+            $api->modules = new \Milax\Mconsole\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
+            $api->menu = new \Milax\Mconsole\API\Menu(new \Milax\Mconsole\Menu\FileMenu);
+            $api->quotes = new \Milax\Mconsole\API\Quotes;
+            $api->options = new \Milax\Mconsole\API\Options(\Milax\Mconsole\Models\MconsoleOption::class);
+            $api->presets = new \Milax\Mconsole\API\Presets(\Milax\Mconsole\Models\MconsoleUploadPreset::class);
+            $api->translations = new \Milax\Mconsole\API\Translations($this);
+            $api->quickmenu = new \Milax\Mconsole\API\QuickMenu;
+            $api->uploads = new \Milax\Mconsole\API\Uploads;
+            $api->info = new \Milax\Mconsole\API\Info;
             return $api;
         });
         

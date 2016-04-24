@@ -1,10 +1,10 @@
 <?php
 
-namespace Milax\Mconsole\Core\Menu;
+namespace Milax\Mconsole\Menu;
 
 use Milax\Mconsole\Contracts\Menu;
-use Milax\Mconsole\Core\Menu\FileMenu;
-use Milax\Mconsole\Core\Menu\DatabaseMenu;
+use Milax\Mconsole\Menu\FileMenu;
+use Milax\Mconsole\Menu\DatabaseMenu;
 
 class MultiMenu implements Menu
 {

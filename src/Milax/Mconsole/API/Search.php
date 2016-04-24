@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Core\API;
+namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\ServiceAPI;
 

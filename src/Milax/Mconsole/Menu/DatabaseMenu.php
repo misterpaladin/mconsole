@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Core\Menu;
+namespace Milax\Mconsole\Menu;
 
 use Milax\Mconsole\Contracts\Menu;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Core\API;
+namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\ModelAPI;
 use Artisan;
@@ -58,7 +58,7 @@ class Modules extends ModelAPI
         $this->dbMods = $model::getCached();
         
         $modules = [];
-        $psr4 = require sprintf('%s/../../../../../../../../vendor/composer/autoload_psr4.php', __DIR__);
+        $psr4 = require sprintf('%s/../../../../../../../vendor/composer/autoload_psr4.php', __DIR__);
         
         // Base modules
         foreach ($psr4 as $class => $path) {
