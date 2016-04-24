@@ -17,7 +17,7 @@ class Tag extends Model
      * 
      * @return int
      */
-    public function count()
+    public function countTagged()
     {
         return Taggable::where('tag_id', $this->id)->count();
     }
