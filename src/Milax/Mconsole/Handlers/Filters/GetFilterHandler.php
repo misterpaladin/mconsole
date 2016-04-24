@@ -32,17 +32,17 @@ class GetFilterHandler implements FilterHandler
         return $query;
     }
     
-    public function setText($label, $key, $exact)
+    public function setText($label, $key, $exact = false)
     {
         return $this->pushFilter('text', $label, $key, $exact);
     }
     
-    public function setSelect($label, $key, $options, $exact)
+    public function setSelect($label, $key, $options, $exact = false)
     {
         return $this->pushFilter('select', $label, $key, $exact, $options);
     }
     
-    public function pushFilter($type, $label, $key, $exact, $options = [])
+    public function pushFilter($type, $label, $key, $exact = false, $options = [])
     {
         $filter = [
             'type' => $type,

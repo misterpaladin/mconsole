@@ -19,7 +19,7 @@ interface FilterHandler
      * @param  bool $exact			Set to true if input value and property value must be equal
      * @return $this
      */
-    public function setText($label, $key, $exact);
+    public function setText($label, $key, $exact = false);
     
     /**
      * Add select input filter
@@ -30,7 +30,7 @@ interface FilterHandler
      * @param  bool $exact			Set to true if input value and property value must be equal
      * @return $this
      */
-    public function setSelect($label, $key, $options, $exact);
+    public function setSelect($label, $key, $options, $exact = false);
     
     /**
      * Inserts new filter to filters array
@@ -42,5 +42,5 @@ interface FilterHandler
      * @param  array $options	Additional data for filter
      * @return $this
      */
-    public function pushFilter($type, $label, $key, $exact, $options = []);
+    public function pushFilter($type, $label, $key, $exact = false, $options = []);
 }
