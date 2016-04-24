@@ -16,8 +16,8 @@ class ModelsTest extends TestCase
             if (class_exists($namespaced)) {
                 // Model creation test
 
-                if ($class == 'MconsoleMenu') {
-                    break;
+                if (in_array($class, ['MconsoleMenu', 'MconsoleDoc', 'MconsoleDocset', 'Taggable'])) {
+                    continue;
                 }
                 
                 $dbCount = $namespaced::count();
