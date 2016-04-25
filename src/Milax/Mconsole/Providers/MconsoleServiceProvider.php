@@ -14,11 +14,12 @@ class MconsoleServiceProvider extends ServiceProvider
         
         'providers' => [
             \Intervention\Image\ImageServiceProvider::class,
+            \Collective\Html\HtmlServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
             \Milax\Mconsole\Providers\CommandsServiceProvider::class,
-            \Collective\Html\HtmlServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
             \Milax\Mconsole\Providers\ViewComposersServiceProvider::class,
+            \Milax\Mconsole\Providers\ScheduleServiceProvider::class,
         ],
         
         'aliases' => [
