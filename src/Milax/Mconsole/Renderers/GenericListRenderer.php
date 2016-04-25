@@ -22,11 +22,13 @@ class GenericListRenderer implements ListRenderer
         'delete' => true,
     ];
     public $defaultView = 'mconsole::layouts.list';
-    
     public $filterHandler;
     
-    public function __construct(GetFilterHandler $filterHandler)
+    protected $processor;
+    
+    public function __construct(GetFilterHandler $filterHandler, TableProcessor $processor)
     {
+        $this->processor = $processor;
         $this->filterHandler = $filterHandler;
     }
     
@@ -83,7 +85,7 @@ class GenericListRenderer implements ListRenderer
         
         if (!is_null($view) && View::exists($view)) {
             return view($view, [
-                'items' => TableProcessor::processItems($cb, $this->items),
+                'items' => $this->processor->run($cb, $this->items),
             ]);
         } else {
             $addAction = $this->actions['add'] != false ? $this->actions['add'] : null;
@@ -92,7 +94,7 @@ class GenericListRenderer implements ListRenderer
             }
             return view($this->defaultView, [
                 'tableOptions' => [
-                    'items' => TableProcessor::processItems($cb, $this->items),
+                    'items' => $this->processor->run($cb, $this->items),
                     'add' => $addAction,
                     'edit' => $this->actions['edit'],
                     'delete' => $this->actions['delete'],

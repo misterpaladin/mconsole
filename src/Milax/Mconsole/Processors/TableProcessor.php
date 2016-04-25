@@ -2,21 +2,23 @@
 
 namespace Milax\Mconsole\Processors;
 
-class TableProcessor
+use Milax\Mconsole\Contracts\Processor;
+
+class TableProcessor implements Processor
 {
     /**
      * Process callbacks for ListRenderer
      * 
-     * @param  function $cb
+     * @param  function $callback
      * @param  Collection $items
      * @return Collection
      */
-    public static function processItems($cb, $items)
+    public function run($callback, $items)
     {
         $collection = collect();
         
         foreach ($items as $item) {
-            $item = $cb($item);
+            $item = $callback($item);
             $cItem = collect();
             
             foreach ($item as $key => $val) {
