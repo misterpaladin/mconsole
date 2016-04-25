@@ -1,7 +1,3 @@
-@extends('mconsole::app')
-
-@section('content')
-
 <div class="row">
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
@@ -38,16 +34,3 @@
 		{!! Form::close() !!}
 	</div>
 </div>
-
-@endsection
-
-@section('page.scripts')
-    <script src="/massets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js" type="text/javascript"></script>
-    <script src="/massets/global/plugins/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>
-    <script>
-        $('.color-picker').minicolors({
-            defaultValue: '#0088cc',
-            theme: 'bootstrap'
-        });
-    </script>
-@endsection

@@ -1,7 +1,3 @@
-@extends('mconsole::app')
-
-@section('content')
-
 <div class="row">
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
@@ -60,5 +56,3 @@
 		{!! Form::close() !!}
 	</div>
 </div>
-
-@endsection

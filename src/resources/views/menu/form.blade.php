@@ -1,12 +1,3 @@
-@extends('mconsole::app')
-
-@section('page.styles')
-    <link href="/massets/global/plugins/jquery-nestable/jquery.nestable.css" rel="stylesheet" type="text/css">
-    <link href="/massets/css/menu-editor.css" rel="stylesheet" type="text/css">
-@endsection
-
-@section('content')
-
 <div class="row">
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
@@ -60,13 +51,3 @@
 		{!! Form::close() !!}
 	</div>
 </div>
-
-@endsection
-
-@section('page.scripts')
-    <script src="/massets/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>
-    <script src="/massets/js/menu-editor.js" type="text/javascript"></script>
-    <script>
-        $('input[name="tree"]').menuEditor();
-    </script>
-@endsection

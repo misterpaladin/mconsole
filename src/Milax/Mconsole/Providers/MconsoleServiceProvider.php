@@ -38,7 +38,6 @@ class MconsoleServiceProvider extends ServiceProvider
             'System' => \Milax\Mconsole\Traits\System::class,
             
             // Own classes
-            'ListRenderer' => \Milax\Mconsole\Contracts\ListRenderer::class,
             'DocsParser' => \Milax\Mconsole\Docs\DocsParser::class,
         ],
         
@@ -47,6 +46,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Menu\FileMenu::class,
             'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
             'Milax\Mconsole\Contracts\ListRenderer' => \Milax\Mconsole\Renderers\GenericListRenderer::class,
+            'Milax\Mconsole\Contracts\FormRenderer' => \Milax\Mconsole\Renderers\GenericFormRenderer::class,
         ],
         
         // Dependencies for injection

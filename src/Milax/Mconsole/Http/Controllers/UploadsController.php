@@ -4,7 +4,7 @@ namespace Milax\Mconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\Upload;
-use ListRenderer;
+use Milax\Mconsole\Contracts\ListRenderer;
 
 class UploadsController extends Controller
 {

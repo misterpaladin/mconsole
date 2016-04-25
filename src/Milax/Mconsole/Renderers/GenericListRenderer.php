@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Milax\Mconsole\Handlers\Filters\GetFilterHandler;
 use View;
 
+/**
+ * Stardart Mconsole table wrapper
+ */
 class GenericListRenderer implements ListRenderer
 {
     public $query;
