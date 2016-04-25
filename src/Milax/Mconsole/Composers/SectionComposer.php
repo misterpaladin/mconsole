@@ -17,13 +17,18 @@ class SectionComposer
      */
     public function compose(View $view)
     {
-        $route = Request::route()->getName();
-        
-        $menu = app('API')->menu->get(true)->where('route', $route)->first();
-        
-        if ($menu) {
-            $view->with('pageTitle', trans('mconsole::' . $menu->translation))
-                ->with('pageCaption', trans('mconsole::' . $menu->translation));
+        if (Request::route()) {
+            $route = Request::route()->getName();
+            
+            $menu = app('API')->menu->get(true)->where('route', $route)->first();
+            
+            if ($menu) {
+                $view->with('pageTitle', trans('mconsole::' . $menu->translation))
+                    ->with('pageCaption', trans('mconsole::' . $menu->translation));
+            } 
+        } else {
+            $view->with('pageTitle', trans('mconsole::mconsole.errors.404.title'))
+                ->with('pageCaption', trans('mconsole::mconsole.errors.404.title'));
         }
     }
 }

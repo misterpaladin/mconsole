@@ -6,6 +6,6 @@
 
 @section('content')
 
-trans('mconsole::mconsole.errors.accessdenied')
+{{ trans('mconsole::mconsole.errors.accessdenied') }}
 
 @endsection
