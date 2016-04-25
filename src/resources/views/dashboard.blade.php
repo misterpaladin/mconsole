@@ -2,6 +2,7 @@
 
 @section('content')
     
+    <div class="btn red btn-outline">TEST</div>
     <div class="row">
         <div class="col-xs-12">
             <div class="portlet light">
@@ -14,7 +15,7 @@
                 <div class="portlet-body form">
                     <ul class="media-list">
                         <li class="media">
-                            <img width="95px" class="media-object pull-left hidden-xs" src="/massets/mudrec.png">
+                            <img width="95px" class="media-object pull-left hidden-xs" src="/massets/img/mudrec.png">
                             <div class="media-body">
                                 <blockquote>
                                     <p>“ {{ $quote['text'] }} „</p>
