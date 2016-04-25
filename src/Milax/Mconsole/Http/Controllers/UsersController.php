@@ -38,7 +38,7 @@ class UsersController extends Controller
             ->setText(trans('mconsole::users.filter.id'), 'id', true)
             ->setSelect(trans('mconsole::users.filter.role'), 'role_id', $this->roles, true);
         
-        return $this->list->setQuery(User::query())->->setAddAction('users/create')->render(function ($item) {
+        return $this->list->setQuery(User::query())->setAddAction('users/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::users.table.updated') => $item->updated_at->format('m.d.Y'),

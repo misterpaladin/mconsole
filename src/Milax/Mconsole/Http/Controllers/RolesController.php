@@ -30,7 +30,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return $this->list->setQuery(MconsoleRole::notRoot())->->setAddAction('roles/create')->render(function ($item) {
+        return $this->list->setQuery(MconsoleRole::notRoot())->setAddAction('roles/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::roles.table.name') => $item->name,
