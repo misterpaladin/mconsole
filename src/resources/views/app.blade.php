@@ -82,7 +82,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="external">
-                                        <h3>Быстрое меню</h3>
+                                        <h3>{{ trans('mconsole::mconsole.quickmenu') }}</h3>
                                     </li>
                                     <li>
                                         <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">

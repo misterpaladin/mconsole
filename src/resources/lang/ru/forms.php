@@ -23,10 +23,11 @@ return [
             'enabled' => 'Отображать',
             'disabled' => 'Не отображать',
         ],
+        'notselected' => 'Не выбрано',
     ],
     'filters' => [
         'filter' => 'Фильтр',
-        'notselected' => 'не выбрано',
+        'notselected' => 'Не выбрано',
         'apply' => 'Применить',
         'reset' => 'Сбросить',
     ],

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'quickmenu' => 'Quick menu',
     'status' => [
         'created' => 'Record created',
         'updated' => 'Record updated',

@@ -23,6 +23,7 @@ return [
             'enabled' => 'Show',
             'disabled' => 'Don\'t show',
         ],
+        'notselected' => 'Not selected',
     ],
     'filters' => [
         'filter' => 'Filter',
