@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleUploadPresetRequest;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Contracts\Localizator;
-use ListRenderer;
+use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 
 class PresetsController extends Controller
 {
@@ -19,9 +20,13 @@ class PresetsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer)
+    public function __construct(ListRenderer $list, FormRenderer $form)
     {
-        $this->renderer = $renderer;
+        $this->list = $list;
+        $this->form = $form;
+        $this->form->addScripts([
+            '/massets/js/presets.js',
+        ]);
     }
     
     /**
@@ -31,7 +36,7 @@ class PresetsController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(MconsoleUploadPreset::query())->setPerPage(20)->setAddAction('presets/create')->render(function ($item) {
+        return $this->list->setQuery(MconsoleUploadPreset::query())->setPerPage(20)->setAddAction('presets/create')->render(function ($item) {
             return [
                 trans('mconsole::presets.table.id') => $item->id,
                 trans('mconsole::presets.table.name') => $item->name,
@@ -48,7 +53,7 @@ class PresetsController extends Controller
      */
     public function create()
     {
-        return view('mconsole::presets.form');
+        return $this->form->render('mconsole::presets.form');
     }
 
     /**
@@ -84,7 +89,7 @@ class PresetsController extends Controller
         $preset = MconsoleUploadPreset::find($id);
         $preset->extensions = implode(', ', $preset->extensions);
         $preset->operations = json_encode($preset->operations);
-        return view('mconsole::presets.form', [
+        return $this->form->render('mconsole::presets.form', [
             'item' => $preset,
         ]);
     }

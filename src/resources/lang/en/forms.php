@@ -24,4 +24,10 @@ return [
             'disabled' => 'Don\'t show',
         ],
     ],
+    'filters' => [
+        'filter' => 'Filter',
+        'notselected' => 'Not selected',
+        'apply' => 'Apply',
+        'reset' => 'Reset',
+    ],
 ];

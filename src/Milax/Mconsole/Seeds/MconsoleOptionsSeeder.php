@@ -4,8 +4,9 @@ namespace Milax\Mconsole\Seeds;
 
 use DB;
 use Milax\Mconsole\Models\MconsoleOption;
+use Milax\Mconsole\Contracts\MconsoleSeeder;
 
-class MconsoleOptionsSeeder
+class MconsoleOptionsSeeder implements MconsoleSeeder
 {
     /**
      * Default options with values to create

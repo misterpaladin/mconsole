@@ -29,9 +29,6 @@ class MconsoleServiceProvider extends ServiceProvider
             'Html' => \Collective\Html\HtmlFacade::class,
             'Debugbar' => \Barryvdh\Debugbar\Facade::class,
             
-            // Helpers
-            'String' => \Milax\Mconsole\Helpers\String::class,
-            
             // Traits
             'Cacheable' => \Milax\Cacheable::class,
             'HasRedirects' => \Milax\Mconsole\Traits\HasRedirects::class,
@@ -41,7 +38,6 @@ class MconsoleServiceProvider extends ServiceProvider
             'System' => \Milax\Mconsole\Traits\System::class,
             
             // Own classes
-            'ListRenderer' => \Milax\Mconsole\Contracts\ListRenderer::class,
             'DocsParser' => \Milax\Mconsole\Docs\DocsParser::class,
         ],
         
@@ -50,6 +46,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Menu\FileMenu::class,
             'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
             'Milax\Mconsole\Contracts\ListRenderer' => \Milax\Mconsole\Renderers\GenericListRenderer::class,
+            'Milax\Mconsole\Contracts\FormRenderer' => \Milax\Mconsole\Renderers\GenericFormRenderer::class,
         ],
         
         // Dependencies for injection
@@ -108,11 +105,6 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Required files
-        foreach ($this->require as $file) {
-            require ($file);
-        }
-        
         // Register API singleton
         $this->app->singleton('API', function ($app) {
             $api = new \stdClass;
@@ -199,10 +191,9 @@ class MconsoleServiceProvider extends ServiceProvider
         
         app('API')->search->register(function ($text) {
             return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->orderBy('type')->get()->transform(function ($file) {
-                $string = new \String($file->filename);
                 return [
                     'icon' => 'file',
-                    'title' => $string->getOriginalFileName(),
+                    'title' => file_get_original_name($file->filename),
                     'filepath' => $file->filename,
                     'path' => $file->path,
                     'description' => '',
@@ -223,6 +214,11 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Required files
+        foreach ($this->require as $file) {
+            require $file;
+        }
+        
         foreach ($this->register['middleware'] as $alias => $class) {
             $this->app['router']->middleware($alias, $class);
         }

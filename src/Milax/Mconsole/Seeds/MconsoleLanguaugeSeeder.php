@@ -4,8 +4,9 @@ namespace Milax\Mconsole\Seeds;
 
 use DB;
 use Milax\Mconsole\Models\Language;
+use Milax\Mconsole\Contracts\MconsoleSeeder;
 
-class MconsoleLanguaugeSeeder
+class MconsoleLanguaugeSeeder implements MconsoleSeeder
 {
     /**
      * Default options with values to create

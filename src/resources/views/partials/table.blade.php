@@ -58,14 +58,14 @@
                 <form action="{{ Request::url() }}" method="GET" class="form-horizontal">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">{{ trans('mconsole::traits.filters.filter') }}</h4>
+                        <h4 class="modal-title">{{ trans('mconsole::forms.filters.filter') }}</h4>
                     </div>
                     <div class="modal-body">
-                        @include('mconsole::traits.filters')
+                        @include('mconsole::filters.form')
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-sm yellow-casablanca">{{ trans('mconsole::traits.filters.apply') }}</button>
-        				<a href="{{ Request::url() }}" class="btn btn-sm">{{ trans('mconsole::traits.filters.reset') }}</a>
+                        <button type="submit" class="btn btn-sm yellow-casablanca">{{ trans('mconsole::forms.filters.apply') }}</button>
+        				<a href="{{ Request::url() }}" class="btn btn-sm">{{ trans('mconsole::forms.filters.reset') }}</a>
                     </div>
                 </form>
             </div>

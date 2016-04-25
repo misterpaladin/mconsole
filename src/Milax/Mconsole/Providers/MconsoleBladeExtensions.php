@@ -42,8 +42,7 @@ class MconsoleBladeExtensions extends ServiceProvider
         });
         
         Blade::directive('variable', function ($expression) {
-            $string = new String($expression);
-            $string = $string->removeParenthesis()->getString();
+            $string = str_remove_parenthesis($expression);
             
             return '<?php
                 $args = [' . $string . '];

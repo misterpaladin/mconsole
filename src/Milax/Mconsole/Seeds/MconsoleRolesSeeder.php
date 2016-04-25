@@ -3,8 +3,9 @@
 namespace Milax\Mconsole\Seeds;
 
 use DB;
+use Milax\Mconsole\Contracts\MconsoleSeeder;
 
-class MconsoleRolesSeeder
+class MconsoleRolesSeeder implements MconsoleSeeder
 {
     /**
      * Table name for options

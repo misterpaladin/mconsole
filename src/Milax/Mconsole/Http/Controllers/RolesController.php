@@ -5,7 +5,8 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
-use ListRenderer;
+use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 
 class RolesController extends Controller
 {
@@ -16,9 +17,10 @@ class RolesController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer)
+    public function __construct(ListRenderer $list, FormRenderer $form)
     {
-        $this->renderer = $renderer;
+        $this->list = $list;
+        $this->form = $form;
     }
 
     /**
@@ -28,7 +30,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(MconsoleRole::notRoot())->setPerPage(20)->setAddAction('roles/create')->render(function ($item) {
+        return $this->list->setQuery(MconsoleRole::notRoot())->setPerPage(20)->setAddAction('roles/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::roles.table.name') => $item->name,
@@ -44,7 +46,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('mconsole::roles.form', [
+        return $this->form->render('mconsole::roles.form', [
             'menu' => app('API')->menu->get(true),
         ]);
     }
@@ -73,7 +75,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        return view('mconsole::roles.form', [
+        return $this->form->render('mconsole::roles.form', [
             'item' => MconsoleRole::find($id),
             'menu' => app('API')->menu->get(true),
         ]);

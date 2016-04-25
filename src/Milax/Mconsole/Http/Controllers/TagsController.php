@@ -5,7 +5,8 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\TagRequest;
 use Milax\Mconsole\Models\Tag;
-use ListRenderer;
+use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 
 class TagsController extends Controller
 {
@@ -17,9 +18,14 @@ class TagsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer)
+    public function __construct(ListRenderer $list, FormRenderer $form)
     {
-        $this->renderer = $renderer;
+        $this->list = $list;
+        $this->form = $form;
+        $this->form->addScripts([
+            '/massets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
+            '/massets/global/plugins/jquery-minicolors/jquery.minicolors.min.js',
+        ]);
     }
     
     /**
@@ -29,7 +35,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(Tag::query())->setPerPage(20)->setAddAction('tags/create')->render(function ($item) {
+        return $this->list->setQuery(Tag::query())->setPerPage(20)->setAddAction('tags/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::tags.table.updated') => $item->updated_at->format('m.d.Y'),
@@ -46,7 +52,7 @@ class TagsController extends Controller
      */
     public function create()
     {
-        return view('mconsole::tags.form');
+        return $this->form->render('mconsole::tags.form');
     }
 
     /**
@@ -68,7 +74,7 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        return view('mconsole::tags.form', [
+        return $this->form->render('mconsole::tags.form', [
             'item' => Tag::find($id),
         ]);
     }

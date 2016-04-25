@@ -10,9 +10,9 @@
 				<div class="col-sm-6">
 					<select name="{{ $filter['key'] }}" class="form-control">
                         @if (!Request::has($filter['key']))
-						    <option value="-1" selected="selected">{{ trans('mconsole::traits.filters.notselected') }}</option>
+						    <option value="-1" selected="selected">{{ trans('mconsole::forms.filters.notselected') }}</option>
                         @else
-                            <option value="-1">{{ trans('mconsole::traits.filters.notselected') }}</option>
+                            <option value="-1">{{ trans('mconsole::forms.filters.notselected') }}</option>
                         @endif
                         @foreach ($filter['options'] as $key => $name)
 							@if (Request::has($filter['key']) && Request::query($filter['key']) == $key)

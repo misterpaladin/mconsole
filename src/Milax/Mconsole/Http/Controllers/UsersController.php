@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\UserRequest;
 use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
-use ListRenderer;
+use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 
 class UsersController extends Controller
 {
@@ -18,9 +19,10 @@ class UsersController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer)
+    public function __construct(ListRenderer $list, FormRenderer $form)
     {
-        $this->renderer = $renderer;
+        $this->list = $list;
+        $this->form = $form;
         $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }
@@ -32,11 +34,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $this->renderer->setText(trans('mconsole::users.filter.email'), 'email', true)
+        $this->list->setText(trans('mconsole::users.filter.email'), 'email', true)
             ->setText(trans('mconsole::users.filter.id'), 'id', true)
             ->setSelect(trans('mconsole::users.filter.role'), 'role_id', $this->roles, true);
         
-        return $this->renderer->setQuery(User::query())->setPerPage(20)->setAddAction('users/create')->render(function ($item) {
+        return $this->list->setQuery(User::query())->setPerPage(20)->setAddAction('users/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::users.table.updated') => $item->updated_at->format('m.d.Y'),
@@ -53,7 +55,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('mconsole::users.form', [
+        return $this->form->render('mconsole::users.form', [
             'roles' => $this->roles,
         ]);
     }
@@ -83,7 +85,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return view('mconsole::users.form', [
+        return $this->form->render('mconsole::users.form', [
             'item' => User::find($id),
             'roles' => $this->roles,
         ]);

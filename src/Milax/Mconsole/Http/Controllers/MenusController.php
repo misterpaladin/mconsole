@@ -5,7 +5,8 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MenuRequest;
 use Milax\Mconsole\Models\Menu;
-use ListRenderer;
+use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 
 class MenusController extends Controller
 {
@@ -16,9 +17,18 @@ class MenusController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer)
+    public function __construct(ListRenderer $list, FormRenderer $form)
     {
-        $this->renderer = $renderer;
+        $this->list = $list;
+        $this->form = $form;
+        $this->form->addStyles([
+            '/massets/global/plugins/jquery-nestable/jquery.nestable.css',
+            '/massets/css/menu-editor.css',
+        ]);
+        $this->form->addScripts([
+            '/massets/global/plugins/jquery-nestable/jquery.nestable.js',
+            '/massets/js/menu-editor.js',
+        ]);
     }
     
     /**
@@ -28,7 +38,7 @@ class MenusController extends Controller
      */
     public function index()
     {
-        return $this->renderer->setQuery(Menu::query())->setPerPage(20)->setAddAction('menus/create')->render(function ($item) {
+        return $this->list->setQuery(Menu::query())->setPerPage(20)->setAddAction('menus/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::menus.table.name') => $item->name,
@@ -43,7 +53,7 @@ class MenusController extends Controller
      */
     public function create()
     {
-        return view('mconsole::menu.form');
+        return $this->form->render('mconsole::menu.form');
     }
 
     /**
@@ -65,7 +75,7 @@ class MenusController extends Controller
      */
     public function edit($id)
     {
-        return view('mconsole::menu.form', [
+        return $this->form->render('mconsole::menu.form', [
             'item' => Menu::find($id),
         ]);
     }
