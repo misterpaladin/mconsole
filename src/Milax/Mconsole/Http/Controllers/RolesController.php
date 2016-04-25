@@ -76,7 +76,7 @@ class RolesController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::roles.form', [
-            'item' => MconsoleRole::find($id),
+            'item' => MconsoleRole::findOrFail($id),
             'menu' => app('API')->menu->get(true),
         ]);
     }
@@ -91,7 +91,7 @@ class RolesController extends Controller
      */
     public function update(MconsoleRoleRequest $request, $id)
     {
-        MconsoleRole::find($id)->update([
+        MconsoleRole::findOrFail($id)->update([
             'name' => $request->input('name'),
             'routes' => collect($request->input('routes'))->keys(),
         ]);
@@ -106,7 +106,7 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        if (MconsoleRole::find($id)->users()->count() > 0) {
+        if (MconsoleRole::findOrFail($id)->users()->count() > 0) {
             return redirect()->back()->withErrors('Cannot role that in use.');
         } else {
             MconsoleRole::destroy($id);

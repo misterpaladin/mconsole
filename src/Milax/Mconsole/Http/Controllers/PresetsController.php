@@ -86,7 +86,7 @@ class PresetsController extends Controller
      */
     public function edit($id)
     {
-        $preset = MconsoleUploadPreset::find($id);
+        $preset = MconsoleUploadPreset::findOrFail($id);
         $preset->extensions = implode(', ', $preset->extensions);
         $preset->operations = json_encode($preset->operations);
         return $this->form->render('mconsole::presets.form', [
@@ -113,7 +113,7 @@ class PresetsController extends Controller
         
         $data['operations'] = json_decode($data['operations'], true);
         
-        MconsoleUploadPreset::find($id)->update($data);
+        MconsoleUploadPreset::findOrFail($id)->update($data);
     }
 
     /**
@@ -125,7 +125,7 @@ class PresetsController extends Controller
      */
     public function destroy($id)
     {
-        $preset = MconsoleUploadPreset::find($id);
+        $preset = MconsoleUploadPreset::findOrFail($id);
         if ($preset->system) {
             return redirect()->back()->withErrors(trans('mconsole::mconsole.errors.system'));
         }

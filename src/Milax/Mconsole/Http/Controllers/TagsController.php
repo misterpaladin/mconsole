@@ -75,7 +75,7 @@ class TagsController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::tags.form', [
-            'item' => Tag::find($id),
+            'item' => Tag::findOrFail($id),
         ]);
     }
 
@@ -88,7 +88,7 @@ class TagsController extends Controller
      */
     public function update(TagRequest $request, $id)
     {
-        Tag::find($id)->update($request->all());
+        Tag::findOrFail($id)->update($request->all());
     }
 
     /**

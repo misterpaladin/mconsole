@@ -86,7 +86,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::users.form', [
-            'item' => User::find($id),
+            'item' => User::findOrFail($id),
             'roles' => $this->roles,
         ]);
     }
@@ -100,7 +100,7 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->lang = $request->input('lang');

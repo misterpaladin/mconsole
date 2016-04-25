@@ -76,7 +76,7 @@ class MenusController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::menu.form', [
-            'item' => Menu::find($id),
+            'item' => Menu::findOrFail($id),
         ]);
     }
 
@@ -89,7 +89,7 @@ class MenusController extends Controller
      */
     public function update(MenuRequest $request, $id)
     {
-        Menu::find($id)->update($request->all());
+        Menu::findOrFail($id)->update($request->all());
     }
 
     /**
