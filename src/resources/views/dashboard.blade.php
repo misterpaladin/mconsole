@@ -8,7 +8,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-bulb font-dark"></i>
-                        <span class="caption-subject font-dark bold uppercase">Мудрость минуты</span>
+                        <span class="caption-subject font-dark bold uppercase">Мудрость</span>
                     </div>
                 </div>
                 <div class="portlet-body form">
