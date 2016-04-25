@@ -31,11 +31,11 @@
     				])
     				
                     @if (Auth::user()->role->key == 'root')
-                        @if (isset($item->id) && $item->id != Auth::id())
+                        @if (!isset($item) || (isset($item->id) && $item->id != Auth::id()))
                             @include('mconsole::forms.select', [
             					'label' => trans('mconsole::users.form.role'),
             					'name' => 'role_id',
-            					'options' => $roles,
+            					'options' => $roles->toArray(),
             				])
                         @endif
                     @endif
