@@ -2,6 +2,9 @@
 
 namespace Milax\Mconsole\Contracts\API;
 
+/**
+ * Repository class for APIs that uses Models
+ */
 abstract class ModelAPI
 {
     protected $model;

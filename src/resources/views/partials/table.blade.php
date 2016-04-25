@@ -46,6 +46,13 @@
 						<p class="align-center">{{ trans('mconsole::tables.notfound') }}</p>
 					@endif
 				</div>
+                @if (isset($paging))
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            {!! $paging->appends(Request::query())->links() !!}
+                        </div>
+                    </div>
+                @endif
 			</div>
 		</div>
 	</div>

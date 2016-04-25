@@ -7,6 +7,7 @@ use Milax\Mconsole\Renderers\FilterableListRenderer;
 use Milax\Mconsole\Processors\TableProcessor;
 use Illuminate\Database\Eloquent\Builder;
 use Milax\Mconsole\Handlers\Filters\GetFilterHandler;
+use Milax\Mconsole\Contracts\PagingHandler;
 use View;
 
 /**
@@ -15,19 +16,21 @@ use View;
 class GenericListRenderer implements ListRenderer
 {
     public $query;
-    public $perPage = 0;
     public $actions = [
         'add' => false,
         'edit' => true,
         'delete' => true,
     ];
     public $defaultView = 'mconsole::layouts.list';
-    
     public $filterHandler;
     
-    public function __construct(GetFilterHandler $filterHandler)
+    protected $processor;
+    
+    public function __construct(GetFilterHandler $filterHandler, PagingHandler $pagingHandler, TableProcessor $processor)
     {
         $this->filterHandler = $filterHandler;
+        $this->pagingHandler = $pagingHandler;
+        $this->processor = $processor;
     }
     
     public function setAddAction($action)
@@ -74,16 +77,11 @@ class GenericListRenderer implements ListRenderer
     {
         $this->query = $this->filterHandler->handleFilterQuery($this->query);
         
-        if ($this->perPage > 0) {
-            $this->items = $this->query->paginate($this->perPage);
-            View::share('paging', $this->items);
-        } else {
-            $this->items = $this->query->get();
-        }
+        $this->items = $this->paginate($this->query);
         
         if (!is_null($view) && View::exists($view)) {
             return view($view, [
-                'items' => TableProcessor::processItems($cb, $this->items),
+                'items' => $this->processor->run($cb, $this->items),
             ]);
         } else {
             $addAction = $this->actions['add'] != false ? $this->actions['add'] : null;
@@ -92,7 +90,7 @@ class GenericListRenderer implements ListRenderer
             }
             return view($this->defaultView, [
                 'tableOptions' => [
-                    'items' => TableProcessor::processItems($cb, $this->items),
+                    'items' => $this->processor->run($cb, $this->items),
                     'add' => $addAction,
                     'edit' => $this->actions['edit'],
                     'delete' => $this->actions['delete'],
@@ -101,15 +99,14 @@ class GenericListRenderer implements ListRenderer
         }
     }
     
-    public function setPerPage($perPage = 20)
+    public function setPerPage($perPage)
     {
-        $this->perPage = $perPage;
+        $this->pagingHandler->setPerPage($perPage);
         return $this;
     }
     
     public function paginate(Builder $query)
     {
-        $this->items = $this->query->paginate($this->perPage);
-        return $this->items;
+        return $this->pagingHandler->paginate($query);
     }
 }

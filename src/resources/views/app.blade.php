@@ -182,14 +182,6 @@
 						<!-- BEGIN PAGE CONTENT INNER -->
 						<div class="page-content-inner">
                             @yield('content')
-							@if (isset($paging))
-    							<div class="row">
-    								<div class="col-xs-12 text-center">
-    									{!! $paging->appends(Request::query())->links() !!}
-    								</div>
-    							</div>
-							@endif
-							
 						</div>
 						<!-- END PAGE CONTENT INNER -->
 					</div>

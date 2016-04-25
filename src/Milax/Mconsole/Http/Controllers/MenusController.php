@@ -38,7 +38,7 @@ class MenusController extends Controller
      */
     public function index()
     {
-        return $this->list->setQuery(Menu::query())->setPerPage(20)->setAddAction('menus/create')->render(function ($item) {
+        return $this->list->setQuery(Menu::query())->setAddAction('menus/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::menus.table.name') => $item->name,
