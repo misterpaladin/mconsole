@@ -21,6 +21,22 @@ interface ListRenderer
     public function removeAddAction();
     
     /**
+     * Remove edit button action
+     * $renderer->removeEditAction();
+     * 
+     * @return $this
+     */
+    public function removeEditAction();
+    
+    /**
+     * Remove delete button action
+     * $renderer->removeDeleteAction();
+     * 
+     * @return $this
+     */
+    public function removeDeleteAction();
+    
+    /**
      * Add text input filter
      * 
      * @param  string $label		Label for input
