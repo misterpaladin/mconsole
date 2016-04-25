@@ -80,7 +80,7 @@ interface ListRenderer
      * @param int $perPage
      * @return $this
      */
-    public function setPerPage($items = 20);
+    public function setPerPage($perPage);
     
     /**
      * Create view with paging and items

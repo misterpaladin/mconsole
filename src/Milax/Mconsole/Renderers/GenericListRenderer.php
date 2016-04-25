@@ -7,6 +7,7 @@ use Milax\Mconsole\Renderers\FilterableListRenderer;
 use Milax\Mconsole\Processors\TableProcessor;
 use Illuminate\Database\Eloquent\Builder;
 use Milax\Mconsole\Handlers\Filters\GetFilterHandler;
+use Milax\Mconsole\Contracts\PagingHandler;
 use View;
 
 /**
@@ -15,7 +16,6 @@ use View;
 class GenericListRenderer implements ListRenderer
 {
     public $query;
-    public $perPage = 20;
     public $actions = [
         'add' => false,
         'edit' => true,
@@ -26,10 +26,11 @@ class GenericListRenderer implements ListRenderer
     
     protected $processor;
     
-    public function __construct(GetFilterHandler $filterHandler, TableProcessor $processor)
+    public function __construct(GetFilterHandler $filterHandler, PagingHandler $pagingHandler, TableProcessor $processor)
     {
-        $this->processor = $processor;
         $this->filterHandler = $filterHandler;
+        $this->pagingHandler = $pagingHandler;
+        $this->processor = $processor;
     }
     
     public function setAddAction($action)
@@ -76,8 +77,7 @@ class GenericListRenderer implements ListRenderer
     {
         $this->query = $this->filterHandler->handleFilterQuery($this->query);
         
-        $this->items = $this->query->paginate($this->perPage);
-        View::share('paging', $this->items);
+        $this->items = $this->paginate($this->query);
         
         if (!is_null($view) && View::exists($view)) {
             return view($view, [
@@ -99,15 +99,14 @@ class GenericListRenderer implements ListRenderer
         }
     }
     
-    public function setPerPage($perPage = 20)
+    public function setPerPage($perPage)
     {
-        $this->perPage = $perPage;
+        $this->pagingHandler->setPerPage($perPage);
         return $this;
     }
     
     public function paginate(Builder $query)
     {
-        $this->items = $this->query->paginate($this->perPage);
-        return $this->items;
+        return $this->pagingHandler->paginate($query);
     }
 }
