@@ -3,6 +3,10 @@
 return [
     'headings' => [
         'signin' => 'Sign in',
+        'forgot' => 'Password recovery',
+    ],
+    'text' => [
+        'forgot_enter_email' => 'Enter email to receive password recovery link',
     ],
     'inputs' => [
         'password' => 'Password',
@@ -13,6 +17,8 @@ return [
     ],
     'buttons' => [
         'login' => 'Login',
+        'back' => 'Back',
+        'restore' => 'Recover',
     ],
     'errors' => [
         'password' => 'Incorrect username or password',

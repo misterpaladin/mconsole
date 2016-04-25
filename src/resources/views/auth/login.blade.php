@@ -73,6 +73,12 @@
 						@endif
 					</div>
 				@endif
+                
+                @if (Session::has('status'))
+                    <div class="alert alert-success">
+                        <p>{{ Session::get('status')}}</p>
+                    </div>
+                @endif
 				
 				<div class="alert alert-danger display-hide">
 					<button class="close" data-close="alert"></button>
@@ -98,7 +104,8 @@
 			</form>
 			<!-- END LOGIN FORM -->
 			<!-- BEGIN FORGOT PASSWORD FORM -->
-			<form class="forget-form" action="index.html" method="post">
+			<form class="forget-form" action="/password/email" method="post">
+                {!! csrf_field() !!}
 				<h3 class="font-green">{{ trans('mconsole::login.headings.forgot') }}</h3>
 				<p> {{ trans('mconsole::login.text.forgot_enter_email') }} </p>
                 <div class="form-group">
