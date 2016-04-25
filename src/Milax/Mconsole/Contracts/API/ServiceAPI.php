@@ -2,6 +2,9 @@
 
 namespace Milax\Mconsole\Contracts\API;
 
+/**
+ * Service APIs
+ */
 interface ServiceAPI
 {
     public function register($args);

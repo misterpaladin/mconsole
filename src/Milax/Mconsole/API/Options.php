@@ -3,8 +3,9 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\ModelAPI;
+use Milax\Mconsole\Contracts\DataManager;
 
-class Options extends ModelAPI
+class Options extends ModelAPI implements DataManager
 {
     /**
      * Get option value by its key
