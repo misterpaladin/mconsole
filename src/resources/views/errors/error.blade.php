@@ -35,7 +35,8 @@
         <div class="page-inner">
             <img src="/massets/pages/img/errors/earth.jpg" class="img-responsive" alt=""> </div>
         <div class="container error-404">
-            <h1>{{ $text[$status]['title'] }}</h1>
+            <h2>{{ $text['heading'] }}</h2>
+            <h2>{{ $text[$status]['title'] }}</h2>
             {!! $text[$status]['text'] !!}
             @if (URL::previous() == Request::url())
                 <p><a href="/mconsole/" class="btn red btn-outline"> {{ $text['home'] }} </a><br></p>

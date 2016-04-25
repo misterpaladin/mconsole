@@ -24,13 +24,14 @@ return [
         'accessdenied' => 'Access denied!',
         'back' => 'Back',
         'home' => 'Return home',
+        'heading' => 'Houston, we have a problem —',
         '404' => [
-            'title' => 'Not found',
-            'text' => '<h2>Houston, we have a problem.</h2><p> Actually, the page you are looking for does not exist. </p>',
+            'title' => 'Not found (404)',
+            'text' => '<p> Actually, the page you are looking for does not exist. </p>',
         ],
         '500' => [
-            'title' => 'Server error',
-            'text' => '<h2>Houston, we have a problem.</h2><p> Actually, something is broken. </p>',
+            'title' => 'Server error (500)',
+            'text' => '<p> Actually, something is broken. </p>',
         ],
     ],
 ];
