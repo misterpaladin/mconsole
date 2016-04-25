@@ -16,7 +16,11 @@ class GenericListRenderer implements ListRenderer
 {
     public $query;
     public $perPage = 0;
-    public $action;
+    public $actions = [
+        'add' => false,
+        'edit' => true,
+        'delete' => true,
+    ];
     public $defaultView = 'mconsole::layouts.list';
     
     public $filterHandler;
@@ -28,12 +32,25 @@ class GenericListRenderer implements ListRenderer
     
     public function setAddAction($action)
     {
-        $this->action = $action;
+        $this->actions['add'] = $action;
         return $this;
     }
     
     public function removeAddAction()
     {
+        $this->actions['add'] = false;
+        return $this;
+    }
+    
+    public function removeEditAction()
+    {
+        $this->actions['edit'] = false;
+        return $this;
+    }
+    
+    public function removeDeleteAction()
+    {
+        $this->actions['delete'] = false;
         return $this;
     }
     
@@ -69,13 +86,17 @@ class GenericListRenderer implements ListRenderer
                 'items' => TableProcessor::processItems($cb, $this->items),
             ]);
         } else {
-            $addAction = isset($this->action) ? $this->action : null;
+            $addAction = $this->actions['add'] != false ? $this->actions['add'] : null;
             if (!is_null($addAction)) {
                 $addAction = (str_contains($addAction, 'mconsole')) ? $addAction : sprintf('/mconsole/%s', trim($addAction, '/'));
             }
             return view($this->defaultView, [
-                'items' => TableProcessor::processItems($cb, $this->items),
-                'add' => $addAction,
+                'tableOptions' => [
+                    'items' => TableProcessor::processItems($cb, $this->items),
+                    'add' => $addAction,
+                    'edit' => $this->actions['edit'],
+                    'delete' => $this->actions['delete'],
+                ],
             ]);
         }
     }

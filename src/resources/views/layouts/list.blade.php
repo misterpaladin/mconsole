@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('mconsole::partials.table', [
-    'add' => $add,
-])
+    @include('mconsole::partials.table', $tableOptions)
 
 @endsection

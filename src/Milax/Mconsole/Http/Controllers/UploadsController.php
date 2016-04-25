@@ -34,7 +34,7 @@ class UploadsController extends Controller
                 'document' => 'Document',
             ], true);
         
-        return $this->renderer->setQuery(Upload::query())->setPerPage(20)->render(function ($item) {
+        return $this->renderer->setQuery(Upload::query())->setPerPage(20)->removeEditAction()->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,
