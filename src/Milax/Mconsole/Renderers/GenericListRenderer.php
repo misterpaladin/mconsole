@@ -15,7 +15,7 @@ use View;
 class GenericListRenderer implements ListRenderer
 {
     public $query;
-    public $perPage = 0;
+    public $perPage = 20;
     public $actions = [
         'add' => false,
         'edit' => true,
@@ -76,12 +76,8 @@ class GenericListRenderer implements ListRenderer
     {
         $this->query = $this->filterHandler->handleFilterQuery($this->query);
         
-        if ($this->perPage > 0) {
-            $this->items = $this->query->paginate($this->perPage);
-            View::share('paging', $this->items);
-        } else {
-            $this->items = $this->query->get();
-        }
+        $this->items = $this->query->paginate($this->perPage);
+        View::share('paging', $this->items);
         
         if (!is_null($view) && View::exists($view)) {
             return view($view, [
