@@ -39,7 +39,7 @@ class UploadsController extends Controller
                 '#' => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,
                 trans('mconsole::uploads.table.path') => $item->path,
-                trans('mconsole::uploads.table.filename') => (new \String($item->filename))->getOriginalFileName(),
+                trans('mconsole::uploads.table.filename') => file_get_original_name($item->filename),
                 trans('mconsole::uploads.table.copies') => count($item->copies),
                 trans('mconsole::uploads.table.related') => strlen($item->related_class) > 0 ? sprintf('%s #%s', class_basename($item->related_class), $item->related_id) : '',
             ];

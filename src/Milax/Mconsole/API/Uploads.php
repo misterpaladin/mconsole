@@ -199,9 +199,8 @@ class Uploads implements GenericAPI
                         
                         // Check if file is allowed
                         if (!in_array(pathinfo($file, PATHINFO_EXTENSION), $preset->extensions)) {
-                            $errored = new String($file);
                             array_push($errors, trans('mconsole::mconsole.errors.extension', [
-                                'file' => $errored->getOriginalFileName(),
+                                'file' => file_get_original_name($file),
                             ]));
                             continue;
                         }
