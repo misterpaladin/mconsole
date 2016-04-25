@@ -3,7 +3,7 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\GenericAPI;
-use Milax\Mconsole\Http\UploadHandler;
+use Milax\Mconsole\Http\Uploads\UploadHandler;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Models\Upload;
 use File;

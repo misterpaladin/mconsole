@@ -10,7 +10,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-namespace Milax\Mconsole\Http;
+namespace Milax\Mconsole\Http\Uploads;
 
 class UploadHandler
 {
