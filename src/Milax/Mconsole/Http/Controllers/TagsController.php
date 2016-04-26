@@ -10,7 +10,7 @@ use Milax\Mconsole\Contracts\FormRenderer;
 
 class TagsController extends Controller
 {
-    use \HasRedirects;
+    use \HasRedirects, \DoesNotHaveShow;
     
     protected $redirectTo = '/mconsole/tags';
     protected $model = 'Milax\Mconsole\Models\Tag';

@@ -10,7 +10,7 @@ use Milax\Mconsole\Contracts\FormRenderer;
 
 class RolesController extends Controller
 {
-    use \HasRedirects;
+    use \HasRedirects, \DoesNotHaveShow;
 
     protected $model = 'Milax\Mconsole\Models\MconsoleRole';
     protected $redirectTo = '/mconsole/roles';

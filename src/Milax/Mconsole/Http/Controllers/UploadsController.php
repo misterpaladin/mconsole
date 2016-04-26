@@ -8,7 +8,7 @@ use Milax\Mconsole\Contracts\ListRenderer;
 
 class UploadsController extends Controller
 {
-    use \HasRedirects;
+    use \HasRedirects, \DoesNotHaveShow;
     
     protected $redirectTo = '/mconsole/uploads';
     protected $model = 'Milax\Mconsole\Models\Upload';

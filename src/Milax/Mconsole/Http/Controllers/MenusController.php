@@ -10,7 +10,7 @@ use Milax\Mconsole\Contracts\FormRenderer;
 
 class MenusController extends Controller
 {
-    use \HasRedirects;
+    use \HasRedirects, \DoesNotHaveShow;
     
     protected $model = 'Milax\Mconsole\Models\Menu';
     protected $redirectTo = '/mconsole/menus';

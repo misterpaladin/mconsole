@@ -11,7 +11,7 @@ use Milax\Mconsole\Contracts\FormRenderer;
 
 class UsersController extends Controller
 {
-    use \HasRedirects;
+    use \HasRedirects, \DoesNotHaveShow;
     
     protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';

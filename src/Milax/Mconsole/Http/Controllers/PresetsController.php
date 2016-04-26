@@ -12,7 +12,7 @@ use Milax\Mconsole\Contracts\FormRenderer;
 
 class PresetsController extends Controller
 {
-    use \HasRedirects;
+    use \HasRedirects, \DoesNotHaveShow;
 
     protected $redirectTo = '/mconsole/presets';
     protected $model = 'Milax\Mconsole\Models\MconsoleUploadPreset';
