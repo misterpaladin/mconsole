@@ -35,6 +35,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'HasRedirects' => \Milax\Mconsole\Traits\HasRedirects::class,
             'HasUploads' => \Milax\Mconsole\Traits\HasUploads::class,
             'HasTags' => \Milax\Mconsole\Traits\HasTags::class,
+            'HasLinks' => \Milax\Mconsole\Traits\HasLinks::class,
             'HasState' => \Milax\Mconsole\Traits\HasState::class,
             'System' => \Milax\Mconsole\Traits\System::class,
             
@@ -121,6 +122,7 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->quickmenu = new \Milax\Mconsole\API\QuickMenu;
             $api->uploads = new \Milax\Mconsole\API\Uploads;
             $api->info = new \Milax\Mconsole\API\Info;
+            $api->links = new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class);
             return $api;
         });
         
