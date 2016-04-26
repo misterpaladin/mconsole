@@ -10,7 +10,7 @@ interface FormRenderer
       * @param array $paths [Paths to .css files]
       * @return $this
       */
-    public function addStyles($path);
+    public function addStyles($paths);
     
     /**
      * Include a set javascripts files
@@ -18,7 +18,7 @@ interface FormRenderer
      * @param array $paths [Paths to .js files]
      * @return $this
      */
-    public function addScripts($path);
+    public function addScripts($paths);
     
     /**
      * Render form inside mconsole wrapper
