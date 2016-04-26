@@ -7,6 +7,11 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'back' => 'Back',
+    'state' => [
+        'name' => 'State',
+        'on' => 'On',
+        'off' => 'Off',
+    ],
     'deletemodal' => [
         'title' => 'Delete item',
         'body' => 'Are you sure you want to delete this item?',

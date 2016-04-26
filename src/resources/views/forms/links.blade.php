@@ -1,5 +1,5 @@
 @include('mconsole::forms.select', [
-    'label' => trans('mconsole::pages.form.links.set'),
+    'label' => trans('mconsole::forms.links.set'),
     'name' => 'linkable_id',
     'options' => $linkable_sets->transform(function ($linkable) use (&$model, &$item, &$attribute) {
         if ($linkable->linkable_type == $model) {
@@ -19,7 +19,7 @@
 ])
 
 @trans([
-    'links-editor-title' => trans('mconsole::pages.form.links.title'),
-    'links-editor-url' => trans('mconsole::pages.form.links.url'),
-    'links-editor-enabled' => trans('mconsole::pages.form.links.enabled'),
+    'links-editor-title' => trans('mconsole::forms.links.title'),
+    'links-editor-url' => trans('mconsole::forms.links.url'),
+    'links-editor-enabled' => trans('mconsole::forms.links.enabled'),
 ])

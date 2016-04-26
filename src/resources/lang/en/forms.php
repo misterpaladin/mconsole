@@ -31,4 +31,11 @@ return [
         'apply' => 'Apply',
         'reset' => 'Reset',
     ],
+    'links' => [
+        'set' => 'Attach links from',
+        'label' => 'Links',
+        'title' => 'Text',
+        'url' => 'URL',
+        'enabled' => 'Enabled',
+    ],
 ];
