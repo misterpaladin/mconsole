@@ -27,6 +27,7 @@ Route::group([
         Route::get('/search', 'SearchController@handle');
         Route::get('/search/{namespace}', 'SearchController@handle');
         Route::any('/uploads/upload', 'UploadsController@upload');
+        Route::get('/uploads/restore', 'UploadsController@restore');
         Route::get('/uploads/get', 'UploadsController@get');
         Route::get('/uploads/delete/{file}', 'UploadsController@delete');
     });
