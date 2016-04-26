@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 trait HasTags
 {
     /**
-     * Dynamic hasMany relationship on Image model
+     * Dynamic hasMany relationship on Tag model
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */

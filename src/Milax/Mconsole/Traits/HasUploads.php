@@ -7,7 +7,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 trait HasUploads
 {
     /**
-     * Dynamic hasMany relationship on Image model
+     * Dynamic hasMany relationship on Upload model
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

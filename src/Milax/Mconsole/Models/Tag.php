@@ -2,7 +2,6 @@
 
 namespace Milax\Mconsole\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use Milax\Mconsole\Models\Taggable;
 
