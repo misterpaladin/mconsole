@@ -11,16 +11,75 @@ use Image;
 use Request;
 use Session;
 use String;
+use Cache;
+use Auth;
 
 class Uploads implements GenericAPI
 {
     protected $uploadsPath;
+    protected $backupName = null;
     
     public function __construct()
     {
         $this->uploadsPath = MX_UPLOADS_PATH;
         $this->requestData = Request::all();
         $this->presets = MconsoleUploadPreset::getCached();
+    }
+    
+    /**
+     * Get backup name
+     *
+     * @param string $group [Group name]
+     * @return string
+     */
+    public function getBackupName($group = null)
+    {
+        $group = $group ? $group : Request::input('group');
+        if (!$this->backupName) {
+            $this->backupName = sprintf('%s_%s_%s', Auth::id(), $group, Request::server('HTTP_REFERER'));
+        }
+        return $this->backupName;
+    }
+    
+    /**
+     * Backup response from file uploads handler
+     *
+     * @param object $response [Response from upload handler]
+     * @return void
+     */
+    public function backup($response)
+    {
+        if (!Cache::has($this->getBackupName())) {
+            Cache::put($this->getBackupName(), [], 15);
+        }
+        
+        Cache::put($this->getBackupName(), array_merge(Cache::get($this->getBackupName()), $response['files']), 15);
+    }
+    
+    /**
+     * Restore response from file uploads handler
+     * @return array
+     */
+    public function restore()
+    {
+        if (Cache::has($this->getBackupName())) {
+            $response = Cache::get($this->getBackupName());
+        } else {
+            $response = [];
+        }
+        
+        return $response;
+    }
+    
+    /**
+     * Drop backup caches
+     *
+     * @param string $group [Group name]
+     * @return void
+     */
+    public function dropBackup($group)
+    {
+        Cache::forget($this->getBackupName($group));
     }
     
     /**
@@ -93,6 +152,12 @@ class Uploads implements GenericAPI
             }
         });
         
+        if (count($backup = $this->restore()) > 0) {
+            foreach ($backup as $file) {
+                $files->get('files')->push($file);
+            }
+        }
+        
         return $files;
     }
     
@@ -140,6 +205,8 @@ class Uploads implements GenericAPI
         foreach ($response['files'] as $key => $file) {
             $response['files'][$key]->deleteUrl = sprintf('%s%s', $config['script_url'], $file->name);
         }
+        
+        $this->backup($response);
         
         return json_encode($response);
     }
@@ -251,6 +318,8 @@ class Uploads implements GenericAPI
                         }
                         
                         $files->get($group)->push($upload);
+                        
+                        $this->dropBackup($group);
                     }
                 }
             }
