@@ -30,5 +30,6 @@ class ViewComposersServiceProvider extends ServiceProvider
         view()->composer('mconsole::forms.tags', 'Milax\Mconsole\Composers\TagsInputComposer');
         view()->composer('mconsole::helpers.blade', 'Milax\Mconsole\Composers\BladeHelperViewComposer');
         view()->composer('mconsole::forms.links', 'Milax\Mconsole\Composers\LinksSetsComposer');
+        view()->composer('mconsole::menu.form', 'Milax\Mconsole\Composers\LanguagesComposer');
     }
 }

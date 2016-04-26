@@ -44,6 +44,22 @@
                             'menu-editor-link' => trans('mconsole::menus.form.link'),
                             'menu-editor-blank' => trans('mconsole::menus.form.blank'),
                         ])
+                        <div class="tabbable-line">
+    						<ul class="nav nav-tabs">
+                                @foreach ($languages as $key => $language)
+        							<li @if ($key == 0) class="active" @endif>
+        								<a href="#lang_{{ $language->id }}" data-toggle="tab"> {{ $language->name }}  </a>
+        							</li>
+                                @endforeach
+    						</ul>
+    						<div class="tab-content">
+                                @foreach ($languages as $key => $language)
+        							<div class="tab-pane fade @if ($key == 0) active @endif in" id="lang_{{ $language->id }}">
+                                        <div class="menu-editor" data-lang="{{ $language->key }}"></div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
