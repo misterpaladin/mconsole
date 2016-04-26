@@ -15,25 +15,25 @@
     @endif
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
-        <div class="col-xs-12">
+        <div class="col-xs-12 buttons-set">
             <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-xs green fileinput-button">
+            <span class="btn btn-xs green fileinput-button disabled">
                 <i class="fa fa-plus"></i>
                 <span> {{ trans('mconsole::uploader.add') }} </span>
                 <input type="file" name="files[]" @if (isset($multiple) && $multiple === true) multiple="" @endif> </span>
-            <button type="submit" class="btn btn-xs blue start hide">
+            <button type="submit" class="btn btn-xs blue start hide disabled">
                 <i class="fa fa-upload"></i>
                 <span> {{ trans('mconsole::uploader.upload') }} </span>
             </button>
-            <button type="button" class="btn btn-xs blue description">
+            <button type="button" class="btn btn-xs blue description disabled">
                 <i class="fa fa-info-circle"></i>
                 <span> {{ trans('mconsole::uploader.description') }} </span>
             </button>
-            <button type="reset" class="btn btn-xs warning cancel">
+            <button type="reset" class="btn btn-xs warning cancel disabled">
                 <i class="fa fa-ban-circle"></i>
                 <span> {{ trans('mconsole::uploader.cancel') }} </span>
             </button>
-            <button type="button" class="btn btn-xs red delete">
+            <button type="button" class="btn btn-xs red delete disabled">
                 <i class="fa fa-trash"></i>
                 <span> {{ trans('mconsole::uploader.delete') }} </span>
             </button>
@@ -45,6 +45,7 @@
             <span class="fileupload-process"> </span>
         </div>
     </div>
+    <div class="text-center loader" style="font-size: 20px; margin-top: 20px;"><i class="fa fa-spin fa-spinner"></i></div>
     <div class="row fileupload-buttonbar">
         <!-- The global progress information -->
         <div class="col-xs-12 fileupload-progress fade">
