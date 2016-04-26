@@ -32,12 +32,13 @@ class MconsoleServiceProvider extends ServiceProvider
             
             // Traits
             'Cacheable' => \Milax\Cacheable::class,
-            'HasRedirects' => \Milax\Mconsole\Traits\HasRedirects::class,
-            'HasUploads' => \Milax\Mconsole\Traits\HasUploads::class,
-            'HasTags' => \Milax\Mconsole\Traits\HasTags::class,
-            'HasLinks' => \Milax\Mconsole\Traits\HasLinks::class,
-            'HasState' => \Milax\Mconsole\Traits\HasState::class,
-            'System' => \Milax\Mconsole\Traits\System::class,
+            'HasRedirects' => \Milax\Mconsole\Traits\Controllers\HasRedirects::class,
+            'DoesNotHaveShow' => \Milax\Mconsole\Traits\Controllers\DoesNotHaveShow::class,
+            'HasUploads' => \Milax\Mconsole\Traits\Models\HasUploads::class,
+            'HasLinks' => \Milax\Mconsole\Traits\Models\HasLinks::class,
+            'HasTags' => \Milax\Mconsole\Traits\Models\HasTags::class,
+            'HasState' => \Milax\Mconsole\Traits\Models\HasState::class,
+            'System' => \Milax\Mconsole\Traits\Models\System::class,
             
             // Own classes
             'DocsParser' => \Milax\Mconsole\Docs\DocsParser::class,

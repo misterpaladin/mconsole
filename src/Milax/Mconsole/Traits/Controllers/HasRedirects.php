@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Traits;
+namespace Milax\Mconsole\Traits\Controllers;
 
 use Milax\Mconsole\Exceptions\ModelPropertyException;
 use Milax\Mconsole\Exceptions\RedirectToPropertyException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Traits;
+namespace Milax\Mconsole\Traits\Models;
 
 trait System
 {
