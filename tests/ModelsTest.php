@@ -16,7 +16,7 @@ class ModelsTest extends TestCase
             if (class_exists($namespaced)) {
                 // Model creation test
 
-                if (in_array($class, ['MconsoleMenu', 'MconsoleDoc', 'MconsoleDocset', 'Taggable'])) {
+                if (in_array($class, ['MconsoleMenu', 'MconsoleDoc', 'MconsoleDocset', 'Taggable', 'Linkable'])) {
                     continue;
                 }
                 
