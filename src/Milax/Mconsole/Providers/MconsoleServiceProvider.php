@@ -123,6 +123,7 @@ class MconsoleServiceProvider extends ServiceProvider
             $api->uploads = new \Milax\Mconsole\API\Uploads;
             $api->info = new \Milax\Mconsole\API\Info;
             $api->links = new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class);
+            $api->tags = new \Milax\Mconsole\API\Tags(\Milax\Mconsole\Models\Tag::class);
             return $api;
         });
         
