@@ -4,6 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
+    config.allowedContent = true;
 	config.uiColor = 'FFFFFF';
 	config.colorButton_colors = '00923E,FFFFFF,FFFFFF';
 	config.removeButtons = 'Anchor,Smiley,Flash,PageBreak,Iframe,Language,JustifyBlock,SpellChecker,Scayt,Font';
