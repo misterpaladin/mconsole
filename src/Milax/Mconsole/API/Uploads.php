@@ -129,7 +129,7 @@ class Uploads implements GenericAPI
             'upload_dir' => storage_path('tmp/uploads/'),
             'upload_url' => '/uploads/preview/',
             'print_response' => false,
-            'script_url' => '/mconsole/api/images/delete/',
+            'script_url' => '/mconsole/api/uploads/delete/',
             'delete_type' => 'GET',
         ];
         

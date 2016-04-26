@@ -18,7 +18,7 @@ class FilesController extends Controller
     {
         $this->uploadDir = storage_path('tmp/uploads/');
         $this->previewUrl = '/storage/images/';
-        $this->scriptUrl = '/mconsole/api/images/delete/';
+        $this->scriptUrl = '/mconsole/api/uploads/delete/';
     }
     
     /**
