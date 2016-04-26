@@ -21,7 +21,7 @@ class MconsoleLanguaugeSeeder implements MconsoleSeeder
         ],
         [
             'key' => 'en',
-            'name' => 'Английский',
+            'name' => 'English',
         ],
     ];
     
