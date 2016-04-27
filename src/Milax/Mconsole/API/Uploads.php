@@ -135,22 +135,24 @@ class Uploads implements GenericAPI
                 break;
         }
         
-        Upload::where('type', $type)->where('group', $group)->where('related_class', urldecode($class))->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($file) use (&$suffix, &$type, &$files, &$url, &$scriptURL) {
-            if (File::exists(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename))) {
-                $files->get('files')->push([
-                    'name' => $file->filename,
-                    'type' => $file->type,
-                    'language_id' => $file->language_id,
-                    'title' => $file->title,
-                    'description' => $file->description,
-                    'size' => File::size(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename)),
-                    'url' => sprintf('%s%s/%s%s', $url, $file->path, $suffix, $file->filename),
-                    'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $file->path, $file->filename),
-                    'deleteUrl' => sprintf('%s%s', $scriptURL, $file->id),
-                    'deleteType' => 'GET',
-                ]);
-            }
-        });
+        if ($id) {
+            Upload::where('type', $type)->where('group', $group)->where('related_class', urldecode($class))->where('related_id', (int) $id)->orderBy('order')->get()->each(function ($file) use (&$suffix, &$type, &$files, &$url, &$scriptURL) {
+                if (File::exists(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename))) {
+                    $files->get('files')->push([
+                        'name' => $file->filename,
+                        'type' => $file->type,
+                        'language_id' => $file->language_id,
+                        'title' => $file->title,
+                        'description' => $file->description,
+                        'size' => File::size(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename)),
+                        'url' => sprintf('%s%s/%s%s', $url, $file->path, $suffix, $file->filename),
+                        'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $file->path, $file->filename),
+                        'deleteUrl' => sprintf('%s%s', $scriptURL, $file->id),
+                        'deleteType' => 'GET',
+                    ]);
+                }
+            });
+        }
         
         if (count($backup = $this->restore()) > 0) {
             foreach ($backup as $file) {
