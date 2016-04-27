@@ -6,7 +6,7 @@ use DB;
 use File;
 use Illuminate\Console\Command;
 use Milax\Mconsole\Seeds;
-use Carbon;
+use Carbon\Carbon;
 
 class Installer extends Command
 {
