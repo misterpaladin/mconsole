@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\API;
 
-use Milax\Mconsole\Contracts\API\ModelAPI;
+use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Contracts\DataManager;
 
-class Presets extends ModelAPI implements DataManager
+class Presets extends RepositoryAPI implements DataManager
 {
     /**
      * Get preset value by its key

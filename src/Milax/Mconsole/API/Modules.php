@@ -2,14 +2,14 @@
 
 namespace Milax\Mconsole\API;
 
-use Milax\Mconsole\Contracts\API\ModelAPI;
+use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Artisan;
 use File;
 use Storage;
 use Schema;
 use DB;
 
-class Modules extends ModelAPI
+class Modules extends RepositoryAPI
 {
     public $modules;
     

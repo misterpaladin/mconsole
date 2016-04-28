@@ -3,10 +3,10 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\GenericAPI;
-use Milax\Mconsole\Contracts\API\ModelAPI;
+use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Request;
 
-class Links extends ModelAPI implements GenericAPI
+class Links extends RepositoryAPI implements GenericAPI
 {
     /**
      * Sync or detach links

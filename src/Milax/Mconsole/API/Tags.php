@@ -3,10 +3,10 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\GenericAPI;
-use Milax\Mconsole\Contracts\API\ModelAPI;
+use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Request;
 
-class Tags extends ModelAPI implements GenericAPI
+class Tags extends RepositoryAPI implements GenericAPI
 {
     /**
      * Sync or detach tags

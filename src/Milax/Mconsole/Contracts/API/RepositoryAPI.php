@@ -3,9 +3,9 @@
 namespace Milax\Mconsole\Contracts\API;
 
 /**
- * Repository class for APIs that uses Models
+ * Repository abstract class for APIs that uses Models
  */
-abstract class ModelAPI
+abstract class RepositoryAPI
 {
     protected $model;
     
@@ -28,6 +28,18 @@ abstract class ModelAPI
     {
         $model = $this->model;
         return $model::get();
+    }
+    
+    /**
+     * Find by ID
+     * 
+     * @param   $id [Object id]
+     * @return mixed [Model instance]
+     */
+    public function find($id)
+    {
+        $model = $this->model;
+        return $model::find($id);
     }
     
     /**

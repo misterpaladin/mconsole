@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\API;
 
-use Milax\Mconsole\Contracts\API\ModelAPI;
+use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Models\Notification;
 
-class Notifications extends ModelAPI
+class Notifications extends RepositoryAPI
 {
     /**
      * Push notification
