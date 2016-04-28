@@ -148,7 +148,7 @@
     							</tbody>
     						</table>
     					@else
-                            <p>Все возможные пакеты установлены</p>
+                            <p>{{ trans('mconsole::modules.table.nosuggested') }}</p>
                         @endif
     				</div>
     			</div>
