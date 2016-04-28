@@ -5,7 +5,7 @@ namespace Milax\Mconsole\Traits\Models;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 trait HasLinks
-{    
+{
     /**
      * Dynamic hasMany relationship on Link model
      * 
