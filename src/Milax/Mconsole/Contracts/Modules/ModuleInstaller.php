@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Contracts\Modules;
 
-interface Installer
+interface ModuleInstaller
 {
     /**
      * Module install callback function

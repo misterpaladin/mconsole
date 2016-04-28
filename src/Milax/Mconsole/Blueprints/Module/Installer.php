@@ -2,7 +2,7 @@
 
 namespace %s\Mconsole\%s;
 
-use Milax\Mconsole\Contracts\Modules\Installer;
+use Milax\Mconsole\Contracts\Modules\ModuleInstaller;
 
 class Installer implements ModuleInstaller
 {
