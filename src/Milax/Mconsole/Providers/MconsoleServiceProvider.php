@@ -112,22 +112,23 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         // Register API singleton
         $this->app->singleton('API', function ($app) {
-            $api = new \stdClass;
-            $api->notifications = new \Milax\Mconsole\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class);
-            $api->search = new \Milax\Mconsole\API\Search;
-            $api->modules = new \Milax\Mconsole\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this);
-            $api->menu = new \Milax\Mconsole\API\Menu(new \Milax\Mconsole\Menu\FileMenu);
-            $api->quotes = new \Milax\Mconsole\API\Quotes;
-            $api->options = new \Milax\Mconsole\API\Options(\Milax\Mconsole\Models\MconsoleOption::class);
-            $api->presets = new \Milax\Mconsole\API\Presets(\Milax\Mconsole\Models\MconsoleUploadPreset::class);
-            $api->translations = new \Milax\Mconsole\API\Translations($this);
-            $api->quickmenu = new \Milax\Mconsole\API\QuickMenu;
-            $api->uploads = new \Milax\Mconsole\API\Uploads;
-            $api->info = new \Milax\Mconsole\API\Info;
-            $api->links = new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class);
-            $api->tags = new \Milax\Mconsole\API\Tags(\Milax\Mconsole\Models\Tag::class);
-            return $api;
+            return new \Milax\Mconsole\API\APIManager;
         });
+        
+        // Register mconsole APIs
+        app('API')->register('notifications', new \Milax\Mconsole\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class));
+        app('API')->register('search', new \Milax\Mconsole\API\Search);
+        app('API')->register('modules', new \Milax\Mconsole\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this));
+        app('API')->register('menu', new \Milax\Mconsole\API\Menu(new \Milax\Mconsole\Menu\FileMenu));
+        app('API')->register('quotes', new \Milax\Mconsole\API\Quotes);
+        app('API')->register('options', new \Milax\Mconsole\API\Options(\Milax\Mconsole\Models\MconsoleOption::class));
+        app('API')->register('presets', new \Milax\Mconsole\API\Presets(\Milax\Mconsole\Models\MconsoleUploadPreset::class));
+        app('API')->register('translations', new \Milax\Mconsole\API\Translations($this));
+        app('API')->register('quickmenu', new \Milax\Mconsole\API\QuickMenu);
+        app('API')->register('uploads', new \Milax\Mconsole\API\Uploads);
+        app('API')->register('info', new \Milax\Mconsole\API\Info);
+        app('API')->register('links', new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class));
+        app('API')->register('tags', new \Milax\Mconsole\API\Tags(\Milax\Mconsole\Models\Tag::class));
         
         // Run one time setup
         app('API')->modules->scan();
