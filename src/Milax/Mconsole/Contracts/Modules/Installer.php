@@ -1,8 +1,8 @@
 <?php
 
-namespace Milax\Mconsole\Contracts;
+namespace Milax\Mconsole\Contracts\Modules;
 
-interface ModuleInstaller
+interface Installer
 {
     /**
      * Module install callback function
