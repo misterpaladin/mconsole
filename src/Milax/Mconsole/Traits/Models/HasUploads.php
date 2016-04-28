@@ -5,7 +5,7 @@ namespace Milax\Mconsole\Traits\Models;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait HasUploads
-{    
+{
     /**
      * Dynamic hasMany relationship on Upload model
      * 
@@ -24,8 +24,6 @@ trait HasUploads
      */
     protected function cascadeDeleteUploads()
     {
-        $this->uploads->each(function ($upload) {
-            $upload->delete();
-        });
+        app('API')->uploads->detach($this);
     }
 }

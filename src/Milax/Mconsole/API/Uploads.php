@@ -112,6 +112,19 @@ class Uploads implements GenericAPI
     }
     
     /**
+     * Delete uploads from given object
+     *
+     * @param mixed $instance [Class instance]
+     * @return void
+     */
+    public function detach($instance)
+    {
+        $instance->uploads->each(function ($upload) {
+            $upload->delete();
+        });
+    }
+    
+    /**
      * Get images for given group, class and id
      * 
      * @param  string $group [Group name]
