@@ -25,7 +25,8 @@ class UsersController extends Controller
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
-        $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');
+        
+        $this->roles = app()->make('RolesRepository')->query()->notRoot()->get()->lists('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }
     
