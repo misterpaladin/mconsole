@@ -54,7 +54,19 @@ abstract class EloquentRepository implements Repository
     public function create($data)
     {
         $model = $this->model;
-        return $model::create($data);
+        $instance = new $model;
+        $parent = get_parent_class($instance);
+        
+        // Fix Eloquent's fillable bug
+        if ($parent != 'Illuminate\Database\Eloquent\Model') {
+            $parent = new $parent;
+            $instance->fillable(array_merge($parent->getFillable(), $instance->getFillable()));
+        }
+        
+        $instance->fill($data);
+        $instance->save();
+        
+        return $instance;
     }
     
     public function update($id, $data)
