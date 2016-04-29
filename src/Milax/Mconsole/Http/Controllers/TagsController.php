@@ -7,6 +7,7 @@ use Milax\Mconsole\Http\Requests\TagRequest;
 use Milax\Mconsole\Models\Tag;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
+use Milax\Mconsole\Contracts\Repository;
 
 class TagsController extends Controller
 {
@@ -18,10 +19,11 @@ class TagsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form)
+    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
         $this->list = $list;
         $this->form = $form;
+        $this->repository = $repository;
         $this->form->addScripts([
             '/massets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
             '/massets/global/plugins/jquery-minicolors/jquery.minicolors.min.js',
@@ -35,7 +37,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return $this->list->setQuery(Tag::query())->setAddAction('tags/create')->render(function ($item) {
+        return $this->list->setQuery($this->repository->index())->setAddAction('tags/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::tags.table.updated') => $item->updated_at->format('m.d.Y'),
@@ -63,7 +65,7 @@ class TagsController extends Controller
      */
     public function store(TagRequest $request)
     {
-        Tag::create($request->all());
+        $this->repository->create($request->all());
     }
 
     /**
@@ -75,7 +77,7 @@ class TagsController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::tags.form', [
-            'item' => Tag::findOrFail($id),
+            'item' => $this->repository->find($id),
         ]);
     }
 
@@ -88,7 +90,7 @@ class TagsController extends Controller
      */
     public function update(TagRequest $request, $id)
     {
-        Tag::findOrFail($id)->update($request->all());
+        $this->repository->update($id, $request->all());
     }
 
     /**
@@ -99,6 +101,6 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        Tag::destroy($id);
+        $this->repository->destroy($id);
     }
 }

@@ -5,9 +5,15 @@ namespace Milax\Mconsole\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\Variable;
+use Milax\Mconsole\Contracts\Repository;
 
 class VariablesController extends Controller
 {
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+    
     /**
      * Show variables form
      * 
@@ -16,7 +22,7 @@ class VariablesController extends Controller
     public function index()
     {
         return view('mconsole::variables.form', [
-            'variables' => Variable::all(),
+            'variables' => $this->repository->get(),
         ]);
     }
     
@@ -28,16 +34,18 @@ class VariablesController extends Controller
      */
     public function save(Request $request)
     {
-        Variable::truncate();
+        $model = $this->repository->model;
+        
+        $model::truncate();
         
         $data = collect($request->input('variables'))->reject(function ($variable) {
             return strlen($variable['key']) == 0;
         });
         if ($data->count() > 0) {
-            Variable::insert($data->toArray());
+            $this->repository->insert($data->toArray());
         }
         
-        Variable::dropCache();
+        $model::dropCache();
         
         return redirect()->back()->with('status', trans('mconsole::variables.saved'));
     }

@@ -14,12 +14,12 @@ class Modules extends RepositoryAPI
     public $modules;
     
     public $provider;
-    protected $model;
+    public $model;
     
     /**
      * Create new loader instance
      */
-    public function __construct($model, $provider)
+    public function __construct($model, $provider = null)
     {
         $this->model = $model;
         $this->provider = $provider;

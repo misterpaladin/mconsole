@@ -11,7 +11,7 @@
 	<!-- BEGIN HEAD -->
 	<head>
 		<meta charset="utf-8" />
-		<title>{{ (isset($pageTitle)) ? sprintf('%s / Mconsole', $pageTitle, app('API')->options->get('project_name')) : sprintf('%s / Mconsole', app('API')->options->get('project_name')) }}</title>
+		<title>{{ (isset($pageTitle)) ? sprintf('%s / Mconsole', $pageTitle, app('API')->options->getByKey('project_name')) : sprintf('%s / Mconsole', app('API')->options->getByKey('project_name')) }}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -104,7 +104,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="{{ app('API')->options->get('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
+                                <a href="{{ app('API')->options->getByKey('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
                                     <i class="icon-share-alt"></i>
                                 </a>
                             </li>

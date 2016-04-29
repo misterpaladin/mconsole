@@ -2,7 +2,7 @@
 
 namespace %s\Mconsole\%s;
 
-use Milax\Mconsole\Abstractions\Modules\EloquentRepository;
+use Milax\Mconsole\Abstractions\Repositories\EloquentRepository;
 
 class %sRepository extends EloquentRepository
 {

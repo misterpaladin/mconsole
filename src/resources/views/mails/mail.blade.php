@@ -207,7 +207,7 @@
                                             <tr>
                                                 <td>
                                                     Наш сайт
-                                                    <br /><a href="{{ app('API')->options->get('project_url') }}">{{ app('API')->options->get('project_url') }}</a>
+                                                    <br /><a href="{{ app('API')->options->getByKey('project_url') }}">{{ app('API')->options->getByKey('project_url') }}</a>
                                                 </td>
                                             </tr>
                                         </table>

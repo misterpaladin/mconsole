@@ -5,6 +5,7 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\Upload;
 use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\Repository;
 
 class UploadsController extends Controller
 {
@@ -16,9 +17,10 @@ class UploadsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer)
+    public function __construct(ListRenderer $renderer, Repository $repository)
     {
         $this->renderer = $renderer;
+        $this->repository = $repository;
     }
     
     /**
@@ -34,7 +36,7 @@ class UploadsController extends Controller
                 'document' => 'Document',
             ], true);
         
-        return $this->renderer->setQuery(Upload::query())->removeEditAction()->render(function ($item) {
+        return $this->renderer->setQuery($this->repository->index())->removeEditAction()->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,

@@ -18,7 +18,7 @@ class Notifications extends RepositoryAPI
      */
     public function push($title, $text, $link = null, $user = null)
     {
-        return $this->store([
+        return $this->create([
             'title' => $title,
             'text' => $text,
             'link' => $link,

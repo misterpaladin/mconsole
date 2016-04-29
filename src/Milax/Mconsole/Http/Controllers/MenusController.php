@@ -7,6 +7,7 @@ use Milax\Mconsole\Http\Requests\MenuRequest;
 use Milax\Mconsole\Models\Menu;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
+use Milax\Mconsole\Contracts\Repository;
 
 class MenusController extends Controller
 {
@@ -17,10 +18,11 @@ class MenusController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form)
+    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
         $this->list = $list;
         $this->form = $form;
+        $this->repository = $repository;
         $this->form->addStyles([
             '/massets/global/plugins/jquery-nestable/jquery.nestable.css',
             '/massets/css/menu-editor.css',
@@ -38,7 +40,7 @@ class MenusController extends Controller
      */
     public function index()
     {
-        return $this->list->setQuery(Menu::query())->setAddAction('menus/create')->render(function ($item) {
+        return $this->list->setQuery($this->repository->index())->setAddAction('menus/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::menus.table.name') => $item->name,
@@ -64,7 +66,7 @@ class MenusController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        Menu::create($request->all());
+        $this->repository->create($request->all());
     }
 
     /**
@@ -76,7 +78,7 @@ class MenusController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::menu.form', [
-            'item' => Menu::findOrFail($id),
+            'item' => $this->repository->find($id),
         ]);
     }
 
@@ -89,7 +91,7 @@ class MenusController extends Controller
      */
     public function update(MenuRequest $request, $id)
     {
-        Menu::findOrFail($id)->update($request->all());
+        $this->repository->update($id, $request->all());
     }
 
     /**
@@ -100,6 +102,6 @@ class MenusController extends Controller
      */
     public function destroy($id)
     {
-        Menu::destroy($id);
+        $this->repository->destroy($id);
     }
 }

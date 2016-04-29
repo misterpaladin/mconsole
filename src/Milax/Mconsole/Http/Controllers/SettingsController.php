@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\MconsoleOption;
 use Milax\Mconsole\Http\Requests\SettingsRequest;
+use Milax\Mconsole\Contracts\Repository;
 
 class SettingsController extends Controller
 {
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+    
     /**
      * Show settings form
      * 
@@ -17,7 +23,7 @@ class SettingsController extends Controller
     public function index()
     {
         return view('mconsole::settings.form', [
-            'options' => MconsoleOption::all(),
+            'options' => $this->repository->get(),
         ]);
     }
     
@@ -30,7 +36,7 @@ class SettingsController extends Controller
     public function save(SettingsRequest $request)
     {
         $toSave = [];
-        MconsoleOption::all()->each(function ($option) use (&$request, &$toSave) {
+        $this->repository->get()->each(function ($option) use (&$request, &$toSave) {
             $option = $option->toArray();
             if ($option['type'] == 'checkbox') {
                 if ($request->input($option['key'])) {
@@ -55,9 +61,11 @@ class SettingsController extends Controller
             array_push($toSave, $option);
         });
         
-        MconsoleOption::truncate();
-        MconsoleOption::insert($toSave);
-        MconsoleOption::dropCache();
+        $model = $this->repository->model;
+        
+        $model::truncate();
+        $model::insert($toSave);
+        $model::dropCache();
         
         return redirect()->back()->with('status', trans('mconsole::settings.saved'));
     }

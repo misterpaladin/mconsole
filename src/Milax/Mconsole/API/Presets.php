@@ -13,7 +13,7 @@ class Presets extends RepositoryAPI implements DataManager
      * @param  string $key
      * @return mixed
      */
-    public function get($key)
+    public function getByKey($key)
     {
         $model = $this->model;
         return $model::getByKey($key);

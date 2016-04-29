@@ -7,6 +7,7 @@ use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
+use Milax\Mconsole\Contracts\Repository;
 
 class RolesController extends Controller
 {
@@ -17,10 +18,11 @@ class RolesController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form)
+    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
         $this->list = $list;
         $this->form = $form;
+        $this->repository = $repository;
     }
 
     /**
@@ -30,7 +32,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return $this->list->setQuery(MconsoleRole::notRoot())->setAddAction('roles/create')->render(function ($item) {
+        return $this->list->setQuery($this->repository->index())->setAddAction('roles/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::roles.table.name') => $item->name,
@@ -60,7 +62,7 @@ class RolesController extends Controller
      */
     public function store(MconsoleRoleRequest $request)
     {
-        MconsoleRole::create([
+        $this->repository->create([
             'name' => $request->input('name'),
             'routes' => collect($request->input('routes'))->keys(),
         ]);
@@ -76,7 +78,7 @@ class RolesController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::roles.form', [
-            'item' => MconsoleRole::findOrFail($id),
+            'item' => $this->repository->find($id),
             'menu' => app('API')->menu->get(true),
         ]);
     }
@@ -91,7 +93,7 @@ class RolesController extends Controller
      */
     public function update(MconsoleRoleRequest $request, $id)
     {
-        MconsoleRole::findOrFail($id)->update([
+        $this->repository->update($id, [
             'name' => $request->input('name'),
             'routes' => collect($request->input('routes'))->keys(),
         ]);
@@ -106,10 +108,10 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        if (MconsoleRole::findOrFail($id)->users()->count() > 0) {
+        if ($this->repository->find($id)->users()->count() > 0) {
             return redirect()->back()->withErrors('Cannot role that in use.');
         } else {
-            MconsoleRole::destroy($id);
+            $this->repository->destroy($id);
         }
     }
 }

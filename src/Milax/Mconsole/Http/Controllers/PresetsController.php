@@ -9,6 +9,7 @@ use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Contracts\Localizator;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
+use Milax\Mconsole\Contracts\Repository;
 
 class PresetsController extends Controller
 {
@@ -20,10 +21,11 @@ class PresetsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form)
+    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
         $this->list = $list;
         $this->form = $form;
+        $this->repository = $repository;
         $this->form->addScripts([
             '/massets/js/presets.js',
         ]);
@@ -36,7 +38,7 @@ class PresetsController extends Controller
      */
     public function index()
     {
-        return $this->list->setQuery(MconsoleUploadPreset::query())->setAddAction('presets/create')->render(function ($item) {
+        return $this->list->setQuery($this->repository->index())->setAddAction('presets/create')->render(function ($item) {
             return [
                 trans('mconsole::presets.table.id') => $item->id,
                 trans('mconsole::presets.table.name') => $item->name,
@@ -74,7 +76,7 @@ class PresetsController extends Controller
         
         $data['operations'] = json_decode($data['operations'], true);
         
-        $preset = MconsoleUploadPreset::create($request->all());
+        $this->repository->create($request->all());
     }
 
     /**
@@ -86,8 +88,8 @@ class PresetsController extends Controller
      */
     public function edit($id)
     {
-        $preset = MconsoleUploadPreset::findOrFail($id);
-        $preset->extensions = implode(', ', $preset->extensions);
+        $preset = $this->repository->find($id);
+        $preset->extensions = implode(',', $preset->extensions);
         $preset->operations = json_encode($preset->operations);
         return $this->form->render('mconsole::presets.form', [
             'item' => $preset,
@@ -113,7 +115,7 @@ class PresetsController extends Controller
         
         $data['operations'] = json_decode($data['operations'], true);
         
-        MconsoleUploadPreset::findOrFail($id)->update($data);
+        $this->repository->update($id, $data);
     }
 
     /**
@@ -125,11 +127,11 @@ class PresetsController extends Controller
      */
     public function destroy($id)
     {
-        $preset = MconsoleUploadPreset::findOrFail($id);
+        $preset = $this->repository->find($id);
         if ($preset->system) {
             return redirect()->back()->withErrors(trans('mconsole::mconsole.errors.system'));
         }
 
-        MconsoleUploadPreset::destroy($id);
+        $this->repository->destroy($id);
     }
 }

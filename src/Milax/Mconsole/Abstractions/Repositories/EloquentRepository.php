@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Abstractions\Modules;
+namespace Milax\Mconsole\Abstractions\Repositories;
 
 use Milax\Mconsole\Contracts\Repository;
 
@@ -9,7 +9,7 @@ use Milax\Mconsole\Contracts\Repository;
  */
 abstract class EloquentRepository implements Repository
 {
-    protected $model;
+    public $model;
     
     public function __construct($model)
     {
@@ -60,7 +60,7 @@ abstract class EloquentRepository implements Repository
     public function update($id, $data)
     {
         $model = $this->model;
-        return $model::find((int) $id)->update($data);
+        return $model::findOrFail((int) $id)->update($data);
     }
     
     public function destroy($id)

@@ -25,7 +25,7 @@ class Links extends RepositoryAPI implements GenericAPI
                 if (isset($link['id']) && strlen($link['id']) > 0) {
                     array_push($sync, $link['id']);
                 } else {
-                    array_push($sync, $this->store($link)->id);
+                    array_push($sync, $this->create($link)->id);
                 }
             }
         }

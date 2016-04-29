@@ -8,6 +8,7 @@ use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
+use Milax\Mconsole\Contracts\Repository;
 
 class UsersController extends Controller
 {
@@ -19,10 +20,11 @@ class UsersController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form)
+    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
         $this->list = $list;
         $this->form = $form;
+        $this->repository = $repository;
         $this->roles = MconsoleRole::notRoot()->get()->lists('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }
@@ -38,7 +40,7 @@ class UsersController extends Controller
             ->setText(trans('mconsole::users.filter.id'), 'id', true)
             ->setSelect(trans('mconsole::users.filter.role'), 'role_id', $this->roles, true);
         
-        return $this->list->setQuery(User::query())->setAddAction('users/create')->render(function ($item) {
+        return $this->list->setQuery($this->repository->index())->setAddAction('users/create')->render(function ($item) {
             return [
                 '#' => $item->id,
                 trans('mconsole::users.table.updated') => $item->updated_at->format('m.d.Y'),
@@ -68,7 +70,7 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = new User();
+        $user = new $this->repository->model;
         $user->name = $request->input('name');
         $user->role_id = $request->input('role_id');
         $user->email = $request->input('email');
@@ -86,7 +88,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         return $this->form->render('mconsole::users.form', [
-            'item' => User::findOrFail($id),
+            'item' => $this->repository->find($id),
             'roles' => $this->roles,
         ]);
     }
@@ -100,7 +102,7 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->repository->find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->lang = $request->input('lang');
@@ -112,6 +114,7 @@ class UsersController extends Controller
         if ($request->input('password')) {
             $user->password = bcrypt($request->input('password'));
         }
+        
         $user->save();
     }
 
@@ -123,6 +126,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        $this->repository->destroy($id);
     }
 }
