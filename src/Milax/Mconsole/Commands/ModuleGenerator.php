@@ -53,6 +53,10 @@ class ModuleGenerator extends Command
                 'destination' => 'Provider.php',
                 'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Provider.php'),
             ],
+            'repository' => [
+                'destination' => '%sRepository.php',
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Repository.php'),
+            ],
         ];
         
         $this->directories = [
@@ -111,6 +115,7 @@ class ModuleGenerator extends Command
         if ($this->option('model')) {
             File::makeDirectory(sprintf('%s/Models', $root), 0775, true, true);
             File::put(sprintf('%s/%s', $root, sprintf('Models/%s.php', $this->option('model'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Models/Model.php'), $namespace, $class, $this->option('model')));
+            File::put(sprintf('%s/%s', $root, sprintf($this->blueprint['repository']['destination'], str_plural($this->option('model')))), sprintf($this->blueprint['repository']['file'], $namespace, $class, $class));
         }
         
         // Request
