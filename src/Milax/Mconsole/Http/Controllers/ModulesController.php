@@ -8,9 +8,15 @@ use Milax\Mconsole\Models\MconsoleModule;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Cache;
+use Milax\Mconsole\Contracts\Repository;
 
 class ModulesController extends Controller
 {
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+    
     /**
      * Manage modules
      * @return Response
@@ -18,14 +24,14 @@ class ModulesController extends Controller
     public function index()
     {
         $modules = app('API')->modules->get('all');
-        $cached = MconsoleModule::all();
+        $cached = $this->repository->get();
         
         $modules->each(function ($module) use (&$cached) {
             $module->installed = false;
             if ($dbModule = $cached->where('identifier', $module->identifier)->first()) {
                 $module->installed = $dbModule->installed;
             } else {
-                MconsoleModule::create([
+                $this->repository->create([
                     'identifier' => $module->identifier,
                     'installed' => false,
                 ]);
