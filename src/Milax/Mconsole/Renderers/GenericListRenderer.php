@@ -67,7 +67,7 @@ class GenericListRenderer implements ListRenderer
         return $this->filterHandler->setSelect($label, $key, $selects, $exact);
     }
     
-    public function setQuery(Builder $query)
+    public function setQuery($query)
     {
         $this->query = $query;
         return $this;
@@ -105,7 +105,7 @@ class GenericListRenderer implements ListRenderer
         return $this;
     }
     
-    public function paginate(Builder $query)
+    public function paginate($query)
     {
         return $this->pagingHandler->paginate($query);
     }

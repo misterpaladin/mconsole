@@ -63,7 +63,7 @@ interface ListRenderer
      * @param \Illuminate\Database\Eloquent\Builder $query [description]
      * @return $this
      */
-    public function setQuery(\Illuminate\Database\Eloquent\Builder $query);
+    public function setQuery($query);
     
     /**
      * Run queries, process items with callback and return view
@@ -90,5 +90,5 @@ interface ListRenderer
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @return View
      */
-    public function paginate(\Illuminate\Database\Eloquent\Builder $query);
+    public function paginate($query);
 }
