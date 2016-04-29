@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Abstractions\Modules;
 
-use Milax\Mconsole\Contracts\Modules\Repository;
+use Milax\Mconsole\Contracts\Repository;
 
 /**
  * Repository abstract class for module models

@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Contracts\Modules;
+namespace Milax\Mconsole\Contracts;
 
 interface Repository
 {
