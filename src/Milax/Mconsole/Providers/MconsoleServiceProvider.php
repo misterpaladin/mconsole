@@ -20,6 +20,7 @@ class MconsoleServiceProvider extends ServiceProvider
             \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
             \Milax\Mconsole\Providers\ViewComposersServiceProvider::class,
             \Milax\Mconsole\Providers\ScheduleServiceProvider::class,
+            \Milax\Mconsole\Providers\RepositoriesServiceProvider::class,
         ],
         
         'aliases' => [
@@ -244,53 +245,5 @@ class MconsoleServiceProvider extends ServiceProvider
                 return new $class();
             });
         }
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\MenusController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\MenusRepository(\Milax\Mconsole\Models\Menu::class);
-            });
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\PresetsController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\PresetsRepository(\Milax\Mconsole\Models\MconsoleUploadPreset::class);
-            });
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\RolesController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\RolesRepository(\Milax\Mconsole\Models\MconsoleRole::class);
-            });
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\TagsController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\TagsRepository(\Milax\Mconsole\Models\Tag::class);
-            });
-            
-        $this->app->when('\Milax\Mconsole\Http\Controllers\UploadsController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\UploadsRepository(\Milax\Mconsole\Models\Upload::class);
-            });
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\UsersController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\UsersRepository(\App\User::class);
-            });
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\SettingsController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\SettingsRepository(\Milax\Mconsole\Models\MconsoleOption::class);
-            });
-        
-        $this->app->when('\Milax\Mconsole\Http\Controllers\VariablesController')
-            ->needs('\Milax\Mconsole\Contracts\Repository')
-            ->give(function () {
-                return new \Milax\Mconsole\Repositories\VariablesRepository(\Milax\Mconsole\Models\Variable::class);
-            });
     }
 }
