@@ -10,11 +10,10 @@ return [
     'identifier' => 'mconsole-%s',
     'description' => '',
     'depends' => [],
-    'menu' => [],
     'register' => [
         'middleware' => [],
         'providers' => [
-            %s\Mconsole\%s\Provider::class,
+            \%s\Mconsole\%s\Provider::class,
         ],
         'aliases' => [],
         'bindings' => [],
