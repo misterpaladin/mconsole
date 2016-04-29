@@ -90,7 +90,7 @@ class Modules extends RepositoryAPI
                         $modules[$key]->views = array_merge($modules[$key]->views, $module->views);
                         $modules[$key]->migrations = array_merge($modules[$key]->migrations, $module->migrations);
                         $modules[$key]->translations = array_merge($modules[$key]->translations, $module->translations);
-                        $modules[$key]->register = array_merge($modules[$key]->register, $module->register);
+                        $modules[$key]->register = array_merge_recursive($modules[$key]->register, $module->register);
                         $modules[$key]->type = 'extended';
                         
                         $matched = true;
