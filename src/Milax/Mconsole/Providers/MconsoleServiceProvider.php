@@ -53,6 +53,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Milax\Mconsole\Contracts\ListRenderer' => \Milax\Mconsole\Renderers\GenericListRenderer::class,
             'Milax\Mconsole\Contracts\FormRenderer' => \Milax\Mconsole\Renderers\GenericFormRenderer::class,
             'Milax\Mconsole\Contracts\PagingHandler' => \Milax\Mconsole\Handlers\GenericPagingHandler::class,
+            'Milax\Mconsole\Contracts\FormConstructor' => \Milax\Mconsole\Constructors\GenericFormConstructor::class,
         ],
         
         // Dependencies for injection
@@ -70,7 +71,7 @@ class MconsoleServiceProvider extends ServiceProvider
     ];
     
     public $config = [
-        'mconsole.php',
+        __DIR__ . '/../../../../src/config/mconsole.php',
     ];
     
     public $translations = [
@@ -130,6 +131,7 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('info', new \Milax\Mconsole\API\Info);
         app('API')->register('links', new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class));
         app('API')->register('tags', new \Milax\Mconsole\API\Tags(\Milax\Mconsole\Models\Tag::class));
+        app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));
         
         // Run one time setup
         app('API')->modules->scan();
@@ -168,11 +170,11 @@ class MconsoleServiceProvider extends ServiceProvider
         foreach ($this->config as $config) {
             if (!file_exists(config_path($config))) {
                 $this->publishes([
-                    __DIR__ . '/../../../../src/config/' . $config => config_path($config),
+                    $config => config_path($config),
                 ], 'config');
             } else {
                 $this->mergeConfigFrom(
-                    __DIR__ . '/../../../../src/config/' . $config, 'config'
+                    $config, 'config'
                 );
             }
         }
