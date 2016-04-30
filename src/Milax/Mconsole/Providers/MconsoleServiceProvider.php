@@ -168,13 +168,13 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Custom configurations
         foreach ($this->config as $config) {
-            if (!file_exists(config_path($config))) {
+            if (!file_exists(config_path(basename($config)))) {
                 $this->publishes([
-                    $config => config_path($config),
+                    $config => config_path(basename($config)),
                 ], 'config');
             } else {
                 $this->mergeConfigFrom(
-                    $config, 'config'
+                    $config, pathinfo($config, PATHINFO_FILENAME)
                 );
             }
         }

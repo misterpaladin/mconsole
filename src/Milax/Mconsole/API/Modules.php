@@ -377,6 +377,12 @@ class Modules extends RepositoryAPI
             }
         }
         
+        if (File::exists(sprintf('%s/assets/config', $path))) {
+            foreach (glob(sprintf('%s/assets/config/*.php', $path)) as $file) {
+                array_push($module->config, $file);
+            }
+        }
+        
         // composer.json
         if (File::exists(sprintf('%s/../../../../composer.json', $path))) {
             $module->package = json_decode(File::get(sprintf('%s/../../../../composer.json', $path)));

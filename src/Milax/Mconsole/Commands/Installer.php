@@ -75,10 +75,15 @@ class Installer extends Command
             $this->comment('Installing package components..');
         }
         
+        if (File::exists(public_path('massets'))) {
+            File::deleteDirectory(public_path('massets'));
+        }
+        
         $this->call('vendor:publish', [
             '--provider' => "Milax\Mconsole\Providers\MconsoleServiceProvider",
             '--force' => true,
         ]);
+        
         $this->comment(null);
     }
     
