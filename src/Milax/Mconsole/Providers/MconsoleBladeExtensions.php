@@ -5,7 +5,6 @@ namespace Milax\Mconsole\Providers;
 use Illuminate\Support\ServiceProvider;
 use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Models\Variable;
-use String;
 use Blade;
 use View;
 

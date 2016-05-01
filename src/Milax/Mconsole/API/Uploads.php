@@ -10,7 +10,6 @@ use File;
 use Image;
 use Request;
 use Session;
-use String;
 use Cache;
 use Auth;
 
