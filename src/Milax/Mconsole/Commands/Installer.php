@@ -153,7 +153,9 @@ class Installer extends Command
     protected function migrate()
     {
         $this->comment('Migrating database..');
-        $this->call('migrate');
+        $this->call('migrate', [
+            '--force' => true,
+        ]);
         $this->comment(null);
     }
     
