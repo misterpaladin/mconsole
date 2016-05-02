@@ -1,3 +1,33 @@
+## 0.3.7
+
+##### Added
+  - php 7 compatibility
+  - `GenericFormsConstructor` class to add custom form fields (`FormsConstructor` interface)
+  - `GenericAPI` interface
+  - `Repository` interface
+  - `APIManager` class (now support third party APIs)
+  - Modules config support
+  - `UploadsAPI` detach method
+  - Ajax uploader backups (restores after errors or page refresh)
+  - `CascadeDelete` trait for dynamic relationships deletions
+  - `DoesNotHaveShow` trait for controllers that doesn't use the `show` method
+  - `HasLinks` trait for linkable items
+  - `GenericPagingHandler` class to handle paginators (`PagingHandler` interface)
+
+##### Fixed
+  - Mconsole installer (unable to overwrite config files, unable to create new user)
+  - Multi language menu editor
+  - Overall optimizations
+
+##### Updated
+  - Module blueprint
+    - Fixed namespaces
+    - Removed menu element from bootstrap
+    - Added repository
+  - No typehints in ListRenderer interface
+  - Modules translations
+  - CKEditor auto formatting
+
 ## 0.3.6
 
 ##### Added
