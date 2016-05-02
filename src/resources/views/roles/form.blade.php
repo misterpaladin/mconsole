@@ -19,6 +19,11 @@
                                 'name' => 'name',
                                 'placeholder' => trans('mconsole::roles.form.placeholder')
                             ])
+                            @include('mconsole::forms.select', [
+                                'label' => trans('mconsole::roles.form.widget'),
+                                'name' => 'widget',
+                                'type' => MX_SELECT_STATE,
+                            ])
         				</div>
         			</div>
                     <div class="form-actions">

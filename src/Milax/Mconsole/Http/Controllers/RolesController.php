@@ -64,6 +64,7 @@ class RolesController extends Controller
     {
         $this->repository->create([
             'name' => $request->input('name'),
+            'widget' => $request->input('widget'),
             'routes' => collect($request->input('routes'))->keys(),
         ]);
     }
@@ -95,6 +96,7 @@ class RolesController extends Controller
     {
         $this->repository->update($id, [
             'name' => $request->input('name'),
+            'widget' => $request->input('widget'),
             'routes' => collect($request->input('routes'))->keys(),
         ]);
     }

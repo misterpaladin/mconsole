@@ -27,9 +27,11 @@
     			</li>
             @endif
 		@endforeach
-        <li class="menu-dropdown classic-menu-dropdown toggle-blade-helper">
-            <a href="javascript:;"><i class="fa fa-magic"></i></a>
-        </li>
+        @if (Auth::user()->role->widget || Auth::user()->role->key == 'root')
+            <li class="menu-dropdown classic-menu-dropdown toggle-blade-helper">
+                <a href="javascript:;"><i class="fa fa-magic"></i></a>
+            </li>
+        @endif
 	</ul>
 </div>
 <!-- END MEGA MENU -->
