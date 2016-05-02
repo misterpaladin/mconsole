@@ -38,7 +38,11 @@ class Menu implements GenericAPI
             $all = collect();
             
             $menu->each(function ($m) use (&$all) {
-                $all = $all->merge($m->child);
+                if (strlen($m->url) > 0) {
+                    $all->push($m);
+                } else {
+                    $all = $all->merge($m->child);
+                }
             });
             
             return $all;
