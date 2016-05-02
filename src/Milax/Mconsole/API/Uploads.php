@@ -22,7 +22,6 @@ class Uploads implements GenericAPI
     {
         $this->uploadsPath = MX_UPLOADS_PATH;
         $this->requestData = Request::all();
-        $this->presets = MconsoleUploadPreset::getCached();
     }
     
     /**
@@ -254,6 +253,7 @@ class Uploads implements GenericAPI
      */
     protected function handleUpload()
     {
+        $this->presets = MconsoleUploadPreset::getCached();
         $files = collect();
         $errors = [];
         
