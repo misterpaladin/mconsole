@@ -1,6 +1,6 @@
 {
     "name": "milax/mconsole",
-    "description": "",
+    "description": "Experimental content management system package for Laravel Framework",
     "authors": [
         {
             "name": "Eugene Min",
@@ -15,7 +15,6 @@
         "doctrine/dbal": "^2.5",
 		"milax/gravatar": "*",
         "milax/cacheable": "*",
-        "milax/mconsole-base-components": "^1.1",
         "guzzlehttp/guzzle": "^6.2",
         "erusev/parsedown": "^1.6"
     },
