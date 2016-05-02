@@ -379,6 +379,18 @@ class FileMenu implements Menu
     }
     
     /**
+     * Push root menu item
+     * 
+     * @param  string $key    [Menu key]
+     * @param  array $menu    [Menu array]
+     * @return void
+     */
+    public function pushRoot($key, $menu)
+    {
+        $this->menu[$key] = $menu;
+    }
+    
+    /**
      * Extend or add root menu category
      * 
      * @return void

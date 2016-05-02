@@ -50,13 +50,29 @@ class Menu implements GenericAPI
     /**
      * Push menu item to given category
      * 
-     * @param  string $category [Root category key]
+     * @param  array $menu      [Menu contents]
      * @param  string $key      [Menu key]
-     * @param  array $menu     [Menu contents]
+     * @param  string $category [Root category key]
      * @return void
      */
-    public function push($category, $key, $menu)
+    public function push($menu, $key, $category = null)
     {
-        $this->loader->push($category, $key, $menu);
+        if (is_null($category)) {
+            $this->loader->pushRoot($key, $menu);
+        } else {
+            $this->loader->push($category, $key, $menu);
+        }
+    }
+    
+    /**
+     * Push root menu item
+     * 
+     * @param  string $key    [Menu key]
+     * @param  array $menu    [Menu array]
+     * @return void
+     */
+    public function pushRoot($key, $menu)
+    {
+        $this->loader->pushRoot($key, $menu);
     }
 }
