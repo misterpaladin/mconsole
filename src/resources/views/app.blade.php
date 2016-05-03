@@ -20,10 +20,6 @@
 		<link href="/massets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-		<link href="/massets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="/massets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-        <link href="/massets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="/massets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
@@ -43,6 +39,7 @@
         <link href="/massets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
@@ -218,10 +215,6 @@
 		<script src="/massets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/moment.min.js" type="text/javascript"></script>
-        <script src="/massets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
-        <script src="/massets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="/massets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-        <script src="/massets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/ckeditor/config.js" type="text/javascript"></script>
         <script src="/massets/js/clipboard.min.js" type="text/javascript"></script>
@@ -244,6 +237,7 @@
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
 		<script src="/massets/js/confirm.js" type="text/javascript"></script>
 		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
