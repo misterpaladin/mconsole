@@ -14,6 +14,18 @@ class MconsoleMiddleware
     ];
     
     /**
+     * Create new instance
+     */
+    public function __construct()
+    {
+        $id = Auth::id();
+        
+        // User profile exception
+        array_push($this->exceptions, sprintf('mconsole/users/%s', $id));
+        array_push($this->exceptions, sprintf('mconsole/users/%s/edit', $id));
+    }
+    
+    /**
      * Check for mconsole access.
      *
      * @param  \Illuminate\Http\Request  $request
