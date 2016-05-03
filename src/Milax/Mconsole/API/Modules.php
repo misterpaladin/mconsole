@@ -311,7 +311,7 @@ class Modules extends RepositoryAPI
         
         // Get installation state
         if ($dbModule = $this->dbMods->where('identifier', $module->identifier)->first()) {
-            $module->installed = ($dbModule->installed === 1);
+            $module->installed = ($dbModule->installed == 1);
         }
         
         // Get init function
