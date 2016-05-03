@@ -61,7 +61,10 @@ abstract class EloquentRepository implements Repository
         if ($parent != 'Illuminate\Database\Eloquent\Model') {
             $parent = new $parent;
             $instance->fillable(array_merge($parent->getFillable(), $instance->getFillable()));
+            $instance->dates(array_merge($parent->getDates(), $instance->getDates()));
         }
+        
+        $data = $this->fixDates($instance, $data);
         
         $instance->fill($data);
         $instance->save();
@@ -72,6 +75,10 @@ abstract class EloquentRepository implements Repository
     public function update($id, $data)
     {
         $model = $this->model;
+        
+        $instance = $model::findOrFail((int) $id);
+        $data = $this->fixDates($instance, $data);
+        
         return $model::findOrFail((int) $id)->update($data);
     }
     
@@ -79,5 +86,25 @@ abstract class EloquentRepository implements Repository
     {
         $model = $this->model;
         return $model::destroy($id);
+    }
+    
+    /**
+     * Fix null dates
+     * 
+     * @param  mixed $instance  [Object instance]
+     * @param  array $data      [Input data]
+     * @return array
+     */
+    protected function fixDates($instance, $data)
+    {
+        foreach ($instance->getDates() as $date) {
+            if (isset($data[$date])) {
+                if (strlen($data[$date]) == 0) {
+                    $data[$date] = null;
+                }
+            }
+        }
+        
+        return $data;
     }
 }
