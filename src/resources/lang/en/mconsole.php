@@ -1,7 +1,10 @@
 <?php
 
 return [
-    'quickmenu' => 'Quick menu',
+    'quickmenu' => [
+        'title' => 'Quick menu',
+        'noelements' => 'No menu elements',
+    ],
     'status' => [
         'created' => 'Record created',
         'updated' => 'Record updated',

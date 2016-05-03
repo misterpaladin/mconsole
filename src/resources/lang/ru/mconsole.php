@@ -1,7 +1,10 @@
 <?php
 
 return [
-    'quickmenu' => 'Быстрое меню',
+    'quickmenu' => [
+        'title' => 'Quick menu',
+        'noelements' => 'Нет элементов меню',
+    ],
     'status' => [
         'created' => 'Запись успешно добавлена',
         'updated' => 'Запись успешно обновлена',

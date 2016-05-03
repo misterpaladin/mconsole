@@ -79,7 +79,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="external">
-                                        <h3>{{ trans('mconsole::mconsole.quickmenu') }}</h3>
+                                        <h3>{{ trans('mconsole::mconsole.quickmenu.title') }}</h3>
                                     </li>
                                     <li>
                                         <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
@@ -94,7 +94,7 @@
                                                     </a>
                                                 </li>
                                             @empty
-                                                <li><a href="javascript:;"><span class="details">Нет элементов меню</span></a></li>
+                                                <li><a href="javascript:;"><span class="details">{{ trans('mconsole::mconsole.quickmenu.noelements') }}</span></a></li>
                                             @endforelse
                                         </ul>
                                     </li>
