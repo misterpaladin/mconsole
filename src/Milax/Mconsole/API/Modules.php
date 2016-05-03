@@ -155,7 +155,9 @@ class Modules extends RepositoryAPI
             File::copy($migration, database_path(sprintf('migrations/%s.php', pathinfo($migration, PATHINFO_FILENAME))));
         }
         
-        Artisan::call('migrate');
+        Artisan::call('migrate', [
+            '--force' => true,
+        ]);
         
         if (!$update) {
             $dbMod = $model::where('identifier', $module->identifier)->first();
@@ -210,7 +212,9 @@ class Modules extends RepositoryAPI
                 ]);
             }
             
-            Artisan::call('migrate:rollback');
+            Artisan::call('migrate:rollback', [
+                '--force' => true,
+            ]);
             
             foreach ($module->migrations as $migration) {
                 File::delete(database_path(sprintf('migrations/%s.php', pathinfo($migration, PATHINFO_FILENAME))));
