@@ -23,7 +23,31 @@
 						@endforeach
 					</select>
 				</div>
-			@endif
+            @elseif ($filter['type'] == 'date')
+                <div class="col-sm-6">
+                    <div class='input-group datepicker'>
+                        <input name="{{ $filter['key'] }}" class="form-control" placeholder="" type="text" value="{{ Request::query($filter['key']) }}">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+				</div>
+			@elseif ($filter['type'] == 'daterange')
+                <div class="col-sm-6">
+                    <div class='input-group datepicker'>
+                        <input name="{{ $filter['key'] }}[from]" class="form-control" placeholder="" type="text" value="{{ array_get(Request::query($filter['key']), 'from') }}">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <div class='input-group datepicker'>
+                        <input name="{{ $filter['key'] }}[to]" class="form-control" placeholder="" type="text" value="{{ array_get(Request::query($filter['key']), 'to') }}">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+				</div>
+            @endif
 		</div>
 	@endforeach
 </div>

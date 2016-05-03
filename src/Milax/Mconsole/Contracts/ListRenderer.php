@@ -39,9 +39,9 @@ interface ListRenderer
     /**
      * Add text input filter
      * 
-     * @param  string $label		Label for input
-     * @param  string $key			Key of model property
-     * @param  bool $exact			Set to true if input value and property value must be equal
+     * @param  string $label		[Label for input]
+     * @param  string $key			[Key of model property]
+     * @param  bool $exact			[Set to true if input value and property value must be equal]
      * @return $this
      */
     public function setText($label, $key, $exact = false);
@@ -49,13 +49,31 @@ interface ListRenderer
     /**
      * Add select input filter
      * 
-     * @param  string $label		Label for input
-     * @param  string $key			Key of model property
+     * @param  string $label		[Label for input]
+     * @param  string $key			[Key of model property]
      * @param  array $selects
-     * @param  bool $exact			Set to true if input value and property value must be equal
+     * @param  bool $exact			[Set to true if input value and property value must be equal]
      * @return $this
      */
     public function setSelect($label, $key, $selects, $exact = false);
+    
+    /**
+     * Add date picker filter
+     * 
+     * @param  string $label		[Label for input]
+     * @param  string $key			[Key of model property]
+     * @return $this
+     */
+    public function setDate($label, $key);
+    
+    /**
+     * Add date range picker filter
+     * 
+     * @param  string $label		[Label for input]
+     * @param  string $key			[Key of model property]
+     * @return $this
+     */
+    public function setDateRange($label, $key);
     
     /**
      * Set query

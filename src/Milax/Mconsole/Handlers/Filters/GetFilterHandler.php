@@ -6,6 +6,7 @@ use Milax\Mconsole\Contracts\FilterHandler;
 use Milax\Mconsole\Exceptions\FiltersPropertyException;
 use View;
 use Request;
+use Carbon\Carbon;
 
 class GetFilterHandler implements FilterHandler
 {
@@ -18,10 +19,26 @@ class GetFilterHandler implements FilterHandler
         foreach ($this->filters as $filter) {
             if (Request::has($filter['key']) && Request::query($filter['key']) != -1) {
                 $filtered = true;
-                if ($filter['exact']) {
-                    $query->where($filter['key'], Request::query($filter['key']));
-                } else {
-                    $query->where($filter['key'], 'like', '%' . Request::query($filter['key']) . '%');
+                switch ($filter['type']) {
+                    case 'date':
+                        if (Request::query($filter['key'])) {
+                            $from = Carbon::createFromFormat('Y-m-d', Request::query($filter['key']))->startOfDay();
+                            $to = Carbon::createFromFormat('Y-m-d', Request::query($filter['key']))->endOfDay();
+                            $query->where($filter['key'], '>=', $from)->where($filter['key'], '<=', $to);
+                        }
+                        break;
+                    
+                    case 'daterange':
+                        $query->where($filter['key'], '>=', array_get(Request::query($filter['key']), 'from'))->where($filter['key'], '<=', array_get(Request::query($filter['key']), 'to'));
+                        break;
+                    
+                    default:
+                        if ($filter['exact']) {
+                            $query->where($filter['key'], Request::query($filter['key']));
+                        } else {
+                            $query->where($filter['key'], 'like', '%' . Request::query($filter['key']) . '%');
+                        }
+                        break;
                 }
             }
         }
@@ -40,6 +57,16 @@ class GetFilterHandler implements FilterHandler
     public function setSelect($label, $key, $options, $exact = false)
     {
         return $this->pushFilter('select', $label, $key, $exact, $options);
+    }
+    
+    public function setDate($label, $key)
+    {
+        return $this->pushFilter('date', $label, $key);
+    }
+    
+    public function setDateRange($label, $key)
+    {
+        return $this->pushFilter('daterange', $label, $key);
     }
     
     public function pushFilter($type, $label, $key, $exact = false, $options = [])

@@ -67,6 +67,16 @@ class GenericListRenderer implements ListRenderer
         return $this->filterHandler->setSelect($label, $key, $selects, $exact);
     }
     
+    public function setDate($label, $key)
+    {
+        return $this->filterHandler->setDate($label, $key);
+    }
+    
+    public function setDateRange($label, $key)
+    {
+        return $this->filterHandler->setDateRange($label, $key);
+    }
+    
     public function setQuery($query)
     {
         $this->query = $query;
