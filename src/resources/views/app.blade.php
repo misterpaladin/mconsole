@@ -39,6 +39,7 @@
         <link href="/massets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+		<link href="/massets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME LAYOUT STYLES -->
 		<link href="/massets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
@@ -236,6 +237,7 @@
         <script src="/massets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
         <script src="/massets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+		<script src="/massets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
 		<script src="/massets/js/confirm.js" type="text/javascript"></script>
 		<script src="/massets/js/mconsole.js" type="text/javascript"></script>

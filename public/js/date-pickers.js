@@ -1,1 +1,1 @@
-var DatePickers={"class":".date-picker"};DatePickers.init=function(){$(DatePickers["class"]).length>0&&$(DatePickers["class"]).datepicker({format:"mm/dd/yyyy"})},$(DatePickers.init);
+var DatePickers={date:".datepicker",datetime:".datetimepicker"};DatePickers.init=function(){$(DatePickers.date).length>0&&$(DatePickers.date).map(function(e,t){$(t).datetimepicker({format:"YYYY-MM-DD"})}),$(DatePickers.datetime).length>0&&$(DatePickers.datetime).map(function(e,t){$(t).datetimepicker({format:"YYYY-MM-DD HH:mm:SS"})})},$(DatePickers.init);
