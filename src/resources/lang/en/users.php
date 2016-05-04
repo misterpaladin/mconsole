@@ -45,4 +45,13 @@ return [
     'types' => [
         'generic' => 'Normal user',
     ],
+    'acl' => [
+        'index' => 'Users: show list',
+        'create' => 'Users: show create form',
+        'store' => 'Users: saving',
+        'edit' => 'Users: show edit form',
+        'update' => 'Users: updating',
+        'show' => 'Users: view',
+        'destroy' => 'Users: delete',
+    ],
 ];

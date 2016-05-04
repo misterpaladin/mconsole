@@ -27,4 +27,8 @@ return [
         'add' => 'Add variable',
     ],
     'saved' => 'Variables saved',
+    'acl' => [
+        'index' => 'Variables: show list',
+        'store' => 'Variables: saving',
+    ],
 ];

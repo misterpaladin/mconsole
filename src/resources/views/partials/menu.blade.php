@@ -7,7 +7,7 @@
             @if ($menu->visible)
     			<li class="menu-dropdown classic-menu-dropdown ">
     				@if (count($menu->child) == 0)
-                        @if (isset($menu->route))
+                        @if (isset($menu->url))
                             <a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
                         @else
                             <a href="javascript:;">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>

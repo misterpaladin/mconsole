@@ -8,9 +8,9 @@ use Auth;
 class MconsoleMiddleware
 {
     protected $exceptions = [
-        'mconsole',
-        'mconsole/dashboard',
-        'mconsole/api/search',
+        'GET:mconsole',
+        'GET:mconsole/dashboard',
+        'GET:mconsole/api/search',
     ];
     
     /**
@@ -21,8 +21,8 @@ class MconsoleMiddleware
         $id = Auth::id();
         
         // User profile exception
-        array_push($this->exceptions, sprintf('mconsole/users/%s', $id));
-        array_push($this->exceptions, sprintf('mconsole/users/%s/edit', $id));
+        array_push($this->exceptions, sprintf('GET:mconsole/users/%s', $id));
+        array_push($this->exceptions, sprintf('GET:mconsole/users/%s/edit', $id));
     }
     
     /**
@@ -66,37 +66,29 @@ class MconsoleMiddleware
      */
     protected function hasAccess($request)
     {
+        $uri = sprintf('%s:%s', $request->method(), $request->route()->getUri());
+        
         if ($request->is('mconsole/logout')) {
             return true;
         }
         
         $user = Auth::user();
         
-        $route = $request->route()->getName();
         $method = $request->method();
         
         // Allow everyone to visit dashboard
-        if (in_array($request->path(), $this->exceptions)) {
+        if (in_array($uri, $this->exceptions)) {
             return true;
         }
         
         // Check if route is in user allowed routes
-        $menus = $user->role->routes;
+        $routes = $user->role->routes;
         
-        if (count($menus) == 0) {
+        if (count($routes) == 0) {
             return false;
         }
         
-        // Fix for creating and updating routes
-        switch ($method) {
-            case 'PUT':
-                $route = str_replace('.update', '.edit', $route);
-                break;
-            case 'POST':
-                $route = str_replace('.store', '.create', $route);
-        }
-        
-        if (in_array($route, $menus)) {
+        if (in_array($uri, $routes)) {
             return true;
         }
         

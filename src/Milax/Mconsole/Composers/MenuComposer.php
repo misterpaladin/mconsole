@@ -20,60 +20,34 @@ class MenuComposer
      */
     public function compose(View $view)
     {
+        $acl = collect(app('API')->acl->get());
         $allowed = Auth::user()->role->routes;
         $all = app('API')->menu->get();
         
-        $all->each(function ($menu, $key) use (&$all, &$allowed) {
+        $all->each(function ($menu, $key) use (&$all, &$allowed, &$acl) {
             if (!$menu->visible || !$menu->enabled) {
                 unset($all[$key]);
             } else {
                 if (isset($menu->child) && count($menu->child) > 0) {
                     foreach ($menu->child as $cKey => $child) {
-                        if (Auth::user()->role->key != 'root' && !in_array($child->route, $allowed)) {
+                        $current = $acl->where('key', $child->key)->first();
+                        if (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed)) {
                             unset($menu->child[$cKey]);
                         }
                     }
                 } else {
-                    if (Auth::user()->role->key != 'root' && !in_array($menu->route, $allowed)) {
+                    $current = $acl->where('key', $menu->key)->first();
+                    if (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed)) {
                         unset($all->child[$key]);
                     }
                 }
             }
+            
             if (strlen($menu->url) == 0 && count($menu->child) == 0) {
                 unset($all[$key]);
             }
         });
         
-        // dd($all);
-
-        // $all->each(function ($menu) use (&$allowed, &$all, &$filtered) {
-        //     if ($menu->visible && $menu->enabled) {
-        //         if ((Auth::user()->role->key == 'root') || (strlen($menu->url) > 0 && $menu->menu_id == 0 && $allowed->where('id', $menu->id)->count() > 0)) {
-        //             $filtered->push($menu);
-        //         }
-        //         
-        //         if ($menu->has('child')) {
-        //             foreach ($all->get('child') as $child) {
-        //                 if (strlen($child->url) > 0 && in_array($child->route, $allowed)) {
-        //                     if ($filtered->where('name', $menu->name)->count() == 0) {
-        //                         $filtered->push($menu);
-        //                     }
-        //                     
-        //                     $filtered->push($child);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
-        // 
-        // dd($filtered);
-        // 
-        // $menu = $filtered->where('menu_id', 0);
-        // 
-        // $menu->each(function ($parent) use (&$filtered) {
-        //     $parent->child = $filtered->where('menu_id', $parent->id);
-        // });
-
         $view->with('mconsole_menu', $all);
     }
 }
