@@ -46,6 +46,7 @@ class FileMenu implements Menu
                     'presets' => [
                         'name' => 'Presets',
                         'translation' => 'presets.menu.list.name',
+                        'url' => 'presets',
                         'description' => 'presets.menu.list.description',
                         'visible' => true,
                         'enabled' => true,
