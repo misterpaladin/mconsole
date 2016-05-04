@@ -3,69 +3,73 @@
     <input type="hidden" class="uploadable-group" value="{{ $group }}" />
     <input type="hidden" class="uploadable-type" name="uploads[{{ $type }}][{{ $group }}][type]" value="{{ $type }}" />
     <input type="hidden" class="uploadable-class" name="uploads[{{ $type }}][{{ $group }}][related_class]" value="{{ $model }}"/>
-    @if (isset($presets) && $presets === true)
-        @include('mconsole::forms.select', [
-            'label' => trans('mconsole::gallery.form.preset.name'),
-            'name' => sprintf('uploads[%s][%s][preset]', $type, $group),
-            'options' => $presets->where('type', $type)->lists('name', 'id'),
-            'value' => $presets->where('key', $preset)->first()->id
-        ])
+    
+    @if (isset($presets) && $presets->count() == 0)
+        <div class="alert alert-danger">
+            <p>{{ trans('mconsole::uploader.errors.nopresets.text')}}</p>
+            <p><a href="/mconsole/presets/create" class="btn btn-xs blue">{{ trans('mconsole::uploader.errors.nopresets.link') }}</a></p>
+        </div>
     @else
-        <input type="hidden" class="uploadable-preset" name="uploads[{{ $type }}][{{ $group }}][preset]" value="{{ $preset }}"/>
-    @endif
-    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-    <div class="row fileupload-buttonbar">
-        <div class="col-xs-12 buttons-set">
-            <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-xs green fileinput-button disabled">
-                <i class="fa fa-plus"></i>
-                <span> {{ trans('mconsole::uploader.add') }} </span>
-                <input type="file" name="files[]" @if (isset($multiple) && $multiple === true) multiple="" @endif> </span>
-            <button type="submit" class="btn btn-xs blue start hide disabled">
-                <i class="fa fa-upload"></i>
-                <span> {{ trans('mconsole::uploader.upload') }} </span>
-            </button>
-            <button type="button" class="btn btn-xs blue description disabled">
-                <i class="fa fa-info-circle"></i>
-                <span> {{ trans('mconsole::uploader.description') }} </span>
-            </button>
-            <button type="reset" class="btn btn-xs warning cancel disabled">
-                <i class="fa fa-ban-circle"></i>
-                <span> {{ trans('mconsole::uploader.cancel') }} </span>
-            </button>
-            <button type="button" class="btn btn-xs red delete disabled">
-                <i class="fa fa-trash"></i>
-                <span> {{ trans('mconsole::uploader.delete') }} </span>
-            </button>
-            <input type="checkbox" class="toggle">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            <span class="fileupload-process"> </span>
-        </div>
-    </div>
-    <div class="text-center loader" style="font-size: 20px; margin-top: 20px;"><i class="fa fa-spin fa-spinner"></i></div>
-    <div class="row fileupload-buttonbar">
-        <!-- The global progress information -->
-        <div class="col-xs-12 fileupload-progress fade">
-            <!-- The extended global progress information -->
-            <div class="progress-extended help-block"> &nbsp; </div>
-            <!-- The global progress bar -->
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-success" style="width:0%;"> </div>
+    
+        @if (isset($presets) && $selector === true)
+            @include('mconsole::forms.select', [
+                'label' => trans('mconsole::uploader.selector'),
+                'name' => sprintf('uploads[%s][%s][preset]', $type, $group),
+                'options' => $presets->where('type', $type)->lists('name', 'id'),
+                'value' => isset($preset) ? $presets->where('key', $preset)->first()->id : null,
+            ])
+        @else
+            <input type="hidden" class="uploadable-preset" name="uploads[{{ $type }}][{{ $group }}][preset]" value="{{ $preset }}"/>
+        @endif
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row fileupload-buttonbar">
+            <div class="col-xs-12 buttons-set">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-xs green fileinput-button disabled">
+                    <i class="fa fa-plus"></i>
+                    <span> {{ trans('mconsole::uploader.add') }} </span>
+                    <input type="file" name="files[]" @if (isset($multiple) && $multiple === true) multiple="" @endif> </span>
+                <button type="submit" class="btn btn-xs blue start hide disabled">
+                    <i class="fa fa-upload"></i>
+                    <span> {{ trans('mconsole::uploader.upload') }} </span>
+                </button>
+                <button type="button" class="btn btn-xs blue description disabled">
+                    <i class="fa fa-info-circle"></i>
+                    <span> {{ trans('mconsole::uploader.description') }} </span>
+                </button>
+                <button type="reset" class="btn btn-xs warning cancel disabled">
+                    <i class="fa fa-ban-circle"></i>
+                    <span> {{ trans('mconsole::uploader.cancel') }} </span>
+                </button>
+                <button type="button" class="btn btn-xs red delete disabled">
+                    <i class="fa fa-trash"></i>
+                    <span> {{ trans('mconsole::uploader.delete') }} </span>
+                </button>
+                <input type="checkbox" class="toggle">
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <span class="fileupload-process"> </span>
+            </div>
+        </div>
+        <div class="text-center loader" style="font-size: 20px; margin-top: 20px;"><i class="fa fa-spin fa-spinner"></i></div>
+        <div class="row fileupload-buttonbar">
+            <!-- The global progress information -->
+            <div class="col-xs-12 fileupload-progress fade">
+                <!-- The extended global progress information -->
+                <div class="progress-extended help-block"> &nbsp; </div>
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"> </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <!-- The table listing the files available for upload/download -->
     <table role="presentation" class="clearfix" style="width: 100%;">
         <tbody class="files sortable"></tbody>
     </table>
-    <div class="row">
-        <div class="col-xs-12">
-            <p class="help-block">{{ trans('mconsole::uploader.help', ['width' => $presets->where('key', $preset)->first()->min_width, 'height' => $presets->where('key', $preset)->first()->min_height]) }}</p>
-        </div>
-    </div>
 </div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <script id="template-upload-{{ $group }}" type="text/x-tmpl"> {% for (var i=0, file; file=o.files[i]; i++) { %}
