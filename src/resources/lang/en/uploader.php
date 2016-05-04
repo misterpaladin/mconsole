@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'selector' => 'Upload preset',
     'add' => 'Add',
     'upload' => 'Upload',
     'cancel' => 'Cancel',
@@ -11,4 +12,10 @@ return [
     'title' => 'Title',
     'description' => 'Description',
     'all' => 'All languages',
+    'errors' => [
+        'nopresets' => [
+            'text' => 'No presets available.',
+            'link' => 'Create new preset',
+        ],
+    ],
 ];
