@@ -8,4 +8,5 @@ class MconsoleMenu extends Model
 {
     public $child;
     public $key;
+    public $acl;
 }

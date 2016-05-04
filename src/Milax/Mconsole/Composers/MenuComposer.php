@@ -25,26 +25,30 @@ class MenuComposer
         $all = app('API')->menu->get();
         
         $all->each(function ($menu, $key) use (&$all, &$allowed, &$acl) {
-            if (!$menu->visible || !$menu->enabled) {
-                unset($all[$key]);
-            } else {
-                if (isset($menu->child) && count($menu->child) > 0) {
-                    foreach ($menu->child as $cKey => $child) {
-                        $current = $acl->where('key', $child->key)->first();
-                        if (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed)) {
-                            unset($menu->child[$cKey]);
+            if ($menu->acl) {
+                if (!$menu->visible || !$menu->enabled) {
+                    unset($all[$key]);
+                } else {
+                    if (isset($menu->child) && count($menu->child) > 0) {
+                        foreach ($menu->child as $cKey => $child) {
+                            if ($child->acl) {
+                                $current = $acl->where('key', $child->key)->first();
+                                if (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed)) {
+                                    unset($menu->child[$cKey]);
+                                }
+                            }
+                        }
+                    } else {
+                        $current = $acl->where('key', $menu->key)->first();
+                        if (count($allowed) == 0 || (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed))) {
+                            $all->forget($key);
                         }
                     }
-                } else {
-                    $current = $acl->where('key', $menu->key)->first();
-                    if (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed)) {
-                        unset($all->child[$key]);
-                    }
                 }
-            }
-            
-            if (strlen($menu->url) == 0 && count($menu->child) == 0) {
-                unset($all[$key]);
+                
+                if (strlen($menu->url) == 0 && count($menu->child) == 0) {
+                    $all->forget($key);
+                }
             }
         });
         

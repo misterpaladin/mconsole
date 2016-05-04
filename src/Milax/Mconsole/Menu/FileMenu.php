@@ -21,6 +21,7 @@ class FileMenu implements Menu
                 'description' => 'menu.dashboard.description',
                 'visible' => true,
                 'enabled' => true,
+                'acl' => false,
                 'child' => [],
             ],
             'content' => [
@@ -176,6 +177,7 @@ class FileMenu implements Menu
         $menu->description = (isset($array['description'])) ? $array['description'] : '';
         $menu->visible = (isset($array['visible'])) ? $array['visible'] : true;
         $menu->enabled = (isset($array['enabled'])) ? $array['enabled'] : true;
+        $menu->acl = isset($array['acl']) ? $array['acl'] : true;
         $menu->key = $key;
         $menu->child = [];
         
