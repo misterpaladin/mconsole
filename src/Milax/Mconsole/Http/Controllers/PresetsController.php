@@ -76,7 +76,7 @@ class PresetsController extends Controller
         
         $data['operations'] = json_decode($data['operations'], true);
         
-        $this->repository->create($request->all());
+        $this->repository->create($data);
     }
 
     /**
