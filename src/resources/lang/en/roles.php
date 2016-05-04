@@ -34,4 +34,13 @@ return [
         'name' => 'Section',
         'description' => 'Description',
     ],
+    'acl' => [
+        'index' => 'User groups: show list',
+        'create' => 'User groups: show create form',
+        'store' => 'User groups: saving',
+        'edit' => 'User groups: show edit form',
+        'update' => 'User groups: updating',
+        'show' => 'User groups: view',
+        'destroy' => 'User groups: delete',
+    ],
 ];

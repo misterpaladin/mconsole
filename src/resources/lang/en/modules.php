@@ -51,4 +51,10 @@ return [
         'translations' => 'Language files',
         'unabletoinstall' => 'Installation not possible, required modules is not installed in system',
     ],
+    'acl' => [
+        'index' => 'Modules: show list',
+        'extend' => 'Modules: extend',
+        'install' => 'Modules: install',
+        'uninstall' => 'Modules: uninstall',
+    ],
 ];

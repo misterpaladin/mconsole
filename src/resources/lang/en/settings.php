@@ -42,4 +42,10 @@ return [
             'reloaded' => 'Language files were reloaded',
         ],
     ],
+    'acl' => [
+        'index' => 'Settings: view settings',
+        'store' => 'Settings: saving',
+        'clearcache' => 'Settings: clear cache',
+        'reloadtrans' => 'Settings: reload language files',
+    ],
 ];

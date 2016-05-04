@@ -49,7 +49,7 @@ class RolesController extends Controller
     public function create()
     {
         return $this->form->render('mconsole::roles.form', [
-            'menu' => app('API')->menu->get(true),
+            'acl' => app('API')->acl->get(),
         ]);
     }
 
@@ -80,7 +80,7 @@ class RolesController extends Controller
     {
         return $this->form->render('mconsole::roles.form', [
             'item' => $this->repository->find($id),
-            'menu' => app('API')->menu->get(true),
+            'acl' => app('API')->acl->get(),
         ]);
     }
 

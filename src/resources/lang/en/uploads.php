@@ -22,4 +22,13 @@ return [
         'filename' => 'File name',
         'type' => 'Type',
     ],
+    'acl' => [
+        'index' => 'Uploads: show list',
+        'create' => 'Uploads: show create form',
+        'store' => 'Uploads: saving',
+        'edit' => 'Uploads: show edit form',
+        'update' => 'Uploads: updating',
+        'show' => 'Uploads: view',
+        'destroy' => 'Uploads: delete',
+    ],
 ];

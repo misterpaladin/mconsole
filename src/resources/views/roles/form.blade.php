@@ -42,20 +42,16 @@
             					<thead>
             						<tr class="uppercase">
                                         <th></th>
-            							<th>{{ trans('mconsole::roles.permission.name') }}</th>
             							<th>{{ trans('mconsole::roles.permission.description') }}</th>
             						</tr>
             					</thead>
             					<tbody>
-            						@foreach ($menu as $menuItem)
+            						@foreach ($acl as $aclItem)
             							<tr onclick="javascript:$(this).find(':checkbox').prop('checked', !$(this).find(':checkbox').prop('checked'));">
                                             <td>
-                                                @if (!empty($menuItem->route))
-                                                    <label><input type="checkbox" name="routes[{{ $menuItem->route }}]" class="form-control" @if (isset($item) && in_array($menuItem->route, $item->routes)) checked @endif></label>
-                                                @endif
+                                                <label><input type="checkbox" name="routes[{{ $aclItem['route'] }}]" class="form-control checkbox" @if (isset($item) && in_array($aclItem['route'], $item->routes)) checked @endif></label>
                                             </td>
-            								<td>{{ trans('mconsole::' . $menuItem->translation) }}</td>
-            								<td>{{ trans('mconsole::' . $menuItem->description) }}</td>
+            								<td>{{ trans('mconsole::' . $aclItem['description']) }}</td>
             							</tr>
             						@endforeach
             					</tbody>

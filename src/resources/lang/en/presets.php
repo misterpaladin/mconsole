@@ -81,4 +81,13 @@ return [
         'path' => 'Save directory',
         'imageonly' => 'Rrocessing rules is available only for images',
     ],
+    'acl' => [
+        'index' => 'Upload presets: show list',
+        'create' => 'Upload presets: show create form',
+        'store' => 'Upload presets: saving',
+        'edit' => 'Upload presets: show edit form',
+        'update' => 'Upload presets: updating',
+        'show' => 'Upload presets: view',
+        'destroy' => 'Upload presets: delete',
+    ],
 ];
