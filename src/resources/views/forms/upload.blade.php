@@ -4,18 +4,18 @@
     <input type="hidden" class="uploadable-type" name="uploads[{{ $type }}][{{ $group }}][type]" value="{{ $type }}" />
     <input type="hidden" class="uploadable-class" name="uploads[{{ $type }}][{{ $group }}][related_class]" value="{{ $model }}"/>
     
-    @if (isset($presets) && $presets->count() == 0)
+    @if ((isset($presets) && $presets->count() == 0) || (isset($type) && isset($presets) && $presets->where('type', $type)->count() == 0))
         <div class="alert alert-danger">
             <p>{{ trans('mconsole::uploader.errors.nopresets.text')}}</p>
             <p><a href="/mconsole/presets/create" class="btn btn-xs blue">{{ trans('mconsole::uploader.errors.nopresets.link') }}</a></p>
         </div>
     @else
     
-        @if (isset($presets) && $selector === true)
+        @if (isset($presets) && isset($selector) && $selector === true)
             @include('mconsole::forms.select', [
                 'label' => trans('mconsole::uploader.selector'),
                 'name' => sprintf('uploads[%s][%s][preset]', $type, $group),
-                'options' => $presets->where('type', $type)->lists('name', 'id'),
+                'options' => isset($type) ? $presets->where('type', $type)->lists('name', 'id')->toArray() : $presets->lists('name', 'id')->toArray(),
                 'value' => isset($preset) ? $presets->where('key', $preset)->first()->id : null,
             ])
         @else
