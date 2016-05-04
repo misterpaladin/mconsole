@@ -21,11 +21,14 @@ class MenuComposer
     public function compose(View $view)
     {
         $acl = collect(app('API')->acl->get());
-        $allowed = Auth::user()->role->routes;
+        $user = Auth::user();
+        $allowed = $user->role->routes;
+        $roleKey = $user->role->key;
         $all = app('API')->menu->get();
         
-        $all->each(function ($menu, $key) use (&$all, &$allowed, &$acl) {
-            if ($menu->acl) {
+        $all->each(function ($menu, $key) use (&$all, &$allowed, &$acl, &$roleKey) {
+            
+            if ($menu->acl && $roleKey != 'root') {
                 if (!$menu->visible || !$menu->enabled) {
                     unset($all[$key]);
                 } else {
@@ -33,14 +36,14 @@ class MenuComposer
                         foreach ($menu->child as $cKey => $child) {
                             if ($child->acl) {
                                 $current = $acl->where('key', $child->key)->first();
-                                if (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed)) {
+                                if (!in_array($current['route'], $allowed)) {
                                     unset($menu->child[$cKey]);
                                 }
                             }
                         }
                     } else {
                         $current = $acl->where('key', $menu->key)->first();
-                        if (count($allowed) == 0 || (Auth::user()->role->key != 'root' && !in_array($current['route'], $allowed))) {
+                        if (count($allowed) == 0 || !in_array($current['route'], $allowed)) {
                             $all->forget($key);
                         }
                     }
