@@ -4,6 +4,7 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Contracts\DataManager;
+use Carbon\Carbon;
 
 class Options extends RepositoryAPI implements DataManager
 {
@@ -28,24 +29,24 @@ class Options extends RepositoryAPI implements DataManager
     public function install($options)
     {
         $model = $this->model;
-        foreach ($options as $option) {
-            if ($model::where('key', $option['key'])->count() == 0) {
-                $model::create($option);
-            } else {
-                unset($option['value']);
-                
-                if (isset($option['rules'])) {
-                    $option['rules'] = json_encode($option['rules']);
+        
+        $this->uninstall($options);
+        
+        foreach ($options as $key => $option) {
+            foreach ($option as $col => $val) {
+                if (is_array($val)) {
+                    $option[$col] = json_encode($val);
+                    $preset['created_at'] = Carbon::now();
+                    $preset['updated_at'] = Carbon::now();
                 }
-                
-                if (isset($option['options'])) {
-                    $option['options'] = json_encode($option['options']);
-                }
-                $model::where('key', $option['key'])->update($option);
             }
+            $options[$key] = $option;
         }
+        
+        $model::insert($options);
+        $model::dropCache();
     }
-    
+        
     /**
      * Remove options from database
      *
@@ -55,8 +56,7 @@ class Options extends RepositoryAPI implements DataManager
     public function uninstall($options)
     {
         $model = $this->model;
-        foreach ($options as $option) {
-            $model::where('key', $option['key'])->delete();
-        }
+        $model::whereIn('key', collect($options)->lists('key'))->delete();
+        $model::dropCache();
     }
 }

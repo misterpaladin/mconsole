@@ -4,6 +4,7 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Contracts\DataManager;
+use Carbon\Carbon;
 
 class Presets extends RepositoryAPI implements DataManager
 {
@@ -28,11 +29,22 @@ class Presets extends RepositoryAPI implements DataManager
     public function install($presets)
     {
         $model = $this->model;
-        foreach ($presets as $preset) {
-            if ($model::where('key', $preset['key'])->count() == 0) {
-                $model::create($preset);
+        
+        $this->uninstall($presets);
+        
+        foreach ($presets as $key => $preset) {
+            foreach ($preset as $col => $val) {
+                if (is_array($val)) {
+                    $preset[$col] = json_encode($val);
+                    $preset['created_at'] = Carbon::now();
+                    $preset['updated_at'] = Carbon::now();
+                }
             }
+            $presets[$key] = $preset;
         }
+        
+        $model::insert($presets);
+        $model::dropCache();
     }
     
     /**
@@ -44,8 +56,7 @@ class Presets extends RepositoryAPI implements DataManager
     public function uninstall($presets)
     {
         $model = $this->model;
-        foreach ($presets as $preset) {
-            $model::where('key', $preset['key'])->delete();
-        }
+        $model::whereIn('key', collect($presets)->lists('key'))->delete();
+        $model::dropCache();
     }
 }
