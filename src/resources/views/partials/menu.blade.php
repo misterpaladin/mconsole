@@ -13,7 +13,11 @@
                             <a href="javascript:;">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
                         @endif
     				@else
-    					<a href="javascript:;">{{ trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                        @if (isset($menu->url))
+                            <a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                        @else
+                            <a href="javascript:;">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                        @endif
     					<ul class="dropdown-menu pull-left">
     						@foreach ($menu->child as $child)
     					        @if ($child->visible)
