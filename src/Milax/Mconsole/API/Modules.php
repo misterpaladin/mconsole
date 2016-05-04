@@ -205,6 +205,11 @@ class Modules extends RepositoryAPI
         $model = $this->model;
         $batch = DB::table('migrations')->max('batch') + 1;
         
+        // Call install function if exists
+        if (!is_null($uninstall = $module->uninstall)) {
+            $uninstall();
+        }
+        
         if (count($module->migrations) > 0) {
             foreach ($module->migrations as $migration) {
                 DB::table('migrations')->where('migration', pathinfo($migration, PATHINFO_FILENAME))->orderBy('migration', 'asc')->update([
@@ -228,11 +233,6 @@ class Modules extends RepositoryAPI
         // Uninstall public assets
         if (File::exists(sprintf('%s/%s/', public_path('massets/modules'), $module->identifier))) {
             File::deleteDirectory(sprintf('%s/%s/', public_path('massets/modules'), $module->identifier));
-        }
-        
-        // Call install function if exists
-        if (!is_null($uninstall = $module->uninstall)) {
-            $uninstall();
         }
         
         File::deleteDirectory(storage_path('app/lang'));
