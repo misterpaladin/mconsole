@@ -75,6 +75,11 @@ class Installer extends Command
             $this->comment('Installing package components..');
         }
         
+        // Clean app migrations
+        foreach (glob(database_path('migrations/*.php')) as $migration) {
+            File::delete($migration);
+        }
+        
         if (File::exists(public_path('massets'))) {
             File::deleteDirectory(public_path('massets'));
         }
