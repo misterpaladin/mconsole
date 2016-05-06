@@ -96,5 +96,8 @@ class RepositoriesServiceProvider extends ServiceProvider
             $this->app->when($repository['when'])->needs($repository['needs'])->give($repository['give']);
             app('API')->repositories->register($repository['bind'], $repository['give']());
         }
+        
+        // Register additional repositories to API
+        app('API')->repositories->register('languages', new \Milax\Mconsole\Repositories\LanguagesRepository(\Milax\Mconsole\Models\Language::class));
     }
 }
