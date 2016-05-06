@@ -6,6 +6,8 @@ use Milax\Mconsole\Contracts\Menu;
 
 class FileMenu implements Menu
 {
+    protected $model = '\Milax\Mconsole\Models\MconsoleMenu';
+    
     /**
      * Create new class instance, define menu
      */
