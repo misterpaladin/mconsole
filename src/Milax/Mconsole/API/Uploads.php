@@ -102,7 +102,9 @@ class Uploads implements GenericAPI
             ]);
             if (isset($data['unique']) && $data['unique'] === true) {
                 $last = $data['related']->uploads()->select('id')->where('group', $data['group'])->orderBy('id', 'desc')->first();
-                $data['related']->uploads()->where('group', $data['group'])->where('id', '!=', $last->id)->delete();
+                if ($last) {
+                    $data['related']->uploads()->where('group', $data['group'])->where('id', '!=', $last->id)->delete();
+                }
             }
         });
         
