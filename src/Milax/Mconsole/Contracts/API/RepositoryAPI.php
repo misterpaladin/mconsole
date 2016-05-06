@@ -2,7 +2,7 @@
 
 namespace Milax\Mconsole\Contracts\API;
 
-use Milax\Mconsole\Abstractions\Repositories\EloquentRepository;
+use Milax\Mconsole\Repositories\EloquentRepository;
 
 /**
  * Repository abstract class for APIs that uses Models

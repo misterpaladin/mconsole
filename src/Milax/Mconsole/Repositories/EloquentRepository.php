@@ -1,6 +1,6 @@
 <?php
 
-namespace Milax\Mconsole\Abstractions\Repositories;
+namespace Milax\Mconsole\Repositories;
 
 use Milax\Mconsole\Contracts\Repository;
 

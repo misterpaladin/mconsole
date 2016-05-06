@@ -132,6 +132,7 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('links', new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class));
         app('API')->register('tags', new \Milax\Mconsole\API\Tags(\Milax\Mconsole\Models\Tag::class));
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
+        app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
         app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));
         
         // Register system ACL

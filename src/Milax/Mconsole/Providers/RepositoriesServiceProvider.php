@@ -23,7 +23,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\MenusRepository(\Milax\Mconsole\Models\Menu::class);
                 },
-                'bind' => 'MenusRepository',
+                'bind' => 'menus',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\PresetsController',
@@ -31,7 +31,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\PresetsRepository(\Milax\Mconsole\Models\MconsoleUploadPreset::class);
                 },
-                'bind' => 'PresetsRepository',
+                'bind' => 'presets',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\RolesController',
@@ -39,7 +39,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\RolesRepository(\Milax\Mconsole\Models\MconsoleRole::class);
                 },
-                'bind' => 'RolesRepository',
+                'bind' => 'roles',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\TagsController',
@@ -47,7 +47,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\TagsRepository(\Milax\Mconsole\Models\Tag::class);
                 },
-                'bind' => 'TagsRepository',
+                'bind' => 'tags',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\UploadsController',
@@ -55,7 +55,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\UploadsRepository(\Milax\Mconsole\Models\Upload::class);
                 },
-                'bind' => 'UploadsRepository',
+                'bind' => 'uploads',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\UsersController',
@@ -63,7 +63,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\UsersRepository(\App\User::class);
                 },
-                'bind' => 'UsersRepository',
+                'bind' => 'users',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\SettingsController',
@@ -71,7 +71,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\SettingsRepository(\Milax\Mconsole\Models\MconsoleOption::class);
                 },
-                'bind' => 'SettingsRepository',
+                'bind' => 'settings',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\VariablesController',
@@ -79,7 +79,7 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\VariablesRepository(\Milax\Mconsole\Models\Variable::class);
                 },
-                'bind' => 'VariablesRepository',
+                'bind' => 'variables',
             ],
             [
                 'when' => '\Milax\Mconsole\Http\Controllers\ModulesController',
@@ -87,14 +87,14 @@ class RepositoriesServiceProvider extends ServiceProvider
                 'give' => function () {
                     return new \Milax\Mconsole\Repositories\ModulesRepository(\Milax\Mconsole\Models\MconsoleModule::class);
                 },
-                'bind' => 'ModulesRepository',
+                'bind' => 'modules',
             ],
         ];
         
         // Repositories contextual binding
         foreach ($repositories as $repository) {
             $this->app->when($repository['when'])->needs($repository['needs'])->give($repository['give']);
-            $this->app->bind($repository['bind'], $repository['give']);
+            app('API')->repositories->register($repository['bind'], $repository['give']());
         }
     }
 }
