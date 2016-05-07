@@ -18,17 +18,14 @@
     						<table id="modules-table" class="table table-striped">
     							<thead>
     								<tr class="uppercase">
-                                        <th width="1%"></th>
                                         <th>{{ trans('mconsole::modules.table.info') }}</th>
+                                        <th>{{ trans('mconsole::modules.table.authors') }}</th>
     									<th width="30%">{{ trans('mconsole::tables.actions') }}</th>
     								</tr>
     							</thead>
     							<tbody>
     								@foreach ($items as $item)
                                         <tr data-identifier="{{ $item->identifier }}">
-                                            <td>
-                                                <i class="fa fa-cubes"></i>
-                                            </td>
                                             <td>
                                                 <p>
                                                     <strong>{{ $item->name }}</strong> <span class="small">[{{ $item->identifier }}]</span>
@@ -77,6 +74,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                @foreach ($item->package->authors as $author)
+                                                    {{ $author->name }}<br/>
+                                                @endforeach
                                             </td>
     										<td>
                                                 <span class="btn btn-xs btn-danger uninstall-module disabled popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.uninstall.info') }}" data-modal-title="{{ trans('mconsole::modules.table.uninstall.modal.title') }}" data-modal-content="{{ trans('mconsole::modules.table.uninstall.modal.content') }}" data-modal-cancel="{{ trans('mconsole::modules.table.uninstall.modal.cancel') }}" data-modal-uninstall="{{ trans('mconsole::modules.table.uninstall.modal.uninstall') }}" data-lang-process="{{ trans('mconsole::modules.table.uninstall.process') }}"><i class="fa fa-close"></i> {{ trans('mconsole::modules.table.buttons.uninstall') }}</span>

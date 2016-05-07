@@ -10,6 +10,7 @@ return [
         'suggested' => 'Additional modules on Packagist',
         'nosuggested' => 'All additional modules already installed in the system',
         'info' => 'Information',
+        'authors' => 'Authors',
         'uninstall' => [
             'process' => 'Uninstalling..',
             'info' => 'Delete module, including all data',
