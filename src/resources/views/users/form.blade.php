@@ -46,6 +46,12 @@
         						'name' => 'password',
         						'placeholder' => trans('mconsole::users.form.placeholder.password'),
         					])
+                        @elseif (Auth::id() == $item->id)
+                            @include('mconsole::forms.password', [
+        						'label' => trans('mconsole::users.form.changepassword'),
+        						'name' => 'password',
+        						'placeholder' => trans('mconsole::users.form.placeholder.changepassword'),
+        					])
         				@endif
             			<div class="form-actions">
             				@include('mconsole::forms.submit')

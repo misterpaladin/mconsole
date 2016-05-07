@@ -33,10 +33,12 @@ return [
         'name' => 'Name',
         'email' => 'E-mail',
         'password' => 'Password',
+        'changepassword' => 'Change password',
         'placeholder' => [
             'name' => 'John Appleseed',
             'email' => 'example@milax.com',
             'password' => 'Password',
+            'changepassword' => 'New password',
         ],
         'main' => 'General',
         'quickmenu' => 'Quick menu',

@@ -33,10 +33,12 @@ return [
         'name' => 'Имя',
         'email' => 'Эл. почта',
         'password' => 'Пароль',
+        'changepassword' => 'Поменять пароль',
         'placeholder' => [
             'name' => 'Иван Апельсинов',
             'email' => 'example@milax.com',
             'password' => 'Пароль',
+            'changepassword' => 'Новый пароль',
         ],
         'main' => 'Основное',
         'quickmenu' => 'Быстрое меню',
