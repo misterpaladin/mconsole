@@ -23,6 +23,7 @@ class MconsoleMiddleware
         // User profile exception
         array_push($this->exceptions, sprintf('GET:mconsole/users/%s', $id));
         array_push($this->exceptions, sprintf('GET:mconsole/users/%s/edit', $id));
+        array_push($this->exceptions, sprintf('POST:mconsole/users/%s/menus', $id));
     }
     
     /**

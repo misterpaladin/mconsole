@@ -14,7 +14,7 @@ class MconsoleUser extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'lang',
+        'name', 'email', 'password', 'lang', 'menus',
     ];
 
     /**
@@ -24,6 +24,10 @@ class MconsoleUser extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+    
+    protected $casts = [
+        'menus' => 'array',
     ];
     
     /**

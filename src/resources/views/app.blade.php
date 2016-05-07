@@ -14,6 +14,7 @@
 		<title>{{ (isset($pageTitle)) ? sprintf('%s / Mconsole', $pageTitle, app('API')->options->getByKey('project_name')) : sprintf('%s / Mconsole', app('API')->options->getByKey('project_name')) }}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta name="_token" content="{{ csrf_token() }}" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=all' rel='stylesheet' type='text/css'>
 		<link href="/massets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />

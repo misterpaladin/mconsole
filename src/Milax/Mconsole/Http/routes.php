@@ -62,4 +62,7 @@ Route::group([
     
     // Docs
     Route::get('/docs', 'DocsController@index');
+    
+    // User menus
+    Route::post('/users/{user}/menus', 'UsersController@updateMenuOrder');
 });

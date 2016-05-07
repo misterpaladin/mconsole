@@ -55,6 +55,23 @@ class MenuComposer
             }
         });
         
+        if ($user->menus && count($user->menus) > 0) {
+            $menus = $all;
+            $all = collect();
+            
+            foreach ($user->menus as $key) {
+                $menus->each(function ($menu, $menuKey) use (&$menus, &$key, &$all) {
+                    if ($menu->key == $key) {
+                        $all->push($menus->pull($menuKey));
+                    }
+                });
+            }
+            
+            $menus->each(function ($menu) use (&$all) {
+                $all->push($menu);
+            });
+        }
+        
         $view->with('mconsole_menu', $all);
     }
 }

@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Milax\Mconsole\Http\Requests\UserRequest;
 use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
@@ -129,5 +130,18 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $this->repository->destroy($id);
+    }
+    
+    /**
+     * Update user menu order
+     * 
+     * @param  int $id    [User id]
+     * @return void
+     */
+    public function updateMenuOrder(Request $request, $id)
+    {
+        dd($this->repository->update($id, [
+            'menus' => json_decode($request->input('menus'), true),
+        ]));
     }
 }
