@@ -9,14 +9,14 @@ class QuickMenu implements GenericAPI
     protected $stack = [];
     
     /**
-     * Register callback function
+     * Register quick menu item
      * 
-     * @param  Closure $callback
+     * @param  array $menu
      * @return void
      */
-    public function register($callback)
+    public function register($menu)
     {
-        $this->stack[] = $callback;
+        $this->stack[] = $menu;
     }
     
     /**
@@ -26,13 +26,10 @@ class QuickMenu implements GenericAPI
      */
     public function get()
     {
-        $results = collect();
-        foreach ($this->stack as $callback) {
-            if ($result = $callback()) {
-                $results->push($result);
-            }
-        }
-        
+        $results = collect($this->stack)->transform(function ($item) {
+            $item['text'] = trans($item['text']);
+            return $item;
+        });
         return $results;
     }
 }

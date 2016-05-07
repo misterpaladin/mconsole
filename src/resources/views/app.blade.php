@@ -86,12 +86,12 @@
                                         <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
                                             @forelse (app('API')->quickmenu->get() as $qmItem)
                                                 <li>
-                                                    <a href="{{ $qmItem->link }}">
+                                                    <a href="{{ $qmItem['link'] }}">
                                                         <span class="details">
-                                                            @if ($qmItem->icon)
-                                                                <i class="{{ $qmItem->icon }}"></i>
+                                                            @if (isset($qmItem['icon']))
+                                                                <i class="{{ $qmItem['icon'] }}"></i>
                                                             @endif
-                                                            {{ $qmItem->text }} </span>
+                                                            {{ $qmItem['text'] }} </span>
                                                     </a>
                                                 </li>
                                             @empty

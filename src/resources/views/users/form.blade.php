@@ -59,8 +59,8 @@
                         @include('mconsole::partials.portlet-title', [
                             'title' => trans('mconsole::users.form.quickmenu'),
                         ])
-                        @foreach (app('API')->quickmenu->get() as $menu)
-                            <div class=""><input name="menu[]" type="hidden" value="{{ $menu->link }}" />{{ $menu->text }}</div>
+                        @foreach (app('API')->quickmenu->get() as $qmItem)
+                            <div class=""><input name="menu[]" type="hidden" value="{{ $qmItem['link'] }}" />{{ $qmItem['text'] }}</div>
                         @endforeach
                     </div>
                 </div>
