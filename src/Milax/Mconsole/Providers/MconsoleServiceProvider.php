@@ -334,29 +334,29 @@ class MconsoleServiceProvider extends ServiceProvider
     protected function registerSearch()
     {
         app('API')->search->register(function ($text) {
-            return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($user) {
+            return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($result) {
                 return [
-                    'icon' => 'user',
-                    'title' => $user->name,
-                    'description' => $user->email,
-                    'link' => sprintf('/mconsole/users/%s/edit', $user->id),
+                    'title' => $result->name,
+                    'description' => $result->email,
+                    'link' => sprintf('/mconsole/users/%s/edit', $result->id),
+                    'tags' => ['user', sprintf('#%s', $result->id)],
                 ];
             });
         }, 'users');
         
         app('API')->search->register(function ($text) {
-            return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->orderBy('type')->get()->transform(function ($file) {
+            return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->orderBy('type')->get()->transform(function ($result) {
                 return [
-                    'icon' => 'file',
-                    'title' => file_get_original_name($file->filename),
-                    'filepath' => $file->filename,
-                    'path' => $file->path,
+                    'title' => file_get_original_name($result->filename),
+                    'filepath' => $result->filename,
+                    'path' => $result->path,
                     'description' => '',
                     'basepath' => '/storage/uploads',
-                    'original' => $file->type == 'image' ? sprintf('/storage/uploads/%s/original/%s', $file->path, $file->filename) : sprintf('/storage/uploads/%s/%s', $file->path, $file->filename),
-                    'copies' => $file->copies,
-                    'preview' => $file->type == 'image' ? sprintf('/storage/uploads/%s/mconsole/%s', $file->path, $file->filename) : '',
+                    'original' => $result->type == 'image' ? sprintf('/storage/uploads/%s/original/%s', $result->path, $result->filename) : sprintf('/storage/uploads/%s/%s', $result->path, $result->filename),
+                    'copies' => $result->copies,
+                    'preview' => $result->type == 'image' ? sprintf('/storage/uploads/%s/mconsole/%s', $result->path, $result->filename) : '',
                     'link' => '#',
+                    'tags' => ['upload', $result->type, sprintf('#%s', $result->id)],
                 ];
             });
         }, 'uploads');
