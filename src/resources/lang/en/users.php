@@ -39,6 +39,7 @@ return [
             'password' => 'Password',
         ],
         'main' => 'General',
+        'quickmenu' => 'Quick menu',
         'language' => 'Interface language',
         'role' => 'Group',
     ],

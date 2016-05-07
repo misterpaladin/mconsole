@@ -80,6 +80,7 @@
                                 <ul class="dropdown-menu">
                                     <li class="external">
                                         <h3>{{ trans('mconsole::mconsole.quickmenu.title') }}</h3>
+                                        <span class="pull-right"><a href="/mconsole/users/{{ Auth::id() }}/edit">Edit</a></span>
                                     </li>
                                     <li>
                                         <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
