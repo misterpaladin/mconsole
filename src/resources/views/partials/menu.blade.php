@@ -21,7 +21,7 @@
     					<ul class="dropdown-menu pull-left">
     						@foreach ($menu->child as $child)
     					        @if ($child->visible)
-                                    <li>
+                                    <li data-key="{{ $child->key }}">
         					            <a href="/mconsole/{{ $child->url }}" class="nav-link">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
         					        </li>
                                 @endif

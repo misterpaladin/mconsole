@@ -56,22 +56,37 @@ class MenuComposer
         });
         
         if ($user->menus && count($user->menus) > 0) {
-            $menus = $all;
-            $all = collect();
-            
-            foreach ($user->menus as $key) {
-                $menus->each(function ($menu, $menuKey) use (&$menus, &$key, &$all) {
-                    if ($menu->key == $key) {
-                        $all->push($menus->pull($menuKey));
-                    }
-                });
-            }
-            
-            $menus->each(function ($menu) use (&$all) {
-                $all->push($menu);
-            });
+            $all = $this->sortMenu($user->menus, $all);
         }
         
         $view->with('mconsole_menu', $all);
+    }
+    
+    /**
+     * Sort menu items with children elements
+     *
+     * @param User $user [User instance]
+     * @param \Iluminate\Support\Collection $menus [Menu collection]
+     * @return \Iluminate\Support\Collection
+     */
+    protected function sortMenu($order, $menus)
+    {
+        $all = collect();
+        foreach ($order as $uMenu) {
+            $menus->each(function ($menu, $menuKey) use (&$menus, &$uMenu, &$all) {
+                if ($menu->key == $uMenu['key']) {
+                    if ($menu->child && $uMenu['children']) {
+                        $menu->child = $this->sortMenu($uMenu['children'], collect($menu->child));
+                    }
+                    $all->push($menus->pull($menuKey));
+                }
+            });
+        }
+        
+        $menus->each(function ($menu) use (&$all) {
+            $all->push($menu);
+        });
+        
+        return $all;
     }
 }
