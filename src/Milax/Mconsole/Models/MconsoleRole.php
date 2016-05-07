@@ -7,7 +7,7 @@ use Milax\Mconsole\Adapters\PermissionsAdapter;
 
 class MconsoleRole extends Model
 {
-    protected $fillable = ['name', 'routes', 'widget'];
+    protected $fillable = ['name', 'routes', 'widget', 'search'];
     
     /**
      * Get routes as array

@@ -23,7 +23,8 @@ return [
         'main' => 'Edit',
         'permissions' => 'Permissions',
         'name' => 'Name',
-        'widget' => 'Blade helper',
+        'widget' => 'Enable Blade helper',
+        'search' => 'Enable search bar',
         'placeholder' => 'Moderator',
     ],
     'table' => [

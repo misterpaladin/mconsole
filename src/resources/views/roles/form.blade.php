@@ -24,6 +24,11 @@
                                 'name' => 'widget',
                                 'type' => MX_SELECT_STATE,
                             ])
+                            @include('mconsole::forms.select', [
+                                'label' => trans('mconsole::roles.form.search'),
+                                'name' => 'search',
+                                'type' => MX_SELECT_STATE,
+                            ])
         				</div>
         			</div>
                     <div class="form-actions">

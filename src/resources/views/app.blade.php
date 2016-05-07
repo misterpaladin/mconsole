@@ -138,17 +138,19 @@
 			<div class="page-header-menu">
 				<div class="container">
                     <!-- BEGIN HEADER SEARCH BOX -->
-                    <form class="search-form" action="" method="GET" style="position: relative;">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ trans('mconsole::mconsole.search.placeholder') }}" name="query">
-                            <span class="input-group-btn">
-                                <span class="btn submit">
-                                    <i class="icon-magnifier"></i>
+                    @if (Auth::user()->role->key == 'root' || Auth::user()->role->search)
+                        <form class="search-form" action="" method="GET" style="position: relative;">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="{{ trans('mconsole::mconsole.search.placeholder') }}" name="query">
+                                <span class="input-group-btn">
+                                    <span class="btn submit">
+                                        <i class="icon-magnifier"></i>
+                                    </span>
                                 </span>
-                            </span>
-                        </div>
-                        <ul class="search-results"></ul>
-                    </form>
+                            </div>
+                            <ul class="search-results"></ul>
+                        </form>
+                    @endif
                     <!-- END HEADER SEARCH BOX -->
 					@include('mconsole::partials.menu')
 				</div>
