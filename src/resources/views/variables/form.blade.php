@@ -28,7 +28,7 @@
                                     <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label>{{ trans('mconsole::variables.form.value') }}</label>
-                                            <input data-name="value" class="form-control" type="text">
+                                            <textarea data-name="value" class="form-control" rows="4"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-xs-12">
@@ -56,10 +56,11 @@
                                             ])
                                         </div>
                                         <div class="col-sm-6 col-xs-12">
-                                            @include('mconsole::forms.text', [
+                                            @include('mconsole::forms.textarea', [
                                                 'label' => trans('mconsole::variables.form.value'),
                                                 'name' => sprintf('variables[%s][value]', $key),
                                                 'value' => $variable->value,
+                                                'size' => '12x4',
                                             ])
                                         </div>
                                         <div class="col-sm-4 col-xs-12">
