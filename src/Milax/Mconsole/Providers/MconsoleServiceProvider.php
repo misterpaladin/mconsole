@@ -118,6 +118,109 @@ class MconsoleServiceProvider extends ServiceProvider
         });
         
         // Register mconsole APIs
+        $this->registerAPIs();
+        
+        // Register system ACL
+        $this->registerACL();
+        
+        // Register providers for search API
+        $this->registerSearch();
+        
+        // Run one time setup
+        app('API')->modules->scan();
+        app('API')->info->setAppVersion('0.3.7');
+        
+        if (env('APP_ENV') == 'local') {
+            app('API')->translations->load();
+        }
+        
+        // Register mconsole singleton
+        $this->app->singleton('Mconsole', function ($app) {
+            return $this;
+        });
+        
+        // Register service providers
+        foreach ($this->register['providers'] as $class) {
+            $this->app->register($class);
+        }
+        
+        foreach ($this->routes as $route) {
+            require $route;
+        }
+        
+        $this->loadTranslationsFrom(storage_path('app/lang'), 'mconsole');
+        
+        foreach ($this->views as $view) {
+            $this->loadViewsFrom($view, 'mconsole');
+        }
+        
+        // Assets
+        $this->publishes([
+            __DIR__ . '/../../../../public' => base_path('public/massets'),
+        ], 'assets');
+        
+        // Custom configurations
+        foreach ($this->config as $config) {
+            if (!file_exists(config_path(basename($config)))) {
+                $this->publishes([
+                    $config => config_path(basename($config)),
+                ], 'config');
+            } else {
+                $this->mergeConfigFrom(
+                    $config, pathinfo($config, PATHINFO_FILENAME)
+                );
+            }
+        }
+        
+        // Copy database migrations
+        $migrations = [];
+        $dir = __DIR__ . '/../../../migrations/';
+        collect(scandir(__DIR__ . '/../../../migrations'))->each(function ($file) use (&$dir, &$migrations) {
+            if (strpos($file, '.php') !== false) {
+                $migrations[$dir . $file] = base_path('database/migrations/' . $file);
+            }
+        });
+        $this->publishes($migrations, 'migrations');
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // Required files
+        foreach ($this->require as $file) {
+            require $file;
+        }
+        
+        foreach ($this->register['middleware'] as $alias => $class) {
+            $this->app['router']->middleware($alias, $class);
+        }
+        
+        foreach ($this->register['aliases'] as $alias => $class) {
+            AliasLoader::getInstance()->alias($alias, $class);
+        }
+        
+        foreach ($this->register['bindings'] as $interface => $implementation) {
+            $this->app->bind($interface, $implementation);
+        }
+        
+        foreach ($this->register['dependencies'] as $dependency => $class) {
+            $this->app->bind($dependency, function ($app) use (&$class) {
+                return new $class();
+            });
+        }
+    }
+    
+    /**
+     * Register APIs
+     * 
+     * @return void
+     */
+    protected function registerAPIs()
+    {
         app('API')->register('notifications', new \Milax\Mconsole\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class));
         app('API')->register('search', new \Milax\Mconsole\API\Search);
         app('API')->register('modules', new \Milax\Mconsole\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this));
@@ -134,8 +237,15 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
         app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));
-        
-        // Register system ACL
+    }
+    
+    /**
+     * Register ACL
+     * 
+     * @return void
+     */
+    protected function registerACL()
+    {
         app('API')->acl->register([
             ['GET', 'uploads', 'uploads.acl.index', 'uploads'],
             ['GET', 'uploads/create', 'uploads.acl.create'],
@@ -214,63 +324,15 @@ class MconsoleServiceProvider extends ServiceProvider
             ['GET', 'variables', 'variables.acl.index', 'variables'],
             ['POST', 'variables', 'variables.acl.store'],
         ]);
-        
-        // Run one time setup
-        app('API')->modules->scan();
-        app('API')->info->setAppVersion('0.3.7');
-        
-        if (env('APP_ENV') == 'local') {
-            app('API')->translations->load();
-        }
-        
-        // Register mconsole singleton
-        $this->app->singleton('Mconsole', function ($app) {
-            return $this;
-        });
-        
-        // Register service providers
-        foreach ($this->register['providers'] as $class) {
-            $this->app->register($class);
-        }
-        
-        foreach ($this->routes as $route) {
-            require $route;
-        }
-        
-        $this->loadTranslationsFrom(storage_path('app/lang'), 'mconsole');
-        
-        foreach ($this->views as $view) {
-            $this->loadViewsFrom($view, 'mconsole');
-        }
-        
-        // Assets
-        $this->publishes([
-            __DIR__ . '/../../../../public' => base_path('public/massets'),
-        ], 'assets');
-        
-        // Custom configurations
-        foreach ($this->config as $config) {
-            if (!file_exists(config_path(basename($config)))) {
-                $this->publishes([
-                    $config => config_path(basename($config)),
-                ], 'config');
-            } else {
-                $this->mergeConfigFrom(
-                    $config, pathinfo($config, PATHINFO_FILENAME)
-                );
-            }
-        }
-        
-        // Copy database migrations
-        $migrations = [];
-        $dir = __DIR__ . '/../../../migrations/';
-        collect(scandir(__DIR__ . '/../../../migrations'))->each(function ($file) use (&$dir, &$migrations) {
-            if (strpos($file, '.php') !== false) {
-                $migrations[$dir . $file] = base_path('database/migrations/' . $file);
-            }
-        });
-        $this->publishes($migrations, 'migrations');
-        
+    }
+    
+    /**
+     * Register search
+     * 
+     * @return void
+     */
+    protected function registerSearch()
+    {
         app('API')->search->register(function ($text) {
             return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($user) {
                 return [
@@ -298,36 +360,5 @@ class MconsoleServiceProvider extends ServiceProvider
                 ];
             });
         }, 'uploads');
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        // Required files
-        foreach ($this->require as $file) {
-            require $file;
-        }
-        
-        foreach ($this->register['middleware'] as $alias => $class) {
-            $this->app['router']->middleware($alias, $class);
-        }
-        
-        foreach ($this->register['aliases'] as $alias => $class) {
-            AliasLoader::getInstance()->alias($alias, $class);
-        }
-        
-        foreach ($this->register['bindings'] as $interface => $implementation) {
-            $this->app->bind($interface, $implementation);
-        }
-        
-        foreach ($this->register['dependencies'] as $dependency => $class) {
-            $this->app->bind($dependency, function ($app) use (&$class) {
-                return new $class();
-            });
-        }
     }
 }
