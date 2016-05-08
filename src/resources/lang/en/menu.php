@@ -13,6 +13,9 @@ return [
     ],
     'tools' => [
         'name' => 'Tools',
+        'files' => [
+            'name' => 'Files',
+        ],
     ],
     'system' => [
         'name' => 'System',

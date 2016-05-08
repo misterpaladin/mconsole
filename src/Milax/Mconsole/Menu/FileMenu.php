@@ -37,52 +37,13 @@ class FileMenu implements Menu
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [
-                    'uploadz' => [
+                    'files' => [
                         'name' => 'Uploads',
-                        'translations' => 'test',
+                        'translation' => 'menu.tools.files.name',
+                        'url' => 'uploads',
                         'visible' => true,
                         'enabled' => true,
-                        'menus' => [
-                            'uploads' => [
-                                'name' => 'Uploads',
-                                'translation' => 'uploads.menu.list.name',
-                                'url' => 'uploads',
-                                'visible' => true,
-                                'enabled' => true,
-                            ],
-                            'presets' => [
-                                'name' => 'Presets',
-                                'translation' => 'presets.menu.list.name',
-                                'url' => 'presets',
-                                'description' => 'presets.menu.list.description',
-                                'visible' => true,
-                                'enabled' => true,
-                            ],
-                        ],
-                    ],
-                    'tags' => [
-                        'name' => 'All tags',
-                        'translation' => 'tags.menu.list.name',
-                        'url' => 'tags',
-                        'description' => 'tags.menu.list.description',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                    'variables' => [
-                        'name' => 'Variables',
-                        'translation' => 'variables.menu.name',
-                        'url' => 'variables',
-                        'description' => 'variables.menu.description',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                    'menus' => [
-                        'name' => 'Presets',
-                        'translation' => 'menus.menu.list.name',
-                        'url' => 'menus',
-                        'description' => 'menus.menu.list.description',
-                        'visible' => true,
-                        'enabled' => true,
+                        'menus' => [],
                     ],
                 ],
             ],
@@ -91,48 +52,14 @@ class FileMenu implements Menu
                 'translation' => 'menu.users.name',
                 'visible' => true,
                 'enabled' => true,
-                'menus' => [
-                    'users_list' => [
-                        'name' => 'All users',
-                        'translation' => 'users.menu.list.name',
-                        'url' => 'users',
-                        'description' => 'users.menu.list.description',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                    'roles' => [
-                        'name' => 'All roles',
-                        'translation' => 'roles.menu.list.name',
-                        'url' => 'roles',
-                        'description' => 'roles.menu.list.description',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                ],
+                'menus' => [],
             ],
             'system' => [
                 'name' => 'System',
                 'translation' => 'menu.system.name',
                 'visible' => true,
                 'enabled' => true,
-                'menus' => [
-                    'modules' => [
-                        'name' => 'Manage modules',
-                        'translation' => 'modules.menu.name',
-                        'url' => 'modules',
-                        'description' => 'modules.menu.description',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                    'settings' => [
-                        'name' => 'Settings',
-                        'translation' => 'settings.menu.name',
-                        'url' => 'settings',
-                        'description' => 'settings.menu.description',
-                        'visible' => true,
-                        'enabled' => true,
-                    ],
-                ],
+                'menus' => [],
             ],
         ];
     }
@@ -202,8 +129,16 @@ class FileMenu implements Menu
      */
     public function push($category, $key, $menu)
     {
-        if (isset($this->menu[$category])) {
-            $this->menu[$category]['menus'][$key] = $menu;
+        if (str_contains($category, '.')) {
+            $category = str_replace('.', '.menus.', $category) . '.menus';
+            if (is_array($existed = array_get($this->menu, $category))) {
+                $existed[$key] = $menu;
+                array_set($this->menu, $category, $existed);
+            }
+        } else {
+            if (isset($this->menu[$category])) {
+                $this->menu[$category]['menus'][$key] = $menu;
+            }
         }
     }
     
@@ -216,6 +151,10 @@ class FileMenu implements Menu
      */
     public function pushRoot($key, $menu)
     {
+        if (!isset($menu['menus'])) {
+            $menu['menus'] = [];
+        }
+        
         $this->menu[$key] = $menu;
     }
     

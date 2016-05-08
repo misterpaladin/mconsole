@@ -23,11 +23,7 @@
     					        @if ($child->visible)
                                     @if (count($child->menus) > 0)
                                         <li class="dropdown-submenu" data-key="{{ $child->key }}">
-                                            @if (isset($child->url))
-            					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
-                                            @else
-                                                <a href="javascript:;" class="nav-link nav-toggle">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
-                                            @endif
+        					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
                                             
                                             <ul class="dropdown-menu">
                                                 @foreach ($child->menus as $subChild)
