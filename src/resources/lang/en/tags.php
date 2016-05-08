@@ -2,22 +2,7 @@
 
 return [
     'menu' => [
-        'list' => [
-            'name' => 'Tags',
-            'description' => 'Displays a list of tags',
-        ],
-        'create' => [
-            'name' => 'Add tag',
-            'description' => 'Add new tag',
-        ],
-        'update' => [
-            'name' => 'Edit tag',
-            'description' => 'Edit tag',
-        ],
-        'delete' => [
-            'name' => 'Delete tag',
-            'description' => 'Delete tag',
-        ],
+        'name' => 'Tags',
     ],
     'table' => [
         'updated' => 'Updated',

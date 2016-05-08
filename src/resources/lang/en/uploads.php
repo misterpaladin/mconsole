@@ -2,14 +2,7 @@
 
 return [
     'menu' => [
-        'list' => [
-            'name' => 'Uploads',
-            'description' => 'List of uploaded files',
-        ],
-        'delete' => [
-            'name' => 'Delete file',
-            'description' => '',
-        ],
+        'name' => 'Uploads',
     ],
     'table' => [
         'type' => 'Type',

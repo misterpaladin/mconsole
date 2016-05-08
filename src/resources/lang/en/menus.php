@@ -2,22 +2,7 @@
 
 return [
     'menu' => [
-        'list' => [
-            'name' => 'Menu Editor',
-            'description' => 'List menus',
-        ],
-        'create' => [
-            'name' => 'Add menu',
-            'description' => 'Add new menu',
-        ],
-        'update' => [
-            'name' => 'Edit menu item',
-            'description' => 'Edit menu item',
-        ],
-        'delete' => [
-            'name' => 'Delete menu',
-            'description' => '',
-        ],
+        'name' => 'Menu Editor',
     ],
     'table' => [
         'id' => '#',

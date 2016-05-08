@@ -19,7 +19,7 @@ class UploadsController extends Controller
      */
     public function __construct(ListRenderer $renderer, Repository $repository)
     {
-        $this->setCaption(trans('mconsole::uploads.menu.list.name'));
+        $this->setCaption(trans('mconsole::uploads.menu.name'));
         $this->renderer = $renderer;
         $this->repository = $repository;
     }

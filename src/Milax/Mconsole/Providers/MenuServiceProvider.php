@@ -25,7 +25,7 @@ class MenuServiceProvider extends ServiceProvider
     {
         app('API')->menu->push([
             'name' => 'Uploads',
-            'translation' => 'uploads.menu.list.name',
+            'translation' => 'uploads.menu.name',
             'url' => 'uploads',
             'visible' => true,
             'enabled' => true,
@@ -33,7 +33,7 @@ class MenuServiceProvider extends ServiceProvider
         
         app('API')->menu->push([
             'name' => 'Presets',
-            'translation' => 'presets.menu.list.name',
+            'translation' => 'presets.menu.name',
             'url' => 'presets',
             'visible' => true,
             'enabled' => true,
@@ -41,9 +41,8 @@ class MenuServiceProvider extends ServiceProvider
         
         app('API')->menu->push([
             'name' => 'All tags',
-            'translation' => 'tags.menu.list.name',
+            'translation' => 'tags.menu.name',
             'url' => 'tags',
-            'description' => 'tags.menu.list.description',
             'visible' => true,
             'enabled' => true,
         ], 'tags', 'tools');
@@ -52,34 +51,30 @@ class MenuServiceProvider extends ServiceProvider
             'name' => 'Variables',
             'translation' => 'variables.menu.name',
             'url' => 'variables',
-            'description' => 'variables.menu.description',
             'visible' => true,
             'enabled' => true,
         ], 'variables', 'tools');
         
         app('API')->menu->push([
             'name' => 'Presets',
-            'translation' => 'menus.menu.list.name',
+            'translation' => 'menus.menu.name',
             'url' => 'menus',
-            'description' => 'menus.menu.list.description',
             'visible' => true,
             'enabled' => true,
         ], 'presets', 'tools');
         
         app('API')->menu->push([
             'name' => 'All users',
-            'translation' => 'users.menu.list.name',
+            'translation' => 'users.menu.name',
             'url' => 'users',
-            'description' => 'users.menu.list.description',
             'visible' => true,
             'enabled' => true,
         ], 'users_list', 'users');
         
         app('API')->menu->push([
             'name' => 'All roles',
-            'translation' => 'roles.menu.list.name',
+            'translation' => 'roles.menu.name',
             'url' => 'roles',
-            'description' => 'roles.menu.list.description',
             'visible' => true,
             'enabled' => true,
         ], 'roles', 'users');
@@ -88,7 +83,6 @@ class MenuServiceProvider extends ServiceProvider
             'name' => 'Manage modules',
             'translation' => 'modules.menu.name',
             'url' => 'modules',
-            'description' => 'modules.menu.description',
             'visible' => true,
             'enabled' => true,
         ], 'modules', 'system');
@@ -97,7 +91,6 @@ class MenuServiceProvider extends ServiceProvider
             'name' => 'Settings',
             'translation' => 'settings.menu.name',
             'url' => 'settings',
-            'description' => 'settings.menu.description',
             'visible' => true,
             'enabled' => true,
         ], 'settings', 'system');

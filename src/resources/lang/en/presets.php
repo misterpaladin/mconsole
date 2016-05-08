@@ -2,22 +2,7 @@
 
 return [
     'menu' => [
-        'list' => [
-            'name' => 'Upload presets',
-            'description' => 'List of presets',
-        ],
-        'create' => [
-            'name' => 'Add preset',
-            'description' => 'Add a new preset for upload files',
-        ],
-        'update' => [
-            'name' => 'Edit preset',
-            'description' => 'Change the requirements for the uploaded files, as well as add/delete operations of image processing',
-        ],
-        'delete' => [
-            'name' => 'Delete preset',
-            'description' => '',
-        ],
+        'name' => 'Upload presets',
     ],
     'types' => [
         'image' => 'Images',

@@ -2,14 +2,7 @@
 
 return [
     'menu' => [
-        'list' => [
-            'name' => 'Загрузки',
-            'description' => 'Список загруженых файлов',
-        ],
-        'delete' => [
-            'name' => 'Удалить файл',
-            'description' => '',
-        ],
+        'name' => 'Загрузки',
     ],
     'table' => [
         'type' => 'Тип',

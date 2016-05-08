@@ -23,7 +23,7 @@ class PresetsController extends Controller
      */
     public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
-        $this->setCaption(trans('mconsole::presets.menu.list.name'));
+        $this->setCaption(trans('mconsole::presets.menu.name'));
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
