@@ -16,7 +16,8 @@
 		"milax/gravatar": "*",
         "milax/cacheable": "*",
         "guzzlehttp/guzzle": "^6.2",
-        "erusev/parsedown": "^1.6"
+        "erusev/parsedown": "^1.6",
+        "milax/cleaner": "*"
     },
     "autoload": {
         "psr-4": {

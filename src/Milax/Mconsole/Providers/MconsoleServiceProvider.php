@@ -15,6 +15,7 @@ class MconsoleServiceProvider extends ServiceProvider
         'providers' => [
             \Intervention\Image\ImageServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
+            \Milax\Cleaner\CleanerServiceProvider::class,
             \Milax\Mconsole\Providers\MenuServiceProvider::class,
             \Milax\Mconsole\Providers\SearchServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
@@ -74,6 +75,7 @@ class MconsoleServiceProvider extends ServiceProvider
     
     public $config = [
         __DIR__ . '/../../../../src/config/mconsole.php',
+        __DIR__ . '/../../../../src/config/cleaner.php',
     ];
     
     public $translations = [
