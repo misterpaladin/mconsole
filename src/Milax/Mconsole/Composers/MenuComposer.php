@@ -27,10 +27,9 @@ class MenuComposer
         $all = app('API')->menu->get();
         
         $all->each(function ($menu, $key) use (&$all, &$allowed, &$acl, &$roleKey) {
-            
             if ($menu->acl && $roleKey != 'root') {
                 if (!$menu->visible || !$menu->enabled) {
-                    unset($all[$key]);
+                    $all->forget($key);
                 } else {
                     if (isset($menu->menus) && count($menu->menus) > 0) {
                         foreach ($menu->menus as $cKey => $child) {
@@ -48,11 +47,12 @@ class MenuComposer
                         }
                     }
                 }
-                
-                if (strlen($menu->url) == 0 && count($menu->menus) == 0) {
-                    $all->forget($key);
-                }
             }
+            
+            if (strlen($menu->url) == 0 && count($menu->menus) == 0) {
+                $all->forget($key);
+            }
+            
         });
         
         if ($user->menus && count($user->menus) > 0) {
