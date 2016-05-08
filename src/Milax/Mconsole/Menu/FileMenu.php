@@ -22,35 +22,43 @@ class FileMenu implements Menu
                 'visible' => true,
                 'enabled' => true,
                 'acl' => false,
-                'child' => [],
+                'menus' => [],
             ],
             'content' => [
                 'name' => 'Content',
                 'translation' => 'menu.content.name',
                 'visible' => true,
                 'enabled' => true,
-                'child' => [],
+                'menus' => [],
             ],
             'tools' => [
                 'name' => 'Tools',
                 'translation' => 'menu.tools.name',
                 'visible' => true,
                 'enabled' => true,
-                'child' => [
-                    'uploads' => [
+                'menus' => [
+                    'uploadz' => [
                         'name' => 'Uploads',
-                        'translation' => 'uploads.menu.list.name',
-                        'url' => 'uploads',
+                        'translations' => 'test',
                         'visible' => true,
                         'enabled' => true,
-                    ],
-                    'presets' => [
-                        'name' => 'Presets',
-                        'translation' => 'presets.menu.list.name',
-                        'url' => 'presets',
-                        'description' => 'presets.menu.list.description',
-                        'visible' => true,
-                        'enabled' => true,
+                        'menus' => [
+                            'uploads' => [
+                                'name' => 'Uploads',
+                                'translation' => 'uploads.menu.list.name',
+                                'url' => 'uploads',
+                                'visible' => true,
+                                'enabled' => true,
+                            ],
+                            'presets' => [
+                                'name' => 'Presets',
+                                'translation' => 'presets.menu.list.name',
+                                'url' => 'presets',
+                                'description' => 'presets.menu.list.description',
+                                'visible' => true,
+                                'enabled' => true,
+                            ],
+                        ],
                     ],
                     'tags' => [
                         'name' => 'All tags',
@@ -83,7 +91,7 @@ class FileMenu implements Menu
                 'translation' => 'menu.users.name',
                 'visible' => true,
                 'enabled' => true,
-                'child' => [
+                'menus' => [
                     'users_list' => [
                         'name' => 'All users',
                         'translation' => 'users.menu.list.name',
@@ -107,7 +115,7 @@ class FileMenu implements Menu
                 'translation' => 'menu.system.name',
                 'visible' => true,
                 'enabled' => true,
-                'child' => [
+                'menus' => [
                     'modules' => [
                         'name' => 'Manage modules',
                         'translation' => 'modules.menu.name',
@@ -137,23 +145,23 @@ class FileMenu implements Menu
     public function load()
     {
         $fileMenu = collect();
-        
-        foreach (app('API')->modules->get('installed') as $module) {
-            if ($module->menu) {
-                foreach ($module->menu as $key => $menu) {
-                    $this->appendCategory($key, $menu);
-                }
-            }
-        }
-        
+
         foreach ($this->menu as $key => $menu) {
             $m = $this->convert($menu, $key);
-            if (isset($menu['child'])) {
-                foreach ($menu['child'] as $cKey => $child) {
-                    $m->child[] = $this->convert($child, $cKey);
+            $m->menus = collect($m->menus);
+            if (isset($menu['menus'])) {
+                foreach ($menu['menus'] as $cKey => $menus) {
+                    $converted = $this->convert($menus, $cKey);
+                    $converted->menus = collect($converted->menus);
+                    if (isset($menu['menus'][$cKey]['menus'])) {
+                        foreach ($menu['menus'][$cKey]['menus'] as $ccKey => $cMenus) {
+                            $converted->menus->put($ccKey, $this->convert($menu['menus'][$cKey]['menus'][$ccKey], $ccKey));
+                        }
+                    }
+                    $m->menus[$cKey] = $converted;
                 }
             }
-            $fileMenu->push($m);
+            $fileMenu->put($key, $m);
         }
         
         return $fileMenu;
@@ -179,7 +187,7 @@ class FileMenu implements Menu
         $menu->enabled = (isset($array['enabled'])) ? $array['enabled'] : true;
         $menu->acl = isset($array['acl']) ? $array['acl'] : true;
         $menu->key = $key;
-        $menu->child = [];
+        $menu->menus = [];
         
         return $menu;
     }
@@ -195,7 +203,7 @@ class FileMenu implements Menu
     public function push($category, $key, $menu)
     {
         if (isset($this->menu[$category])) {
-            $this->menu[$category]['child'][$key] = $menu;
+            $this->menu[$category]['menus'][$key] = $menu;
         }
     }
     
@@ -219,9 +227,9 @@ class FileMenu implements Menu
     protected function appendCategory($key, $menu)
     {
         if (isset($this->menu[$key])) {
-            if (isset($menu['child'])) {
-                $this->menu[$key]['child'] = array_merge($this->menu[$key]['child'], $menu['child']);
-                unset($menu['child']);
+            if (isset($menu['menus'])) {
+                $this->menu[$key]['menus'] = array_merge($this->menu[$key]['menus'], $menu['menus']);
+                unset($menu['menus']);
             }
             $this->menu[$key] = array_merge($this->menu[$key], $menu);
         } else {
