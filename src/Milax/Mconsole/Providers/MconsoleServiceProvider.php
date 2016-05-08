@@ -16,6 +16,7 @@ class MconsoleServiceProvider extends ServiceProvider
             \Intervention\Image\ImageServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
             \Milax\Cleaner\CleanerServiceProvider::class,
+            \Milax\Mconsole\Providers\ACLServiceProvider::class,
             \Milax\Mconsole\Providers\MenuServiceProvider::class,
             \Milax\Mconsole\Providers\SearchServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
@@ -121,7 +122,7 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Run one time setup
         app('API')->modules->scan();
-        app('API')->info->setAppVersion('0.3.26');
+        app('API')->info->setAppVersion('0.3.27');
         
         if (env('APP_ENV') == 'local') {
             app('API')->translations->load();
