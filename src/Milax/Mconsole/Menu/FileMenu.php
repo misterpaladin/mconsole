@@ -15,7 +15,7 @@ class FileMenu implements Menu
     {
         $this->menu = [
             'dashboard' => [
-                'name' => 'menu.dashboard.name',
+                'name' => 'mconsole::menu.dashboard.name',
                 'url' => 'dashboard',
                 'description' => 'menu.dashboard.description',
                 'visible' => true,
@@ -24,18 +24,18 @@ class FileMenu implements Menu
                 'menus' => [],
             ],
             'content' => [
-                'name' => 'menu.content.name',
+                'name' => 'mconsole::menu.content.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [],
             ],
             'tools' => [
-                'name' => 'menu.tools.name',
+                'name' => 'mconsole::menu.tools.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [
                     'files' => [
-                        'name' => 'menu.tools.files.name',
+                        'name' => 'mconsole::menu.tools.files.name',
                         'url' => 'uploads',
                         'visible' => true,
                         'enabled' => true,
@@ -44,13 +44,13 @@ class FileMenu implements Menu
                 ],
             ],
             'users' => [
-                'name' => 'menu.users.name',
+                'name' => 'mconsole::menu.users.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [],
             ],
             'system' => [
-                'name' => 'menu.system.name',
+                'name' => 'mconsole::menu.system.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [],
