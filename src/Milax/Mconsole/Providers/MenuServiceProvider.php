@@ -24,63 +24,63 @@ class MenuServiceProvider extends ServiceProvider
     public function register()
     {
         app('API')->menu->push([
-            'name' => 'uploads.menu.name',
+            'name' => 'mconsole::uploads.menu.name',
             'url' => 'uploads',
             'visible' => true,
             'enabled' => true,
         ], 'uploads', 'tools.files');
         
         app('API')->menu->push([
-            'name' => 'presets.menu.name',
+            'name' => 'mconsole::presets.menu.name',
             'url' => 'presets',
             'visible' => true,
             'enabled' => true,
         ], 'presets', 'tools.files');
         
         app('API')->menu->push([
-            'name' => 'tags.menu.name',
+            'name' => 'mconsole::tags.menu.name',
             'url' => 'tags',
             'visible' => true,
             'enabled' => true,
         ], 'tags', 'tools');
         
         app('API')->menu->push([
-            'name' => 'variables.menu.name',
+            'name' => 'mconsole::variables.menu.name',
             'url' => 'variables',
             'visible' => true,
             'enabled' => true,
         ], 'variables', 'tools');
         
         app('API')->menu->push([
-            'name' => 'menus.menu.name',
+            'name' => 'mconsole::menus.menu.name',
             'url' => 'menus',
             'visible' => true,
             'enabled' => true,
         ], 'presets', 'tools');
         
         app('API')->menu->push([
-            'name' => 'users.menu.name',
+            'name' => 'mconsole::users.menu.name',
             'url' => 'users',
             'visible' => true,
             'enabled' => true,
         ], 'users_list', 'users');
         
         app('API')->menu->push([
-            'name' => 'roles.menu.name',
+            'name' => 'mconsole::roles.menu.name',
             'url' => 'roles',
             'visible' => true,
             'enabled' => true,
         ], 'roles', 'users');
         
         app('API')->menu->push([
-            'name' => 'modules.menu.name',
+            'name' => 'mconsole::modules.menu.name',
             'url' => 'modules',
             'visible' => true,
             'enabled' => true,
         ], 'modules', 'system');
         
         app('API')->menu->push([
-            'name' => 'settings.menu.name',
+            'name' => 'mconsole::settings.menu.name',
             'url' => 'settings',
             'visible' => true,
             'enabled' => true,

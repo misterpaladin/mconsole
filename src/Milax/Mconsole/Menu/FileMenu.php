@@ -100,7 +100,7 @@ class FileMenu implements Menu
         $menu = new $properties['model'];
         
         $menu->menu_id = (isset($array['menu_id'])) ? $array['menu_id'] : 0;
-        $menu->name = trans('mconsole::' . $array['name']);
+        $menu->name = trans($array['name']);
         $menu->url = (isset($array['url'])) ? $array['url'] : '';
         $menu->description = (isset($array['description'])) ? $array['description'] : '';
         $menu->visible = (isset($array['visible'])) ? $array['visible'] : true;
