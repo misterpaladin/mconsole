@@ -40,7 +40,7 @@ return [
             'password' => 'Password',
             'changepassword' => 'New password',
         ],
-        'main' => 'General',
+        'main' => 'Main',
         'quickmenu' => 'Quick menu',
         'language' => 'Interface language',
         'role' => 'Group',

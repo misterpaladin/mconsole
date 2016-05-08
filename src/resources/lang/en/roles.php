@@ -20,7 +20,7 @@ return [
         ],
     ],
     'form' => [
-        'main' => 'Edit',
+        'main' => 'Main',
         'permissions' => 'Permissions',
         'name' => 'Name',
         'widget' => 'Enable Blade helper',
