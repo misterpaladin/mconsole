@@ -27,6 +27,7 @@ return [
     ],
     'filters' => [
         'filter' => 'Фильтр',
+        'active' => 'Применен фильтр',
         'notselected' => 'Не выбрано',
         'apply' => 'Применить',
         'reset' => 'Сбросить',

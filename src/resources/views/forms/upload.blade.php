@@ -37,10 +37,6 @@
                     <i class="fa fa-info-circle"></i>
                     <span> {{ trans('mconsole::uploader.description') }} </span>
                 </button>
-                <button type="reset" class="btn btn-xs warning cancel disabled">
-                    <i class="fa fa-ban-circle"></i>
-                    <span> {{ trans('mconsole::uploader.cancel') }} </span>
-                </button>
                 <button type="button" class="btn btn-xs red delete disabled">
                     <i class="fa fa-trash"></i>
                     <span> {{ trans('mconsole::uploader.delete') }} </span>
@@ -57,8 +53,6 @@
         <div class="row fileupload-buttonbar">
             <!-- The global progress information -->
             <div class="col-xs-12 fileupload-progress fade">
-                <!-- The extended global progress information -->
-                <div class="progress-extended help-block"> &nbsp; </div>
                 <!-- The global progress bar -->
                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar progress-bar-success" style="width:0%;"> </div>
@@ -114,7 +108,6 @@
             <input type="hidden" class="uploadable-filename" name="uploads[{{ $type }}][{{ $group }}][files][]" value="{%=file.name%}">
             <div class="name"> {% if (file.url) { %}
                 <span class="size">{%=o.formatFileSize(file.size)%}</span><br/>
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl? 'data-gallery': ''%}>{%=file.name%}</a> {% } else { %}
                 <span>{%=file.name%}</span> {% } %} </div> {% if (file.error) { %}
             <div class="help-block">
                 <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %}

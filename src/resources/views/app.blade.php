@@ -102,7 +102,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown visit-project">
                                 <a href="{{ app('API')->options->getByKey('project_url') }}" target="_blank" class="dropdown-toggle popovers" data-container="body" data-trigger="hover" data-placement="bottom" data-content="{{ trans('mconsole::mconsole.links.website') }}">
                                     <i class="icon-share-alt"></i>
                                 </a>
@@ -169,7 +169,7 @@
 					<div class="container">
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
-							<h1>{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.heading') }}
+							<h1 class="font-grey-mint">{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.heading') }}
 								<small>{{ (isset($pageSubcaption)) ? $pageSubcaption : trans('mconsole::mconsole.text.version') }}</small>
 							</h1>
 						</div>
@@ -245,7 +245,7 @@
         <!-- END PAGE LEVEL PLUGINS -->
 		<script src="/massets/js/confirm.js" type="text/javascript"></script>
 		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
-		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
+		<script src="/massets/global/scripts/app.js" type="text/javascript"></script>
         <script src="/massets/js/helpers.js" type="text/javascript"></script>
 		<script src="/massets/js/search.js" type="text/javascript"></script>
 		<script src="/massets/js/form-multi-upload.js" type="text/javascript"></script>
