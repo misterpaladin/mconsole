@@ -9,6 +9,8 @@ use Milax\Mconsole\Models\MconsoleDocset;
 
 class DocsController extends Controller
 {
+    use \UseLayout;
+    
     protected $docsets = [];
     
     /**
@@ -16,6 +18,7 @@ class DocsController extends Controller
      */
     public function __construct(DocsParser $parser)
     {
+        $this->setCaption('DOCSETS::TITLE');
         $this->parser = $parser;
     }
     

@@ -11,7 +11,7 @@ use Milax\Mconsole\Contracts\Repository;
 
 class TagsController extends Controller
 {
-    use \HasRedirects, \DoesNotHaveShow;
+    use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $redirectTo = '/mconsole/tags';
     protected $model = 'Milax\Mconsole\Models\Tag';
@@ -21,6 +21,7 @@ class TagsController extends Controller
      */
     public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
+        $this->setCaption(trans('mconsole::tags.menu.list.name'));
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;

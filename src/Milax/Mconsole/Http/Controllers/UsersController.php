@@ -13,7 +13,7 @@ use Milax\Mconsole\Contracts\Repository;
 
 class UsersController extends Controller
 {
-    use \HasRedirects, \DoesNotHaveShow;
+    use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';
@@ -23,6 +23,7 @@ class UsersController extends Controller
      */
     public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
+        $this->setCaption(trans('mconsole::users.menu.list.name'));
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;

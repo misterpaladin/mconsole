@@ -9,7 +9,7 @@ use Milax\Mconsole\Contracts\Repository;
 
 class UploadsController extends Controller
 {
-    use \HasRedirects, \DoesNotHaveShow;
+    use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $redirectTo = '/mconsole/uploads';
     protected $model = 'Milax\Mconsole\Models\Upload';
@@ -19,6 +19,7 @@ class UploadsController extends Controller
      */
     public function __construct(ListRenderer $renderer, Repository $repository)
     {
+        $this->setCaption(trans('mconsole::uploads.menu.list.name'));
         $this->renderer = $renderer;
         $this->repository = $repository;
     }

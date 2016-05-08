@@ -9,8 +9,11 @@ use Milax\Mconsole\Contracts\Repository;
 
 class VariablesController extends Controller
 {
+    use \UseLayout;
+    
     public function __construct(Repository $repository)
     {
+        $this->setCaption(trans('mconsole::users.menu.name'));
         $this->repository = $repository;
     }
     

@@ -10,8 +10,11 @@ use Milax\Mconsole\Contracts\Repository;
 
 class SettingsController extends Controller
 {
+    use \UseLayout;
+    
     public function __construct(Repository $repository)
     {
+        $this->setCaption(trans('mconsole::settings.menu.name'));
         $this->repository = $repository;
     }
     

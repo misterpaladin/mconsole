@@ -11,7 +11,7 @@ use Milax\Mconsole\Contracts\Repository;
 
 class MenusController extends Controller
 {
-    use \HasRedirects, \DoesNotHaveShow;
+    use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $model = 'Milax\Mconsole\Models\Menu';
     protected $redirectTo = '/mconsole/menus';
@@ -20,6 +20,7 @@ class MenusController extends Controller
      */
     public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
+        $this->setCaption(trans('mconsole::menus.list.name'));
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;

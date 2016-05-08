@@ -13,7 +13,7 @@ use Milax\Mconsole\Contracts\Repository;
 
 class PresetsController extends Controller
 {
-    use \HasRedirects, \DoesNotHaveShow;
+    use \HasRedirects, \DoesNotHaveShow, \UseLayout;
 
     protected $redirectTo = '/mconsole/presets';
     protected $model = 'Milax\Mconsole\Models\MconsoleUploadPreset';
@@ -23,6 +23,7 @@ class PresetsController extends Controller
      */
     public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
     {
+        $this->setCaption(trans('mconsole::presets.menu.list.name'));
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;

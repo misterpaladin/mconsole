@@ -39,6 +39,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Cacheable' => \Milax\Cacheable::class,
             'HasRedirects' => \Milax\Mconsole\Traits\Controllers\HasRedirects::class,
             'DoesNotHaveShow' => \Milax\Mconsole\Traits\Controllers\DoesNotHaveShow::class,
+            'UseLayout' => \Milax\Mconsole\Traits\Controllers\UseLayout::class,
             'HasUploads' => \Milax\Mconsole\Traits\Models\HasUploads::class,
             'HasLinks' => \Milax\Mconsole\Traits\Models\HasLinks::class,
             'HasTags' => \Milax\Mconsole\Traits\Models\HasTags::class,
