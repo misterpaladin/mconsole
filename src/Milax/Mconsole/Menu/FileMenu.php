@@ -15,8 +15,7 @@ class FileMenu implements Menu
     {
         $this->menu = [
             'dashboard' => [
-                'name' => 'Dashboard',
-                'translation' => 'menu.dashboard.name',
+                'name' => 'menu.dashboard.name',
                 'url' => 'dashboard',
                 'description' => 'menu.dashboard.description',
                 'visible' => true,
@@ -25,21 +24,18 @@ class FileMenu implements Menu
                 'menus' => [],
             ],
             'content' => [
-                'name' => 'Content',
-                'translation' => 'menu.content.name',
+                'name' => 'menu.content.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [],
             ],
             'tools' => [
-                'name' => 'Tools',
-                'translation' => 'menu.tools.name',
+                'name' => 'menu.tools.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [
                     'files' => [
-                        'name' => 'Uploads',
-                        'translation' => 'menu.tools.files.name',
+                        'name' => 'menu.tools.files.name',
                         'url' => 'uploads',
                         'visible' => true,
                         'enabled' => true,
@@ -48,15 +44,13 @@ class FileMenu implements Menu
                 ],
             ],
             'users' => [
-                'name' => 'Users',
-                'translation' => 'menu.users.name',
+                'name' => 'menu.users.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [],
             ],
             'system' => [
-                'name' => 'System',
-                'translation' => 'menu.system.name',
+                'name' => 'menu.system.name',
                 'visible' => true,
                 'enabled' => true,
                 'menus' => [],
@@ -106,9 +100,8 @@ class FileMenu implements Menu
         $menu = new $properties['model'];
         
         $menu->menu_id = (isset($array['menu_id'])) ? $array['menu_id'] : 0;
-        $menu->name = (isset($array['name'])) ? $array['name'] : '';
+        $menu->name = trans('mconsole::' . $array['name']);
         $menu->url = (isset($array['url'])) ? $array['url'] : '';
-        $menu->translation = (isset($array['translation'])) ? $array['translation'] : '';
         $menu->description = (isset($array['description'])) ? $array['description'] : '';
         $menu->visible = (isset($array['visible'])) ? $array['visible'] : true;
         $menu->enabled = (isset($array['enabled'])) ? $array['enabled'] : true;

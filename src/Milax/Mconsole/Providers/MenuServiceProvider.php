@@ -24,72 +24,63 @@ class MenuServiceProvider extends ServiceProvider
     public function register()
     {
         app('API')->menu->push([
-            'name' => 'Uploads',
-            'translation' => 'uploads.menu.name',
+            'name' => 'uploads.menu.name',
             'url' => 'uploads',
             'visible' => true,
             'enabled' => true,
         ], 'uploads', 'tools.files');
         
         app('API')->menu->push([
-            'name' => 'Presets',
-            'translation' => 'presets.menu.name',
+            'name' => 'presets.menu.name',
             'url' => 'presets',
             'visible' => true,
             'enabled' => true,
         ], 'presets', 'tools.files');
         
         app('API')->menu->push([
-            'name' => 'All tags',
-            'translation' => 'tags.menu.name',
+            'name' => 'tags.menu.name',
             'url' => 'tags',
             'visible' => true,
             'enabled' => true,
         ], 'tags', 'tools');
         
         app('API')->menu->push([
-            'name' => 'Variables',
-            'translation' => 'variables.menu.name',
+            'name' => 'variables.menu.name',
             'url' => 'variables',
             'visible' => true,
             'enabled' => true,
         ], 'variables', 'tools');
         
         app('API')->menu->push([
-            'name' => 'Presets',
-            'translation' => 'menus.menu.name',
+            'name' => 'menus.menu.name',
             'url' => 'menus',
             'visible' => true,
             'enabled' => true,
         ], 'presets', 'tools');
         
         app('API')->menu->push([
-            'name' => 'All users',
-            'translation' => 'users.menu.name',
+            'name' => 'users.menu.name',
             'url' => 'users',
             'visible' => true,
             'enabled' => true,
         ], 'users_list', 'users');
         
         app('API')->menu->push([
-            'name' => 'All roles',
-            'translation' => 'roles.menu.name',
+            'name' => 'roles.menu.name',
             'url' => 'roles',
             'visible' => true,
             'enabled' => true,
         ], 'roles', 'users');
         
         app('API')->menu->push([
-            'name' => 'Manage modules',
-            'translation' => 'modules.menu.name',
+            'name' => 'modules.menu.name',
             'url' => 'modules',
             'visible' => true,
             'enabled' => true,
         ], 'modules', 'system');
         
         app('API')->menu->push([
-            'name' => 'Settings',
-            'translation' => 'settings.menu.name',
+            'name' => 'settings.menu.name',
             'url' => 'settings',
             'visible' => true,
             'enabled' => true,

@@ -8,27 +8,26 @@
     			<li class="menu-dropdown classic-menu-dropdown main-menu-item" data-key="{{ $menu->key }}">
     				@if (count($menu->menus) == 0)
                         @if (isset($menu->url))
-                            <a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                            <a href="/mconsole/{{ $menu->url }}">{{ $menu->name }}<span class="arrow"></span></a>
                         @else
-                            <a href="javascript:;">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                            <a href="javascript:;">{{ $menu->name }}<span class="arrow"></span></a>
                         @endif
     				@else
                         @if (isset($menu->url))
-                            <a href="/mconsole/{{ $menu->url }}">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                            <a href="/mconsole/{{ $menu->url }}">{{ $menu->name }}<span class="arrow"></span></a>
                         @else
-                            <a href="javascript:;">{{ (trans('mconsole::' . $menu->translation) == $menu->translation) ? $menu->name : trans('mconsole::' . $menu->translation) }}<span class="arrow"></span></a>
+                            <a href="javascript:;">{{ $menu->name }}<span class="arrow"></span></a>
                         @endif
     					<ul class="dropdown-menu pull-left">
     						@foreach ($menu->menus as $child)
     					        @if ($child->visible)
                                     @if (count($child->menus) > 0)
                                         <li class="dropdown-submenu" data-key="{{ $child->key }}">
-        					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
-                                            
+        					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ $child->name }}</a>
                                             <ul class="dropdown-menu">
                                                 @foreach ($child->menus as $subChild)
                                                     <li data-key={{ $subChild->key }}>
-                                                        <a href="{{ $subChild->url }}" class="nav-link ">{{ (trans('mconsole::' . $subChild->translation) == $subChild->translation) ? $subChild->name : trans('mconsole::' . $subChild->translation) }}</a>
+                                                        <a href="{{ $subChild->url }}" class="nav-link ">{{ $subChild->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -36,9 +35,9 @@
                                     @else
                                         <li data-key="{{ $child->key }}">
                                             @if (isset($child->url))
-            					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
+            					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ $child->name }}</a>
                                             @else
-                                                <a href="javascript:;" class="nav-link nav-toggle">{{ (trans('mconsole::' . $child->translation) == $child->translation) ? $child->name : trans('mconsole::' . $child->translation) }}</a>
+                                                <a href="javascript:;" class="nav-link nav-toggle">{{ $child->name }}</a>
                                             @endif
             					        </li>
                                     @endif
