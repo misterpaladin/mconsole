@@ -37,10 +37,6 @@
                     <i class="fa fa-info-circle"></i>
                     <span> {{ trans('mconsole::uploader.description') }} </span>
                 </button>
-                <button type="reset" class="btn btn-xs warning cancel disabled">
-                    <i class="fa fa-ban-circle"></i>
-                    <span> {{ trans('mconsole::uploader.cancel') }} </span>
-                </button>
                 <button type="button" class="btn btn-xs red delete disabled">
                     <i class="fa fa-trash"></i>
                     <span> {{ trans('mconsole::uploader.delete') }} </span>
