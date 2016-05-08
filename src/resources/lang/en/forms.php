@@ -27,6 +27,7 @@ return [
     ],
     'filters' => [
         'filter' => 'Filter',
+        'active' => 'Filter applied',
         'notselected' => 'Not selected',
         'apply' => 'Apply',
         'reset' => 'Reset',

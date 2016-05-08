@@ -43,7 +43,10 @@ class GetFilterHandler implements FilterHandler
             }
         }
         
-        View::share('filtered', $filtered);
+        if (!defined('FILTERS_ACTIVE')) {
+            define('FILTERS_ACTIVE', $filtered);
+        }
+        
         View::share('filters', $this->filters);
         
         return $query;
