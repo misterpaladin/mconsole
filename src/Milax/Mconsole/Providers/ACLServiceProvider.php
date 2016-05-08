@@ -24,82 +24,82 @@ class ACLServiceProvider extends ServiceProvider
     public function register()
     {
         app('API')->acl->register([
-            ['GET', 'uploads', 'uploads.acl.index', 'uploads'],
-            ['GET', 'uploads/create', 'uploads.acl.create'],
-            ['POST', 'uploads', 'uploads.acl.store'],
-            ['GET', 'uploads/{uploads}/edit', 'uploads.acl.edit'],
-            ['PUT', 'uploads/{uploads}', 'uploads.acl.update'],
-            ['GET', 'uploads/{uploads}', 'uploads.acl.show'],
-            ['DELETE', 'uploads/{uploads}', 'uploads.acl.destroy'],
+            ['GET', 'uploads', 'mconsole::uploads.acl.index', 'uploads'],
+            ['GET', 'uploads/create', 'mconsole::uploads.acl.create'],
+            ['POST', 'uploads', 'mconsole::uploads.acl.store'],
+            ['GET', 'uploads/{uploads}/edit', 'mconsole::uploads.acl.edit'],
+            ['PUT', 'uploads/{uploads}', 'mconsole::uploads.acl.update'],
+            ['GET', 'uploads/{uploads}', 'mconsole::uploads.acl.show'],
+            ['DELETE', 'uploads/{uploads}', 'mconsole::uploads.acl.destroy'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'menu', 'menu.acl.index', 'menus'],
-            ['GET', 'menu/create', 'menu.acl.create'],
-            ['POST', 'menu', 'menu.acl.store'],
-            ['GET', 'menu/{menu}/edit', 'menu.acl.edit'],
-            ['PUT', 'menu/{menu}', 'menu.acl.update'],
-            ['GET', 'menu/{menu}', 'menu.acl.show'],
-            ['DELETE', 'menu/{menu}', 'menu.acl.destroy'],
+            ['GET', 'menu', 'mconsole::menu.acl.index', 'menus'],
+            ['GET', 'menu/create', 'mconsole::menu.acl.create'],
+            ['POST', 'menu', 'mconsole::menu.acl.store'],
+            ['GET', 'menu/{menu}/edit', 'mconsole::menu.acl.edit'],
+            ['PUT', 'menu/{menu}', 'mconsole::menu.acl.update'],
+            ['GET', 'menu/{menu}', 'mconsole::menu.acl.show'],
+            ['DELETE', 'menu/{menu}', 'mconsole::menu.acl.destroy'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'presets', 'presets.acl.index', 'presets'],
-            ['GET', 'presets/create', 'presets.acl.create'],
-            ['POST', 'presets', 'presets.acl.store'],
-            ['GET', 'presets/{presets}/edit', 'presets.acl.edit'],
-            ['PUT', 'presets/{presets}', 'presets.acl.update'],
-            ['GET', 'presets/{presets}', 'presets.acl.show'],
-            ['DELETE', 'presets/{presets}', 'presets.acl.destroy'],
+            ['GET', 'presets', 'mconsole::presets.acl.index', 'presets'],
+            ['GET', 'presets/create', 'mconsole::presets.acl.create'],
+            ['POST', 'presets', 'mconsole::presets.acl.store'],
+            ['GET', 'presets/{presets}/edit', 'mconsole::presets.acl.edit'],
+            ['PUT', 'presets/{presets}', 'mconsole::presets.acl.update'],
+            ['GET', 'presets/{presets}', 'mconsole::presets.acl.show'],
+            ['DELETE', 'presets/{presets}', 'mconsole::presets.acl.destroy'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'roles', 'roles.acl.index', 'roles'],
-            ['GET', 'roles/create', 'roles.acl.create'],
-            ['POST', 'roles', 'roles.acl.store'],
-            ['GET', 'roles/{roles}/edit', 'roles.acl.edit'],
-            ['PUT', 'roles/{roles}', 'roles.acl.update'],
-            ['GET', 'roles/{roles}', 'roles.acl.show'],
-            ['DELETE', 'roles/{roles}', 'roles.acl.destroy'],
+            ['GET', 'roles', 'mconsole::roles.acl.index', 'roles'],
+            ['GET', 'roles/create', 'mconsole::roles.acl.create'],
+            ['POST', 'roles', 'mconsole::roles.acl.store'],
+            ['GET', 'roles/{roles}/edit', 'mconsole::roles.acl.edit'],
+            ['PUT', 'roles/{roles}', 'mconsole::roles.acl.update'],
+            ['GET', 'roles/{roles}', 'mconsole::roles.acl.show'],
+            ['DELETE', 'roles/{roles}', 'mconsole::roles.acl.destroy'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'users', 'users.acl.index', 'users_list'],
-            ['GET', 'users/create', 'users.acl.create'],
-            ['POST', 'users', 'users.acl.store'],
-            ['GET', 'users/{users}/edit', 'users.acl.edit'],
-            ['PUT', 'users/{users}', 'users.acl.update'],
-            ['GET', 'users/{users}', 'users.acl.show'],
-            ['DELETE', 'users/{users}', 'users.acl.destroy'],
+            ['GET', 'users', 'mconsole::users.acl.index', 'users_list'],
+            ['GET', 'users/create', 'mconsole::users.acl.create'],
+            ['POST', 'users', 'mconsole::users.acl.store'],
+            ['GET', 'users/{users}/edit', 'mconsole::users.acl.edit'],
+            ['PUT', 'users/{users}', 'mconsole::users.acl.update'],
+            ['GET', 'users/{users}', 'mconsole::users.acl.show'],
+            ['DELETE', 'users/{users}', 'mconsole::users.acl.destroy'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'tags', 'tags.acl.index', 'tags'],
-            ['GET', 'tags/create', 'tags.acl.create'],
-            ['POST', 'tags', 'tags.acl.store'],
-            ['GET', 'tags/{tags}/edit', 'tags.acl.edit'],
-            ['PUT', 'tags/{tags}', 'tags.acl.update'],
-            ['GET', 'tags/{tags}', 'tags.acl.show'],
-            ['DELETE', 'tags/{tags}', 'tags.acl.destroy'],
+            ['GET', 'tags', 'mconsole::tags.acl.index', 'tags'],
+            ['GET', 'tags/create', 'mconsole::tags.acl.create'],
+            ['POST', 'tags', 'mconsole::tags.acl.store'],
+            ['GET', 'tags/{tags}/edit', 'mconsole::tags.acl.edit'],
+            ['PUT', 'tags/{tags}', 'mconsole::tags.acl.update'],
+            ['GET', 'tags/{tags}', 'mconsole::tags.acl.show'],
+            ['DELETE', 'tags/{tags}', 'mconsole::tags.acl.destroy'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'modules', 'modules.acl.index', 'modules'],
-            ['GET', 'modules/{id}/extend', 'modules.acl.extend'],
-            ['GET', 'modules/{id}/install', 'modules.acl.install'],
-            ['GET', 'modules/{id}/uninstall', 'modules.acl.uninstall'],
+            ['GET', 'modules', 'mconsole::modules.acl.index', 'modules'],
+            ['GET', 'modules/{id}/extend', 'mconsole::modules.acl.extend'],
+            ['GET', 'modules/{id}/install', 'mconsole::modules.acl.install'],
+            ['GET', 'modules/{id}/uninstall', 'mconsole::modules.acl.uninstall'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'settings', 'settings.acl.index', 'settings'],
-            ['POST', 'settings', 'settings.acl.store'],
-            ['GET', 'settings/clearcache', 'settings.acl.clearcache'],
-            ['GET', 'settings/reloadtrans', 'settings.acl.reloadtrans'],
+            ['GET', 'settings', 'mconsole::settings.acl.index', 'settings'],
+            ['POST', 'settings', 'mconsole::settings.acl.store'],
+            ['GET', 'settings/clearcache', 'mconsole::settings.acl.clearcache'],
+            ['GET', 'settings/reloadtrans', 'mconsole::settings.acl.reloadtrans'],
         ]);
         
         app('API')->acl->register([
-            ['GET', 'variables', 'variables.acl.index', 'variables'],
-            ['POST', 'variables', 'variables.acl.store'],
+            ['GET', 'variables', 'mconsole::variables.acl.index', 'variables'],
+            ['POST', 'variables', 'mconsole::variables.acl.store'],
         ]);
     }
 }

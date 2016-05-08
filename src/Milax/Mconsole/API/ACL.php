@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\GenericAPI;
+use Milax\Mconsole\Models\ACL as ACLModel;
 
 class ACL implements GenericAPI
 {
@@ -32,12 +33,29 @@ class ACL implements GenericAPI
     
     /**
      * Get access control list
-     * 
+     *
+     * @param bool $grouped [Return as grouped collection]
      * @return array
      */
-    public function get()
+    public function get($grouped = false)
     {
-        return $this->list;
+        $collection = collect($this->list)->transform(function ($item) {
+            return new ACLModel($item);
+        });
+        
+        if ($grouped) {
+            $group = collect([]);
+            $collection->each(function ($item) use (&$group) {
+                if (!$group->has($item->group)) {
+                    $group->put($item->group, collect());
+                }
+                $group->get($item->group)->push($item);
+            });
+            
+            return $group;
+        } else {
+            return $collection;
+        }
     }
     
     /**
