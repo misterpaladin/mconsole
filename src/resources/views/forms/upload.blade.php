@@ -110,7 +110,6 @@
             <input type="hidden" class="uploadable-filename" name="uploads[{{ $type }}][{{ $group }}][files][]" value="{%=file.name%}">
             <div class="name"> {% if (file.url) { %}
                 <span class="size">{%=o.formatFileSize(file.size)%}</span><br/>
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl? 'data-gallery': ''%}>{%=file.name%}</a> {% } else { %}
                 <span>{%=file.name%}</span> {% } %} </div> {% if (file.error) { %}
             <div class="help-block">
                 <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %}
