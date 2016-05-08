@@ -245,7 +245,7 @@
         <!-- END PAGE LEVEL PLUGINS -->
 		<script src="/massets/js/confirm.js" type="text/javascript"></script>
 		<script src="/massets/js/mconsole.js" type="text/javascript"></script>
-		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
+		<script src="/massets/global/scripts/app.js" type="text/javascript"></script>
         <script src="/massets/js/helpers.js" type="text/javascript"></script>
 		<script src="/massets/js/search.js" type="text/javascript"></script>
 		<script src="/massets/js/form-multi-upload.js" type="text/javascript"></script>
