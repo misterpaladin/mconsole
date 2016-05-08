@@ -43,24 +43,19 @@
         					</div>
         				</div>
         				<div class="portlet-body form">
-                            <table class="table table-hover table-striped">
-            					<thead>
-            						<tr class="uppercase">
-                                        <th></th>
-            							<th>{{ trans('mconsole::roles.permission.description') }}</th>
-            						</tr>
-            					</thead>
-            					<tbody>
-            						@foreach ($acl as $aclItem)
-            							<tr onclick="javascript:$(this).find(':checkbox').prop('checked', !$(this).find(':checkbox').prop('checked'));">
-                                            <td>
-                                                <label><input type="checkbox" name="routes[{{ $aclItem['route'] }}]" class="form-control checkbox" @if (isset($item) && in_array($aclItem['route'], $item->routes)) checked @endif></label>
-                                            </td>
-            								<td>{{ trans('mconsole::' . $aclItem['description']) }}</td>
-            							</tr>
-            						@endforeach
-            					</tbody>
-            				</table>
+                            <div class="form-group row">
+                                <div class="col-xs-12">
+                                    <select multiple="multiple" class="multi-select grouped" name="routes[]">
+                                        @foreach ($acl as $aclGroup => $aclItems)
+                                            <optgroup label="{{ $aclGroup }}">
+                                                @foreach ($aclItems as $aclItem)
+                                                    <option @if(isset($item) && in_array($aclItem->route, $item->routes)) selected="selected" @endif value="{{ $aclItem->route }}">{{ $aclItem->action }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
         				</div>
         			</div>
                 </div>

@@ -24,6 +24,13 @@ class RolesController extends Controller
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
+        
+        $this->form->addStyles([
+            '/massets/global/plugins/jquery-multi-select/css/multi-select.css',
+        ]);
+        $this->form->addScripts([
+            '/massets/global/plugins/jquery-multi-select/js/jquery.multi-select.js',
+        ]);
     }
 
     /**
@@ -50,7 +57,7 @@ class RolesController extends Controller
     public function create()
     {
         return $this->form->render('mconsole::roles.form', [
-            'acl' => app('API')->acl->get(),
+            'acl' => app('API')->acl->get(true),
         ]);
     }
 
@@ -63,12 +70,7 @@ class RolesController extends Controller
      */
     public function store(MconsoleRoleRequest $request)
     {
-        $this->repository->create([
-            'name' => $request->input('name'),
-            'routes' => collect($request->input('routes'))->keys(),
-            'widget' => $request->input('widget'),
-            'search' => $request->input('search'),
-        ]);
+        $this->repository->create($request->all());
     }
 
     /**
@@ -82,7 +84,7 @@ class RolesController extends Controller
     {
         return $this->form->render('mconsole::roles.form', [
             'item' => $this->repository->find($id),
-            'acl' => app('API')->acl->get(),
+            'acl' => app('API')->acl->get(true),
         ]);
     }
 
@@ -96,12 +98,7 @@ class RolesController extends Controller
      */
     public function update(MconsoleRoleRequest $request, $id)
     {
-        $this->repository->update($id, [
-            'name' => $request->input('name'),
-            'routes' => collect($request->input('routes'))->keys(),
-            'widget' => $request->input('widget'),
-            'search' => $request->input('search'),
-        ]);
+        $this->repository->update($id, $request->all());
     }
 
     /**
