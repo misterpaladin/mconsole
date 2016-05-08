@@ -53,8 +53,6 @@
         <div class="row fileupload-buttonbar">
             <!-- The global progress information -->
             <div class="col-xs-12 fileupload-progress fade">
-                <!-- The extended global progress information -->
-                <div class="progress-extended help-block"> &nbsp; </div>
                 <!-- The global progress bar -->
                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar progress-bar-success" style="width:0%;"> </div>
