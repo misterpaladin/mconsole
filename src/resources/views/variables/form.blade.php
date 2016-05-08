@@ -39,7 +39,6 @@
                                     </div>
                                     <div class="col-xs-12 text-right">
                                         <span class="btn btn-xs blue-soft copy-variable"><i class="fa fa-copy"></i> {{ trans('mconsole::variables.form.copy.single') }}</span>
-                                        <span class="btn btn-xs blue-soft copy-variable multiline"><i class="fa fa-copy"></i> {{ trans('mconsole::variables.form.copy.multiline') }}</span>
                                         <span class="btn btn-xs btn-danger remove-variable"><i class="fa fa-remove"></i> {{ trans('mconsole::variables.form.delete') }}</span>
                                         <hr/>
                                     </div>
