@@ -15,6 +15,8 @@ class MconsoleServiceProvider extends ServiceProvider
         'providers' => [
             \Intervention\Image\ImageServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
+            \Milax\Mconsole\Providers\MenuServiceProvider::class,
+            \Milax\Mconsole\Providers\SearchServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleBladeExtensions::class,
             \Milax\Mconsole\Providers\CommandsServiceProvider::class,
             \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
@@ -112,16 +114,8 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Register API singleton
-        $this->app->singleton('API', function ($app) {
-            return new \Milax\Mconsole\API\APIManager;
-        });
-        
-        // Register components
+        // Boot components
         $this->registerAPIs();
-        $this->registerACL();
-        $this->registerSearch();
-        $this->registerMenu();
         
         // Run one time setup
         app('API')->modules->scan();
@@ -187,6 +181,11 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Register API singleton
+        $this->app->singleton('API', function ($app) {
+            return new \Milax\Mconsole\API\APIManager;
+        });
+        
         // Required files
         foreach ($this->require as $file) {
             require $file;
@@ -234,215 +233,5 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
         app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));
-    }
-    
-    /**
-     * Register ACL
-     * 
-     * @return void
-     */
-    protected function registerACL()
-    {
-        app('API')->acl->register([
-            ['GET', 'uploads', 'uploads.acl.index', 'uploads'],
-            ['GET', 'uploads/create', 'uploads.acl.create'],
-            ['POST', 'uploads', 'uploads.acl.store'],
-            ['GET', 'uploads/{uploads}/edit', 'uploads.acl.edit'],
-            ['PUT', 'uploads/{uploads}', 'uploads.acl.update'],
-            ['GET', 'uploads/{uploads}', 'uploads.acl.show'],
-            ['DELETE', 'uploads/{uploads}', 'uploads.acl.destroy'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'menu', 'menu.acl.index', 'menus'],
-            ['GET', 'menu/create', 'menu.acl.create'],
-            ['POST', 'menu', 'menu.acl.store'],
-            ['GET', 'menu/{menu}/edit', 'menu.acl.edit'],
-            ['PUT', 'menu/{menu}', 'menu.acl.update'],
-            ['GET', 'menu/{menu}', 'menu.acl.show'],
-            ['DELETE', 'menu/{menu}', 'menu.acl.destroy'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'presets', 'presets.acl.index', 'presets',],
-            ['GET', 'presets/create', 'presets.acl.create'],
-            ['POST', 'presets', 'presets.acl.store'],
-            ['GET', 'presets/{presets}/edit', 'presets.acl.edit'],
-            ['PUT', 'presets/{presets}', 'presets.acl.update'],
-            ['GET', 'presets/{presets}', 'presets.acl.show'],
-            ['DELETE', 'presets/{presets}', 'presets.acl.destroy'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'roles', 'roles.acl.index', 'roles'],
-            ['GET', 'roles/create', 'roles.acl.create'],
-            ['POST', 'roles', 'roles.acl.store'],
-            ['GET', 'roles/{roles}/edit', 'roles.acl.edit'],
-            ['PUT', 'roles/{roles}', 'roles.acl.update'],
-            ['GET', 'roles/{roles}', 'roles.acl.show'],
-            ['DELETE', 'roles/{roles}', 'roles.acl.destroy'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'users', 'users.acl.index', 'users_list'],
-            ['GET', 'users/create', 'users.acl.create'],
-            ['POST', 'users', 'users.acl.store'],
-            ['GET', 'users/{users}/edit', 'users.acl.edit'],
-            ['PUT', 'users/{users}', 'users.acl.update'],
-            ['GET', 'users/{users}', 'users.acl.show'],
-            ['DELETE', 'users/{users}', 'users.acl.destroy'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'tags', 'tags.acl.index', 'tags'],
-            ['GET', 'tags/create', 'tags.acl.create'],
-            ['POST', 'tags', 'tags.acl.store'],
-            ['GET', 'tags/{tags}/edit', 'tags.acl.edit'],
-            ['PUT', 'tags/{tags}', 'tags.acl.update'],
-            ['GET', 'tags/{tags}', 'tags.acl.show'],
-            ['DELETE', 'tags/{tags}', 'tags.acl.destroy'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'modules', 'modules.acl.index', 'modules'],
-            ['GET', 'modules/{id}/extend', 'modules.acl.extend'],
-            ['GET', 'modules/{id}/install', 'modules.acl.install'],
-            ['GET', 'modules/{id}/uninstall', 'modules.acl.uninstall'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'settings', 'settings.acl.index', 'settings'],
-            ['POST', 'settings', 'settings.acl.store'],
-            ['GET', 'settings/clearcache', 'settings.acl.clearcache'],
-            ['GET', 'settings/reloadtrans', 'settings.acl.reloadtrans'],
-        ]);
-        
-        app('API')->acl->register([
-            ['GET', 'variables', 'variables.acl.index', 'variables'],
-            ['POST', 'variables', 'variables.acl.store'],
-        ]);
-    }
-    
-    /**
-     * Register search
-     * 
-     * @return void
-     */
-    protected function registerSearch()
-    {
-        app('API')->search->register(function ($text) {
-            return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($result) {
-                return [
-                    'title' => $result->name,
-                    'description' => $result->email,
-                    'link' => sprintf('/mconsole/users/%s/edit', $result->id),
-                    'tags' => ['user', sprintf('#%s', $result->id)],
-                ];
-            });
-        }, 'users');
-        
-        app('API')->search->register(function ($text) {
-            return \Milax\Mconsole\Models\Upload::select('id', 'type', 'path', 'filename', 'copies')->where('id', (int) $text)->orWhere('filename', 'like', sprintf('%%%s%%', $text))->orderBy('type')->get()->transform(function ($result) {
-                return [
-                    'title' => file_get_original_name($result->filename),
-                    'filepath' => $result->filename,
-                    'path' => $result->path,
-                    'description' => '',
-                    'basepath' => '/storage/uploads',
-                    'original' => $result->type == 'image' ? sprintf('/storage/uploads/%s/original/%s', $result->path, $result->filename) : sprintf('/storage/uploads/%s/%s', $result->path, $result->filename),
-                    'copies' => $result->copies,
-                    'preview' => $result->type == 'image' ? sprintf('/storage/uploads/%s/mconsole/%s', $result->path, $result->filename) : '',
-                    'link' => '#',
-                    'tags' => ['upload', $result->type, sprintf('#%s', $result->id)],
-                ];
-            });
-        }, 'uploads');
-    }
-    
-    /**
-     * Push core elements to menu
-     *
-     * @return void
-     */
-    protected function registerMenu()
-    {
-        app('API')->menu->push([
-            'name' => 'Uploads',
-            'translation' => 'uploads.menu.list.name',
-            'url' => 'uploads',
-            'visible' => true,
-            'enabled' => true,
-        ], 'uploads', 'tools.files');
-        
-        app('API')->menu->push([
-            'name' => 'Presets',
-            'translation' => 'presets.menu.list.name',
-            'url' => 'presets',
-            'visible' => true,
-            'enabled' => true,
-        ], 'presets', 'tools.files');
-        
-        app('API')->menu->push([
-            'name' => 'All tags',
-            'translation' => 'tags.menu.list.name',
-            'url' => 'tags',
-            'description' => 'tags.menu.list.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'tags', 'tools');
-        
-        app('API')->menu->push([
-            'name' => 'Variables',
-            'translation' => 'variables.menu.name',
-            'url' => 'variables',
-            'description' => 'variables.menu.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'variables', 'tools');
-        
-        app('API')->menu->push([
-            'name' => 'Presets',
-            'translation' => 'menus.menu.list.name',
-            'url' => 'menus',
-            'description' => 'menus.menu.list.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'presets', 'tools');
-        
-        app('API')->menu->push([
-            'name' => 'All users',
-            'translation' => 'users.menu.list.name',
-            'url' => 'users',
-            'description' => 'users.menu.list.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'users_list', 'users');
-        
-        app('API')->menu->push([
-            'name' => 'All roles',
-            'translation' => 'roles.menu.list.name',
-            'url' => 'roles',
-            'description' => 'roles.menu.list.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'roles', 'users');
-        
-        app('API')->menu->push([
-            'name' => 'Manage modules',
-            'translation' => 'modules.menu.name',
-            'url' => 'modules',
-            'description' => 'modules.menu.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'modules', 'users');
-        
-        app('API')->menu->push([
-            'name' => 'Settings',
-            'translation' => 'settings.menu.name',
-            'url' => 'settings',
-            'description' => 'settings.menu.description',
-            'visible' => true,
-            'enabled' => true,
-        ], 'settings', 'users');
     }
 }
