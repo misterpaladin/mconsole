@@ -35,20 +35,30 @@ class Menu implements GenericAPI
         }
         
         if ($flatten) {
-            $all = collect();
-            
-            $menu->each(function ($m) use (&$all) {
-                if (strlen($m->url) > 0) {
-                    $all->push($m);
-                } else {
-                    $all = $all->merge($m->child);
-                }
-            });
-            
-            return $all;
+            return collect($this->flatten($menu));
         } else {
             return $menu;
         }
+    }
+    
+    /**
+     * Flatten menu items
+     * 
+     * @param  \Illuminate\Support\Collection $menu [Menu collection]
+     * @return \Illuminate\Support\Collection
+     */
+    protected function flatten($menu)
+    {
+        $all = collect();
+        
+        foreach ($menu as $key => $m) {
+            $all->put($key, $m);
+            if (isset($m->menus) && count($m->menus) > 0) {
+                $all = $all->merge($m->menus);
+            }
+        }
+        
+        return $all;
     }
     
     /**
