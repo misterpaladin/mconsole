@@ -1,7 +1,7 @@
 <div class="portlet-title">
     @if (isset($title))
         <div class="caption">
-			<span class="caption-subject font-blue sbold uppercase">{{ $title }}</span>
+			<span class="caption-subject font-grey-mint sbold uppercase">{{ $title }}</span>
 		</div>
     @endif
     <div class="actions">

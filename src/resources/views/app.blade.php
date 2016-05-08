@@ -169,7 +169,7 @@
 					<div class="container">
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
-							<h1>{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.heading') }}
+							<h1 class="font-grey-mint">{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.heading') }}
 								<small>{{ (isset($pageSubcaption)) ? $pageSubcaption : trans('mconsole::mconsole.text.version') }}</small>
 							</h1>
 						</div>
