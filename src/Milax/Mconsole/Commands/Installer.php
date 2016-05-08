@@ -4,7 +4,6 @@ namespace Milax\Mconsole\Commands;
 
 use DB;
 use File;
-use App;
 use Illuminate\Console\Command;
 use Milax\Mconsole\Seeds;
 use Carbon\Carbon;
@@ -135,7 +134,6 @@ class Installer extends Command
                     'role_id' => 1,
                     'name' => $name,
                     'email' => $email,
-                    'lang' => App::getLocale(),
                     'password' => bcrypt($pass),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
