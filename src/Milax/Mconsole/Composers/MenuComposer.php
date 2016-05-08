@@ -32,12 +32,12 @@ class MenuComposer
                 if (!$menu->visible || !$menu->enabled) {
                     unset($all[$key]);
                 } else {
-                    if (isset($menu->child) && count($menu->child) > 0) {
-                        foreach ($menu->child as $cKey => $child) {
+                    if (isset($menu->menus) && count($menu->menus) > 0) {
+                        foreach ($menu->menus as $cKey => $child) {
                             if ($child->acl) {
                                 $current = $acl->where('key', $child->key)->first();
                                 if (!in_array($current['route'], $allowed)) {
-                                    unset($menu->child[$cKey]);
+                                    unset($menu->menus[$cKey]);
                                 }
                             }
                         }
@@ -49,7 +49,7 @@ class MenuComposer
                     }
                 }
                 
-                if (strlen($menu->url) == 0 && count($menu->child) == 0) {
+                if (strlen($menu->url) == 0 && count($menu->menus) == 0) {
                     $all->forget($key);
                 }
             }
@@ -74,17 +74,17 @@ class MenuComposer
         $all = collect();
         foreach ($order as $uMenu) {
             $menus->each(function ($menu, $menuKey) use (&$menus, &$uMenu, &$all) {
-                if ($menu->key == $uMenu['key']) {
-                    if ($menu->child && $uMenu['children']) {
-                        $menu->child = $this->sortMenu($uMenu['children'], collect($menu->child));
+                if (isset($uMenu['key']) && $menu->key == $uMenu['key']) {
+                    if (isset($uMenu['children']) && $menu->menus && $uMenu['children']) {
+                        $menu->menus = $this->sortMenu($uMenu['children'], collect($menu->menus));
                     }
-                    $all->push($menus->pull($menuKey));
+                    $all->put($menuKey, $menus->pull($menuKey));
                 }
             });
         }
         
         $menus->each(function ($menu) use (&$all) {
-            $all->push($menu);
+            $all->put($menu->key, $menu);
         });
         
         return $all;
