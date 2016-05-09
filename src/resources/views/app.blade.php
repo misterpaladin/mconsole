@@ -169,7 +169,7 @@
 					<div class="container">
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
-							<h1 class="font-grey-mint">{{ (isset($pageCaption)) ? $pageCaption : nulll }}
+							<h1 class="font-grey-mint">{{ (isset($pageCaption)) ? $pageCaption : null }}
 								<small>{{ (isset($pageAction)) ? $pageAction : null }}</small>
 							</h1>
 						</div>
