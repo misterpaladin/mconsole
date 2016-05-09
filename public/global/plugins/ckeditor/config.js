@@ -21,3 +21,16 @@ CKEDITOR.editorConfig = function( config ) {
 	    { name: 'tools' },
 	];
 };
+
+CKEDITOR.on('dialogDefinition', function( ev ) {
+    var dialogName = ev.data.name;
+    var dialogDefinition = ev.data.definition;
+
+    if ( dialogName == 'table' ) {
+        var info = dialogDefinition.getContents( 'info' );
+        info.get('txtWidth')['default'] = '100%';
+        info.get('txtBorder')['default'] = null;
+        info.get('txtCellPad')['default'] = null;
+        info.get('txtCellSpace')['default'] = null;
+    }
+});
