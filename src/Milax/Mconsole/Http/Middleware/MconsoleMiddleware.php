@@ -66,7 +66,14 @@ class MconsoleMiddleware
      */
     protected function hasAccess($request)
     {
+        $base = mconsole_url(null, true);
+        $base = trim($base);
         $uri = sprintf('%s:%s', $request->method(), $request->route()->getUri());
+        
+        if (str_contains($uri, $base)) {
+            $uri = str_replace($base . '/', null, $uri);
+        }
+        
         $path = sprintf('%s:%s', $request->method(), $request->path());
         
         if ($request->is(mconsole_url('logout', true))) {
