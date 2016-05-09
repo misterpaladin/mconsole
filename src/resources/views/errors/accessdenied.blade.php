@@ -1,11 +1,16 @@
 @extends('mconsole::app')
 
-@section('title', trans('mconsole::mconsole.errors.accessdenied') . ' | Mconsole')
-@section('page.title', trans('mconsole::mconsole.errors.accessdenied'))
-@section('page.subtitle', trans('mconsole::mconsole.errors.accessdenied'))
+@section('pageTitle', trans('mconsole::mconsole.errors.accessdenied.title'))
 
 @section('content')
 
-{{ trans('mconsole::mconsole.errors.accessdenied') }}
+<div class="portlet light">
+    @include('mconsole::partials.portlet-title', [
+        'title' => trans('mconsole::mconsole.errors.accessdenied.title'),
+    ])
+    <div class="portlet-body">
+        <p>{{ trans('mconsole::mconsole.errors.accessdenied.info') }}</p>
+    </div>
+</div>
 
 @endsection

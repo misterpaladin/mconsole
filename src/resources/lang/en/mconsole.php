@@ -25,7 +25,10 @@ return [
     'errors' => [
         'extension' => 'Extension of file :file does not match the allowed extensions template!',
         'system' => 'Cannot delete the system item!',
-        'accessdenied' => 'Access denied!',
+        'accessdenied' => [
+            'title' => 'Access denied',
+            'info' => 'You don\'t have permissions to access this page',
+        ],
         'back' => 'Back',
         'home' => 'Return home',
         'heading' => 'Houston, we have a problem —',
