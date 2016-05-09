@@ -13,10 +13,13 @@ return [
     'search' => [
         'placeholder' => 'Поиск',
     ],
+    'headings' => [
+        'main' => 'Главная',
+    ],
     'text' => [
         'heading' => 'Mconsole X',
         'version' => 'ßeta',
-        'welcome' => 'Добро пожаловать в Mconsole X!',
+        'welcome' => 'Добро пожаловать',
     ],
     'links' => [
         'website' => 'Перейти на веб-сайт',

@@ -13,10 +13,13 @@ return [
     'search' => [
         'placeholder' => 'Search',
     ],
+    'headings' => [
+        'main' => 'Main',
+    ],
     'text' => [
         'heading' => 'Mconsole X',
         'version' => 'ßeta',
-        'welcome' => 'Welcome to Mconsole X!',
+        'welcome' => 'Welcome back',
     ],
     'links' => [
         'website' => 'Visit project website',

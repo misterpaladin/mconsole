@@ -65,7 +65,7 @@
 				<div class="container">
 					<!-- BEGIN LOGO -->
 					<div class="page-logo">
-						
+                        <h2 class="font-grey-mint">{{ trans('mconsole::mconsole.text.heading') }}</h2>
 					</div>
 					<!-- END LOGO -->
 					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -169,7 +169,7 @@
 					<div class="container">
 						<!-- BEGIN PAGE TITLE -->
 						<div class="page-title">
-							<h1 class="font-grey-mint">{{ (isset($pageCaption)) ? $pageCaption : trans('mconsole::mconsole.text.heading') }}
+							<h1 class="font-grey-mint">{{ (isset($pageCaption)) ? $pageCaption : nulll }}
 								<small>{{ (isset($pageAction)) ? $pageAction : null }}</small>
 							</h1>
 						</div>

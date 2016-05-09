@@ -8,6 +8,8 @@ use Auth;
 
 class MconsoleController extends Controller
 {
+    use \UseLayout;
+    
     protected $uri = '/mconsole';
 
     /**
@@ -17,6 +19,8 @@ class MconsoleController extends Controller
      */
     public function index()
     {
+        $this->setCaption(trans('mconsole::mconsole.headings.main'));
+        $this->setAction(trans('mconsole::mconsole.text.welcome'));
         $quote = app('API')->quotes->getRandom();
         return view('mconsole::dashboard', [
             'quote' => $quote,
