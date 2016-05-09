@@ -49,6 +49,7 @@ class Installer extends Command
         if (!$this->option('quick')) {
             $this->components();
         }
+        $this->symbolicLink();
         $this->migrate();
         $this->seeds();
         $this->modules();
@@ -59,6 +60,18 @@ class Installer extends Command
         
         $this->cleanup();
         $this->finish();
+    }
+    
+    /**
+     * Create symbolic link
+     * 
+     * @return 
+     */
+    protected function symbolicLink()
+    {
+        if (!File::exists(public_path('storage'))) {
+            exec(sprintf('ln -s %s %s', storage_path('app/public'), public_path('storage')));
+        }
     }
     
     /**
