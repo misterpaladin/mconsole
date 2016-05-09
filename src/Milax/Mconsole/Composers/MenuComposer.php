@@ -35,14 +35,25 @@ class MenuComposer
                         foreach ($menu->menus as $cKey => $child) {
                             if ($child->acl) {
                                 $current = $acl->where('key', $child->key)->first();
-                                if (!in_array($current->route, $allowed)) {
+                                if ($current && !in_array($current->route, $allowed)) {
                                     unset($menu->menus[$cKey]);
                                 }
+                            }
+                            foreach ($child->menus as $scKey => $subChild) {
+                                if ($subChild->acl) {
+                                    $current = $acl->where('key', $subChild->key)->first();
+                                    if ($current && !in_array($current->route, $allowed)) {
+                                        unset($child->menus[$scKey]);
+                                    }
+                                }
+                            }
+                            if ($child->menus->count() == 0) {
+                                unset($menu->menus[$cKey]);
                             }
                         }
                     } else {
                         $current = $acl->where('key', $menu->key)->first();
-                        if (count($allowed) == 0 || !in_array($current->route, $allowed)) {
+                        if (count($allowed) == 0 || ($current && !in_array($current->route, $allowed))) {
                             $all->forget($key);
                         }
                     }

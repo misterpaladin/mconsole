@@ -70,7 +70,9 @@ class RolesController extends Controller
      */
     public function store(MconsoleRoleRequest $request)
     {
-        $this->repository->create($request->all());
+        $data = $request->all();
+        $data['routes'] = isset($data['routes']) ? $data['routes'] : [];
+        $this->repository->create($data);
     }
 
     /**
@@ -98,7 +100,9 @@ class RolesController extends Controller
      */
     public function update(MconsoleRoleRequest $request, $id)
     {
-        $this->repository->update($id, $request->all());
+        $data = $request->all();
+        $data['routes'] = isset($data['routes']) ? $data['routes'] : [];
+        $this->repository->update($id, $data);
     }
 
     /**
