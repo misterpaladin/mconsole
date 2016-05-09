@@ -7,11 +7,7 @@ use Auth;
 
 class MconsoleMiddleware
 {
-    protected $exceptions = [
-        'GET:mconsole',
-        'GET:mconsole/dashboard',
-        'GET:mconsole/api/search',
-    ];
+    protected $exceptions = [];
     
     /**
      * Create new instance
@@ -20,10 +16,13 @@ class MconsoleMiddleware
     {
         $id = Auth::id();
         
-        // User profile exception
-        array_push($this->exceptions, sprintf('GET:mconsole/users/%s', $id));
-        array_push($this->exceptions, sprintf('GET:mconsole/users/%s/edit', $id));
-        array_push($this->exceptions, sprintf('POST:mconsole/users/%s/menus', $id));
+        // Add some exceptions
+        array_push($this->exceptions, sprintf('GET:%s', mconsole_url('/', true)));
+        array_push($this->exceptions, sprintf('GET:%s', mconsole_url('dashboard', true)));
+        array_push($this->exceptions, sprintf('GET:%s', mconsole_url('api/search', true)));
+        array_push($this->exceptions, sprintf('GET:%s/%s/edit', mconsole_url('users', true), $id));
+        array_push($this->exceptions, sprintf('PUT:%s/%s', mconsole_url('users', true), $id));
+        array_push($this->exceptions, sprintf('POST:%s/%s/menus', mconsole_url('users', true), $id));
     }
     
     /**
@@ -68,19 +67,20 @@ class MconsoleMiddleware
     protected function hasAccess($request)
     {
         $uri = sprintf('%s:%s', $request->method(), $request->route()->getUri());
+        $path = sprintf('%s:%s', $request->method(), $request->path());
         
         if ($request->is(mconsole_url('logout', true))) {
             return true;
         }
         
-        $user = Auth::user();
-        
         $method = $request->method();
         
         // Allow everyone to visit dashboard
-        if (in_array($uri, $this->exceptions)) {
+        if (in_array($uri, $this->exceptions) || in_array($path, $this->exceptions)) {
             return true;
         }
+        
+        $user = Auth::user();
         
         // Check if route is in user allowed routes
         $routes = $user->role->routes;
