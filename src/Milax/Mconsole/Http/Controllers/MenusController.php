@@ -14,7 +14,6 @@ class MenusController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $model = 'Milax\Mconsole\Models\Menu';
-    protected $redirectTo = '/mconsole/menus';
     /**
      * Create new class instance
      */
@@ -24,6 +23,7 @@ class MenusController extends Controller
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
+        $this->redirectTo = mconsole_url('menus');
         $this->form->addStyles([
             '/massets/global/plugins/jquery-nestable/jquery.nestable.css',
             '/massets/css/menu-editor.css',

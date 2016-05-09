@@ -14,7 +14,6 @@ class RolesController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
 
     protected $model = 'Milax\Mconsole\Models\MconsoleRole';
-    protected $redirectTo = '/mconsole/roles';
     /**
      * Create new class instance
      */
@@ -25,6 +24,7 @@ class RolesController extends Controller
         $this->form = $form;
         $this->repository = $repository;
         
+        $this->redirectTo = mconsole_url('roles');
         $this->form->addStyles([
             '/massets/global/plugins/jquery-multi-select/css/multi-select.css',
         ]);
