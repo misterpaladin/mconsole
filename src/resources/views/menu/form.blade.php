@@ -8,9 +8,9 @@
             <div class="portlet-body form">
             		<div class="form-body">
                         @if (isset($item))
-                			{!! Form::model($item, ['method' => 'PUT', 'route' => ['mconsole.menus.update', $item->id]]) !!}
+                			{!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('mconsole/menus', $item->id))]) !!}
                 		@else
-                			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/menus']) !!}
+                			{!! Form::open(['method' => 'POST', 'url' => mconsole_url('menus')]) !!}
                 		@endif
         				@include('mconsole::forms.text', [
         					'label' => trans('mconsole::menus.form.name'),

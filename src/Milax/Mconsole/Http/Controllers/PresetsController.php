@@ -15,7 +15,6 @@ class PresetsController extends Controller
 {
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
 
-    protected $redirectTo = '/mconsole/presets';
     protected $model = 'Milax\Mconsole\Models\MconsoleUploadPreset';
     
     /**
@@ -27,6 +26,7 @@ class PresetsController extends Controller
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
+        $this->redirectTo = mconsole_url('presets');
         $this->form->addScripts([
             '/massets/js/presets.js',
         ]);

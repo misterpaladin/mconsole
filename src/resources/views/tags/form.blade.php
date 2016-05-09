@@ -8,9 +8,9 @@
             <div class="portlet-body form">
             		<div class="form-body">
                         @if (isset($item))
-                			{!! Form::model($item, ['method' => 'PUT', 'route' => ['mconsole.tags.update', $item->id]]) !!}
+                			{!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('tags/%s', $item->id))]) !!}
                 		@else
-                			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/tags']) !!}
+                			{!! Form::open(['method' => 'POST', 'url' => mconsole_url('tags')]) !!}
                 		@endif
         				@include('mconsole::forms.text', [
         					'label' => trans('mconsole::tags.form.name'),

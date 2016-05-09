@@ -13,7 +13,6 @@ class TagsController extends Controller
 {
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
-    protected $redirectTo = '/mconsole/tags';
     protected $model = 'Milax\Mconsole\Models\Tag';
     
     /**
@@ -25,6 +24,8 @@ class TagsController extends Controller
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
+        
+        $this->redirectTo = mconsole_url('tags');
         $this->form->addScripts([
             '/massets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
             '/massets/global/plugins/jquery-minicolors/jquery.minicolors.min.js',

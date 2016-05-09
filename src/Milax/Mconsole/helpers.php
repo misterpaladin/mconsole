@@ -58,3 +58,39 @@ if (!function_exists('str_remove_double_quotes')) {
         return str_replace(['""'], null, $text);
     }
 }
+
+/**
+ * Make given url absolute with mconsole base url
+ *
+ * @param  string $url  [Relative url]
+ * @param  bool   $trim [Trim slashes]
+ * @return string [Absolute url]
+ */
+if (!function_exists('mconsole_url')) {
+    function mconsole_url($url = null, $trim = false)
+    {
+        $base = config('mconsole.url');
+        
+        if (!is_null($url)) {
+            $url = trim($url, '/');
+            
+            if (starts_with($url, 'mconsole')) {
+                str_replace('mconsole', $url);
+            }
+            
+            $url = trim($url, '/');
+        }
+        
+        if ($base == '/') {
+            $result = sprintf('/%s', $url);
+        } else {
+            $base = trim($base, '/');
+            if (strlen($url) > 0) {
+                $url = '/' . $url;
+            }
+            $result = sprintf('/%s%s', $base, $url);
+        }
+        
+        return $trim ? trim($result, '/') : $result;
+    }
+}

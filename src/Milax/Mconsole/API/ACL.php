@@ -69,7 +69,7 @@ class ACL implements GenericAPI
      */
     protected function push($method, $uri, $description, $key)
     {
-        $uri = str_contains('mconsole', $uri) ? $uri : sprintf('mconsole/%s', trim($uri, '/'));
+        $uri = trim(str_replace('mconsole', null, $uri), '/');
         array_push($this->list, [
             'route' => sprintf('%s:%s', $method, $uri),
             'method' => $method,

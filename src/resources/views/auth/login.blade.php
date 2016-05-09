@@ -43,7 +43,7 @@
 	<body class=" login">
 		<!-- BEGIN LOGO -->
 		<div class="logo">
-			<a href="/mconsole"></a>
+			<a href="{{ mconsole_url() }}"></a>
 		</div>
 		<!-- END LOGO -->
 		<!-- BEGIN LOGIN -->

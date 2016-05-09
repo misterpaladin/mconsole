@@ -11,7 +11,6 @@ class UploadsController extends Controller
 {
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
-    protected $redirectTo = '/mconsole/uploads';
     protected $model = 'Milax\Mconsole\Models\Upload';
     
     /**
@@ -22,6 +21,8 @@ class UploadsController extends Controller
         $this->setCaption(trans('mconsole::uploads.menu.name'));
         $this->renderer = $renderer;
         $this->repository = $repository;
+        
+        $this->redirectTo = mconsole_url('uploads');
     }
     
     /**

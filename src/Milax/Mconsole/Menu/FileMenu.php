@@ -101,8 +101,7 @@ class FileMenu implements Menu
         
         $menu->menu_id = (isset($array['menu_id'])) ? $array['menu_id'] : 0;
         $menu->name = trans($array['name']);
-        $menu->url = (isset($array['url'])) ? $array['url'] : '';
-        $menu->description = (isset($array['description'])) ? $array['description'] : '';
+        $menu->url = (isset($array['url'])) ? mconsole_url($array['url']) : null;
         $menu->visible = (isset($array['visible'])) ? $array['visible'] : true;
         $menu->enabled = (isset($array['enabled'])) ? $array['enabled'] : true;
         $menu->acl = isset($array['acl']) ? $array['acl'] : true;
@@ -122,10 +121,6 @@ class FileMenu implements Menu
      */
     public function push($category, $key, $menu)
     {
-        if (isset($menu['url']) && strlen($menu['url']) > 0) {
-            $menu['url'] = sprintf('/mconsole/%s', trim($menu['url']));
-        }
-        
         if (str_contains($category, '.')) {
             $category = str_replace('.', '.menus.', $category) . '.menus';
             if (is_array($existed = array_get($this->menu, $category))) {

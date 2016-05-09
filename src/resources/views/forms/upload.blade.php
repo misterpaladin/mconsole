@@ -1,4 +1,4 @@
-<div class="uploadable" action="/mconsole/api/uploads/upload" method="POST" enctype="multipart/form-data">
+<div class="uploadable" action="{{ mconsole_url('api/uploads/upload') }}" method="POST" enctype="multipart/form-data">
     <input type="hidden" class="uploadable-id" value="{{ $id }}" />
     <input type="hidden" class="uploadable-group" value="{{ $group }}" />
     <input type="hidden" class="uploadable-type" name="uploads[{{ $type }}][{{ $group }}][type]" value="{{ $type }}" />
@@ -7,7 +7,7 @@
     @if ((isset($presets) && $presets->count() == 0) || (isset($type) && isset($presets) && $presets->where('type', $type)->count() == 0))
         <div class="alert alert-danger">
             <p>{{ trans('mconsole::uploader.errors.nopresets.text')}}</p>
-            <p><a href="/mconsole/presets/create" class="btn btn-xs blue">{{ trans('mconsole::uploader.errors.nopresets.link') }}</a></p>
+            <p><a href="{{ mconsole_url('presets/create') }}" class="btn btn-xs blue">{{ trans('mconsole::uploader.errors.nopresets.link') }}</a></p>
         </div>
     @else
     

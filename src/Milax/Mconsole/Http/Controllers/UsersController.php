@@ -15,7 +15,6 @@ class UsersController extends Controller
 {
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
-    protected $redirectTo = '/mconsole/users';
     protected $model = 'App\User';
     
     /**
@@ -28,6 +27,7 @@ class UsersController extends Controller
         $this->form = $form;
         $this->repository = $repository;
         
+        $this->redirectTo = mconsole_url('users');
         $this->roles = app('API')->repositories->roles;
         $this->roles = $this->roles->query()->notRoot()->get()->lists('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
