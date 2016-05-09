@@ -16,8 +16,8 @@ class MconsoleOptionsSeeder implements MconsoleSeeder
      */
     protected static $options = [
         [
-            'group' => 'settings.options.group.name',
-            'label' => 'settings.labels.name',
+            'group' => 'mconsole::settings.options.group.name',
+            'label' => 'mconsole::settings.labels.name',
             'key' => 'project_name',
             'value' => 'New Project',
             'rules' => ['required'],
@@ -25,8 +25,8 @@ class MconsoleOptionsSeeder implements MconsoleSeeder
             'options' => null,
         ],
         [
-            'group' => 'settings.options.group.name',
-            'label' => 'settings.labels.url',
+            'group' => 'mconsole::settings.options.group.name',
+            'label' => 'mconsole::settings.labels.url',
             'key' => 'project_url',
             'value' => 'http://milax.com',
             'rules' => ['required', 'url'],
@@ -34,31 +34,31 @@ class MconsoleOptionsSeeder implements MconsoleSeeder
             'options' => null,
         ],
         [
-            'group' => 'settings.options.group.name',
-            'label' => 'settings.labels.notifications',
+            'group' => 'mconsole::settings.options.group.name',
+            'label' => 'mconsole::settings.labels.notifications',
             'key' => 'notifications',
             'value' => '1',
             'rules' => null,
             'type' => 'select',
-            'options' => ['1' => 'settings.options.on', '0' => 'settings.options.off'],
+            'options' => ['1' => 'mconsole::settings.options.on', '0' => 'mconsole::settings.options.off'],
         ],
         [
-            'group' => 'settings.options.group.name',
-            'label' => 'settings.labels.editor',
+            'group' => 'mconsole::settings.options.group.name',
+            'label' => 'mconsole::settings.labels.editor',
             'key' => 'textareatype',
             'value' => 'textarea',
             'rules' => null,
             'type' => 'select',
-            'options' => ['textarea' => 'settings.options.textarea', 'ckeditor' => 'settings.options.ckeditor'],
+            'options' => ['textarea' => 'mconsole::settings.options.textarea', 'ckeditor' => 'mconsole::settings.options.ckeditor'],
         ],
         [
-            'group' => 'settings.options.group.name',
-            'label' => 'settings.labels.editredirect',
+            'group' => 'mconsole::settings.options.group.name',
+            'label' => 'mconsole::settings.labels.editredirect',
             'key' => 'editredirect',
             'value' => '1',
             'rules' => null,
             'type' => 'select',
-            'options' => ['1' => 'settings.options.on', '0' => 'settings.options.off'],
+            'options' => ['1' => 'mconsole::settings.options.on', '0' => 'mconsole::settings.options.off'],
         ],
     ];
     

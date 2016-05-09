@@ -16,36 +16,40 @@
         				<div class="portlet-body">
                             @foreach ($options->groupBy('group') as $groupName => $groupOptions)
                                 @if (strlen($groupName) > 0)
-                                    <h4>{{ trans(sprintf('mconsole::%s', $groupName)) }}</h4>
+                                    <h4>{{ trans($groupName) }}</h4>
                                     <div class="row">
                                         @foreach ($groupOptions as $option)
                                             <div class="col-lg-4 col-md-6 col-xs-12">
                                                 @if ($option->type == 'text')
                                                     @include('mconsole::forms.text', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'value' => $option->value,
+                                                        'popover' => $option->help,
                                                     ])
                                                 @elseif ($option->type == 'textarea')
                                                     @include('mconsole::forms.textarea', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'value' => $option->value,
+                                                        'popover' => $option->help,
                                                     ])
                                                 @elseif ($option->type == 'checkbox')
                                                     @include('mconsole::forms.checkbox', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'value' => $option->value,
+                                                        'popover' => $option->help,
                                                     ])
                                                 @elseif ($option->type == 'select')
                                                     @include('mconsole::forms.select', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'options' => collect($option->options)->transform(function ($val, $key) {
-                                                            return trans(sprintf('mconsole::%s', $val));
+                                                            return trans($val);
                                                         })->toArray(),
                                                         'value' => $option->value,
+                                                        'popover' => $option->help,
                                                     ])
                                                 @endif
                                             </div>
@@ -63,28 +67,29 @@
                                             <div class="col-lg-4 col-md-6 col-xs-12">
                                                 @if ($option->type == 'text')
                                                     @include('mconsole::forms.text', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'value' => $option->value,
+                                                        'popover' => $help,
                                                     ])
                                                 @elseif ($option->type == 'textarea')
                                                     @include('mconsole::forms.textarea', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'value' => $option->value,
                                                     ])
                                                 @elseif ($option->type == 'checkbox')
                                                     @include('mconsole::forms.checkbox', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'value' => $option->value,
                                                     ])
                                                 @elseif ($option->type == 'select')
                                                     @include('mconsole::forms.select', [
-                                                        'label' => trans('mconsole::' . $option->label),
+                                                        'label' => trans($option->label),
                                                         'name' => $option->key,
                                                         'options' => collect($option->options)->transform(function ($val, $key) {
-                                                            return trans(sprintf('mconsole::%s', $val));
+                                                            return trans($val);
                                                         })->toArray(),
                                                         'value' => $option->value,
                                                     ])
