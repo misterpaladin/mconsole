@@ -7,10 +7,10 @@ CKEDITOR.editorConfig = function( config ) {
     config.allowedContent = true;
 	config.uiColor = 'FFFFFF';
 	config.colorButton_colors = '00923E,FFFFFF,FFFFFF';
-	config.removeButtons = 'Anchor,Smiley,Flash,PageBreak,Iframe,Language,JustifyBlock,SpellChecker,Scayt,Font';
+	config.removeButtons = 'Image,NewPage,Preview,Print,Find,Replace,SelectAll,Underline,Subscript,Outdent,Indent,Blockquote,CreateDiv,Cut,Copy,Paste,Save,Anchor,Smiley,Flash,PageBreak,Iframe,Language,JustifyLeft,JustifyRight,JustifyCenter,JustifyBlock,SpellChecker,Scayt,Font';
 	config.toolbarGroups = [
-	    { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
-	    { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+	    { name: 'document',    groups: [ 'mode' ] },
+	    { name: 'clipboard',   groups: [ 'PasteText', 'undo' ] },
 	    { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
 	    '/',
 	    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
