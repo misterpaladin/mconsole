@@ -35,14 +35,14 @@ class MenuComposer
                         foreach ($menu->menus as $cKey => $child) {
                             if ($child->acl) {
                                 $current = $acl->where('key', $child->key)->first();
-                                if (!in_array($current['route'], $allowed)) {
+                                if (!in_array($current->route, $allowed)) {
                                     unset($menu->menus[$cKey]);
                                 }
                             }
                         }
                     } else {
                         $current = $acl->where('key', $menu->key)->first();
-                        if (count($allowed) == 0 || !in_array($current['route'], $allowed)) {
+                        if (count($allowed) == 0 || !in_array($current->route, $allowed)) {
                             $all->forget($key);
                         }
                     }
