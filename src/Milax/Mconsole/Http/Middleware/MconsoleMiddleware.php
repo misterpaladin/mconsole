@@ -36,13 +36,13 @@ class MconsoleMiddleware
     public function handle($request, Closure $next)
     {
         // Redirect if already authenticated
-        if ($request->is('mconsole/login') && Auth::user() && Auth::user()->role_id > 0) {
-            return redirect('/mconsole');
+        if ($request->is(mconsole_url('login', true)) && Auth::user() && Auth::user()->role_id > 0) {
+            return redirect(mconsole_url('/'));
         }
         
         // Redirect to login page
-        if ((Auth::guest() || Auth::user()->role_id == 0) && !$request->is('mconsole/login')) {
-            return redirect('/mconsole/login');
+        if ((Auth::guest() || Auth::user()->role_id == 0) && !$request->is(mconsole_url('login', true))) {
+            return redirect(mconsole_url('login'));
         }
         
         // Set user locale if authenticated
@@ -50,7 +50,7 @@ class MconsoleMiddleware
             app('API')->translations->setUserLocale();
         }
         
-        if (!$request->is('mconsole/login') && Auth::user()->role->key != 'root') {
+        if (!$request->is(mconsole_url('login', true)) && Auth::user()->role->key != 'root') {
             if (!$this->hasAccess($request)) {
                 return response()->view('mconsole::errors.accessdenied');
             }
@@ -69,7 +69,7 @@ class MconsoleMiddleware
     {
         $uri = sprintf('%s:%s', $request->method(), $request->route()->getUri());
         
-        if ($request->is('mconsole/logout')) {
+        if ($request->is(mconsole_url('logout', true))) {
             return true;
         }
         

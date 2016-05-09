@@ -15,6 +15,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta name="_token" content="{{ csrf_token() }}" />
+        <meta name="_mconsole_url" content="{{ config('mconsole.url') }}" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=all' rel='stylesheet' type='text/css'>
 		<link href="/massets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -81,7 +82,7 @@
                                 <ul class="dropdown-menu">
                                     <li class="external">
                                         <h3>{{ trans('mconsole::mconsole.quickmenu.title') }}</h3>
-                                        <span class="pull-right"><a href="/mconsole/users/{{ Auth::id() }}/edit">Edit</a></span>
+                                        <span class="pull-right"><a href="{{ mconsole_url(sprintf('users/%s/edit', Auth::id())) }}">Edit</a></span>
                                     </li>
                                     <li>
                                         <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
@@ -118,12 +119,12 @@
 								</a>
 								<ul class="dropdown-menu dropdown-menu-default">
 									<li>
-										<a href="/mconsole/users/{{ Auth::id() }}/edit">
+										<a href="{{ mconsole_url(sprintf('users/%s/edit', Auth::id())) }}">
 										<i class="icon-settings"></i> {{ trans('mconsole::profile.links.settings') }} </a>
 									</li>
 									<li class="divider"> </li>
 									<li>
-										<a href="/mconsole/logout">
+										<a href="{{ mconsole_url('logout') }}">
 										<i class="icon-key"></i> {{ trans('mconsole::profile.links.logout') }} </a>
 									</li>
 								</ul>

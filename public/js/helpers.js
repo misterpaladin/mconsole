@@ -1,1 +1,1 @@
-var trans=function(n){var t="trans-"+n;return $('input[name="'+t+'"]').val()},notification=function(n,t,i,a){notifications.push(n,t,i,a)};
+var trans=function(n){var t="trans-"+n;return $('input[name="'+t+'"]').val()},notification=function(n,t,a,r){notifications.push(n,t,a,r)},mconsole_url=function(n){var t=$('meta[name="_mconsole_url"]').attr("content");return t=t.replace(/^\/|\/$/g,""),n=n.replace(/^\/|\/$/g,""),n.length>0&&(n="/"+n),"/"+t+n};

@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-xs-12">
-        {!! Form::open(['method' => 'POST', 'url' => '/mconsole/variables']) !!}
+        {!! Form::open(['method' => 'POST', 'url' => mconsole_url('variables')]) !!}
 		<div class="form-body">
 			<div class="row">
                 <div class="col-xs-12">

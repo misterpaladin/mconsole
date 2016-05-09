@@ -1,16 +1,16 @@
 <div class="row">
 	<div class="col-xs-12">
         @if (isset($item))
-            {!! Form::model($item, ['method' => 'PUT', 'route' => ['mconsole.roles.update', $item->id]]) !!}
+            {!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('roles/%s', $item->id))]) !!}
         @else
-            {!! Form::open(['method' => 'POST', 'url' => '/mconsole/roles']) !!}
+            {!! Form::open(['method' => 'POST', 'url' => mconsole_url('roles')]) !!}
         @endif
 		<div class="form-body">
 			<div class="row">
                 <div class="col-md-4">
                     <div class="portlet light">
                         @include('mconsole::partials.portlet-title', [
-                            'back' => '/mconsole/roles',
+                            'back' => mconsole_url('roles'),
                             'title' => trans('mconsole::roles.form.main'),
                         ])
         				<div class="portlet-body form">

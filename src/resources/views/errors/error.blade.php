@@ -39,7 +39,7 @@
             <h2>{{ $text[$status]['title'] }}</h2>
             {!! $text[$status]['text'] !!}
             @if (URL::previous() == Request::url())
-                <p><a href="/mconsole/" class="btn red btn-outline"> {{ $text['home'] }} </a><br></p>
+                <p><a href="{{ mconsole_url() }}" class="btn red btn-outline"> {{ $text['home'] }} </a><br></p>
             @else
                 <p><a href="{{ URL::previous() }}" class="btn red btn-outline"> {{ $text['back'] }} </a><br></p>
             @endif
