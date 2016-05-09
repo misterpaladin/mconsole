@@ -12,7 +12,6 @@ CKEDITOR.editorConfig = function( config ) {
 	    { name: 'document',    groups: [ 'mode' ] },
 	    { name: 'clipboard',   groups: [ 'PasteText', 'undo' ] },
 	    { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-	    '/',
 	    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 	    { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align',] },
 	    { name: 'links' },
