@@ -59,6 +59,13 @@ class MenuServiceProvider extends ServiceProvider
         ], 'presets', 'tools');
         
         app('API')->menu->push([
+            'name' => 'mconsole::languages.menu.name',
+            'url' => 'languages',
+            'visible' => true,
+            'enabled' => true,
+        ], 'languages', 'tools');
+        
+        app('API')->menu->push([
             'name' => 'mconsole::users.menu.name',
             'url' => 'users',
             'visible' => true,

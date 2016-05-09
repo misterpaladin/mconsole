@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
-    use \Cacheable;
+    use \Cacheable, \System;
     
     protected $fillable = ['key', 'name'];
 }

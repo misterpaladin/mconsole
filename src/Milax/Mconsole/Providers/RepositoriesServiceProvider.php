@@ -89,15 +89,20 @@ class RepositoriesServiceProvider extends ServiceProvider
                 },
                 'bind' => 'modules',
             ],
+            [
+                'when' => '\Milax\Mconsole\Http\Controllers\LanguagesController',
+                'needs' => '\Milax\Mconsole\Contracts\Repository',
+                'give' => function () {
+                    return new \Milax\Mconsole\Repositories\LanguagesRepository(\Milax\Mconsole\Models\Language::class);
+                },
+                'bind' => 'languages',
+            ],
         ];
         
         // Repositories contextual binding
         foreach ($repositories as $repository) {
-            $this->app->when($repository['when'])->needs($repository['needs'])->give($repository['give']);
             app('API')->repositories->register($repository['bind'], $repository['give']());
+            $this->app->when($repository['when'])->needs($repository['needs'])->give($repository['give']);
         }
-        
-        // Register additional repositories to API
-        app('API')->repositories->register('languages', new \Milax\Mconsole\Repositories\LanguagesRepository(\Milax\Mconsole\Models\Language::class));
     }
 }
