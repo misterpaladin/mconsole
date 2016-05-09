@@ -122,6 +122,10 @@ class FileMenu implements Menu
      */
     public function push($category, $key, $menu)
     {
+        if (strlen($menu['url']) > 0) {
+            $menu['url'] = sprintf('/mconsole/%s', trim($menu['url']));
+        }
+        
         if (str_contains($category, '.')) {
             $category = str_replace('.', '.menus.', $category) . '.menus';
             if (is_array($existed = array_get($this->menu, $category))) {
