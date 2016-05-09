@@ -39,16 +39,18 @@ class MenuComposer
                                     unset($menu->menus[$cKey]);
                                 }
                             }
-                            foreach ($child->menus as $scKey => $subChild) {
-                                if ($subChild->acl) {
-                                    $current = $acl->where('key', $subChild->key)->first();
-                                    if ($current && !in_array($current->route, $allowed)) {
-                                        unset($child->menus[$scKey]);
+                            if ($child->menus->count() > 0) {
+                                foreach ($child->menus as $scKey => $subChild) {
+                                    if ($subChild->acl) {
+                                        $current = $acl->where('key', $subChild->key)->first();
+                                        if ($current && !in_array($current->route, $allowed)) {
+                                            unset($child->menus[$scKey]);
+                                        }
                                     }
                                 }
-                            }
-                            if ($child->menus->count() == 0) {
-                                unset($menu->menus[$cKey]);
+                                if ($child->menus->count() == 0) {
+                                    unset($menu->menus[$cKey]);
+                                }
                             }
                         }
                     } else {
