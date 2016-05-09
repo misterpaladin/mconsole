@@ -39,6 +39,7 @@ Route::group([
     Route::resource('/presets', 'PresetsController');
     Route::resource('/menus', 'MenusController');
     Route::resource('/uploads', 'UploadsController');
+    Route::resource('/languages', 'LanguagesController');
     
     // Modules
     Route::group([

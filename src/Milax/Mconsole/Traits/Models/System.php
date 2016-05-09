@@ -2,6 +2,8 @@
 
 namespace Milax\Mconsole\Traits\Models;
 
+use Session;
+
 trait System
 {
     /**
