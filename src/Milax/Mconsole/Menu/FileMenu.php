@@ -122,7 +122,7 @@ class FileMenu implements Menu
      */
     public function push($category, $key, $menu)
     {
-        if (strlen($menu['url']) > 0) {
+        if (isset($menu['url']) && strlen($menu['url']) > 0) {
             $menu['url'] = sprintf('/mconsole/%s', trim($menu['url']));
         }
         
