@@ -8,13 +8,13 @@
     			<li class="menu-dropdown classic-menu-dropdown main-menu-item" data-key="{{ $menu->key }}">
     				@if (count($menu->menus) == 0)
                         @if (isset($menu->url))
-                            <a href="/mconsole/{{ $menu->url }}">{{ $menu->name }}<span class="arrow"></span></a>
+                            <a href="{{ $menu->url }}">{{ $menu->name }}<span class="arrow"></span></a>
                         @else
                             <a href="javascript:;">{{ $menu->name }}<span class="arrow"></span></a>
                         @endif
     				@else
                         @if (isset($menu->url))
-                            <a href="/mconsole/{{ $menu->url }}">{{ $menu->name }}<span class="arrow"></span></a>
+                            <a href="{{ $menu->url }}">{{ $menu->name }}<span class="arrow"></span></a>
                         @else
                             <a href="javascript:;">{{ $menu->name }}<span class="arrow"></span></a>
                         @endif
@@ -23,7 +23,7 @@
     					        @if ($child->visible)
                                     @if (count($child->menus) > 0)
                                         <li class="dropdown-submenu" data-key="{{ $child->key }}">
-        					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ $child->name }}</a>
+        					                <a href="{{ $child->url }}" class="nav-link nav-toggle">{{ $child->name }}</a>
                                             <ul class="dropdown-menu">
                                                 @foreach ($child->menus as $subChild)
                                                     <li data-key={{ $subChild->key }}>
@@ -35,7 +35,7 @@
                                     @else
                                         <li data-key="{{ $child->key }}">
                                             @if (isset($child->url))
-            					                <a href="/mconsole/{{ $child->url }}" class="nav-link nav-toggle">{{ $child->name }}</a>
+            					                <a href="{{ $child->url }}" class="nav-link nav-toggle">{{ $child->name }}</a>
                                             @else
                                                 <a href="javascript:;" class="nav-link nav-toggle">{{ $child->name }}</a>
                                             @endif
