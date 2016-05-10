@@ -13,7 +13,7 @@ class ModifyMconsoleOptionsTableAddGroupColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_options', function (Blueprint $table) {
-            $table->string('group')->after('id');
+            $table->string('group')->nullable()->after('id');
         });
     }
 

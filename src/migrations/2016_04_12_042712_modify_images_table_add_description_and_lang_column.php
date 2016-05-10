@@ -13,9 +13,9 @@ class ModifyImagesTableAddDescriptionAndLangColumn extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->text('description')->after('preset_id');
-            $table->string('title')->after('preset_id');
-            $table->integer('language_id')->after('preset_id')->default(0);
+            $table->text('description')->nullable()->after('preset_id');
+            $table->string('title')->nullable()->after('preset_id');
+            $table->integer('language_id')->default(0)->after('preset_id');
         });
     }
 

@@ -13,8 +13,10 @@ class ModifyImagesTableAddAdditionalColumns extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->integer('preset_id')->after('id');
-            $table->text('copies')->after('filename');
+            $table->integer('preset_id')->nullable()->after('id');
+        });
+        Schema::table('images', function (Blueprint $table) {
+            $table->json('copies')->nullable()->after('filename');
         });
     }
 

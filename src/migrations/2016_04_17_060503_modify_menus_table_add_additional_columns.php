@@ -13,8 +13,7 @@ class ModifyMenusTableAddAdditionalColumns extends Migration
     public function up()
     {
         Schema::table('menus', function (Blueprint $table) {
-            $table->string('key')->after('id');
-            $table->renameColumn('state', 'enabled');
+            $table->string('key')->nullable()->after('id');
         });
     }
 
@@ -27,7 +26,6 @@ class ModifyMenusTableAddAdditionalColumns extends Migration
     {
         Schema::table('menus', function (Blueprint $table) {
             $table->dropColumn('key');
-            $table->renameColumn('enabled', 'state');
         });
     }
 }

@@ -14,10 +14,10 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url');
-            $table->string('title');
-            $table->integer('order');
-            $table->boolean('enabled');
+            $table->string('url')->nullable();
+            $table->string('title')->nullable();
+            $table->integer('order')->default(0);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
     }

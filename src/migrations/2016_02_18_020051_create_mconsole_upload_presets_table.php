@@ -14,15 +14,15 @@ class CreateMconsoleUploadPresetsTable extends Migration
     {
         Schema::create('mconsole_upload_presets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key');
-            $table->string('name');
-            $table->string('path');
+            $table->string('key')->nullable();
+            $table->string('name')->nullable();
+            $table->string('path')->nullable();
             $table->integer('width')->default(0);
             $table->integer('height')->default(0);
-            $table->string('watermark');
-            $table->string('position');
+            $table->string('watermark')->nullable();
+            $table->string('position')->nullable();
             $table->integer('quality')->default(95);
-            $table->string('extensions');
+            $table->string('extensions')->nullable();
             $table->integer('min_width')->default(0);
             $table->integer('min_height')->default(0);
             $table->timestamps();

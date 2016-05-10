@@ -13,8 +13,8 @@ class CreateOptionsTable extends Migration
     public function up()
     {
         Schema::create('mconsole_options', function (Blueprint $table) {
-	        $table->string('key');
-	        $table->string('value');
+            $table->string('key')->nullable();
+            $table->string('value')->nullable();
         });
     }
 

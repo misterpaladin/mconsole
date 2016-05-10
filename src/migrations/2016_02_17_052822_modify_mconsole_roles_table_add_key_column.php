@@ -13,7 +13,7 @@ class ModifyMconsoleRolesTableAddKeyColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_roles', function (Blueprint $table) {
-            $table->string('key')->after('id');
+            $table->string('key')->nullable()->after('id');
         });
     }
 

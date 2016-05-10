@@ -15,8 +15,8 @@ class CreateTagsToAnyTable extends Migration
         Schema::create('tags_to_any', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tag_id');
-            $table->integer('related_id');
-            $table->string('related_class');
+            $table->integer('related_id')->nullable();
+            $table->string('related_class')->nullable();
         });
     }
 

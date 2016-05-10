@@ -13,7 +13,7 @@ class ModifyRolesTableAddRoutesColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_roles', function (Blueprint $table) {
-            $table->text('routes')->after('name');
+            $table->json('routes')->nullable()->after('name');
         });
     }
 

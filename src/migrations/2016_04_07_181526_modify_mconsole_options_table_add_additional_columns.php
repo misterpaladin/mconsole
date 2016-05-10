@@ -14,10 +14,12 @@ class ModifyMconsoleOptionsTableAddAdditionalColumns extends Migration
     {
         Schema::table('mconsole_options', function (Blueprint $table) {
             $table->boolean('enabled')->default(true)->after('value');
-            $table->text('options')->after('value');
             $table->enum('type', ['text', 'textarea', 'checkbox', 'select'])->after('value');
-            $table->string('label')->after('id');
-            $table->text('value')->change();
+            $table->string('label')->nullable()->after('id');
+            $table->text('value')->nullable()->change();
+        });
+        Schema::table('mconsole_options', function (Blueprint $table) {
+            $table->json('options')->nullable()->after('value');
         });
     }
 
@@ -33,6 +35,8 @@ class ModifyMconsoleOptionsTableAddAdditionalColumns extends Migration
             $table->dropColumn('options');
             $table->dropColumn('type');
             $table->dropColumn('label');
+        });
+        Schema::table('mconsole_options', function (Blueprint $table) {
             $table->string('value')->change();
         });
     }
