@@ -15,8 +15,8 @@ class CreateLinkablesTable extends Migration
         Schema::create('linkables', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('link_id');
-            $table->integer('linkable_id');
-            $table->string('linkable_type');
+            $table->integer('linkable_id')->nullable();
+            $table->string('linkable_type')->nullable();
         });
     }
 

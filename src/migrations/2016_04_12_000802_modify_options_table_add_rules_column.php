@@ -13,7 +13,7 @@ class ModifyOptionsTableAddRulesColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_options', function (Blueprint $table) {
-            $table->text('rules')->after('value');
+            $table->json('rules')->nullable()->after('value');
         });
     }
 

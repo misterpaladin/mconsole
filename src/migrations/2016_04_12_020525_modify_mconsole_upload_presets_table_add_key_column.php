@@ -13,7 +13,7 @@ class ModifyMconsoleUploadPresetsTableAddKeyColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_upload_presets', function (Blueprint $table) {
-            $table->string('key')->after('id');
+            $table->string('key')->nullable()->after('id');
         });
     }
 

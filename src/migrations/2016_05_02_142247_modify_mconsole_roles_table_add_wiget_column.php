@@ -13,7 +13,7 @@ class ModifyMconsoleRolesTableAddWigetColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_roles', function (Blueprint $table) {
-            $table->boolean('widget')->after('routes')->default(0);
+            $table->boolean('widget')->after('routes')->default(false);
         });
     }
 

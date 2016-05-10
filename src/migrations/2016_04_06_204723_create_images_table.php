@@ -14,10 +14,10 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('path');
-            $table->string('filename');
-            $table->integer('related_id');
-            $table->string('related_class');
+            $table->string('path')->nullable();
+            $table->string('filename')->nullable();
+            $table->integer('related_id')->nullable();
+            $table->string('related_class')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class ModifyUsersTableAddMenusColumn extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('menus')->after('lang');
+            $table->json('menus')->nullable()->after('lang');
         });
     }
 

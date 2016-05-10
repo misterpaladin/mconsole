@@ -13,7 +13,7 @@ class ModifyLanguagesTableAddSystemColumn extends Migration
     public function up()
     {
         Schema::table('languages', function (Blueprint $table) {
-            $table->boolean('system')->after('name')->default(0);
+            $table->boolean('system')->default(false)->after('name');
         });
     }
 

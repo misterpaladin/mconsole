@@ -13,7 +13,7 @@ class ModifyImagesTableAddUniqueColumn extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->boolean('unique')->after('group');
+            $table->boolean('unique')->default(0)->after('group');
         });
     }
 

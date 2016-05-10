@@ -13,7 +13,7 @@ class ModifyUploadsTableAddTypeColumn extends Migration
     public function up()
     {
         Schema::table('uploads', function (Blueprint $table) {
-            $table->string('type')->after('language_id');
+            $table->string('type')->nullable()->after('language_id');
         });
     }
 

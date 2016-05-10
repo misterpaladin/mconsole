@@ -19,7 +19,9 @@ class ModifyMconsoleUploadPresetsChangeColumns extends Migration
             $table->dropColumn('quality');
             $table->dropColumn('width');
             $table->dropColumn('height');
-            $table->text('operations')->after('path');
+        });
+        Schema::table('mconsole_upload_presets', function (Blueprint $table) {
+            $table->json('operations')->nullable()->after('path');
         });
     }
 
@@ -31,12 +33,14 @@ class ModifyMconsoleUploadPresetsChangeColumns extends Migration
     public function down()
     {
         Schema::table('mconsole_upload_presets', function (Blueprint $table) {
-            $table->string('width')->after('id');
-            $table->string('height')->after('id');
-            $table->string('quality')->after('id');
-            $table->string('watermark')->after('id');
-            $table->string('position')->after('id');
-            $table->string('key')->after('id');
+            $table->string('width')->nullable()->after('id');
+            $table->string('height')->nullable()->after('id');
+            $table->string('quality')->nullable()->after('id');
+            $table->string('watermark')->nullable()->after('id');
+            $table->string('position')->nullable()->after('id');
+            $table->string('key')->nullable()->after('id');
+        });
+        Schema::table('mconsole_upload_presets', function (Blueprint $table) {
             $table->dropColumn('operations');
         });
     }

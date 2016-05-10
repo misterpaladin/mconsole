@@ -13,7 +13,7 @@ class ModifyMconsoleOptionsTableAddHelpColumn extends Migration
     public function up()
     {
         Schema::table('mconsole_options', function (Blueprint $table) {
-            $table->string('help')->after('label');
+            $table->string('help')->nullable()->after('label');
         });
     }
 
