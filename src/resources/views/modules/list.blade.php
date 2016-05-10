@@ -76,9 +76,11 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @foreach ($item->package->authors as $author)
-                                                    {{ $author->name }}<br/>
-                                                @endforeach
+                                                @if ($item->package)
+                                                    @foreach ($item->package->authors as $author)
+                                                        {{ $author->name }}<br/>
+                                                    @endforeach
+                                                @endif
                                             </td>
     										<td>
                                                 <span class="btn btn-xs btn-danger uninstall-module disabled popovers @if (!$item->installed) hide @endif" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::modules.table.uninstall.info') }}" data-modal-title="{{ trans('mconsole::modules.table.uninstall.modal.title') }}" data-modal-content="{{ trans('mconsole::modules.table.uninstall.modal.content') }}" data-modal-cancel="{{ trans('mconsole::modules.table.uninstall.modal.cancel') }}" data-modal-uninstall="{{ trans('mconsole::modules.table.uninstall.modal.uninstall') }}" data-lang-process="{{ trans('mconsole::modules.table.uninstall.process') }}"><i class="fa fa-close"></i> {{ trans('mconsole::modules.table.buttons.uninstall') }}</span>
