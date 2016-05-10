@@ -16,7 +16,7 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->json('tree')->nullable();
-            $table->boolean('state')->default(true);
+            $table->boolean('enabled')->default(true);
             $table->boolean('system')->default(false);
             $table->timestamps();
         });
