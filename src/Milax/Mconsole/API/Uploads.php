@@ -158,9 +158,9 @@ class Uploads implements GenericAPI
                         'title' => $file->title,
                         'description' => $file->description,
                         'size' => File::size(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename)),
-                        'url' => sprintf('%s%s/%s%s', $url, $file->path, $suffix, $file->filename),
-                        'thumbnailUrl' => sprintf('%s%s/mconsole/%s', $url, $file->path, $file->filename),
-                        'deleteUrl' => sprintf('%s%s', $scriptURL, $file->id),
+                        'url' => sprintf('/%s/%s/%s%s', trim($url, '/'), trim($file->path, '/'), $suffix, $file->filename),
+                        'thumbnailUrl' => sprintf('/%s/%s/mconsole/%s', trim($url, '/'), trim($file->path, '/'), $file->filename),
+                        'deleteUrl' => sprintf('/%s/%s', trim($scriptURL, '/'), $file->id),
                         'deleteType' => 'GET',
                     ]);
                 }
@@ -209,7 +209,7 @@ class Uploads implements GenericAPI
             'upload_dir' => storage_path('tmp/uploads/'),
             'upload_url' => '/uploads/preview/',
             'print_response' => false,
-            'script_url' => mconsole_url('api/uploads/delete/'),
+            'script_url' => mconsole_url('api/uploads/delete/', false),
             'delete_type' => 'GET',
         ];
         
