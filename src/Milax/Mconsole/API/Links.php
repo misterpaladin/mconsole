@@ -51,6 +51,6 @@ class Links extends RepositoryAPI implements GenericAPI
      */
     public function getGroupedSets()
     {
-        return \Milax\Mconsole\Models\Linkable::groupBy(['linkable_id', 'linkable_type'])->get();
+        return \Milax\Mconsole\Models\Linkable::groupBy(['id', 'linkable_id', 'linkable_type'])->get();
     }
 }
