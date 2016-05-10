@@ -49,7 +49,7 @@
 		<!-- BEGIN LOGIN -->
 		<div class="content">
 			<!-- BEGIN LOGIN FORM -->
-			{!! Form::open(['method' => 'POST', 'url' => '/mconsole/login', 'class' => 'login-form']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => mconsole_url('login'), 'class' => 'login-form']) !!}
 				<h3 class="form-title font-green">{{ trans('mconsole::login.headings.signin') }}</h3>
 				
                 @if (env('APP_DEMO'))
