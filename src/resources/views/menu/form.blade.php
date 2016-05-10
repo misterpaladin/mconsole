@@ -17,7 +17,7 @@
         					'name' => 'name',
         					'placeholder' => trans('mconsole::menus.form.placeholder')
         				])
-                        @include('mconsole::forms.state')
+                        @include('mconsole::forms.state', isset($item) ? $item : [])
                     </div>
                     
         			<div class="form-actions">
