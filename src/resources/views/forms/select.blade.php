@@ -4,8 +4,8 @@
         {!! Form::select($name, $options, (isset($value)) ? $value : null, ['class' => 'form-control']) !!}
     @elseif (isset($type))
         {!! Form::select($name, [
-            '1' => trans(sprintf('mconsole::forms.options.%s.enabled', $type)),
-            '0' => trans(sprintf('mconsole::forms.options.%s.disabled', $type)),
+            TRUE => trans(sprintf('mconsole::forms.options.%s.enabled', $type)),
+            FALSE => trans(sprintf('mconsole::forms.options.%s.disabled', $type)),
         ], (isset($value)) ? $value : null, ['class' => 'form-control']) !!}
     @endif
 </div>
