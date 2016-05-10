@@ -13,7 +13,7 @@ Route::group([
     
     // Mconsole root
     Route::get('/', function () {
-        return redirect('/mconsole/dashboard');
+        return redirect(mconsole_url('/dashboard'));
     });
     Route::get('/dashboard', 'MconsoleController@index');
     
