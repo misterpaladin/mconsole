@@ -4,7 +4,6 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Contracts\DataManager;
-use Carbon\Carbon;
 
 class Presets extends RepositoryAPI implements DataManager
 {
@@ -36,10 +35,10 @@ class Presets extends RepositoryAPI implements DataManager
             foreach ($preset as $col => $val) {
                 if (is_array($val)) {
                     $preset[$col] = json_encode($val);
-                    $preset['created_at'] = Carbon::now();
-                    $preset['updated_at'] = Carbon::now();
                 }
             }
+            $preset['created_at'] = date('Y-m-d H:i:s');
+            $preset['updated_at'] = date('Y-m-d H:i:s');
             $presets[$key] = $preset;
         }
         

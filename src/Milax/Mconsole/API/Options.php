@@ -4,7 +4,6 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Contracts\DataManager;
-use Carbon\Carbon;
 
 class Options extends RepositoryAPI implements DataManager
 {
@@ -36,10 +35,10 @@ class Options extends RepositoryAPI implements DataManager
             foreach ($option as $col => $val) {
                 if (is_array($val)) {
                     $option[$col] = json_encode($val);
-                    $preset['created_at'] = Carbon::now();
-                    $preset['updated_at'] = Carbon::now();
                 }
             }
+            $option['created_at'] = date('Y-m-d H:i:s');
+            $option['updated_at'] = date('Y-m-d H:i:s');
             $options[$key] = $option;
         }
         
