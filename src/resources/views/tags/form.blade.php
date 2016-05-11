@@ -2,7 +2,7 @@
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
             @include('mconsole::partials.portlet-title', [
-                    'back' => '/mconsole/tags',
+                    'back' => mconsole_url('tags'),
                     'title' => trans('mconsole::tags.form.main'),
                 ])
             <div class="portlet-body form">

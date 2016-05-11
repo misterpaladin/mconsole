@@ -2,7 +2,7 @@
 	<div class="col-md-4 col-sm-6">
         <div class="portlet light">
             @include('mconsole::partials.portlet-title', [
-                    'back' => '/mconsole/menus',
+                    'back' => mconsole_url('menus'),
                     'title' => trans('mconsole::menus.form.main'),
                 ])
             <div class="portlet-body form">
