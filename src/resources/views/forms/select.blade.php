@@ -6,6 +6,6 @@
         {!! Form::select($name, [
             '1' => trans(sprintf('mconsole::forms.options.%s.enabled', $type)),
             '0' => trans(sprintf('mconsole::forms.options.%s.disabled', $type)),
-        ], (isset($value)) ? $value : is_bool(Form::getValueAttribute($name)) ? (int) Form::getValueAttribute($name) : 0, ['class' => 'form-control']) !!}
+        ], (isset($value)) ? $value : is_bool(Form::getValueAttribute($name)) ? (int) Form::getValueAttribute($name) : null, ['class' => 'form-control']) !!}
     @endif
 </div>
