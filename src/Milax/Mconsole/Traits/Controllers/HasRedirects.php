@@ -14,16 +14,29 @@ use URL;
 trait HasRedirects
 {
     protected $redirects = [];
+    protected $disabled = false;
     
     /**
      * Set redirect url
      *
      * @param mixed $url
-     * @return [type] [description]
+     * @return HasRedirects
      */
     protected function setRedirects($url)
     {
         $this->redirectTo = $url;
+        return $this;
+    }
+    
+    /**
+     * Disable redirect for current request
+     * 
+     * @return HasRedirects
+     */
+    protected function noRedirect()
+    {
+        $this->disabled = true;
+        return $this;
     }
     
     /**
@@ -100,7 +113,9 @@ trait HasRedirects
         
         // Check for session errors and request method
         if (Session::get('errors') === null && Request::method() != 'GET') {
-            $this->redirect();
+            if (!$this->disabled) {
+                $this->redirect();
+            }
         }
     }
 }
