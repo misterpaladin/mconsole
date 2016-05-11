@@ -9,6 +9,9 @@ return [
             'description' => 'Save variables',
         ],
     ],
+    'tabs' => [
+        'main' => 'Templates editor',
+    ],
     'form' => [
         'info' => [
             'title' => 'Wisdom',

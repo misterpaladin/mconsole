@@ -9,8 +9,9 @@
 			<div class="row">
                 <div class="col-xs-12">
                     <div class="portlet light">
-        				@include('mconsole::partials.portlet-title', [
-                            'title' => trans('mconsole::variables.menu.name'),
+                        @include('mconsole::partials.portlet-title', [
+                            'title' => trans('mconsole::variables.tabs.main'),
+                            'fullscreen' => true,
                         ])
         				<div class="portlet-body">
                             @include('mconsole::partials.note', [
