@@ -104,5 +104,6 @@ class RepositoriesServiceProvider extends ServiceProvider
             app('API')->repositories->register($repository['bind'], $repository['give']());
             $this->app->when($repository['when'])->needs($repository['needs'])->give($repository['give']);
         }
+        app('API')->repositories->register('links', new \Milax\Mconsole\Repositories\LinksRepository(\Milax\Mconsole\Models\Link::class));
     }
 }
