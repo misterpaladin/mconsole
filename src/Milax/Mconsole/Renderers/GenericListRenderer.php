@@ -96,8 +96,9 @@ class GenericListRenderer implements ListRenderer
         } else {
             $addAction = $this->actions['add'] != false ? $this->actions['add'] : null;
             if (!is_null($addAction)) {
-                $addAction = (str_contains($addAction, 'mconsole')) ? $addAction : sprintf('/mconsole/%s', trim($addAction, '/'));
+                $addAction = mconsole_url(trim($addAction, '/'));
             }
+            
             return view($this->defaultView, [
                 'tableOptions' => [
                     'items' => $this->processor->run($cb, $this->items),
