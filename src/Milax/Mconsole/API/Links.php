@@ -23,13 +23,16 @@ class Links extends RepositoryAPI implements GenericAPI
         if ($links = Request::input('links')) {
             foreach (json_decode($links, true) as $link) {
                 if (isset($link['id']) && strlen($link['id']) > 0) {
+                    app('API')->repositories->links->update($link['id'], $link);
                     array_push($sync, $link['id']);
                 } else {
-                    array_push($sync, $this->create($link)->id);
+                    array_push($sync, app('API')->repositories->links->create($link)->id);
                 }
             }
         }
         
+        // dd($sync);
+
         $instance->links()->sync($sync);
     }
     
