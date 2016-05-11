@@ -13,7 +13,7 @@ class VariablesController extends Controller
     
     public function __construct(Repository $repository)
     {
-        $this->setCaption(trans('mconsole::users.menu.name'));
+        $this->setCaption(trans('mconsole::variables.menu.name'));
         $this->repository = $repository;
     }
     
