@@ -24,6 +24,7 @@
 		<link href="/massets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css" />
         <link href="/massets/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet" type="text/css" />
+        <link href="/massets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
 		<!-- BEGIN THEME GLOBAL STYLES -->
         <link href="/massets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
