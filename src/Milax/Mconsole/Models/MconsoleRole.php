@@ -48,6 +48,6 @@ class MconsoleRole extends Model
      */
     public function scopeNotRoot($query)
     {
-        return $query->where('key', '!=', 'root');
+        return $query->where('key', '!=', 'root')->orWhere('key', null);
     }
 }
