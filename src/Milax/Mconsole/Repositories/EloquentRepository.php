@@ -53,20 +53,7 @@ abstract class EloquentRepository implements Repository
     
     public function create($data)
     {
-        $model = $this->model;
-        $instance = new $model;
-        $parent = get_parent_class($instance);
-        
-        // Fix Eloquent's fillable bug
-        if ($parent != 'Illuminate\Database\Eloquent\Model') {
-            $parent = new $parent;
-            $instance->fillable(array_merge($parent->getFillable(), $instance->getFillable()));
-            $instance->dates(array_merge($parent->getDates(), $instance->getDates()));
-        }
-        
-        $data = $this->fixDates($instance, $data);
-        
-        $instance->fill($data);
+        $instance = $this->fill($data);
         $instance->save();
         
         return $instance;
@@ -86,6 +73,32 @@ abstract class EloquentRepository implements Repository
     {
         $model = $this->model;
         return $model::destroy($id);
+    }
+    
+    /**
+     * Prepare to store created object
+     *
+     * @param array $data [Post data]
+     * @return mixed
+     */
+    protected function fill($data)
+    {
+        $model = $this->model;
+        $instance = new $model;
+        $parent = get_parent_class($instance);
+        
+        // Fix Eloquent's fillable bug
+        if ($parent != 'Illuminate\Database\Eloquent\Model') {
+            $parent = new $parent;
+            $instance->fillable(array_merge($parent->getFillable(), $instance->getFillable()));
+            $instance->dates(array_merge($parent->getDates(), $instance->getDates()));
+        }
+        
+        $data = $this->fixDates($instance, $data);
+        
+        $instance->fill($data);
+        
+        return $instance;
     }
     
     /**
