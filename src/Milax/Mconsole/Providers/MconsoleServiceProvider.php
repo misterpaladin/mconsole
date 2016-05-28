@@ -15,7 +15,7 @@ class MconsoleServiceProvider extends ServiceProvider
         'providers' => [
             \Intervention\Image\ImageServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
-            \Milax\Cleaner\CleanerServiceProvider::class,
+            \MisterPaladin\Cleaner\CleanerServiceProvider::class,
             \Milax\Mconsole\Providers\ACLServiceProvider::class,
             \Milax\Mconsole\Providers\MenuServiceProvider::class,
             \Milax\Mconsole\Providers\SearchServiceProvider::class,
@@ -29,14 +29,14 @@ class MconsoleServiceProvider extends ServiceProvider
         
         'aliases' => [
             // Third party packages
-            'Gravatar' => \Milax\Gravatar::class,
+            'Gravatar' => \MisterPaladin\Gravatar::class,
             'Image' => \Intervention\Image\Facades\Image::class,
             'Form' => \Collective\Html\FormFacade::class,
             'Html' => \Collective\Html\HtmlFacade::class,
             'Debugbar' => \Barryvdh\Debugbar\Facade::class,
             
             // Traits
-            'Cacheable' => \Milax\Cacheable::class,
+            'Cacheable' => \MisterPaladin\Cacheable::class,
             'HasRedirects' => \Milax\Mconsole\Traits\Controllers\HasRedirects::class,
             'DoesNotHaveShow' => \Milax\Mconsole\Traits\Controllers\DoesNotHaveShow::class,
             'UseLayout' => \Milax\Mconsole\Traits\Controllers\UseLayout::class,
