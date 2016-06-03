@@ -34,7 +34,7 @@ class ModulesController extends Controller
             if ($dbModule = $cached->where('identifier', $module->identifier)->first()) {
                 $module->installed = $dbModule->installed;
             } else {
-                $this->repository->create([
+                \DB::table('mconsole_modules')->insert([
                     'identifier' => $module->identifier,
                     'installed' => false,
                 ]);
