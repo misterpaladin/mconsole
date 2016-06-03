@@ -2,7 +2,7 @@
 
 @section('content')
     
-    @trans([
+    @jstrans([
         'unabletoinstall' => trans('mconsole::modules.table.unabletoinstall'),
     ])
     

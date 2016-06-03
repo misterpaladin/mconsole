@@ -1,4 +1,4 @@
-@trans([
+@jstrans([
     'blade-helper-code' => trans('mconsole::widget.code'),
     'blade-helper-copied' => trans('mconsole::widget.copied'),
 ])

@@ -16,6 +16,7 @@ class MconsoleServiceProvider extends ServiceProvider
             \Intervention\Image\ImageServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
             \MisterPaladin\Cleaner\CleanerServiceProvider::class,
+            \MisterPaladin\JSTrans\JSTransServiceProvider::class,
             \Milax\Mconsole\Providers\ACLServiceProvider::class,
             \Milax\Mconsole\Providers\MenuServiceProvider::class,
             \Milax\Mconsole\Providers\SearchServiceProvider::class,

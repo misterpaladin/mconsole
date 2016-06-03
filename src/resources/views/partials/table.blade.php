@@ -8,7 +8,7 @@
                 'actions' => isset($actions) ? $actions : null,
                 'add' => isset($add) ? $add : null,
             ])
-            @trans([
+            @jstrans([
                 'delete-modal-title' => trans('mconsole::tables.deletemodal.title'),
                 'delete-modal-body' => trans('mconsole::tables.deletemodal.body'),
                 'delete-modal-ok' => trans('mconsole::tables.deletemodal.ok'),

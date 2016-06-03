@@ -18,7 +18,7 @@
     'class' => 'links-editor',
 ])
 
-@trans([
+@jstrans([
     'links-editor-title' => trans('mconsole::forms.links.title'),
     'links-editor-url' => trans('mconsole::forms.links.url'),
     'links-editor-enabled' => trans('mconsole::forms.links.enabled'),

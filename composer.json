@@ -17,7 +17,8 @@
         "milax/cacheable": "*",
         "guzzlehttp/guzzle": "^6.2",
         "erusev/parsedown": "^1.6",
-        "milax/cleaner": "*"
+        "misterpaladin/cleaner": "*",
+        "misterpaladin/jstrans": "^1.0"
     },
     "autoload": {
         "psr-4": {

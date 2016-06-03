@@ -27,15 +27,6 @@ class MconsoleBladeExtensions extends ServiceProvider
      */
     public function register()
     {
-        Blade::directive('trans', function ($expression) {
-            return '<?php
-                $exp = ' . $expression . ';
-                foreach ($exp as $key => $value) {
-                    echo "<input type=\"hidden\" disabled=\"disabled\" name=\"trans-$key\" value=\"$value\" />";
-                }
-            ?>';
-        });
-        
         Blade::directive('datetime', function ($expression) {
             return "<?php echo \Carbon\Carbon::now()->format({$expression}); ?>";
         });

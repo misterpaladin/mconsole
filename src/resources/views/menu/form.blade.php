@@ -37,7 +37,7 @@
         				@include('mconsole::forms.hidden', [
         					'name' => 'tree',
         				])
-                        @trans([
+                        @jstrans([
                             'menu-editor-text' => trans('mconsole::menus.form.text'),
                             'menu-editor-add' => trans('mconsole::menus.form.add'),
                             'menu-editor-delete' => trans('mconsole::menus.form.delete'),

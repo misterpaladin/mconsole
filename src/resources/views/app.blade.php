@@ -212,6 +212,7 @@
 		<script src="/massets/global/plugins/excanvas.min.js"></script> 
 		<![endif]-->
 		<!-- BEGIN CORE PLUGINS -->
+        <script scr="/js/jstrans.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/jquery.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="/massets/global/plugins/js.cookie.min.js" type="text/javascript"></script>

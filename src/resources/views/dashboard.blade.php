@@ -26,5 +26,11 @@
             </div>
         </div>
     </div>
+    
+    @jstrans([
+        'foo' => 'bar',
+    ])
+    
+    <script src="/js/jstrans.js" type="text/javascript"></script>
 
 @endsection
