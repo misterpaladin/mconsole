@@ -13,11 +13,11 @@
         "laravelcollective/html": "5.2.*",
         "intervention/image": "^2.3",
         "doctrine/dbal": "^2.5",
-		"misterpaladin/gravatar": "*",
-        "misterpaladin/cacheable": "*",
+		"misterpaladin/gravatar": "^1.0",
+        "misterpaladin/cacheable": "^1.0",
         "guzzlehttp/guzzle": "^6.2",
         "erusev/parsedown": "^1.6",
-        "misterpaladin/cleaner": "*",
+        "misterpaladin/cleaner": "^1.0",
         "misterpaladin/jstrans": "^1.0"
     },
     "autoload": {
