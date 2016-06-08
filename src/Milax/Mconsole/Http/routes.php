@@ -68,4 +68,4 @@ Route::group([
     Route::post('/users/{user}/menus', 'UsersController@updateMenuOrder');
 });
 
-Route::get('/{slug}', 'PagesController@index');
+Route::get('/{slug}', 'App\Http\Controllers\PagesController@index');
