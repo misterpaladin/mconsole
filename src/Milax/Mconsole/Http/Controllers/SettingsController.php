@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\MconsoleOption;
 use Milax\Mconsole\Http\Requests\SettingsRequest;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\SettingsRepository;
 
 class SettingsController extends Controller
 {
     use \UseLayout;
     
-    public function __construct(Repository $repository)
+    public function __construct(SettingsRepository $repository)
     {
         $this->setCaption(trans('mconsole::settings.menu.name'));
         $this->repository = $repository;

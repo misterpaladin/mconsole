@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\LanguageRequest;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\LanguagesRepository;
 
 class LanguagesController extends Controller
 {
@@ -17,7 +17,7 @@ class LanguagesController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
+    public function __construct(ListRenderer $list, FormRenderer $form, LanguagesRepository $repository)
     {
         $this->setCaption(trans('mconsole::languages.menu.name'));
         $this->list = $list;

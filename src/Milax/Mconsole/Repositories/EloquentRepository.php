@@ -11,9 +11,13 @@ abstract class EloquentRepository implements Repository
 {
     public $model;
     
-    public function __construct($model)
+    public function __construct($model = null)
     {
-        $this->model = $model;
+        if ($model) {
+            $this->model = $model;
+        }
+        
+        $model = $this->model;
         $this->query = $model::query();
     }
     

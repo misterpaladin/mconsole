@@ -19,7 +19,7 @@ class Modules extends RepositoryAPI
     /**
      * Create new loader instance
      */
-    public function __construct($model, $provider = null)
+    public function __construct($model = null, $provider = null)
     {
         $this->model = $model;
         $this->provider = $provider;
