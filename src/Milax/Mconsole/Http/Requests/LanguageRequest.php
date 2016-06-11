@@ -3,15 +3,16 @@
 namespace Milax\Mconsole\Http\Requests;
 
 use App\Http\Requests\Request;
+use Milax\Mconsole\Contracts\Repositories\LanguagesRepository;
 
 class LanguageRequest extends Request
 {
     /**
      * Create new instance
      */
-    public function __construct()
+    public function __construct(LanguagesRepository $repository)
     {
-        $this->repository = app('API')->repositories->languages;
+        $this->repository = $repository;
     }
     
     /**
