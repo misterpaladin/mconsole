@@ -4,10 +4,19 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\GenericAPI;
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
+use Milax\Mconsole\Contracts\Repositories\LinksRepository as Repository;
 use Request;
 
 class Links extends RepositoryAPI implements GenericAPI
 {
+    /**
+     * Create new instance
+     */
+    public function __consruct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+    
     /**
      * Sync or detach links
      * 
@@ -23,10 +32,10 @@ class Links extends RepositoryAPI implements GenericAPI
         if ($links = Request::input('links')) {
             foreach (json_decode($links, true) as $link) {
                 if (isset($link['id']) && strlen($link['id']) > 0) {
-                    app('API')->repositories->links->update($link['id'], $link);
+                    $this->repository->update($link['id'], $link);
                     array_push($sync, $link['id']);
                 } else {
-                    array_push($sync, app('API')->repositories->links->create($link)->id);
+                    array_push($sync, $this->repository->create($link)->id);
                 }
             }
         }
