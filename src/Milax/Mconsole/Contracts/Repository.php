@@ -9,7 +9,7 @@ interface Repository
      * 
      * @param mixed $model [Model class]
      */
-    public function __construct($model);
+    public function __construct($model = null);
     
     /**
      * Set query
