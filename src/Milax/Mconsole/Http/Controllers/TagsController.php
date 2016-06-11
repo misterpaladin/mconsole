@@ -7,7 +7,7 @@ use Milax\Mconsole\Http\Requests\TagRequest;
 use Milax\Mconsole\Models\Tag;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\TagsRepository;
 
 class TagsController extends Controller
 {
@@ -18,7 +18,7 @@ class TagsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
+    public function __construct(ListRenderer $list, FormRenderer $form, TagsRepository $repository)
     {
         $this->setCaption(trans('mconsole::tags.menu.name'));
         $this->list = $list;
