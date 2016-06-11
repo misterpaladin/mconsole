@@ -7,7 +7,7 @@ use Milax\Mconsole\Http\Requests\MenuRequest;
 use Milax\Mconsole\Models\Menu;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\MenusRepository as Repository;
 
 class MenusController extends Controller
 {

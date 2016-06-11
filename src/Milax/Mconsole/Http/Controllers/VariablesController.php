@@ -5,13 +5,13 @@ namespace Milax\Mconsole\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\Variable;
-use Milax\Mconsole\Contracts\Repositories\VariablesRepository;
+use Milax\Mconsole\Contracts\Repositories\VariablesRepository as Repository;
 
 class VariablesController extends Controller
 {
     use \UseLayout;
     
-    public function __construct(VariablesRepository $repository)
+    public function __construct(Repository $repository)
     {
         $this->setCaption(trans('mconsole::variables.menu.name'));
         $this->repository = $repository;

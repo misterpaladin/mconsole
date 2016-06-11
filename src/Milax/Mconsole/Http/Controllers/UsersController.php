@@ -9,7 +9,7 @@ use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\UsersRepository as Repository;
 
 class UsersController extends Controller
 {

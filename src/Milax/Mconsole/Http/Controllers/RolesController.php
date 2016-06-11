@@ -7,7 +7,7 @@ use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\RolesRepository as Repository;
 
 class RolesController extends Controller
 {

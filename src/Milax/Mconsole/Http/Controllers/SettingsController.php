@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\MconsoleOption;
 use Milax\Mconsole\Http\Requests\SettingsRequest;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\SettingsRepository as Repository;
 
 class SettingsController extends Controller
 {

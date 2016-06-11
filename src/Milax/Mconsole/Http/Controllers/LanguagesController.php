@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\LanguageRequest;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\LanguagesRepository as Repository;
 
 class LanguagesController extends Controller
 {

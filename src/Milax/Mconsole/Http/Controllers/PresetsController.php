@@ -9,7 +9,7 @@ use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Contracts\Localizator;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\PresetsRepository as Repository;
 
 class PresetsController extends Controller
 {

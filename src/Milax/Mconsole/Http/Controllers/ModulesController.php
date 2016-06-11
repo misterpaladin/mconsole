@@ -8,7 +8,7 @@ use Milax\Mconsole\Models\MconsoleModule;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Cache;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\ModulesRepository as Repository;
 
 class ModulesController extends Controller
 {
