@@ -8,13 +8,13 @@ use Milax\Mconsole\Models\MconsoleModule;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Cache;
-use Milax\Mconsole\Contracts\Repositories\ModulesRepository as Repository;
+use Milax\Mconsole\Contracts\Repositories\ModulesRepository;
 
 class ModulesController extends Controller
 {
     use \UseLayout;
     
-    public function __construct(Repository $repository)
+    public function __construct(ModulesRepository $repository)
     {
         $this->setCaption(trans('mconsole::modules.menu.name'));
         $this->repository = $repository;

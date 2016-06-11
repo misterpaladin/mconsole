@@ -5,7 +5,7 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\Upload;
 use Milax\Mconsole\Contracts\ListRenderer;
-use Milax\Mconsole\Contracts\Repositories\UploadsRepository as Repository;
+use Milax\Mconsole\Contracts\Repositories\UploadsRepository;
 
 class UploadsController extends Controller
 {
@@ -16,7 +16,7 @@ class UploadsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer, Repository $repository)
+    public function __construct(ListRenderer $renderer, UploadsRepository $repository)
     {
         $this->setCaption(trans('mconsole::uploads.menu.name'));
         $this->renderer = $renderer;

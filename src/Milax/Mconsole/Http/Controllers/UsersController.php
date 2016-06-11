@@ -9,7 +9,8 @@ use App\User;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repositories\UsersRepository as Repository;
+use Milax\Mconsole\Contracts\Repositories\UsersRepository;
+use Milax\Mconsole\Contracts\Repositories\RolesRepository;
 
 class UsersController extends Controller
 {
@@ -20,15 +21,15 @@ class UsersController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
+    public function __construct(ListRenderer $list, FormRenderer $form, UsersRepository $repository, RolesRepository $roles)
     {
         $this->setCaption(trans('mconsole::users.menu.name'));
         $this->list = $list;
         $this->form = $form;
         $this->repository = $repository;
+        $this->roles = $roles;
         
         $this->redirectTo = mconsole_url('users');
-        $this->roles = app('API')->repositories->roles;
         $this->roles = $this->roles->query()->notRoot()->get()->lists('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }

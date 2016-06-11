@@ -7,7 +7,7 @@ use Milax\Mconsole\Http\Requests\MenuRequest;
 use Milax\Mconsole\Models\Menu;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repositories\MenusRepository as Repository;
+use Milax\Mconsole\Contracts\Repositories\MenusRepository;
 
 class MenusController extends Controller
 {
@@ -17,7 +17,7 @@ class MenusController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
+    public function __construct(ListRenderer $list, FormRenderer $form, MenusRepository $repository)
     {
         $this->setCaption(trans('mconsole::menus.menu.name'));
         $this->list = $list;

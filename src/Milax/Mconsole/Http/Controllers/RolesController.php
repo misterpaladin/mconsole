@@ -7,7 +7,7 @@ use Milax\Mconsole\Http\Requests\MconsoleRoleRequest;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repositories\RolesRepository as Repository;
+use Milax\Mconsole\Contracts\Repositories\RolesRepository;
 
 class RolesController extends Controller
 {
@@ -17,7 +17,7 @@ class RolesController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
+    public function __construct(ListRenderer $list, FormRenderer $form, RolesRepository $repository)
     {
         $this->setCaption(trans('mconsole::roles.menu.name'));
         $this->list = $list;
