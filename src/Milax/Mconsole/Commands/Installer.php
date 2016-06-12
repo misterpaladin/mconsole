@@ -49,7 +49,7 @@ class Installer extends Command
         if (!$this->option('quick')) {
             $this->components();
         }
-        $this->symbolicLink();
+        $this->symbolicLinks();
         $this->migrate();
         $this->seeds();
         $this->modules();
@@ -67,13 +67,23 @@ class Installer extends Command
      * 
      * @return 
      */
-    protected function symbolicLink()
+    protected function symbolicLinks()
     {
-        exec(sprintf('unlink %s', public_path('storage')));
-        exec(sprintf('ln -s %s %s', storage_path('app/public'), public_path('storage')));
+        if (file_exists(MX_STORAGE_PUBLIC_PATH)) {
+            exec(sprintf('unlink %s', MX_STORAGE_PUBLIC_PATH));
+        }
         
-        exec(sprintf('unlink %s', public_path('massets')));
-        exec(sprintf('ln -s %s %s', MX_MASSETS_PATH, public_path('massets')));
+        exec(sprintf('ln -s %s %s', MX_STORAGE_PATH, MX_STORAGE_PUBLIC_PATH));
+        
+        if (file_exists(MX_MASSETS_PUBLIC_PATH)) {
+            if (is_link(MX_MASSETS_PUBLIC_PATH)) {
+                exec(sprintf('unlink %s', MX_MASSETS_PUBLIC_PATH));
+            } else {
+                exec(sprintf('rm -rf %s', MX_MASSETS_PUBLIC_PATH));
+            }
+        }
+        
+        exec(sprintf('ln -s %s %s', MX_MASSETS_PATH, MX_MASSETS_PUBLIC_PATH));
     }
     
     /**
@@ -93,10 +103,6 @@ class Installer extends Command
         // Clean app migrations
         foreach (glob(database_path('migrations/*.php')) as $migration) {
             File::delete($migration);
-        }
-        
-        if (File::exists(public_path('massets'))) {
-            File::deleteDirectory(public_path('massets'));
         }
         
         $this->call('vendor:publish', [
