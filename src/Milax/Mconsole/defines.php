@@ -7,8 +7,12 @@
 $defines = [
     'MCONSOLE_VERSION' => '0.4.16',
     
-    // Uploads
+    // Paths
     'MX_UPLOADS_PATH' => storage_path('app/public/uploads'),
+    'MX_MASSETS_PATH' => File::exists(base_path('workbench/milax/mconsole/public')) ? base_path('workbench/milax/mconsole/public') : base_path('vendor/milax/mconsole/public'),
+    'MX_MASSETS_PUBLIC_PATH' => public_path('massets'),
+    'MX_STORAGE_PATH' => storage_path('app/public'),
+    'MX_STORAGE_PUBLIC_PATH' => public_path('storage'),
     
     // Upload types
     'MX_UPLOAD_TYPE_IMAGE' => 'image',
