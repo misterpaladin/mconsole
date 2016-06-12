@@ -70,6 +70,7 @@ class Installer extends Command
     protected function symbolicLink()
     {
         exec(sprintf('ln -s %s %s', storage_path('app/public'), public_path('storage')));
+        exec(sprintf('ln -s %s %s', MX_MASSETS_PATH, public_path('massets')));
     }
     
     /**
