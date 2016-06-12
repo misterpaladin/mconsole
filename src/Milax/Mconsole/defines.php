@@ -5,7 +5,7 @@
  */
 
 $defines = [
-    'MCONSOLE_VERSION' => '0.4.15',
+    'MCONSOLE_VERSION' => '0.4.16',
     
     // Uploads
     'MX_UPLOADS_PATH' => storage_path('app/public/uploads'),
