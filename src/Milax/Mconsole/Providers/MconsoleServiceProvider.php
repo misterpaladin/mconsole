@@ -150,11 +150,6 @@ class MconsoleServiceProvider extends ServiceProvider
             $this->loadViewsFrom($view, 'mconsole');
         }
         
-        // Assets
-        $this->publishes([
-            __DIR__ . '/../../../../public' => base_path('public/massets'),
-        ], 'assets');
-        
         // Custom configurations
         foreach ($this->config as $config) {
             if (!file_exists(config_path(basename($config)))) {
