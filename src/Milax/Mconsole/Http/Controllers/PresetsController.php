@@ -9,7 +9,7 @@ use Milax\Mconsole\Models\MconsoleUploadPreset;
 use Milax\Mconsole\Contracts\Localizator;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
-use Milax\Mconsole\Contracts\Repository;
+use Milax\Mconsole\Contracts\Repositories\PresetsRepository;
 
 class PresetsController extends Controller
 {
@@ -20,7 +20,7 @@ class PresetsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $list, FormRenderer $form, Repository $repository)
+    public function __construct(ListRenderer $list, FormRenderer $form, PresetsRepository $repository)
     {
         $this->setCaption(trans('mconsole::presets.menu.name'));
         $this->list = $list;

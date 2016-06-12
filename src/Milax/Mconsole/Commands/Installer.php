@@ -69,9 +69,7 @@ class Installer extends Command
      */
     protected function symbolicLink()
     {
-        if (!File::exists(public_path('storage'))) {
-            exec(sprintf('ln -s %s %s', storage_path('app/public'), public_path('storage')));
-        }
+        exec(sprintf('ln -s %s %s', storage_path('app/public'), public_path('storage')));
     }
     
     /**
