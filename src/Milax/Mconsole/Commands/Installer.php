@@ -216,6 +216,8 @@ class Installer extends Command
     {
         chdir(base_path());
         exec('composer dump-autoload');
+        exec('php artisan clear-compiled');
+        exec('php artisan optimize');
         
         if ($this->option('update')) {
             $this->info('Update completed!');
