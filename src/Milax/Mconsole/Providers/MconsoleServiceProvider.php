@@ -10,6 +10,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public $register = [
         'middleware' => [
             'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
+            'languages' => \Milax\Mconsole\Http\Middleware\LanguagesMiddleware::class,
         ],
         
         'providers' => [
