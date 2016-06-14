@@ -8,6 +8,8 @@ use Request;
 
 class Tags extends RepositoryAPI implements GenericAPI
 {
+    public $model = \Milax\Mconsole\Models\Tag::class;
+    
     /**
      * Sync or detach tags
      * 

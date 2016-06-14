@@ -7,6 +7,9 @@ use Milax\Mconsole\Contracts\DataManager;
 
 class Presets extends RepositoryAPI implements DataManager
 {
+    
+    public $model = \Milax\Mconsole\Models\MconsoleUploadPreset::class;
+    
     /**
      * Get preset value by its key
      * 

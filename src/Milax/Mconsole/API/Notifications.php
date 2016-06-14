@@ -7,6 +7,8 @@ use Milax\Mconsole\Models\Notification;
 
 class Notifications extends RepositoryAPI
 {
+    public $model = \Milax\Mconsole\Models\MconsoleNotification::class;
+    
     /**
      * Push notification
      * 

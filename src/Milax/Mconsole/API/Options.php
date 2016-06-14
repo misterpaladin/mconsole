@@ -7,6 +7,9 @@ use Milax\Mconsole\Contracts\DataManager;
 
 class Options extends RepositoryAPI implements DataManager
 {
+    
+    public $model = \Milax\Mconsole\Models\MconsoleOption::class;
+    
     /**
      * Get option value by its key
      * 

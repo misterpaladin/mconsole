@@ -9,6 +9,8 @@ use Request;
 
 class Links extends RepositoryAPI implements GenericAPI
 {
+    public $model = \Milax\Mconsole\Models\Link::class;
+    
     /**
      * Create new instance
      */

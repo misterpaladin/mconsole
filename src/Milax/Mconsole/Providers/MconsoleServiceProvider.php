@@ -218,19 +218,19 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     protected function registerAPIs()
     {
-        app('API')->register('notifications', new \Milax\Mconsole\API\Notifications(\Milax\Mconsole\Models\MconsoleNotification::class));
+        app('API')->register('notifications', new \Milax\Mconsole\API\Notifications);
         app('API')->register('search', new \Milax\Mconsole\API\Search);
-        app('API')->register('modules', new \Milax\Mconsole\API\Modules(\Milax\Mconsole\Models\MconsoleModule::class, $this));
+        app('API')->register('modules', new \Milax\Mconsole\API\Modules($this));
         app('API')->register('menu', new \Milax\Mconsole\API\Menu(new \Milax\Mconsole\Menu\FileMenu));
         app('API')->register('quotes', new \Milax\Mconsole\API\Quotes);
-        app('API')->register('options', new \Milax\Mconsole\API\Options(\Milax\Mconsole\Models\MconsoleOption::class));
-        app('API')->register('presets', new \Milax\Mconsole\API\Presets(\Milax\Mconsole\Models\MconsoleUploadPreset::class));
+        app('API')->register('options', new \Milax\Mconsole\API\Options);
+        app('API')->register('presets', new \Milax\Mconsole\API\Presets);
         app('API')->register('translations', new \Milax\Mconsole\API\Translations($this));
         app('API')->register('quickmenu', new \Milax\Mconsole\API\QuickMenu);
         app('API')->register('uploads', new \Milax\Mconsole\API\Uploads);
         app('API')->register('info', new \Milax\Mconsole\API\Info);
-        app('API')->register('links', new \Milax\Mconsole\API\Links(\Milax\Mconsole\Models\Link::class));
-        app('API')->register('tags', new \Milax\Mconsole\API\Tags(\Milax\Mconsole\Models\Tag::class));
+        app('API')->register('links', new \Milax\Mconsole\API\Links);
+        app('API')->register('tags', new \Milax\Mconsole\API\Tags);
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
         app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));

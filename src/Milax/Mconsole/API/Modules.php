@@ -14,14 +14,13 @@ class Modules extends RepositoryAPI
     public $modules;
     
     public $provider;
-    public $model;
+    public $model = \Milax\Mconsole\Models\MconsoleModule::class;
     
     /**
      * Create new loader instance
      */
-    public function __construct($model = null, $provider = null)
+    public function __construct($provider)
     {
-        $this->model = $model;
         $this->provider = $provider;
     }
     

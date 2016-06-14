@@ -3,14 +3,7 @@
 namespace Milax\Mconsole\Contracts;
 
 interface Repository
-{
-    /**
-     * Create new instance
-     * 
-     * @param mixed $model [Model class]
-     */
-    public function __construct($model = null);
-    
+{    
     /**
      * Set query
      *
