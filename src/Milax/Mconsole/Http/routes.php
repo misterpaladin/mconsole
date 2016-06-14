@@ -67,5 +67,3 @@ Route::group([
     // User menus
     Route::post('/users/{user}/menus', 'UsersController@updateMenuOrder');
 });
-
-Route::get('/{slug}', 'App\Http\Controllers\PagesController@index');
