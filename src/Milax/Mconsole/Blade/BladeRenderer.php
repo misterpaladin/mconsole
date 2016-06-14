@@ -28,8 +28,12 @@ class BladeRenderer
     protected $view;
 
     /**
-     * @param      $html
+     * Works like view()
+     * 
+     * @param string     $html [Html string]
      * @param array|null $data
+     *
+     * @return Illuminate\View\View
      */
     public function __construct($html, $data = [])
     {
