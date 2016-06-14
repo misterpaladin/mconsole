@@ -3,15 +3,7 @@
 namespace Milax\Mconsole\Contracts;
 
 interface Repository
-{    
-    /**
-     * Set query
-     *
-     * @param Builder $query [Query builder]
-     * @return $this
-     */
-    public function setQuery($query);
-    
+{
     /**
      * Get model query
      * 

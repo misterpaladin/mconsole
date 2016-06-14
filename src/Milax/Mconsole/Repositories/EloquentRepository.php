@@ -9,15 +9,10 @@ use Milax\Mconsole\Contracts\Repository;
  */
 abstract class EloquentRepository implements Repository
 {
-    public function setQuery($query)
-    {
-        $this->query = $query;
-        return $this;
-    }
-    
     public function query()
     {
-        return $this->query;
+        $model = $this->model;
+        return $model::query();
     }
     
     public function index()
