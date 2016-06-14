@@ -56,7 +56,7 @@ class MconsoleServiceProvider extends ServiceProvider
         // Interface to Implementation bindings
         'bindings' => [
             'Milax\Mconsole\Contracts\Menu' => \Milax\Mconsole\Menu\FileMenu::class,
-            'Milax\Mconsole\Contracts\Localizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
+            'Milax\Mconsole\Contracts\ContentLocalizator' => \Milax\Mconsole\Processors\ContentLocalizator::class,
             'Milax\Mconsole\Contracts\ListRenderer' => \Milax\Mconsole\Renderers\GenericListRenderer::class,
             'Milax\Mconsole\Contracts\FormRenderer' => \Milax\Mconsole\Renderers\GenericFormRenderer::class,
             'Milax\Mconsole\Contracts\PagingHandler' => \Milax\Mconsole\Handlers\GenericPagingHandler::class,
