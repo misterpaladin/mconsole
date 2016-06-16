@@ -12,8 +12,22 @@ class ContentLocalizator implements Repository
         $attributes = $object->getAttributes();
         
         foreach ($attributes as $key => $value) {
+            $hasLanguages = false;
             $value = $object->$key;
-            if (is_array($value) && isset($value[$lang])) {
+            if (is_array($value)) {
+                if (isset($value[$lang])) {
+                    $hasLanguages = true;
+                }
+            } else {
+                $value = json_decode($value, true);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    if (isset($value[$lang])) {
+                        $hasLanguages = true;
+                    }
+                }
+            }
+            
+            if ($hasLanguages) {
                 $attributes[$key] = $value[$lang];
             }
         }
