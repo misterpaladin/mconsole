@@ -61,6 +61,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Milax\Mconsole\Contracts\FormRenderer' => \Milax\Mconsole\Renderers\GenericFormRenderer::class,
             'Milax\Mconsole\Contracts\PagingHandler' => \Milax\Mconsole\Handlers\GenericPagingHandler::class,
             'Milax\Mconsole\Contracts\FormConstructor' => \Milax\Mconsole\Constructors\GenericFormConstructor::class,
+            'Milax\Mconsole\Contracts\ContentCompiler' => \Milax\Mconsole\Compilers\BladeContentCompiler::class,
         ],
         
         // Dependencies for injection
@@ -80,6 +81,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public $config = [
         __DIR__ . '/../../../../src/config/mconsole.php',
         __DIR__ . '/../../../../src/config/cleaner.php',
+        __DIR__ . '/../../../../src/config/renders.php',
     ];
     
     public $translations = [
@@ -156,7 +158,7 @@ class MconsoleServiceProvider extends ServiceProvider
             if (!file_exists(config_path(basename($config)))) {
                 $this->publishes([
                     $config => config_path(basename($config)),
-                ], 'config');
+                ], 'mconsole');
             } else {
                 $this->mergeConfigFrom(
                     $config, pathinfo($config, PATHINFO_FILENAME)
