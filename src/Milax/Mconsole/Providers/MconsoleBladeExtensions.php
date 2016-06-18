@@ -38,7 +38,8 @@ class MconsoleBladeExtensions extends ServiceProvider
                 $args = [' . $string . '];
                 $variable = \Milax\Mconsole\Models\Variable::getCached()->where("key", $args[0])->first();
                 if ($variable) {
-                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, $args[1]);
+                    $arr = empty($args[1]) ? [] : $args[1];
+                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, $arr);
                     echo $renderer->render();
                 }
             ?>';
