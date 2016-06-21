@@ -28,16 +28,16 @@ class LanguagesMiddleware
     public function handle($request, Closure $next)
     {
         $languages = $this->repository->get();
+        $segments = $request->segments();
         
-        if ($request->query('lang')) {
-            if ($activeLang = $languages->where('key', $request->query('lang'))->first()) {
-                if ($activeLang->key == config('app.locale')) {
-                    return redirect($request->path());
-                }
-                \App::setLocale($activeLang->key);
-            } else {
-                return redirect($request->path());
+        $activeLang = $languages->where('key', $segments[0]);
+        
+        if ($activeLang->count() > 0) {
+            if ($activeLang->first()->key == config('app.locale')) {
+                $segments[0] = null;
+                return redirect(implode('/', $segments));
             }
+            \App::setLocale($activeLang->first()->key);
         }
         
         return $next($request);
