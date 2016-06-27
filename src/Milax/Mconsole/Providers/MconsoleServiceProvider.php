@@ -61,7 +61,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Milax\Mconsole\Contracts\PagingHandler' => \Milax\Mconsole\Handlers\GenericPagingHandler::class,
             'Milax\Mconsole\Contracts\FormConstructor' => \Milax\Mconsole\Constructors\GenericFormConstructor::class,
             'Milax\Mconsole\Contracts\ContentCompiler' => \Milax\Mconsole\Compilers\BladeContentCompiler::class,
-            'Milax\Mconsole\Contracts\LanguageManager' => \Milax\Mconsole\Language\GetParamLanguageManager::class,
+            'Milax\Mconsole\Contracts\LanguageManager' => \Milax\Mconsole\Language\PrefixLanguageManager::class,
         ],
         
         // Dependencies for injection
