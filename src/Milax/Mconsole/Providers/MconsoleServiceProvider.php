@@ -10,7 +10,6 @@ class MconsoleServiceProvider extends ServiceProvider
     public $register = [
         'middleware' => [
             'mconsole' => \Milax\Mconsole\Http\Middleware\MconsoleMiddleware::class,
-            'languages' => \Milax\Mconsole\Http\Middleware\LanguagesMiddleware::class,
         ],
         
         'providers' => [
@@ -62,6 +61,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'Milax\Mconsole\Contracts\PagingHandler' => \Milax\Mconsole\Handlers\GenericPagingHandler::class,
             'Milax\Mconsole\Contracts\FormConstructor' => \Milax\Mconsole\Constructors\GenericFormConstructor::class,
             'Milax\Mconsole\Contracts\ContentCompiler' => \Milax\Mconsole\Compilers\BladeContentCompiler::class,
+            'Milax\Mconsole\Contracts\LanguageManager' => \Milax\Mconsole\Language\GetParamLanguageManager::class,
         ],
         
         // Dependencies for injection
