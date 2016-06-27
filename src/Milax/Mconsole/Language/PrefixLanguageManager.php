@@ -45,7 +45,7 @@ class PrefixLanguageManager implements LanguageManager
     {
         $segments = Request::segments();
         
-        if ($segments[0] == $this->lang && $this->lang == $this->defaultLang) {
+        if (isset($segments[0]) && $segments[0] == $this->lang && $this->lang == $this->defaultLang) {
             \Route::any('/{lang}/{slug?}', function () use ($segments) {
                 $segments[0] = null;
                 return redirect(implode('/', $segments));
