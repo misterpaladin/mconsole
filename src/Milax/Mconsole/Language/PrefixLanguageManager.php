@@ -16,9 +16,12 @@ class PrefixLanguageManager implements LanguageManager
      */
     public function __construct(LanguagesRepository $respository)
     {
-        $this->repository = $respository;
         $this->defaultLang = $this->lang = config('app.locale');
-        $this->setLanguage();
+        
+        if (\Schema::hasTable('languages')) {
+            $this->repository = $respository;
+            $this->setLanguage();
+        }
     }
     
     /**
@@ -31,7 +34,7 @@ class PrefixLanguageManager implements LanguageManager
         $languages = $this->repository->get();
         $segments = Request::segments();
         
-        if (count($segments) > 0 ) {    
+        if (count($segments) > 0) {    
             $activeLang = $languages->where('key', $segments[0]);
             if ($activeLang->count() > 0) {
                 $this->lang = $activeLang->first()->key;
