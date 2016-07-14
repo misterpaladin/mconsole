@@ -172,7 +172,7 @@ class Modules extends RepositoryAPI
         
         // Install public assets
         if (File::exists(sprintf('%s/assets/public', $module->path)) && File::allFiles(sprintf('%s/assets/public', $module->path))) {
-            File::copyDirectory(sprintf('%s/assets/public', $module->path), sprintf('%s/%s/', public_path('modules'), $module->identifier));
+            File::copyDirectory(sprintf('%s/assets/public', $module->path), sprintf('%s/%s/', public_path('mconsole-modules'), $module->identifier));
         }
         
         if ($dump) {
@@ -230,8 +230,8 @@ class Modules extends RepositoryAPI
         $dbMod->save();
         
         // Uninstall public assets
-        if (File::exists(sprintf('%s/%s/', public_path('modules'), $module->identifier))) {
-            File::deleteDirectory(sprintf('%s/%s/', public_path('modules'), $module->identifier));
+        if (File::exists(sprintf('%s/%s/', public_path('mconsole-modules'), $module->identifier))) {
+            File::deleteDirectory(sprintf('%s/%s/', public_path('mconsole-modules'), $module->identifier));
         }
         
         File::deleteDirectory(storage_path('app/lang'));
