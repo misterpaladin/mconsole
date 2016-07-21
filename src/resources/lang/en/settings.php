@@ -17,12 +17,16 @@ return [
         'notifications' => 'Notifications',
         'editredirect' => 'Redirect to edit after saving',
         'editor' => 'HTML editor Type',
+        'defaultheading' => 'Default page heading',
+        'indexing' => 'Allow search engine indexing',
+        'adminemail' => 'Email for system notifications',
     ],
     'options' => [
         'enabled' => 'Status',
         'group' => [
             'name' => 'Main',
             'other' => 'Other',
+            'site' => 'Site',
         ],
         'on' => 'Enabled',
         'off' => 'Disabled',

@@ -60,6 +60,33 @@ class MconsoleOptionsSeeder implements MconsoleSeeder
             'type' => 'select',
             'options' => ['1' => 'mconsole::settings.options.on', '0' => 'mconsole::settings.options.off'],
         ],
+        [
+            'group' => 'mconsole::settings.options.group.site',
+            'label' => 'mconsole::settings.labels.defaultheading',
+            'key' => 'defaultheading',
+            'value' => null,
+            'rules' => null,
+            'type' => 'text',
+            'options' => null,
+        ],
+        [
+            'group' => 'mconsole::settings.options.group.site',
+            'label' => 'mconsole::settings.labels.indexing',
+            'key' => 'indexing',
+            'value' => '1',
+            'rules' => null,
+            'type' => 'select',
+            'options' => ['1' => 'mconsole::settings.options.on', '0' => 'mconsole::settings.options.off'],
+        ],
+        [
+            'group' => 'mconsole::settings.options.group.site',
+            'label' => 'mconsole::settings.labels.adminemail',
+            'key' => 'adminemail',
+            'value' => null,
+            'rules' => ['email'],
+            'type' => 'text',
+            'options' => null,
+        ],
     ];
     
     /**
