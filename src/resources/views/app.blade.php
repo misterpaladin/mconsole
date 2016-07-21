@@ -67,7 +67,7 @@
 				<div class="container">
 					<!-- BEGIN LOGO -->
 					<div class="page-logo">
-                        <h2 class="font-grey-mint">{{ trans('mconsole::mconsole.text.heading') }}</h2>
+                        <h2 class="font-grey-mint">{{ strlen(app('API')->options->getByKey('project_name')) > 0 ? app('API')->options->getByKey('project_name') : trans('mconsole::mconsole.text.heading') }}</h2>
 					</div>
 					<!-- END LOGO -->
 					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
