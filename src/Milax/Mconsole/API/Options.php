@@ -23,6 +23,21 @@ class Options extends RepositoryAPI implements DataManager
     }
     
     /**
+     * Store a new option value by key
+     * 
+     * @param  string $key
+     * @param  string $value
+     * @return mixed
+     */
+    public function setByKey($key, $value)
+    {
+        $model = $this->model;
+        return $model::where('key', $key)->update([
+            'value' => $value,
+        ]);
+    }
+    
+    /**
      * Create or update options
      *
      * @param array $options [Options array]
