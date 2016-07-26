@@ -33,6 +33,33 @@ class Upload extends Model
     }
     
     /**
+     * Get image url for given copy
+     * 
+     * @param  string $size
+     * @return string
+     */
+    public function getImagePath($size = 'original')
+    {
+        return sprintf('/storage/uploads/%s/%s/%s', $this->path, $size, $this->filename);
+    }
+    
+    /**
+     * Get image copies as associative array
+     * 
+     * @return array
+     */
+    public function getImageCopies()
+    {
+        $copies = [];
+        
+        foreach ($this->copies as $copy) {
+            $copies[$copy['path']] = $this->getImagePath($copy['path']);
+        }
+        
+        return $copies;
+    }
+    
+    /**
      * Automatically delete related data
      * 
      * @return void
