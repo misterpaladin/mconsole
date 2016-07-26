@@ -22,7 +22,16 @@ class ACL implements GenericAPI
     {
         if (is_array($method)) {
             foreach ($method as $list) {
-                $this->push($list[0], $list[1], isset($list[2]) ? $list[2] : null, isset($list[3]) ? $list[3] : null);
+                // Fix for new register types: $acl->register([], 'key');
+                if (!is_null($uri)) {
+                    $key = $uri;
+                }
+                
+                $method = $list[0];
+                $uri = $list[1];
+                $description = !empty($list[2]) ? $list[2] : null;
+                
+                $this->push($method, $uri, $description, $key);
             }
         } else {
             $this->push($method, $uri, $description, $key);
