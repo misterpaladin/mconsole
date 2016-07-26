@@ -36,7 +36,7 @@ class ContentLocalizator implements Repository
             }
             
             if ($hasLanguages) {
-                if (strlen($value[$lang]) == 0) {
+                if (!is_array($value[$lang]) && strlen($value[$lang]) == 0) {
                     $compiled->$key = null;
                 } else {
                     $compiled->$key = $value[$lang];
