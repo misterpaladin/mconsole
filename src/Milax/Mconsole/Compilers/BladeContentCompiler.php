@@ -41,10 +41,16 @@ class BladeContentCompiler implements ContentCompiler
         $attributes = $this->instance->getAttributes();
         
         foreach ($attributes as $key => $value) {
-            if (empty($this->instance->compiled->$key)) {
-                $this->instance->compiled->$key = (new BladeRenderer($value))->render()->render();
-            } else {
-                $this->instance->compiled->$key = (new BladeRenderer($this->instance->compiled->$key))->render()->render();
+            if (property_exists($this->instance->compiled, $key) && is_null($this->instance->compiled->$key)) {
+                continue;
+            }
+            
+            if (is_string($value)) {
+                if (!isset($this->instance->compiled->$key)) {
+                    $this->instance->compiled->$key = (new BladeRenderer($value))->render()->render();
+                } else {
+                    $this->instance->compiled->$key = (new BladeRenderer($this->instance->compiled->$key))->render()->render();
+                }
             }
         }
         
