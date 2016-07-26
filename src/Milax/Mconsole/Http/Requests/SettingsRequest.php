@@ -37,7 +37,6 @@ class SettingsRequest extends Request
      */
     public function rules()
     {
-        \Log::debug($this->rules);
         return $this->rules;
     }
 }
