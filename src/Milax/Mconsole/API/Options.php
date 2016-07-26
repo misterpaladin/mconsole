@@ -32,9 +32,11 @@ class Options extends RepositoryAPI implements DataManager
     public function setByKey($key, $value)
     {
         $model = $this->model;
-        return $model::where('key', $key)->update([
+        $result = $model::where('key', $key)->update([
             'value' => $value,
         ]);
+        $model::dropCache();
+        return $result;
     }
     
     /**
