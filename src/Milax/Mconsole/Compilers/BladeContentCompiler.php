@@ -31,6 +31,7 @@ class BladeContentCompiler implements ContentCompiler
     
     public function localize($lang = null)
     {
+        $lang = is_null($lang) ? \App::getLocale() : $lang;
         $this->instance->compiled = $this->localizator->localize($this->instance, $lang);
         return $this;
     }
@@ -40,12 +41,10 @@ class BladeContentCompiler implements ContentCompiler
         $attributes = $this->instance->getAttributes();
         
         foreach ($attributes as $key => $value) {
-            if (in_array($key, config(sprintf('renders.%s', get_class($this->instance))))) {
-                if (empty($this->instance->compiled->$key)) {
-                    $this->instance->compiled->$key = (new BladeRenderer($value))->render();
-                } else {
-                    $this->instance->compiled->$key = (new BladeRenderer($this->instance->compiled->$key))->render();
-                }
+            if (empty($this->instance->compiled->$key)) {
+                $this->instance->compiled->$key = (new BladeRenderer($value))->render()->render();
+            } else {
+                $this->instance->compiled->$key = (new BladeRenderer($this->instance->compiled->$key))->render()->render();
             }
         }
         

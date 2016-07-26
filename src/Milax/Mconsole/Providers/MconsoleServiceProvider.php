@@ -81,7 +81,6 @@ class MconsoleServiceProvider extends ServiceProvider
     public $config = [
         __DIR__ . '/../../../../src/config/mconsole.php',
         __DIR__ . '/../../../../src/config/cleaner.php',
-        __DIR__ . '/../../../../src/config/renders.php',
     ];
     
     public $translations = [

@@ -28,7 +28,7 @@ interface ContentCompiler
     public function localize($lang = null);
     
     /**
-     * Render strings with Blade (see config/renders.php)
+     * Render strings with Blade
      * 
      * @return ContentCompiler
      */
