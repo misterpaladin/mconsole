@@ -5,12 +5,23 @@ namespace %s\Mconsole\%s\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 
 /**
  * %s module controller file
  */
 class %sController extends Controller
 {
+    use \HasRedirects, \DoesNotHaveShow, \UseLayout;
+    
+    protected $model = '';
+    
+    public function __construct(ListRenderer $list, FormRenderer $form)
+    {
+        $this->list = $list;
+        $this->form = $form;
+    }
     
     /**
      * Display a listing of the resource.
