@@ -8,7 +8,7 @@ interface VariablesRepository
      * Get variable by key
      * 
      * @param  string $key
-     * @return string
+     * @return Variable
      */
     public function getByKey($key);
 }

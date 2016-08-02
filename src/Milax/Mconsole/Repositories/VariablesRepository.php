@@ -11,6 +11,6 @@ class VariablesRepository extends EloquentRepository implements Repository
     
     public function getByKey($key)
     {
-        return $this->query()->where('key', $key)->firstOrFail()->value;
+        return $this->query()->where('key', $key)->firstOrFail();
     }
 }
