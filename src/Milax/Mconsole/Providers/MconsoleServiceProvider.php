@@ -183,6 +183,10 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->when('Milax\Mconsole\API\Variables')->needs('Milax\Mconsole\Contracts\Repositories\VariablesRepository')->give(function() {
+            return new \Milax\Mconsole\Repositories\VariablesRepository;
+        });
+        
         // Register API singleton
         $this->app->singleton('API', function ($app) {
             return new \Milax\Mconsole\API\APIManager;
@@ -235,5 +239,6 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
         app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));
+        app('API')->register('variables', $this->app->make('\Milax\Mconsole\API\Variables'));
     }
 }
