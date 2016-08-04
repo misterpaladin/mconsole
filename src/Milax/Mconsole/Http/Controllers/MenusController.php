@@ -43,7 +43,7 @@ class MenusController extends Controller
     {
         return $this->list->setQuery($this->repository->index())->setAddAction('menus/create')->render(function ($item) {
             return [
-                '#' => $item->id,
+                trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::menus.table.name') => $item->name,
             ];
         });

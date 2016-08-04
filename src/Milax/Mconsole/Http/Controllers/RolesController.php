@@ -42,7 +42,7 @@ class RolesController extends Controller
     {
         return $this->list->setQuery($this->repository->index())->setAddAction('roles/create')->render(function ($item) {
             return [
-                '#' => $item->id,
+                trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::roles.table.name') => $item->name,
                 trans('mconsole::roles.table.users') => $item->users->count(),
             ];

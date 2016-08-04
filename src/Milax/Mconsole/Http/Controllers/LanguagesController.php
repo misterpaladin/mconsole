@@ -36,7 +36,7 @@ class LanguagesController extends Controller
     {
         return $this->list->setQuery($this->repository->index())->setAddAction('languages/create')->render(function ($item) {
             return [
-                '#' => $item->id,
+                trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::languages.form.name') => $item->name,
                 trans('mconsole::languages.form.key') => $item->key,
             ];

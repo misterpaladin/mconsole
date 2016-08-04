@@ -40,7 +40,7 @@ class UploadsController extends Controller
         
         return $this->renderer->setQuery($this->repository->index())->removeEditAction()->render(function ($item) {
             return [
-                '#' => $item->id,
+                trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,
                 trans('mconsole::uploads.table.path') => $item->path,
                 trans('mconsole::uploads.table.filename') => file_get_original_name($item->filename),

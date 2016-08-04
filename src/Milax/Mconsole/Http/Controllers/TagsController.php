@@ -41,7 +41,7 @@ class TagsController extends Controller
     {
         return $this->list->setQuery($this->repository->index())->setAddAction('tags/create')->render(function ($item) {
             return [
-                '#' => $item->id,
+                trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::tags.table.updated') => $item->updated_at->format('m.d.Y'),
                 trans('mconsole::tags.table.name') => sprintf('<div class="label" style="background-color: %s;">%s</div>', $item->color, $item->name),
                 trans('mconsole::tags.table.elements') => $item->count(),

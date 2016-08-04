@@ -1,5 +1,5 @@
 @if ($enabled)
-    <span class="label bg-green-meadow bg-font-green-meadow">{{ trans('mconsole::tables.state.on') }}</span>
+    <i class="font-green-jungle fa fa-circle"></i>
 @else
-    <span class="label label-default">{{ trans('mconsole::tables.state.off') }}</span>
+    <i class="font-grey-steel fa fa-circle"></i>
 @endif

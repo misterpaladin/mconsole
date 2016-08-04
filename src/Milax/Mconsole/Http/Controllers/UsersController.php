@@ -47,7 +47,7 @@ class UsersController extends Controller
         
         return $this->list->setQuery($this->repository->index())->setAddAction('users/create')->render(function ($item) {
             return [
-                '#' => $item->id,
+                trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::users.table.updated') => $item->updated_at->format('m.d.Y'),
                 trans('mconsole::users.table.email') => $item->email,
                 trans('mconsole::users.table.name') => $item->name,

@@ -21,7 +21,11 @@
 							<thead>
 								<tr class="uppercase">
 									@foreach ($items->first() as $key => $item)
-										<th>{{ $key }}</th>
+                                        @if ($key == trans('mconsole::tables.state') || $key == trans('mconsole::tables.id'))
+                                            <th style="width: 1%">{{ $key }}</th>
+                                        @else
+										    <th>{{ $key }}</th>
+                                        @endif
 									@endforeach
 									<th>{{ trans('mconsole::tables.actions') }}</th>
 								</tr>
