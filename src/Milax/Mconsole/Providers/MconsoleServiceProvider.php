@@ -25,7 +25,6 @@ class MconsoleServiceProvider extends ServiceProvider
             \Milax\Mconsole\Providers\MconsoleValidatorServiceProvider::class,
             \Milax\Mconsole\Providers\ViewComposersServiceProvider::class,
             \Milax\Mconsole\Providers\ScheduleServiceProvider::class,
-            \Milax\Mconsole\Providers\RepositoriesServiceProvider::class,
         ],
         
         'aliases' => [
@@ -122,6 +121,7 @@ class MconsoleServiceProvider extends ServiceProvider
     public function boot()
     {
         // Boot components
+        $this->registerRepositories();
         $this->registerAPIs();
         
         // Run one time setup
@@ -183,10 +183,6 @@ class MconsoleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->when('Milax\Mconsole\API\Variables')->needs('Milax\Mconsole\Contracts\Repositories\VariablesRepository')->give(function() {
-            return new \Milax\Mconsole\Repositories\VariablesRepository;
-        });
-        
         // Register API singleton
         $this->app->singleton('API', function ($app) {
             return new \Milax\Mconsole\API\APIManager;
@@ -214,6 +210,21 @@ class MconsoleServiceProvider extends ServiceProvider
                 return new $class();
             });
         }
+    }
+    
+    public function registerRepositories()
+    {
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\LanguagesRepository', 'Milax\Mconsole\Repositories\LanguagesRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\LinksRepository', 'Milax\Mconsole\Repositories\LinksRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\MenusRepository', 'Milax\Mconsole\Repositories\MenusRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\ModulesRepository', 'Milax\Mconsole\Repositories\ModulesRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\PresetsRepository', 'Milax\Mconsole\Repositories\PresetsRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\RolesRepository', 'Milax\Mconsole\Repositories\RolesRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\TagsRepository', 'Milax\Mconsole\Repositories\TagsRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\UploadsRepository', 'Milax\Mconsole\Repositories\UploadsRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\UsersRepository', 'Milax\Mconsole\Repositories\UsersRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\SettingsRepository', 'Milax\Mconsole\Repositories\SettingsRepository');
+        $this->app->bind('Milax\Mconsole\Contracts\Repositories\VariablesRepository', 'Milax\Mconsole\Repositories\VariablesRepository');
     }
     
     /**
