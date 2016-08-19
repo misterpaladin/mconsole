@@ -4,6 +4,7 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
 use Milax\Mconsole\Contracts\DataManager;
+use DB;
 
 class Options extends RepositoryAPI implements DataManager
 {
@@ -43,26 +44,33 @@ class Options extends RepositoryAPI implements DataManager
      * Create or update options
      *
      * @param array $options [Options array]
+     * @param bool  $force [Overwrite options values]
      * @return void
      */
-    public function install($options)
+    public function install($options, $force = false)
     {
         $model = $this->model;
         
-        $this->uninstall($options);
+        $toInsert = [];
         
-        foreach ($options as $key => $option) {
-            foreach ($option as $col => $val) {
-                if (is_array($val)) {
-                    $option[$col] = json_encode($val);
-                }
-            }
-            $option['created_at'] = date('Y-m-d H:i:s');
-            $option['updated_at'] = date('Y-m-d H:i:s');
-            $options[$key] = $option;
+        if ($force) {
+            $this->uninstall($options);
         }
         
-        $model::insert($options);
+        foreach ($options as $key => $option) {
+            if ($force || DB::table('mconsole_options')->where('key', $option['key'])->count() == 0) {
+                foreach ($option as $col => $val) {
+                    if (is_array($val)) {
+                        $option[$col] = json_encode($val);
+                    }
+                }
+                $option['created_at'] = date('Y-m-d H:i:s');
+                $option['updated_at'] = date('Y-m-d H:i:s');
+                array_push($toInsert, $option);
+            }
+        }
+        
+        $model::insert($toInsert);
         $model::dropCache();
     }
         
