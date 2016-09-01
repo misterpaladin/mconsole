@@ -245,7 +245,7 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('quickmenu', new \Milax\Mconsole\API\QuickMenu);
         app('API')->register('uploads', new \Milax\Mconsole\API\Uploads);
         app('API')->register('info', new \Milax\Mconsole\API\Info);
-        app('API')->register('links', new \Milax\Mconsole\API\Links);
+        app('API')->register('links', app('Milax\Mconsole\API\Links'));
         app('API')->register('tags', new \Milax\Mconsole\API\Tags);
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);

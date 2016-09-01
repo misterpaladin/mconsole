@@ -4,7 +4,7 @@ namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\GenericAPI;
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
-use Milax\Mconsole\Contracts\Repositories\LinksRepository as Repository;
+use Milax\Mconsole\Contracts\Repositories\LinksRepository;
 use Request;
 
 class Links extends RepositoryAPI implements GenericAPI
@@ -14,7 +14,7 @@ class Links extends RepositoryAPI implements GenericAPI
     /**
      * Create new instance
      */
-    public function __consruct(Repository $repository)
+    public function __construct(LinksRepository $repository)
     {
         $this->repository = $repository;
     }
