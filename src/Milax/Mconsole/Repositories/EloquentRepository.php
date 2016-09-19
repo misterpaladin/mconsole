@@ -15,6 +15,11 @@ abstract class EloquentRepository implements Repository
         return $model::query();
     }
     
+    public function factory($attributes = [])
+    {
+        return new $this->model($attributes);
+    }
+    
     public function index()
     {
         return $this->query();

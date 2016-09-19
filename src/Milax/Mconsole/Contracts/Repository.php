@@ -12,6 +12,13 @@ interface Repository
     public function query();
     
     /**
+     * Create new model instance
+     * 
+     * @return mixed
+     */
+    public function factory($attributes = []);
+    
+    /**
      * Get query for listing page
      * 
      * @return Builder
