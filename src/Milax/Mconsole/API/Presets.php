@@ -32,20 +32,22 @@ class Presets extends RepositoryAPI implements DataManager
     {
         $model = $this->model;
         
-        $this->uninstall($presets);
+        $toInsert = [];
         
         foreach ($presets as $key => $preset) {
-            foreach ($preset as $col => $val) {
-                if (is_array($val)) {
-                    $preset[$col] = json_encode($val);
+            if ($model::where('key', $preset['key'])->count() == 0) {
+                foreach ($preset as $col => $val) {
+                    if (is_array($val)) {
+                        $preset[$col] = json_encode($val);
+                    }
                 }
+                $preset['created_at'] = date('Y-m-d H:i:s');
+                $preset['updated_at'] = date('Y-m-d H:i:s');
+                array_push($toInsert, $preset);
             }
-            $preset['created_at'] = date('Y-m-d H:i:s');
-            $preset['updated_at'] = date('Y-m-d H:i:s');
-            $presets[$key] = $preset;
         }
         
-        $model::insert($presets);
+        $model::insert($toInsert);
         $model::dropCache();
     }
     
