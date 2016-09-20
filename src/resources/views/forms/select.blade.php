@@ -1,5 +1,5 @@
 <div class="form-group">
-	<label>{{ $label }}</label>
+	@if (!empty($label))<label>{{ $label }}</label>@endif
     <?php if (isset($value)): $val = $value; elseif (is_bool(Form::getValueAttribute($name))): $val = (int) Form::getValueAttribute($name); else: $val = null; endif; ?>
     @if (isset($options) && is_array($options))
         {!! Form::select($name, $options, $val, ['class' => sprintf('form-control %s', isset($class) ? $class : null)]) !!}
