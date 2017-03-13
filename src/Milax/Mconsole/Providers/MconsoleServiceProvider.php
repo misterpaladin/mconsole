@@ -46,6 +46,7 @@ class MconsoleServiceProvider extends ServiceProvider
             'HasState' => \Milax\Mconsole\Traits\Models\HasState::class,
             'System' => \Milax\Mconsole\Traits\Models\System::class,
             'CascadeDelete' => \Milax\Mconsole\Traits\Models\CascadeDelete::class,
+            'TaggableRepository' => \Milax\Mconsole\Traits\Repositories\TaggableRepository::class,
             
             // Own classes
             'DocsParser' => \Milax\Mconsole\Docs\DocsParser::class,
