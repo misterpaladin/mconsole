@@ -22,12 +22,12 @@
                             @include('mconsole::forms.select', [
                                 'label' => trans('mconsole::roles.form.widget'),
                                 'name' => 'widget',
-                                'type' => MX_SELECT_STATE,
+                                'type' => MconsoleFormSelectType::OnOff,
                             ])
                             @include('mconsole::forms.select', [
                                 'label' => trans('mconsole::roles.form.search'),
                                 'name' => 'search',
-                                'type' => MX_SELECT_STATE,
+                                'type' => MconsoleFormSelectType::OnOff,
                             ])
         				</div>
         			</div>

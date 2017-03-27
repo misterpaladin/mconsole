@@ -8,9 +8,9 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "illuminate/support": "5.2.*",
-        "laravelcollective/html": "5.2.*",
+        "php": ">=5.6.4",
+        "illuminate/support": "^5.4",
+        "laravelcollective/html": "^5.4",
         "intervention/image": "^2.3",
         "doctrine/dbal": "^2.5",
 		"misterpaladin/gravatar": "^1.0",

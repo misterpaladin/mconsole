@@ -33,7 +33,6 @@ class MconsoleServiceProvider extends ServiceProvider
             'Image' => \Intervention\Image\Facades\Image::class,
             'Form' => \Collective\Html\FormFacade::class,
             'Html' => \Collective\Html\HtmlFacade::class,
-            'Debugbar' => \Barryvdh\Debugbar\Facade::class,
             
             // Traits
             'Cacheable' => \MisterPaladin\Cacheable::class,
@@ -48,8 +47,9 @@ class MconsoleServiceProvider extends ServiceProvider
             'CascadeDelete' => \Milax\Mconsole\Traits\Models\CascadeDelete::class,
             'TaggableRepository' => \Milax\Mconsole\Traits\Repositories\TaggableRepository::class,
             
-            // Own classes
-            'DocsParser' => \Milax\Mconsole\Docs\DocsParser::class,
+            // Enum
+            'MconsoleUploadType' => \Milax\Mconsole\Structs\MconsoleUploadType::class,
+            'MconsoleFormSelectType' => \Milax\Mconsole\Structs\MconsoleFormSelectType::class,
         ],
         
         // Interface to Implementation bindings
@@ -113,7 +113,7 @@ class MconsoleServiceProvider extends ServiceProvider
     {
         parent::__construct($app);
     }
-    
+
     /**
      * Bootstrap the application events.
      *
@@ -127,14 +127,14 @@ class MconsoleServiceProvider extends ServiceProvider
         
         // Run one time setup
         app('API')->modules->scan();
-        app('API')->info->setAppVersion(MCONSOLE_VERSION);
+        app('API')->info->setAppVersion(MX_VERSION);
         
         if (env('APP_ENV') == 'local') {
             app('API')->translations->load();
         }
         
         // Register mconsole singleton
-        $this->app->singleton('Mconsole', function ($app) {
+        $this->app->singleton('mconsole', function ($app) {
             return $this;
         });
         
@@ -142,11 +142,11 @@ class MconsoleServiceProvider extends ServiceProvider
         foreach ($this->register['providers'] as $class) {
             $this->app->register($class);
         }
-        
+
         foreach ($this->routes as $route) {
             require $route;
         }
-        
+
         $this->loadTranslationsFrom(storage_path('app/lang'), 'mconsole');
         
         foreach ($this->views as $view) {
@@ -195,7 +195,7 @@ class MconsoleServiceProvider extends ServiceProvider
         }
         
         foreach ($this->register['middleware'] as $alias => $class) {
-            $this->app['router']->middleware($alias, $class);
+            $this->app['router']->aliasMiddleware($alias, $class);
         }
         
         foreach ($this->register['aliases'] as $alias => $class) {
@@ -211,6 +211,7 @@ class MconsoleServiceProvider extends ServiceProvider
                 return new $class();
             });
         }
+        
     }
     
     public function registerRepositories()
@@ -250,7 +251,7 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('tags', new \Milax\Mconsole\API\Tags);
         app('API')->register('acl', new \Milax\Mconsole\API\ACL);
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
-        app('API')->register('forms.constructor', $this->app->make('\Milax\Mconsole\Contracts\FormConstructor'));
-        app('API')->register('variables', $this->app->make('\Milax\Mconsole\API\Variables'));
+        app('API')->register('forms.constructor', $this->app->make('Milax\Mconsole\Contracts\FormConstructor'));
+        app('API')->register('variables', $this->app->make('Milax\Mconsole\API\Variables'));
     }
 }

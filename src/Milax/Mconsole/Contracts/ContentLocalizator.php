@@ -7,9 +7,9 @@ interface ContentLocalizator
     /**
      * Localize object json fields
      *
-     * @param  [object] $object
-     * @param  [string] $lang [Language key]
-     * @return [object]
+     * @param  mixed $object
+     * @param  string $lang [Language key]
+     * @return mixed
      */
     public function localize($object, $lang = null);
 }

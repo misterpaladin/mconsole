@@ -68,6 +68,7 @@ class TagsController extends Controller
     public function store(TagRequest $request)
     {
         $this->repository->create($request->all());
+        $this->redirect();
     }
 
     /**
@@ -93,6 +94,7 @@ class TagsController extends Controller
     public function update(TagRequest $request, $id)
     {
         $this->repository->update($id, $request->all());
+        $this->redirect();
     }
 
     /**
@@ -104,5 +106,6 @@ class TagsController extends Controller
     public function destroy($id)
     {
         $this->repository->destroy($id);
+        $this->redirect();
     }
 }

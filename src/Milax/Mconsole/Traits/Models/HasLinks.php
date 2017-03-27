@@ -19,7 +19,7 @@ trait HasLinks
     /**
      * Get all links including 
      * 
-     * @return [type] [description]
+     * @return \Illuminate\Support\Collection
      */
     public function allLinks()
     {

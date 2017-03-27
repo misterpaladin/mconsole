@@ -61,8 +61,8 @@ class Modules extends RepositoryAPI
         
         // Base modules
         foreach ($psr4 as $class => $path) {
-            if (strpos($class, MODULESEARCH) > -1) {
-                $file = sprintf('%s/%s', $path[0], BOOTSTRAPFILE);
+            if (strpos($class, MX_MODULE_SEARCH_PATH) > -1) {
+                $file = sprintf('%s/%s', $path[0], MX_MODULE_BOOTSTRAP_FILE);
                 if (File::exists($file)) {
                     $config = include $file;
                     array_push($modules, $this->makeModule($config, $path[0], 'base'));

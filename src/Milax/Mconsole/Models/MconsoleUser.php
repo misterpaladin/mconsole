@@ -2,10 +2,13 @@
 
 namespace Milax\Mconsole\Models;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class MconsoleUser extends Authenticatable
 {
+    use Notifiable;
+    
     protected $table = 'users';
     
     /**

@@ -2,9 +2,9 @@
 
 namespace Milax\Mconsole\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class MconsoleRoleRequest extends Request
+class MconsoleRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

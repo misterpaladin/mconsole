@@ -5,7 +5,6 @@ Route::group([
     'middleware' => ['web', 'mconsole'],
     'namespace' => 'Milax\Mconsole\Http\Controllers',
 ], function () {
-    
     // Authentication
     Route::get('/login', 'MconsoleController@login');
     Route::post('/login', 'MconsoleController@auth');
@@ -60,9 +59,6 @@ Route::group([
     // Variables
     Route::get('/variables', 'VariablesController@index');
     Route::post('/variables', 'VariablesController@save');
-    
-    // Docs
-    Route::get('/docs', 'DocsController@index');
     
     // User menus
     Route::post('/users/{user}/menus', 'UsersController@updateMenuOrder');

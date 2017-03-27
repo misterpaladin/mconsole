@@ -15,7 +15,7 @@
             @include('mconsole::forms.select', [
                 'label' => trans('mconsole::uploader.selector'),
                 'name' => sprintf('uploads[%s][%s][preset]', $type, $group),
-                'options' => isset($type) ? $presets->where('type', $type)->lists('name', 'id')->toArray() : $presets->lists('name', 'id')->toArray(),
+                'options' => isset($type) ? $presets->where('type', $type)->pluck('name', 'id')->toArray() : $presets->pluck('name', 'id')->toArray(),
                 'value' => isset($preset) ? $presets->where('key', $preset)->first()->id : null,
             ])
         @else

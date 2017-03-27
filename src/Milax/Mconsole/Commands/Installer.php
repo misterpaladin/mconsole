@@ -65,7 +65,7 @@ class Installer extends Command
     /**
      * Create symbolic link
      * 
-     * @return 
+     * @return void
      */
     protected function symbolicLinks()
     {

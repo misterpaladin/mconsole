@@ -86,7 +86,7 @@ class Uploads implements GenericAPI
      * @param  string $group   [Group name]
      * @param  Collection $files  [Files collection]
      * @param  mixed $related [Related object]
-     * @param  mixed $unique [Should be unique]
+     * @param  bool $unique [Should be unique]
      * @return mixed
      */
     public function attach($data)

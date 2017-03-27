@@ -8,7 +8,9 @@ use Illuminate\Contracts\View\Factory;
 class BladeRenderer
 {
     /**
-     * @var
+     * HTML placeholder
+     * 
+     * @var string
      */
     protected $html;
 

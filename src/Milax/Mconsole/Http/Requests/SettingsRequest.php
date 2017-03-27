@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Milax\Mconsole\Models\MconsoleOption;
 
-class SettingsRequest extends Request
+class SettingsRequest extends FormRequest
 {
     protected $options;
     protected $rules = [];

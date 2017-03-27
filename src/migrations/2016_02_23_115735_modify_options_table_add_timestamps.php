@@ -14,8 +14,7 @@ class ModifyOptionsTableAddTimestamps extends Migration
     {
         Schema::table('mconsole_options', function (Blueprint $table) {
             $table->increments('id')->first();
-            $table->timestamp('updated_at')->after('value');
-            $table->timestamp('created_at')->after('value');
+            $table->timestamps();
         });
     }
 

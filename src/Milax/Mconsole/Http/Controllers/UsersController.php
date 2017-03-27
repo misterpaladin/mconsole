@@ -28,9 +28,8 @@ class UsersController extends Controller
         $this->form = $form;
         $this->repository = $repository;
         $this->roles = $roles;
-        
         $this->redirectTo = mconsole_url('users');
-        $this->roles = $this->roles->query()->notRoot()->get()->lists('name', 'id');
+        $this->roles = $this->roles->query()->notRoot()->get()->pluck('name', 'id');
         $this->roles->prepend(trans('mconsole::users.types.generic'), 0);
     }
     
@@ -82,6 +81,7 @@ class UsersController extends Controller
         $user->lang = $request->input('lang');
         $user->password = bcrypt($request->input('password'));
         $user->save();
+        $this->redirect();
     }
 
     /**
@@ -121,6 +121,7 @@ class UsersController extends Controller
         }
         
         $user->save();
+        $this->redirect();
     }
 
     /**
@@ -132,6 +133,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $this->repository->destroy($id);
+        $this->redirect();
     }
     
     /**
@@ -142,8 +144,8 @@ class UsersController extends Controller
      */
     public function updateMenuOrder(Request $request, $id)
     {
-        dd($this->repository->update($id, [
+        $this->repository->update($id, [
             'menus' => json_decode($request->input('menus'), true),
-        ]));
+        ]);
     }
 }

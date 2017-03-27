@@ -35,27 +35,27 @@ class ModuleGenerator extends Command
         $this->blueprint = [
             'bootstrap' => [
                 'destination' => 'bootstrap.php',
-                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/bootstrap.php'),
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/bootstrap.blueprint'),
             ],
             'installer' => [
                 'destination' => 'Installer.php',
-                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Installer.php'),
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Installer.blueprint'),
             ],
             'routes' => [
                 'destination' => 'Http/routes.php',
-                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/routes.php'),
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/routes.blueprint'),
             ],
             'controller' => [
                 'destination' => 'Http/Controllers/%sController.php',
-                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Controllers/Controller.php'),
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Controllers/Controller.blueprint'),
             ],
             'serviceprovider' => [
                 'destination' => 'Provider.php',
-                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Provider.php'),
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Provider.blueprint'),
             ],
             'repository' => [
                 'destination' => '%sRepository.php',
-                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Repository.php'),
+                'file' => file_get_contents(__DIR__ . '/../Blueprints/Module/Repository.blueprint'),
             ],
         ];
         
@@ -114,14 +114,14 @@ class ModuleGenerator extends Command
         // Model
         if ($this->option('model')) {
             File::makeDirectory(sprintf('%s/Models', $root), 0775, true, true);
-            File::put(sprintf('%s/%s', $root, sprintf('Models/%s.php', $this->option('model'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Models/Model.php'), $namespace, $class, $this->option('model')));
+            File::put(sprintf('%s/%s', $root, sprintf('Models/%s.php', $this->option('model'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Models/Model.blueprint'), $namespace, $class, $this->option('model')));
             File::put(sprintf('%s/%s', $root, sprintf($this->blueprint['repository']['destination'], str_plural($this->option('model')))), sprintf($this->blueprint['repository']['file'], $namespace, $class, $class));
         }
         
         // Request
         if ($this->option('request')) {
             File::makeDirectory(sprintf('%s/Http/Requests', $root), 0775, true, true);
-            File::put(sprintf('%s/%s', $root, sprintf('Http/Requests/%s.php', $this->option('request'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Requests/Request.php'), $namespace, $class, $this->option('request')));
+            File::put(sprintf('%s/%s', $root, sprintf('Http/Requests/%s.php', $this->option('request'))), sprintf(file_get_contents(__DIR__ . '/../Blueprints/Module/Http/Requests/Request.blueprint'), $namespace, $class, $this->option('request')));
         }
         
         foreach ($this->directories as $dir) {

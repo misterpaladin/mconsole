@@ -68,6 +68,7 @@ class MenusController extends Controller
     public function store(MenuRequest $request)
     {
         $this->repository->create($request->all());
+        $this->redirect();
     }
 
     /**
@@ -93,6 +94,7 @@ class MenusController extends Controller
     public function update(MenuRequest $request, $id)
     {
         $this->repository->update($id, $request->all());
+        $this->redirect();
     }
 
     /**
@@ -104,5 +106,6 @@ class MenusController extends Controller
     public function destroy($id)
     {
         $this->repository->destroy($id);
+        $this->redirect();
     }
 }

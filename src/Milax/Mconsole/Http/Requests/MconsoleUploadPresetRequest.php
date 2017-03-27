@@ -2,9 +2,9 @@
 
 namespace Milax\Mconsole\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class MconsoleUploadPresetRequest extends Request
+class MconsoleUploadPresetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

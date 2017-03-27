@@ -60,7 +60,7 @@ class Presets extends RepositoryAPI implements DataManager
     public function uninstall($presets)
     {
         $model = $this->model;
-        $model::whereIn('key', collect($presets)->lists('key'))->delete();
+        $model::whereIn('key', collect($presets)->pluck('key'))->delete();
         $model::dropCache();
     }
 }

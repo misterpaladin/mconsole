@@ -9,7 +9,7 @@
         }
     })->reject(function ($instance) {
         return is_null($instance);
-    })->lists($attribute, 'id')->prepend(trans('mconsole::forms.options.notselected'), '0')->toArray(),
+    })->pluck($attribute, 'id')->prepend(trans('mconsole::forms.options.notselected'), '0')->toArray(),
 ])
 
 @include('mconsole::forms.hidden', [

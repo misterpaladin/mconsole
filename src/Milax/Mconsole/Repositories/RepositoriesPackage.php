@@ -24,7 +24,7 @@ class RepositoriesPackage
      * Get Repository from stash
      * 
      * @param  string $name     [Repository name]
-     * @return [type]           [description]
+     * @return mixed
      */
     public function __get($name)
     {

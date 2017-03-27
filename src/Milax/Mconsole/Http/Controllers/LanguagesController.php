@@ -62,6 +62,7 @@ class LanguagesController extends Controller
     public function store(LanguageRequest $request)
     {
         $this->repository->create($request->all());
+        $this->redirect();
     }
 
     /**
@@ -87,6 +88,7 @@ class LanguagesController extends Controller
     public function update(LanguageRequest $request, $id)
     {
         $this->repository->update($id, $request->all());
+        $this->redirect();
     }
 
     /**
@@ -98,5 +100,6 @@ class LanguagesController extends Controller
     public function destroy($id)
     {
         $this->repository->destroy($id);
+        $this->redirect();
     }
 }

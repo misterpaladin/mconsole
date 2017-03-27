@@ -32,7 +32,7 @@ class MconsoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
         // Redirect if already authenticated
         if ($request->is(mconsole_url('login', true)) && Auth::user() && Auth::user()->role_id > 0) {
@@ -68,7 +68,7 @@ class MconsoleMiddleware
     {
         $base = mconsole_url(null, true);
         $base = trim($base);
-        $uri = sprintf('%s:%s', $request->method(), $request->route()->getUri());
+        $uri = sprintf('%s:%s', $request->method(), $request->route()->uri);
         
         if (str_contains($uri, $base)) {
             $uri = str_replace($base . '/', null, $uri);

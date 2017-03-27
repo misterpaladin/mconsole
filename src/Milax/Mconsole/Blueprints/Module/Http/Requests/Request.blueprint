@@ -2,9 +2,9 @@
 
 namespace %s\Mconsole\%s\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class %s extends Request
+class %s extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

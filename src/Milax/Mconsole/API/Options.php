@@ -83,7 +83,7 @@ class Options extends RepositoryAPI implements DataManager
     public function uninstall($options)
     {
         $model = $this->model;
-        $model::whereIn('key', collect($options)->lists('key'))->delete();
+        $model::whereIn('key', collect($options)->pluck('key'))->delete();
         $model::dropCache();
     }
 }

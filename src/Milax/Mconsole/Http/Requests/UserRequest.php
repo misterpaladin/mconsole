@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use App\User;
 
-class UserRequest extends Request
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        $user = User::find($this->users);
+        $user = User::find($this->user);
         
-        switch ($this->method) {
+        switch ($this->method()) {
             case 'PUT':
             case 'UPDATE':
                 return [

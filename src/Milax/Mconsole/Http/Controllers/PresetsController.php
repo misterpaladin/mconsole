@@ -78,6 +78,7 @@ class PresetsController extends Controller
         $data['operations'] = json_decode($data['operations'], true);
         
         $this->repository->create($data);
+        $this->redirect();
     }
 
     /**
@@ -117,6 +118,7 @@ class PresetsController extends Controller
         $data['operations'] = json_decode($data['operations'], true);
         
         $this->repository->update($id, $data);
+        $this->redirect();
     }
 
     /**
@@ -134,5 +136,6 @@ class PresetsController extends Controller
         }
 
         $this->repository->destroy($id);
+        $this->redirect();
     }
 }

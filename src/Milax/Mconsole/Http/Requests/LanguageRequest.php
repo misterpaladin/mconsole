@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Milax\Mconsole\Contracts\Repositories\LanguagesRepository;
 
-class LanguageRequest extends Request
+class LanguageRequest extends FormRequest
 {
     /**
      * Create new instance
@@ -32,7 +32,7 @@ class LanguageRequest extends Request
      */
     public function rules()
     {
-        switch ($this->method) {
+        switch ($this->method()) {
             case 'PUT':
                 $language = $this->repository->find($this->route('languages'));
                 return [

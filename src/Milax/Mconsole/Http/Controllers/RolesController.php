@@ -73,6 +73,7 @@ class RolesController extends Controller
         $data = $request->all();
         $data['routes'] = isset($data['routes']) ? $data['routes'] : [];
         $this->repository->create($data);
+        $this->redirect();
     }
 
     /**
@@ -103,6 +104,7 @@ class RolesController extends Controller
         $data = $request->all();
         $data['routes'] = isset($data['routes']) ? $data['routes'] : [];
         $this->repository->update($id, $data);
+        $this->redirect();
     }
 
     /**
@@ -119,5 +121,6 @@ class RolesController extends Controller
         } else {
             $this->repository->destroy($id);
         }
+        $this->redirect();
     }
 }

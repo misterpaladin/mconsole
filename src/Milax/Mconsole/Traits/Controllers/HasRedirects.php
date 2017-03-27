@@ -45,7 +45,7 @@ trait HasRedirects
      * @access protected
      * @return Redirector
      */
-    protected function redirect()
+    protected function handleRedirect()
     {
         // Repeat warning flash message
         Session::flash('warning', Session::get('warning'));
@@ -68,7 +68,7 @@ trait HasRedirects
     /**
      * Check if session doesn't have errors and request method is not GET
      */
-    public function __destruct()
+    public function redirect()
     {
         // Check if $redirectTo is set
         if (empty($this->redirectTo)) {
@@ -114,7 +114,7 @@ trait HasRedirects
         // Check for session errors and request method
         if (Session::get('errors') === null && Request::method() != 'GET') {
             if (!$this->disabled) {
-                $this->redirect();
+                $this->handleRedirect();
             }
         }
     }

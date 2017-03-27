@@ -17,7 +17,7 @@ class UploadFormComposer
      */
     public function compose(View $view)
     {
-        $languages = Language::getCached()->lists('name', 'id');
+        $languages = Language::getCached()->pluck('name', 'id');
         $languages->prepend(trans('mconsole::uploader.all'), 0);
         $view->with('presets', MconsoleUploadPreset::getCached())->with('languages', $languages);
     }

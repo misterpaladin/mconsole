@@ -2,10 +2,10 @@
 
 namespace Milax\Mconsole\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Milax\Mconsole\Models\Tag;
 
-class TagRequest extends Request
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class TagRequest extends Request
      */
     public function rules()
     {
-        $tag = Tag::find($this->tags);
-        switch ($this->method) {
+        $tag = Tag::find($this->tag);
+        
+        switch ($this->method()) {
             case 'PUT':
             case 'UPDATE':
                 return [
