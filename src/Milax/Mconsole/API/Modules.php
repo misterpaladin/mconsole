@@ -107,7 +107,7 @@ class Modules extends RepositoryAPI
         if (count($modules) > 0) {
             $this->load($modules);
         }
-        
+
         return $this;
     }
     
@@ -233,6 +233,29 @@ class Modules extends RepositoryAPI
         File::deleteDirectory(storage_path('app/lang'));
         
         return $this;
+    }
+
+    /**
+     * Get bootstrap file for given controller
+     * 
+     * @param Milax\Mconsole\Http\Controllers\ModuleController $instance
+     * @return mixed
+     */
+    public function getControllerBootstrap($instance)
+    {
+        $reflector = new \ReflectionClass($instance);
+        $file = $reflector->getFileName();
+        $controllersDirectory = preg_replace('/(.+)\/.+\.php/', '$1', $file);
+
+        $module = null;
+
+        $this->modules->get('all')->each(function ($mod) use ($controllersDirectory, &$module) {
+            if (in_array($controllersDirectory, $mod->controllers)) {
+                $module = $mod;
+            }
+        });
+
+        return $module;
     }
     
     /**
