@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Contracts\API\RepositoryAPI;
+use Milax\Mconsole\Models\MconsoleModule;
 use Artisan;
 use File;
 use Storage;
@@ -14,7 +15,6 @@ class Modules extends RepositoryAPI
     public $modules;
     
     public $provider;
-    public $model = \Milax\Mconsole\Models\MconsoleModule::class;
     
     /**
      * Create new loader instance
@@ -48,13 +48,11 @@ class Modules extends RepositoryAPI
     {
         $this->resetMods();
         
-        $model = $this->model;
-        
-        if (!Schema::hasTable($model::getQuery()->from)) {
+        if (!Schema::hasTable(MconsoleModule::getQuery()->from)) {
             return;
         }
         
-        $this->dbMods = $model::getCached();
+        $this->dbMods = MconsoleModule::getCached();
         
         $modules = [];
         $psr4 = require sprintf('%s/../../../../../../../vendor/composer/autoload_psr4.php', __DIR__);
@@ -69,7 +67,7 @@ class Modules extends RepositoryAPI
                 }
             }
         }
-        
+
         // Custom modules
         foreach (glob(app_path('Mconsole/*/bootstrap.php')) as $file) {
             $config = include $file;
@@ -90,6 +88,7 @@ class Modules extends RepositoryAPI
                         $modules[$key]->migrations = array_merge($modules[$key]->migrations, $module->migrations);
                         $modules[$key]->translations = array_merge($modules[$key]->translations, $module->translations);
                         $modules[$key]->register = array_merge_recursive($modules[$key]->register, $module->register);
+                        $modules[$key]->tags = array_merge($modules[$key]->tags, $module->tags);
                         $modules[$key]->type = 'extended';
                         
                         $matched = true;
@@ -135,8 +134,6 @@ class Modules extends RepositoryAPI
      */
     public function install($module, $update = false, $dump = true)
     {
-        $model = $this->model;
-        
         // Install dependencies
         if (isset($module->depends) && count($module->depends) > 0) {
             foreach ($module->depends as $dependency) {
@@ -159,12 +156,12 @@ class Modules extends RepositoryAPI
         ]);
         
         if (!$update) {
-            $dbMod = $model::where('identifier', $module->identifier)->first();
+            $dbMod = MconsoleModule::where('identifier', $module->identifier)->first();
             
             if ($dbMod) {
                 $dbMod->installed = true;
             } else {
-                $dbMod = new $model;
+                $dbMod = new MconsoleModule;
                 $dbMod->identifier = $identifier;
                 $dbMod->installed = true;
             }
@@ -201,7 +198,6 @@ class Modules extends RepositoryAPI
      */
     public function uninstall($module)
     {
-        $model = $this->model;
         $batch = DB::table('migrations')->max('batch') + 1;
         
         // Call install function if exists
@@ -225,7 +221,7 @@ class Modules extends RepositoryAPI
             }
         }
         
-        $dbMod = $model::where('identifier', $module->identifier)->first();
+        $dbMod = MconsoleModule::where('identifier', $module->identifier)->first();
         $dbMod->installed = false;
         $dbMod->save();
         
@@ -259,6 +255,11 @@ class Modules extends RepositoryAPI
                     $this->provider->register = array_merge_recursive($this->provider->register, $module->register);
                     $this->provider->config = array_merge_recursive($this->provider->config, $module->config);
                     $this->provider->views = array_merge_recursive($this->provider->views, $module->views);
+
+                    if (count($module->tags) > 0) {
+                        app('API')->tags->registerCategory($module->tags);
+                    }
+
                     $this->modules->get('installed')->push($module);
                 } else {
                     $this->modules->get('available')->push($module);
@@ -282,8 +283,7 @@ class Modules extends RepositoryAPI
      */
     protected function makeModule($config, $path, $type)
     {
-        $model = $this->model;
-        $module = new $model;
+        $module = new MconsoleModule;
         
         $module->name = $config['name'];
         $module->identifier = $config['identifier'];
@@ -305,7 +305,7 @@ class Modules extends RepositoryAPI
         $module->uninstall = null;
         $module->path = $path;
         $module->package = null;
-        $module->docs = null;
+        $module->tags = isset($config['tags']) ? $config['tags'] : [];
         $module->public = [
             'css' => [],
             'img' => [],
@@ -389,11 +389,6 @@ class Modules extends RepositoryAPI
         // composer.json
         if (File::exists(sprintf('%s/../../../../composer.json', $path))) {
             $module->package = json_decode(File::get(sprintf('%s/../../../../composer.json', $path)));
-        }
-        
-        // Docs
-        if (File::exists(sprintf('%s/../../../../docs', $path))) {
-            $module->docs = sprintf('%s/../../../../docs', $path);
         }
         
         return $module;

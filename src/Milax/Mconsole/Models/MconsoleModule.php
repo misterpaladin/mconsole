@@ -28,7 +28,7 @@ class MconsoleModule extends Model
     public $path;
     public $depends;
     public $package;
-    public $docs;
+    public $tags;
     
     protected $fillable = ['identifier', 'installed'];
 }

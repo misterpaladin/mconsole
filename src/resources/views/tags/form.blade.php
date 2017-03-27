@@ -22,6 +22,12 @@
                             'label' => trans('mconsole::tags.form.color'),
                             'name' => 'color',
                         ])
+
+						@include('mconsole::forms.select', [
+							'label' => trans('mconsole::tags.form.category'),
+							'name' => 'category',
+							'options' => app('API')->tags->getCategories(),
+						])
                         
                     </div>
                     

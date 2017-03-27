@@ -15,6 +15,7 @@ return [
         'name' => 'Tag name',
         'placeholder' => 'News',
         'color' => 'Color',
+        'category' => 'Category',
     ],
     'acl' => [
         'index' => 'Tags: show list',

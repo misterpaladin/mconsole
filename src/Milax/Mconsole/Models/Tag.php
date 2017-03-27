@@ -9,7 +9,7 @@ class Tag extends Model
 {
     use \Cacheable;
     
-    protected $fillable = ['name', 'color'];
+    protected $fillable = ['name', 'color', 'category'];
     
     /**
      * Count all tagged elements
@@ -42,7 +42,7 @@ class Tag extends Model
     {
         return $this->morphedByMany($class, 'taggable')->get();
     }
-    
+
     /**
      * Automatically delete related data
      * 
