@@ -109,4 +109,20 @@ interface ListRenderer
      * @return View
      */
     public function paginate($query);
+    
+    /**
+     * Append partial before list
+     * 
+     * @param \Illuminate\View\View $view
+     * @return $this
+     */
+    public function before($view);
+
+    /**
+     * Append partial after list
+     * 
+     * @param \Illuminate\View\View $view
+     * @return $this
+     */
+    public function after($view);
 }

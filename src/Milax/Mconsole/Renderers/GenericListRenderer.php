@@ -24,6 +24,8 @@ class GenericListRenderer implements ListRenderer
     public $defaultView = 'mconsole::layouts.list';
     public $filterHandler;
     
+    protected $before;
+    protected $after;
     protected $processor;
     
     public function __construct(GetFilterHandler $filterHandler, PagingHandler $pagingHandler, TableProcessor $processor)
@@ -92,6 +94,8 @@ class GenericListRenderer implements ListRenderer
         if (!is_null($view) && View::exists($view)) {
             return view($view, [
                 'items' => $this->processor->run($cb, $this->items),
+                'beforeList' => $this->before,
+                'afterList' => $this->after,
             ]);
         } else {
             $addAction = $this->actions['add'] != false ? $this->actions['add'] : null;
@@ -106,6 +110,8 @@ class GenericListRenderer implements ListRenderer
                     'edit' => $this->actions['edit'],
                     'delete' => $this->actions['delete'],
                 ],
+                'beforeList' => $this->before,
+                'afterList' => $this->after,
             ]);
         }
     }
@@ -119,5 +125,17 @@ class GenericListRenderer implements ListRenderer
     public function paginate($query)
     {
         return $this->pagingHandler->paginate($query);
+    }
+
+    public function before($view)
+    {
+        $this->before = $view;
+        return $this;
+    }
+
+    public function after($view)
+    {
+        $this->after = $view;
+        return $this;
     }
 }
