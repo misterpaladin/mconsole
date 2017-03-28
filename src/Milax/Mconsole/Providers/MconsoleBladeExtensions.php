@@ -31,6 +31,18 @@ class MconsoleBladeExtensions extends ServiceProvider
             return "<?php echo \Carbon\Carbon::now()->format({$expression}); ?>";
         });
         
+        Blade::directive('filesByTag', function ($expression) {
+            $string = str_remove_parenthesis($expression);
+
+            return $string;
+        });
+        
+        Blade::directive('filesById', function ($expression) {
+            $string = str_remove_parenthesis($expression);
+
+            return $string;
+        });
+
         Blade::directive('variable', function ($expression) {
             $string = str_remove_parenthesis($expression);
             
@@ -40,6 +52,71 @@ class MconsoleBladeExtensions extends ServiceProvider
                 if ($variable) {
                     $arr = empty($args[1]) ? [] : $args[1];
                     $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, $arr);
+                    echo $renderer->render();
+                }
+            ?>';
+        });
+
+        /**
+         * Display file by id
+         */
+        Blade::directive('fileById', function ($expression) {
+            $string = str_remove_parenthesis($expression);
+            
+            return '<?php
+                $parameters = explode(",", "' . $string . '");
+                $id = $parameters[0];
+                
+                if (count($parameters) > 1) {
+                    $template = preg_replace("/\'|\s/", null, $parameters[1]);
+                } else {
+                    $template = "file-container";
+                }
+
+                try {
+                    $file = app("Milax\Mconsole\Contracts\Repositories\UploadsRepository")->find($id);
+                } catch (\Exception $e) {
+                    \Log::error($e->getMessage());
+                    return;
+                }
+
+                $variable = \Milax\Mconsole\Models\Variable::getCached()->where("key", $template)->first();
+                if ($variable) {
+                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, $file);
+                    echo $renderer->render();
+                }
+            ?>';
+        });
+
+        /**
+         * Display set of files by id
+         */
+        Blade::directive('filesById', function ($expression) {
+            $string = str_remove_parenthesis($expression);
+            
+            return '<?php
+                $parameters = [' . $string . '];
+                
+                $ids = $parameters[0];
+                
+                if (count($parameters) > 1) {
+                    $template = preg_replace("/\'|\s/", null, $parameters[1]);
+                } else {
+                    $template = "files-container";
+                }
+
+                try {
+                    $files = app("Milax\Mconsole\Contracts\Repositories\UploadsRepository")->query()->whereIn("id", $ids)->get();
+                } catch (\Exception $e) {
+                    \Log::error($e->getMessage());
+                    return;
+                }
+
+                $variable = \Milax\Mconsole\Models\Variable::getCached()->where("key", $template)->first();
+                if ($variable) {
+                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, [
+                        "files" => $files,
+                    ]);
                     echo $renderer->render();
                 }
             ?>';

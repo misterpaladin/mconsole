@@ -31,6 +31,16 @@ class MconsoleVariablesSeeder implements MconsoleSeeder
             'key' => 'image-center',
             'value' => '<img src="{{ $src }}" class="content-image-center" alt="" />',
         ],
+        [
+            'key' => 'file-container',
+            'value' => '<div>{{ $filename }}</div>',
+            'description' => 'Display single file',
+        ],
+        [
+            'key' => 'files-container',
+            'value' => '<ul>@foreach ($files as $file) <li>@fileById($file->id)</li> @endforeach</ul>',
+            'description' => 'Display set of files',
+        ],
     ];
     
     /**
