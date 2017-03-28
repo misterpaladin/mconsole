@@ -77,7 +77,7 @@ class UploadsController extends Controller
     {
         $this->handleUploads();
         
-        $this->redirect();
+        return redirect()->back();
     }
 
     /**
