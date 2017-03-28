@@ -16,6 +16,7 @@
                     'label' => trans('mconsole::presets.form.type'),
                     'name' => 'type',
                     'options' => [
+                        'any' => trans('mconsole::presets.types.any'),
                         'image' => trans('mconsole::presets.types.image'),
                         'document' => trans('mconsole::presets.types.document'),
                     ],
@@ -53,7 +54,7 @@
 		<div class="portlet light">
 			<div class="portlet-title">
 				<div class="caption">
-					<span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::presets.form.operations.title') }}</span>
+					<span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::presets.operations.title') }}</span>
 				</div>
 			</div>
             <div class="portlet-body form hide" data-only="document">
@@ -62,7 +63,7 @@
 			<div class="portlet-body form hide" data-only="image">
                 <div class="operations-list"></div>
                 <div class="help-block">{{ trans('mconsole::presets.form.sequence') }}</div>
-                <div class="btn btn-sm blue preset-add-operation">{{ trans('mconsole::presets.form.operations.add') }}</div>
+                <div class="btn btn-sm blue preset-add-operation">{{ trans('mconsole::presets.operations.add') }}</div>
                 @include('mconsole::forms.hidden', [
                     'name' => 'operations',
                 ])
@@ -78,24 +79,24 @@
     <div data-type="types">
         <form>
             <div class="form-group">
-                <label>{{ trans('mconsole::presets.form.operations.type') }}</label>
+                <label>{{ trans('mconsole::presets.operations.type') }}</label>
                 <select name="operation" class="form-control">
-                    <option value="">{{ trans('mconsole::presets.form.operations.types.notselected') }}</option>
-                    <optgroup label="{{ trans('mconsole::presets.form.operations.types.groups.file') }}">
-                        <option value="original">{{ trans('mconsole::presets.form.operations.types.loadoriginal') }}</option>
-                        <option value="save">{{ trans('mconsole::presets.form.operations.types.save') }}</option>
+                    <option value="">{{ trans('mconsole::presets.operations.types.notselected') }}</option>
+                    <optgroup label="{{ trans('mconsole::presets.operations.types.groups.file') }}">
+                        <option value="original">{{ trans('mconsole::presets.operations.types.loadoriginal') }}</option>
+                        <option value="save">{{ trans('mconsole::presets.operations.types.save') }}</option>
                     </optgroup>
-                    <optgroup label="{{ trans('mconsole::presets.form.operations.types.groups.actions') }}">
-                        <option value="resize">{{ trans('mconsole::presets.form.operations.types.resize') }}</option>
-                        <option value="watermark">{{ trans('mconsole::presets.form.operations.types.watermark') }}</option>
+                    <optgroup label="{{ trans('mconsole::presets.operations.types.groups.actions') }}">
+                        <option value="resize">{{ trans('mconsole::presets.operations.types.resize') }}</option>
+                        <option value="watermark">{{ trans('mconsole::presets.operations.types.watermark') }}</option>
                     </optgroup>
-                    <optgroup label="{{ trans('mconsole::presets.form.operations.types.groups.filters') }}">
-                        <option value="greyscale">{{ trans('mconsole::presets.form.operations.types.greyscale') }}</option>
+                    <optgroup label="{{ trans('mconsole::presets.operations.types.groups.filters') }}">
+                        <option value="greyscale">{{ trans('mconsole::presets.operations.types.greyscale') }}</option>
                     </optgroup>
                 </select>
             </div>
             <div class="operation-options"></div>
-            <div class="text-right"><div class="btn btn-xs btn-danger remove-operation">{{ trans('mconsole::presets.form.operations.remove') }}</div></div>
+            <div class="text-right"><div class="btn btn-xs btn-danger remove-operation">{{ trans('mconsole::presets.operations.remove') }}</div></div>
         </form>
         <hr/>
     </div>
@@ -104,11 +105,11 @@
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group">
-                    <label>{{ trans('mconsole::presets.form.operations.resize.name') }}</label>
+                    <label>{{ trans('mconsole::presets.operations.resize.name') }}</label>
                     <select name="type" class="form-control input-sm">
-                        <option value="ratio">{{ trans('mconsole::presets.form.operations.resize.ratio') }}</option>
-                        <option value="center">{{ trans('mconsole::presets.form.operations.resize.center') }}</option>
-                        <option value="fixed">{{ trans('mconsole::presets.form.operations.resize.fixed') }}</option>
+                        <option value="ratio">{{ trans('mconsole::presets.operations.resize.ratio') }}</option>
+                        <option value="center">{{ trans('mconsole::presets.operations.resize.center') }}</option>
+                        <option value="fixed">{{ trans('mconsole::presets.operations.resize.fixed') }}</option>
                     </select>
                 </div>
             </div>
@@ -129,13 +130,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label>{{ trans('mconsole::presets.form.operations.save.path') }} <i class="fa fa-question-circle popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::presets.form.operations.save.pathhelp') }}"></i></label>
+                    <label>{{ trans('mconsole::presets.operations.save.path') }} <i class="fa fa-question-circle popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="{{ trans('mconsole::presets.operations.save.pathhelp') }}"></i></label>
                     <input class="form-control input-sm" type="text" name="path" placeholder="thumb/etc">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label>{{ trans('mconsole::presets.form.operations.save.quality') }}</label>
+                    <label>{{ trans('mconsole::presets.operations.save.quality') }}</label>
                     <input class="form-control input-sm" type="text" name="quality" placeholder="95">
                 </div>
             </div>
@@ -147,9 +148,9 @@
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <select name="operation-type" class="form-control input-sm">
-                        <option value="top">{{ trans('mconsole::presets.form.operations.watermark.top') }}</option>
-                        <option value="center">{{ trans('mconsole::presets.form.operations.watermark.center') }}</option>
-                        <option value="bottom">{{ trans('mconsole::presets.form.operations.watermark.bottom') }}</option>
+                        <option value="top">{{ trans('mconsole::presets.operations.watermark.top') }}</option>
+                        <option value="center">{{ trans('mconsole::presets.operations.watermark.center') }}</option>
+                        <option value="bottom">{{ trans('mconsole::presets.operations.watermark.bottom') }}</option>
                     </select>
                 </div>
             </div>
@@ -161,9 +162,9 @@
             <div class="col-md-3 col-sm-6">
                 <div class="form-group">
                     <select name="operation-type" class="form-control input-sm">
-                        <option value="left">{{ trans('mconsole::presets.form.operations.watermark.left') }}</option>
-                        <option value="center">{{ trans('mconsole::presets.form.operations.watermark.center') }}</option>
-                        <option value="right">{{ trans('mconsole::presets.form.operations.watermark.right') }}</option>
+                        <option value="left">{{ trans('mconsole::presets.operations.watermark.left') }}</option>
+                        <option value="center">{{ trans('mconsole::presets.operations.watermark.center') }}</option>
+                        <option value="right">{{ trans('mconsole::presets.operations.watermark.right') }}</option>
                     </select>
                 </div>
             </div>

@@ -7,6 +7,7 @@ namespace Milax\Mconsole\Structs;
  */
 abstract class MconsoleUploadType
 {
+    const Any = 'any';
     const Image = 'image';
     const Document = 'document';
     const Audio = 'audio';
