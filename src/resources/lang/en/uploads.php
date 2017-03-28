@@ -24,4 +24,11 @@ return [
         'show' => 'Uploads: view',
         'destroy' => 'Uploads: delete',
     ],
+    'form' => [
+        'name' => 'Upload files',
+        'help' => [
+            'name' => 'Help',
+            'text' => '',
+        ],
+    ],
 ];

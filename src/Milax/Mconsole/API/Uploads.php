@@ -97,7 +97,7 @@ class Uploads implements GenericAPI
         
         $data['uploads']->get($data['group'])->each(function ($file, $key) use (&$data) {
             $file->update([
-                'related_id' => $data['related']->id,
+                'related_id' => isset($data['related']) ? $data['related']->id : null,
                 'order' => $key,
             ]);
             if (isset($data['unique']) && $data['unique'] === true) {
@@ -281,7 +281,7 @@ class Uploads implements GenericAPI
                     foreach ($input['files'] as $key => $file) {
                         
                         // Check if file is allowed
-                        if (!in_array(pathinfo($file, PATHINFO_EXTENSION), $preset->extensions)) {
+                        if (!in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), $preset->extensions)) {
                             array_push($errors, trans('mconsole::mconsole.errors.extension', [
                                 'file' => file_get_original_name($file),
                             ]));

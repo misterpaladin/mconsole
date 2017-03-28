@@ -4,8 +4,12 @@ namespace Milax\Mconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Models\Upload;
+use Milax\Mconsole\Models\Language;
 use Milax\Mconsole\Contracts\ListRenderer;
+use Milax\Mconsole\Contracts\FormRenderer;
 use Milax\Mconsole\Contracts\Repositories\UploadsRepository;
+use Milax\Mconsole\Contracts\Repositories\PresetsRepository;
+use Illuminate\Http\Request;
 
 class UploadsController extends Controller
 {
@@ -16,11 +20,13 @@ class UploadsController extends Controller
     /**
      * Create new class instance
      */
-    public function __construct(ListRenderer $renderer, UploadsRepository $repository)
+    public function __construct(ListRenderer $renderer, FormRenderer $form, UploadsRepository $repository, PresetsRepository $presetsRepository)
     {
         $this->setCaption(trans('mconsole::uploads.menu.name'));
         $this->renderer = $renderer;
+        $this->form = $form;
         $this->repository = $repository;
+        $this->presets = $presetsRepository;
         
         $this->redirectTo = mconsole_url('uploads');
     }
@@ -38,7 +44,9 @@ class UploadsController extends Controller
                 'document' => 'Document',
             ], true);
         
-        return $this->renderer->setQuery($this->repository->index())->removeEditAction()->render(function ($item) {
+        return $this->renderer->setQuery($this->repository->index())->before(view('mconsole::uploads.list-form', [
+            'presets' => $this->presets->get(),
+        ]))->render(function ($item) {
             return [
                 trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,
@@ -65,8 +73,11 @@ class UploadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
+        $this->handleUploads();
+        
+        $this->redirect();
     }
 
     /**
@@ -77,6 +88,10 @@ class UploadsController extends Controller
      */
     public function edit($id)
     {
+        return $this->form->render('mconsole::uploads.form', [
+            'item' => $this->repository->find($id),
+            'languages' => Language::getCached()->pluck('name', 'id')->prepend(trans('mconsole::uploader.all'), 0)->toArray(),
+        ]);
     }
 
     /**
@@ -86,8 +101,15 @@ class UploadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $upload = $this->repository->find($id);
+        
+        app('API')->tags->sync($upload);
+        
+        $this->repository->update($id, $request->all());
+        
+        $this->redirect();
     }
 
     /**
@@ -98,5 +120,25 @@ class UploadsController extends Controller
      */
     public function destroy($id)
     {
+    }
+    
+    /**
+     * Handle files upload
+     *
+     * @return void
+     */
+    protected function handleUploads()
+    {
+        // Images processing
+        app('API')->uploads->handle(function ($uploads) {
+            app('API')->uploads->attach([
+                'group' => 'upload',
+                'uploads' => $uploads,
+                'related' => null,
+            ]);
+            foreach ($uploads->get('upload') as $upload) {
+                app('API')->tags->sync($upload);
+            }
+        });
     }
 }
