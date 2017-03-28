@@ -33,10 +33,12 @@
                     @include('mconsole::forms.text', [
                         'label' => trans('mconsole::presets.form.minwidth'),
                         'name' => 'min_width',
+                        'value' => '0',
                     ])
                     @include('mconsole::forms.text', [
                         'label' => trans('mconsole::presets.form.minheight'),
                         'name' => 'min_height',
+                        'value' => '0',
                     ])
                 </span>
                 @include('mconsole::forms.text', [
@@ -66,6 +68,7 @@
                 <div class="btn btn-sm blue preset-add-operation">{{ trans('mconsole::presets.operations.add') }}</div>
                 @include('mconsole::forms.hidden', [
                     'name' => 'operations',
+                    'value' => isset($item) ? $item->operations : '[]',
                 ])
 			</div>
 		</div>
