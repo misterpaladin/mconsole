@@ -57,10 +57,10 @@
 					<span class="caption-subject font-blue sbold uppercase">{{ trans('mconsole::presets.operations.title') }}</span>
 				</div>
 			</div>
-            <div class="portlet-body form hide" data-only="document">
+            <div class="dependent portlet-body form hide" data-only="any">
                 <p>{{ trans('mconsole::presets.form.imageonly') }}</p>
             </div>
-			<div class="portlet-body form hide" data-only="image">
+			<div class="dependent portlet-body form hide" data-only="image">
                 <div class="operations-list"></div>
                 <div class="help-block">{{ trans('mconsole::presets.form.sequence') }}</div>
                 <div class="btn btn-sm blue preset-add-operation">{{ trans('mconsole::presets.operations.add') }}</div>
