@@ -121,5 +121,81 @@ class MconsoleBladeExtensions extends ServiceProvider
                 }
             ?>';
         });
+
+        /**
+         * Display files by tag
+         */
+        Blade::directive('filesByTag', function ($expression) {
+            $string = str_remove_parenthesis($expression);
+            
+            return '<?php
+                $parameters = explode(",", "' . $string . '");
+                $id = $parameters[0];
+                
+                if (count($parameters) > 1) {
+                    $template = preg_replace("/\'|\s/", null, $parameters[1]);
+                } else {
+                    $template = "files-container";
+                }
+
+                try {
+                    $files = app("Milax\Mconsole\Contracts\Repositories\TagsRepository")->find($id)->getTagged("Milax\Mconsole\Models\Upload");
+                } catch (\Exception $e) {
+                    \Log::error($e->getMessage());
+                    return;
+                }
+
+                $variable = \Milax\Mconsole\Models\Variable::getCached()->where("key", $template)->first();
+                if ($variable) {
+                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, [
+                        "files" => $files,
+                    ]);
+                    echo $renderer->render();
+                }
+            ?>';
+        });
+
+        /**
+         * Display set of files by tags
+         */
+        Blade::directive('filesByTags', function ($expression) {
+            $string = str_remove_parenthesis($expression);
+            
+            return '<?php
+                $parameters = [' . $string . '];
+                
+                $ids = $parameters[0];
+                
+                if (count($parameters) > 1) {
+                    $template = preg_replace("/\'|\s/", null, $parameters[1]);
+                } else {
+                    $template = "files-container";
+                }
+                
+                try {
+                    $files = collect();
+                    $tags = app("Milax\Mconsole\Contracts\Repositories\TagsRepository")->query()->whereIn("id", $ids)->get();
+                    
+                    $tags->each(function ($tag) use (&$files) {
+                        $taggables = $tag->getTagged("Milax\Mconsole\Models\Upload");
+                        if ($taggables->count() > 0) {
+                            $files = $files->merge($taggables);
+                        }
+                    });
+                    
+                } catch (\Exception $e) {
+                    \Log::error($e->getMessage());
+                    return;
+                }
+
+                $variable = \Milax\Mconsole\Models\Variable::getCached()->where("key", $template)->first();
+                if ($variable) {
+                    $renderer = new \Milax\Mconsole\Blade\BladeRenderer($variable->value, [
+                        "files" => $files,
+                    ]);
+                    echo $renderer->render();
+                }
+            ?>';
+        });
     }
 }
