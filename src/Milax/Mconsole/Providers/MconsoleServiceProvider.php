@@ -253,5 +253,7 @@ class MconsoleServiceProvider extends ServiceProvider
         app('API')->register('repositories', new \Milax\Mconsole\API\Repositories);
         app('API')->register('forms.constructor', $this->app->make('Milax\Mconsole\Contracts\FormConstructor'));
         app('API')->register('variables', $this->app->make('Milax\Mconsole\API\Variables'));
+        app('API')->register('sitemap', new \Milax\Mconsole\API\SitemapManager);
+        app('API')->sitemap->setHandler(new \Milax\Mconsole\Components\SitemapHandler);
     }
 }

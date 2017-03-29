@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/sitemap.xml', function () {
+    return app('API')->sitemap->handle();
+});
+
 Route::group([
     'prefix' => config('mconsole.url'),
     'middleware' => ['web', 'mconsole'],
