@@ -3,12 +3,24 @@
 namespace Milax\Mconsole\API;
 
 use Milax\Mconsole\Exceptions\APINamespaceExistsException;
+use Milax\Mconsole\Exceptions\APIClassImplementationException;
 
 /**
  * Class for serving mconsole API services
  */
 class APIManager
 {
+    /**
+     * List of required contracts
+     * 
+     * @var array
+     */
+    protected $contracts = [
+        'Milax\Mconsole\Contracts\API\GenericAPI',
+        'Milax\Mconsole\Contracts\API\RepositoryAPI',
+        'Milax\Mconsole\Contracts\API\ServiceAPI',
+    ];
+
     /**
      * Register an API class
      * 
@@ -19,6 +31,12 @@ class APIManager
      */
     public function register($namespace, $instance, $force = false)
     {
+        $implements = array_merge(class_implements($instance), class_parents($instance));
+        
+        if (count(array_intersect($implements, $this->contracts)) == 0) {
+            throw new APIClassImplementationException(sprintf('Class %s should implement one of given API contracts: %s', get_class($instance), implode(', ', $this->contracts)));
+        }
+
         if (str_contains($namespace, '.')) {
             $namespaces = explode('.', $namespace);
             $namespace = array_pull($namespaces, 0);

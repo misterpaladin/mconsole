@@ -2,7 +2,9 @@
 
 namespace Milax\Mconsole\API;
 
-class SitemapManager
+use Milax\Mconsole\Contracts\API\GenericAPI;
+
+class SitemapManager implements GenericAPI
 {
     protected $stack = [];
     
