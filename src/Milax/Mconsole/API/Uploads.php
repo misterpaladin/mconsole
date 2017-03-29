@@ -32,10 +32,9 @@ class Uploads implements GenericAPI
      */
     public function getBackupName($group = null)
     {
-        $group = $group ? $group : Request::input('group');
-        if (!$this->backupName) {
-            $this->backupName = sprintf('%s_%s_%s', Auth::id(), $group, Request::server('HTTP_REFERER'));
-        }
+        $group = !is_null($group) ? $group : Request::input('group');
+        $this->backupName = sprintf('%s_%s', Auth::id(), $group);
+
         return $this->backupName;
     }
     
@@ -334,9 +333,9 @@ class Uploads implements GenericAPI
                         }
                         
                         $files->get($group)->push($upload);
-                        
-                        $this->dropBackup($group);
                     }
+                    
+                    $this->dropBackup($group);
                 }
             }
         }
