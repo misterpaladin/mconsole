@@ -25,7 +25,7 @@ class VariablesController extends Controller
     public function index()
     {
         return view('mconsole::variables.form', [
-            'variables' => $this->repository->get(),
+            'variables' => $this->repository->query()->orderBy('key', 'asc')->get(),
         ]);
     }
     
