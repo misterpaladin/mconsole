@@ -48,3 +48,9 @@
         </div>
     </div>
 </div>
+
+@section('page.scripts')
+    <script>
+        new Clipboard('.copy');
+    </script>
+@endsection

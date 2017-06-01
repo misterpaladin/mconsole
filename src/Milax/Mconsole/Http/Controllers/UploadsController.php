@@ -47,12 +47,18 @@ class UploadsController extends Controller
         return $this->renderer->setQuery($this->repository->index())->before(view('mconsole::uploads.list-form', [
             'presets' => $this->presets->get(),
         ]))->render(function ($item) {
+            $copies = collect($item->getCopies(true));
+
+            $copies = $copies->transform(function ($copy, $key) {
+                return '<button class="copy btn btn-default btn-xs" data-clipboard-text="' . $copy . '" target="_blank">' . $key . '</button>';
+            })->implode(' ');
+
             return [
                 trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,
                 trans('mconsole::uploads.table.path') => $item->path,
                 trans('mconsole::uploads.table.filename') => file_get_original_name($item->filename),
-                trans('mconsole::uploads.table.copies') => count($item->copies),
+                trans('mconsole::uploads.table.copies') => $copies,
                 trans('mconsole::uploads.table.related') => strlen($item->related_class) > 0 ? sprintf('%s #%s', class_basename($item->related_class), $item->related_id) : '',
             ];
         });

@@ -46,11 +46,12 @@ class Upload extends Model
     }
     
     /**
-     * Get image copies as associative array
-     * 
-     * @return array
+     * Undocumented function
+     *
+     * @param boolean $includeOriginal [Include original file path]
+     * @return void
      */
-    public function getImageCopies()
+    public function getCopies($includeOriginal = false)
     {
         $copies = [];
         
@@ -58,7 +59,17 @@ class Upload extends Model
             $copies[$copy['path']] = $this->getImagePath($copy['path']);
         }
         
+        if ($includeOriginal) {
+            $copies['original'] = $this->getImagePath();
+        }
+
         return $copies;
+    }
+
+    // @TODO: REMOVE THIS METHOD
+    public function getImageCopies()
+    {
+        throw new \Milax\Mconsole\Exceptions\DeprecatedException('Upload getImageCopies is deprecated, use getCopies() instead');
     }
     
     /**
