@@ -9,8 +9,14 @@ class VariablesRepository extends EloquentRepository implements Repository
 {
     public $model = \Milax\Mconsole\Models\Variable::class;
     
-    public function getByKey($key)
+    public function getByKey($key, $noFail = false)
     {
-        return $this->query()->where('key', $key)->firstOrFail();
+        $query = $this->query()->where('key', $key);
+        
+        if ($noFail) {
+            return $query->first();
+        } else {
+            return $query->firstOrFail();
+        }
     }
 }
