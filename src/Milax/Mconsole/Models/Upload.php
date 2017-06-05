@@ -44,6 +44,32 @@ class Upload extends Model
     {
         return sprintf('/storage/uploads/%s/%s/%s', $this->path, $size, $this->filename);
     }
+
+    /**
+     * Get document url for given copy
+     * 
+     * @return string
+     */
+    public function getDocumentPath()
+    {
+        return sprintf('/storage/uploads/%s/%s', $this->path, $this->filename);
+    }
+
+    /**
+     * Get original file path
+     *
+     * @return string
+     */
+    public function getOriginalPath()
+    {
+        switch ($this->type) {
+            case 'image':
+                return $this->getImagePath();
+            
+            default:
+                return $this->getDocumentPath();
+        }
+    }
     
     /**
      * Undocumented function
@@ -60,7 +86,7 @@ class Upload extends Model
         }
         
         if ($includeOriginal) {
-            $copies['original'] = $this->getImagePath();
+            $copies['original'] = $this->getOriginalPath();
         }
 
         return $copies;

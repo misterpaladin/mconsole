@@ -275,7 +275,7 @@ class Uploads implements GenericAPI
                     
                     $model = $input['related_class'];
                     $path = sprintf('%s/%s', $this->uploadsPath, $preset->path);
-                    $type = $input['type'];
+                    $type = $preset->type;
                     
                     foreach ($input['files'] as $key => $file) {
                         
