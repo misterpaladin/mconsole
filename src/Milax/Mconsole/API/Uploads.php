@@ -217,10 +217,15 @@ class Uploads implements GenericAPI
         $handler = new UploadHandler($config);
         $response = $handler->get_response();
         foreach ($response['files'] as $key => $file) {
-            $response['files'][$key]->deleteUrl = sprintf('%s%s', $config['script_url'], $file->name);
+            $response['files'][$key]->deleteUrl = sprintf('/%s/%s', trim($config['script_url'], '/'), $file->name);
         }
-        
-        $this->backup($response);
+
+        $backup = $response;
+        $backup['files'] = collect($backup['files'])->reject(function ($upload) {
+            return isset($upload->error);
+        })->toArray();
+
+        $this->backup($backup);
         
         return json_encode($response);
     }
