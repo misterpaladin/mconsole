@@ -60,11 +60,11 @@ class Upload extends Model
      *
      * @return string
      */
-    public function getOriginalPath()
+    public function getOriginalPath($size = 'original')
     {
         switch ($this->type) {
             case 'image':
-                return $this->getImagePath();
+                return $this->getImagePath($size);
             
             default:
                 return $this->getDocumentPath();
