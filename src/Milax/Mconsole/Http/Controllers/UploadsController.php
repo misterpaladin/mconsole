@@ -126,6 +126,8 @@ class UploadsController extends Controller
      */
     public function destroy($id)
     {
+        app('API')->uploads->delete($id);
+        $this->redirect();
     }
     
     /**
