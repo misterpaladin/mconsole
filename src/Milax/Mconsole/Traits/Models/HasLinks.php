@@ -13,7 +13,7 @@ trait HasLinks
      */
     public function links()
     {
-        return $this->morphToMany('Milax\Mconsole\Models\Link', 'linkable');
+        return $this->morphToMany('Milax\Mconsole\Models\Link', 'linkable')->orderBy('order');
     }
     
     /**
