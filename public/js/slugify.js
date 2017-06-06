@@ -1,0 +1,1 @@
+var slugify;slugify=function(n,t){var u;return u=null,n.each(function(n,t){if(t.value.length>0&&null===u)return u=t.value}),null!==u?$.ajax({url:"/mconsole/api/tools/slug",headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")},type:"POST",data:{text:u},success:function(n){return t(n)}}):t()},window.slugify=slugify;

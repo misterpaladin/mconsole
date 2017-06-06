@@ -33,6 +33,9 @@ Route::group([
         Route::get('/uploads/restore', 'UploadsController@restore');
         Route::get('/uploads/get', 'UploadsController@get');
         Route::get('/uploads/delete/{file}', 'UploadsController@delete');
+        Route::group(['prefix' => '/tools'], function () {
+            Route::post('/slug', 'ToolsController@slug');
+        });
     });
     
     // Resources
