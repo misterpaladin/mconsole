@@ -6,4 +6,4 @@ Experimental content management system package for [Laravel framework](https://l
 
 Not recommended to use until 1.* versions.
 
-Visit [wiki page](https://github.com/misterpaladin/mconsole/wiki) for installation and use guide.
+Visit [wiki page](https://github.com/milaxcom/mconsole/wiki) for installation and use guide.
