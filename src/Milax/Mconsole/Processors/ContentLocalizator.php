@@ -19,14 +19,14 @@ class ContentLocalizator implements Repository
             
             switch (gettype($value)) {
                 case 'array':
-                    if (isset($value[$lang])) {
+                    if (array_has($value, $lang)) {
                         $hasLanguages = true;
                     }
                     break;
                 case 'string':
                     $value = json_decode($value, true);
                     if (json_last_error() === JSON_ERROR_NONE) {
-                        if (isset($value[$lang])) {
+                        if (array_has($value, $lang)) {
                             $hasLanguages = true;
                         }
                     }
@@ -43,7 +43,7 @@ class ContentLocalizator implements Repository
                 }
             }
         }
-        
+
         return $compiled;
     }
 }
