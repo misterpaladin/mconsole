@@ -20,7 +20,7 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $signature = 'mconsole:install {--update : Run update without package initializing} {--quick : Run without copying assets} {--no-migrations : Run without any migrations}';
+    protected $signature = 'mconsole:install {--update : Run update without package initializing} {--quick : Run without copying assets} {--no-db : Run without any migrations and seeds}';
 
     /**
      * The console command description.
@@ -51,11 +51,11 @@ class Installer extends Command
         }
         $this->symbolicLinks();
 
-        if (!$this->option('no-migrations')) {
+        if (!$this->option('no-db')) {
             $this->migrate();
+            $this->seeds();
         }
         
-        $this->seeds();
         $this->modules();
         
         if (!$this->option('update')) {
