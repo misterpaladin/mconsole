@@ -1,5 +1,5 @@
 <div class="form-group">
-	<label>{{ $label }}</label>
+	<label>{!! $label !!}</label>
     <div class='input-group datepicker'>
     	{!! Form::text($name, null, ['placeholder' => (isset($placeholder)) ? $placeholder : null, 'class' => 'form-control']) !!}
         <span class="input-group-addon">
