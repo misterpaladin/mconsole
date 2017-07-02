@@ -24,6 +24,8 @@ class ACLServiceProvider extends ServiceProvider
     public function register()
     {
         app('API')->acl->register([
+            ['GET', 'api/uploads/get', 'mconsole::uploads.acl.uploadlist'],
+            ['POST', 'api/uploads/upload', 'mconsole::uploads.acl.upload'],
             ['GET', 'uploads', 'mconsole::uploads.acl.index'],
             ['GET', 'uploads/create', 'mconsole::uploads.acl.create'],
             ['POST', 'uploads', 'mconsole::uploads.acl.store'],

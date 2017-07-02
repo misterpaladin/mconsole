@@ -16,6 +16,8 @@ return [
         'type' => 'Type',
     ],
     'acl' => [
+        'uploadlist' => 'Uploads: view attached files',
+        'upload' => 'Uploads: upload attached files',
         'index' => 'Uploads: show list',
         'create' => 'Uploads: show create form',
         'store' => 'Uploads: saving',
