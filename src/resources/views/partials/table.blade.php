@@ -53,7 +53,7 @@
                 @if (isset($paging))
                     <div class="row">
                         <div class="col-xs-12 text-center">
-                            {!! $paging->appends(Request::query())->links() !!}
+                            {!! $paging->appends(Request::except('page'))->links() !!}
                         </div>
                     </div>
                 @endif
