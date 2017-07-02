@@ -17,12 +17,17 @@ class MconsoleMiddleware
         $id = Auth::id();
         
         // Add some exceptions
-        array_push($this->exceptions, sprintf('GET:%s', mconsole_url('/', true)));
-        array_push($this->exceptions, sprintf('GET:%s', mconsole_url('dashboard', true)));
-        array_push($this->exceptions, sprintf('GET:%s', mconsole_url('api/search', true)));
-        array_push($this->exceptions, sprintf('GET:%s/%s/edit', mconsole_url('users', true), $id));
-        array_push($this->exceptions, sprintf('PUT:%s/%s', mconsole_url('users', true), $id));
-        array_push($this->exceptions, sprintf('POST:%s/%s/menus', mconsole_url('users', true), $id));
+        array_push($this->exceptions, sprintf('GET:%s', '/'));
+        array_push($this->exceptions, sprintf('GET:%s', 'dashboard'));
+        array_push($this->exceptions, sprintf('GET:%s', 'api/search'));
+        array_push($this->exceptions, sprintf('GET:%s/%s/edit', 'users', $id));
+        array_push($this->exceptions, sprintf('PUT:%s/%s', 'users', $id));
+        array_push($this->exceptions, sprintf('POST:%s/%s/menus', 'users', $id));
+        array_push($this->exceptions, sprintf('POST:%s', 'api/tools/slug'));
+        array_push($this->exceptions, sprintf('GET:%s', 'api/uploads/delete/{file}'));
+        array_push($this->exceptions, sprintf('GET:%s', 'api/uploads/delete/{file}'));
+        array_push($this->exceptions, sprintf('GET:%s', 'api/uploads/get'));
+        array_push($this->exceptions, sprintf('POST:%s', 'api/uploads/upload'));
     }
     
     /**
@@ -82,7 +87,7 @@ class MconsoleMiddleware
         
         $method = $request->method();
         
-        // Allow everyone to visit dashboard
+        // Allow everyone to visit exceptions
         if (in_array($uri, $this->exceptions) || in_array($path, $this->exceptions)) {
             return true;
         }
