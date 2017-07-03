@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Seeds;
 
 use DB;
+use Schema;
 use Milax\Mconsole\Models\Language;
 use Milax\Mconsole\Contracts\MconsoleSeeder;
 
@@ -32,14 +33,17 @@ class MconsoleLanguaugeSeeder implements MconsoleSeeder
      */
     public static function run()
     {
-        collect(self::$languages)->each(function ($language) {
-            if (DB::table('languages')->where('key', $language['key'])->count() == 0) {
-                DB::table('languages')->insert([
-                    'key' => $language['key'],
-                    'name' => $language['name'],
-                ]);
-            }
-        });
+        if (!Schema::hasTable('languages') || DB::table('languages')->count() == 0) {
+            collect(self::$languages)->each(function ($language) {
+                if (DB::table('languages')->where('key', $language['key'])->count() == 0) {
+                    DB::table('languages')->insert([
+                        'key' => $language['key'],
+                        'name' => $language['name'],
+                    ]);
+                }
+            });
+        }
+
         return 'Installed ' . __CLASS__ . '.';
     }
 }
