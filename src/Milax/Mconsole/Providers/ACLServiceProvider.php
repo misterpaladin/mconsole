@@ -76,6 +76,17 @@ class ACLServiceProvider extends ServiceProvider
             ['DELETE', 'users/{users}', 'mconsole::users.acl.destroy'],
         ], 'users_list');
         
+        
+        app('API')->acl->register([
+            ['GET', 'languages', 'mconsole::languages.acl.index'],
+            ['GET', 'languages/create', 'mconsole::languages.acl.create'],
+            ['POST', 'languages', 'mconsole::languages.acl.store'],
+            ['GET', 'languages/{languages}/edit', 'mconsole::languages.acl.edit'],
+            ['PUT', 'languages/{languages}', 'mconsole::languages.acl.update'],
+            ['GET', 'languages/{languages}', 'mconsole::languages.acl.show'],
+            ['DELETE', 'languages/{languages}', 'mconsole::languages.acl.destroy'],
+        ], 'languages');
+        
         app('API')->acl->register([
             ['GET', 'tags', 'mconsole::tags.acl.index'],
             ['GET', 'tags/create', 'mconsole::tags.acl.create'],
