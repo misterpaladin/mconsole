@@ -18,6 +18,7 @@ class MconsoleMiddleware
         
         // Add some exceptions
         array_push($this->exceptions, sprintf('GET:%s', '/'));
+        array_push($this->exceptions, sprintf('GET:%s', 'mconsole'));
         array_push($this->exceptions, sprintf('GET:%s', 'dashboard'));
         array_push($this->exceptions, sprintf('GET:%s', 'api/search'));
         array_push($this->exceptions, sprintf('GET:%s/%s/edit', 'users', $id));
