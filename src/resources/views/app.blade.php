@@ -285,12 +285,12 @@
 			<script>
 				$('textarea.codemirror').each(function () {
 					CodeMirror.fromTextArea($(this)[0], {
-						lineNumbers: {{ app('API')->options->getByKey('editorlinenumbers') }},
+						lineNumbers: {{ app('API')->options->getByKey('editorlinenumbers') ? 'true' : 'false' }},
 						mode: $(this).data('mode'),
 						viewportMargin: Infinity,
-						lineWrapping: true,
-						smartIndent: false,
-						indentUnit: 4,
+						lineWrapping: {{ app('API')->options->getByKey('editorlinewrap') ? 'true' : 'false' }},
+						smartIndent: {{ app('API')->options->getByKey('editorsmartindent') ? 'true' : 'false' }},
+						indentUnit: {{ app('API')->options->getByKey('editortabsize') }},
 					});
 				});
 			</script>

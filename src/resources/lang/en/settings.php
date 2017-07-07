@@ -21,6 +21,9 @@ return [
         'indexing' => 'Allow search engine indexing',
         'adminemail' => 'Email for system notifications',
         'editorlinenumbers' => 'HTML editor line numbers',
+        'editorlinewrap' => 'HTML editor line wrap',
+        'editortabsize' => 'HTML editor tab size',
+        'editorsmartindent' => 'HTML editor smart indent',
     ],
     'options' => [
         'enabled' => 'Status',

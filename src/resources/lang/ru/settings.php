@@ -21,6 +21,9 @@ return [
         'indexing' => 'Разрешить индексирование сайта',
         'adminemail' => 'Email для системных уведомлений',
         'editorlinenumbers' => 'Номера строк в HTML редакторе',
+        'editorlinewrap' => 'Перенос строк в HTML редакторе',
+        'editortabsize' => 'Размер табуляции в HTML редакторе',
+        'editorsmartindent' => 'Умные отступы в HTML редакторе',
     ],
     'options' => [
         'enabled' => 'Состояние',
