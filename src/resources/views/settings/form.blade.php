@@ -19,7 +19,7 @@
                                     <h4>{{ trans($groupName) }}</h4>
                                     <div class="row">
                                         @foreach ($groupOptions as $option)
-                                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                            <div class="col-xs-12">
                                                 @if ($option->type == 'text')
                                                     @include('mconsole::forms.text', [
                                                         'label' => trans($option->label),
@@ -64,7 +64,7 @@
                                     <h4>{{ trans('mconsole::settings.options.group.other') }}</h4>
                                     <div class="row">
                                         @foreach ($groupOptions as $option)
-                                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                            <div class="col-xs-12">
                                                 @if ($option->type == 'text')
                                                     @include('mconsole::forms.text', [
                                                         'label' => trans($option->label),
