@@ -58,7 +58,8 @@ class Options extends RepositoryAPI implements DataManager
         }
         
         foreach ($options as $key => $option) {
-            if ($force || DB::table('mconsole_options')->where('key', $option['key'])->count() == 0) {
+            $count = DB::table('mconsole_options')->where('key', $option['key'])->count();
+            if ($force || $count == 0) {
                 foreach ($option as $col => $val) {
                     if (is_array($val)) {
                         $option[$col] = json_encode($val);
@@ -67,6 +68,17 @@ class Options extends RepositoryAPI implements DataManager
                 $option['created_at'] = date('Y-m-d H:i:s');
                 $option['updated_at'] = date('Y-m-d H:i:s');
                 array_push($toInsert, $option);
+            }
+
+            if ($count > 0) {
+                $option['rules'] = !empty($option['rules']) ? json_encode($option['rules']) : null;
+                $option['options'] = !empty($option['options']) ? json_encode($option['options']) : null;
+                DB::table('mconsole_options')->where('key', $option['key'])->update([
+                    'group' => $option['group'],
+                    'label' => $option['label'],
+                    'rules' => $option['rules'],
+                    'options' => $option['options'],
+                ]);
             }
         }
         
