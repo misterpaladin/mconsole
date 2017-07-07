@@ -20,6 +20,7 @@ return [
         'defaultheading' => 'Заголовок страниц по-умолчанию',
         'indexing' => 'Разрешить индексирование сайта',
         'adminemail' => 'Email для системных уведомлений',
+        'editorlinenumbers' => 'Номера строк в HTML редакторе',
     ],
     'options' => [
         'enabled' => 'Состояние',
@@ -32,6 +33,7 @@ return [
         'off' => 'Отключено',
         'textarea' => 'Textarea',
         'ckeditor' => 'CKEditor',
+        'codemirror' => 'Code Mirror',
     ],
     'additional' => [
         'name' => 'Дополнительно',

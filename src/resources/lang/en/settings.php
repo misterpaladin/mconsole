@@ -20,6 +20,7 @@ return [
         'defaultheading' => 'Default page heading',
         'indexing' => 'Allow search engine indexing',
         'adminemail' => 'Email for system notifications',
+        'editorlinenumbers' => 'HTML editor line numbers',
     ],
     'options' => [
         'enabled' => 'Status',
@@ -32,6 +33,7 @@ return [
         'off' => 'Disabled',
         'textarea' => 'Textarea',
         'ckeditor' => 'CKEditor',
+        'codemirror' => 'Code Mirror',
     ],
     'additional' => [
         'name' => 'Additional',

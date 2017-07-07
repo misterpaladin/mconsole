@@ -49,7 +49,23 @@
 		<link href="/massets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="/massets/css/mconsole.css" rel="stylesheet" type="text/css" />
         <link href="/massets/css/blade-helper.css" rel="stylesheet" type="text/css" />
-        
+
+		@if (app('API')->options->getByKey('textareatype') == 'codemirror')
+			<link href="/massets/components/codemirror/lib/codemirror.css" rel="stylesheet" type="text/css" />
+			<style type="text/css">
+				.CodeMirror {
+					border: 1px solid #c2cad8;
+					height: auto;
+					border-radius: 4px;;
+				}
+				.CodeMirror-scroll {
+					height: auto;
+					overflow-y: hidden;
+					overflow-x: auto;
+				}
+			</style>
+		@endif
+
         @yield('page.styles')
         
 		<!-- END THEME LAYOUT STYLES -->
@@ -260,6 +276,25 @@
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+		@if (app('API')->options->getByKey('textareatype') == 'codemirror')
+			<script src="/massets/components/codemirror/lib/codemirror.js" type="text/javascript"></script>
+			<script src="/massets/components/codemirror/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+			<script src="/massets/components/codemirror/mode/css/css.js" type="text/javascript"></script>
+			<script src="/massets/components/codemirror/mode/javascript/javascript.js" type="text/javascript"></script>
+			<script src="/massets/components/codemirror/mode/xml/xml.js" type="text/javascript"></script>
+			<script>
+				$('textarea.codemirror').each(function () {
+					CodeMirror.fromTextArea($(this)[0], {
+						lineNumbers: {{ app('API')->options->getByKey('editorlinenumbers') }},
+						mode: $(this).data('mode'),
+						viewportMargin: Infinity,
+						lineWrapping: true,
+						smartIndent: false,
+						indentUnit: 4,
+					});
+				});
+			</script>
+		@endif
 		<!-- END THEME LAYOUT SCRIPTS -->
         @yield('page.scripts')
         @include('mconsole::partials.messages')

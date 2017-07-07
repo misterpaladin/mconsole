@@ -23,18 +23,11 @@
     					'label' => trans('mconsole::uploads.form.title'),
     					'name' => 'title',
     				])
-                    @if (app('API')->options->getByKey('textareatype') == 'ckeditor')
-                        @include('mconsole::forms.ckeditor', [
-                            'label' => trans('mconsole::uploads.form.description'),
-                            'name' => 'description',
-                        ])
-                    @else
-                        @include('mconsole::forms.textarea', [
-                            'label' => trans('mconsole::uploads.form.description'),
-                            'name' => 'description',
-                            'size' => '50x4',
-                        ])
-                    @endif
+                    @include('mconsole::forms.textarea', [
+                        'label' => trans('mconsole::uploads.form.description'),
+                        'name' => 'description',
+                        'size' => '50x4',
+                    ])
     			</div>
                 <div class="form-actions">
                     @include('mconsole::forms.submit')
