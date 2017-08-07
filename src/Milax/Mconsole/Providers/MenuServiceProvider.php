@@ -28,14 +28,14 @@ class MenuServiceProvider extends ServiceProvider
             'url' => 'uploads',
             'visible' => true,
             'enabled' => true,
-        ], 'uploads', 'tools.files');
+        ], 'uploads', 'tools');
         
         app('API')->menu->push([
             'name' => 'mconsole::presets.menu.name',
             'url' => 'presets',
             'visible' => true,
             'enabled' => true,
-        ], 'presets', 'tools.files');
+        ], 'presets', 'tools');
         
         app('API')->menu->push([
             'name' => 'mconsole::tags.menu.name',
@@ -50,13 +50,6 @@ class MenuServiceProvider extends ServiceProvider
             'visible' => true,
             'enabled' => true,
         ], 'variables', 'tools');
-        
-        app('API')->menu->push([
-            'name' => 'mconsole::menus.menu.name',
-            'url' => 'menus',
-            'visible' => true,
-            'enabled' => true,
-        ], 'presets', 'tools');
         
         app('API')->menu->push([
             'name' => 'mconsole::languages.menu.name',
