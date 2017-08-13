@@ -73,21 +73,8 @@ class Installer extends Command
      */
     protected function symbolicLinks()
     {
-        if (file_exists(MX_STORAGE_PUBLIC_PATH)) {
-            exec(sprintf('unlink %s', MX_STORAGE_PUBLIC_PATH));
-        }
-        
-        exec(sprintf('ln -s %s %s', MX_STORAGE_PATH, MX_STORAGE_PUBLIC_PATH));
-        
-        if (file_exists(MX_MASSETS_PUBLIC_PATH)) {
-            if (is_link(MX_MASSETS_PUBLIC_PATH)) {
-                exec(sprintf('unlink %s', MX_MASSETS_PUBLIC_PATH));
-            } else {
-                exec(sprintf('rm -rf %s', MX_MASSETS_PUBLIC_PATH));
-            }
-        }
-        
-        exec(sprintf('ln -s %s %s', MX_MASSETS_PATH, MX_MASSETS_PUBLIC_PATH));
+        exec(sprintf('ln -sf "%s" "%s"', MX_MASSETS_PATH, MX_MASSETS_PUBLIC_PATH));
+        exec(sprintf('ln -sf "%s" "%s"', MX_STORAGE_PATH, MX_STORAGE_PUBLIC_PATH));
     }
     
     /**
