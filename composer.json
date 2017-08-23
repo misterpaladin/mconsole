@@ -12,7 +12,7 @@
         "illuminate/support": "^5.4",
         "laravelcollective/html": "^5.4",
         "intervention/image": "^2.3",
-        "doctrine/dbal": "^2.5",
+        "doctrine/dbal": "2.5.*",
 		"misterpaladin/gravatar": "^1.0",
         "misterpaladin/cacheable": "^1.0",
         "guzzlehttp/guzzle": "^6.2",
