@@ -9,10 +9,10 @@ class ScheduleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app->booted(function () {
-            $schedule = $this->app->make(Schedule::class);
-            $schedule->command('queue:work database')->everyMinute();
-        });
+        // $this->app->booted(function () {
+        //     $schedule = $this->app->make(Schedule::class);
+        //     $schedule->command('queue:work database')->everyMinute();
+        // });
     }
     
     public function register()
