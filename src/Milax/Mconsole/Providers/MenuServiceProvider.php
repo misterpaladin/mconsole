@@ -36,6 +36,13 @@ class MenuServiceProvider extends ServiceProvider
             'visible' => true,
             'enabled' => true,
         ], 'presets', 'tools');
+
+        app('API')->menu->push([
+            'name' => 'mconsole::menus.menu.name',
+            'url' => 'menus',
+            'visible' => true,
+            'enabled' => true,
+        ], 'menus', 'tools');
         
         app('API')->menu->push([
             'name' => 'mconsole::tags.menu.name',

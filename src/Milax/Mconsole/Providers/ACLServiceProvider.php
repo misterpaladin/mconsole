@@ -24,9 +24,6 @@ class ACLServiceProvider extends ServiceProvider
     public function register()
     {
         app('API')->acl->register([
-            ['GET', 'api/uploads/get', 'mconsole::uploads.acl.uploadlist'],
-            ['POST', 'api/uploads/upload', 'mconsole::uploads.acl.upload'],
-            ['GET', 'api/uploads/delete/{file}', 'mconsole::uploads.acl.uploaddelete'],
             ['GET', 'uploads', 'mconsole::uploads.acl.index'],
             ['GET', 'uploads/create', 'mconsole::uploads.acl.create'],
             ['POST', 'uploads', 'mconsole::uploads.acl.store'],
@@ -34,16 +31,19 @@ class ACLServiceProvider extends ServiceProvider
             ['PUT', 'uploads/{uploads}', 'mconsole::uploads.acl.update'],
             ['GET', 'uploads/{uploads}', 'mconsole::uploads.acl.show'],
             ['DELETE', 'uploads/{uploads}', 'mconsole::uploads.acl.destroy'],
+            ['GET', 'api/uploads/get', 'mconsole::uploads.acl.uploadlist'],
+            ['POST', 'api/uploads/upload', 'mconsole::uploads.acl.upload'],
+            ['GET', 'api/uploads/delete/{file}', 'mconsole::uploads.acl.uploaddelete'],
         ], 'uploads');
         
         app('API')->acl->register([
-            ['GET', 'menu', 'mconsole::menu.acl.index'],
-            ['GET', 'menu/create', 'mconsole::menu.acl.create'],
-            ['POST', 'menu', 'mconsole::menu.acl.store'],
-            ['GET', 'menu/{menu}/edit', 'mconsole::menu.acl.edit'],
-            ['PUT', 'menu/{menu}', 'mconsole::menu.acl.update'],
-            ['GET', 'menu/{menu}', 'mconsole::menu.acl.show'],
-            ['DELETE', 'menu/{menu}', 'mconsole::menu.acl.destroy'],
+            ['GET', 'menus', 'mconsole::menus.acl.index'],
+            ['GET', 'menus/create', 'mconsole::menus.acl.create'],
+            ['POST', 'menus', 'mconsole::menus.acl.store'],
+            ['GET', 'menus/{menu}/edit', 'mconsole::menus.acl.edit'],
+            ['PUT', 'menus/{menu}', 'mconsole::menus.acl.update'],
+            ['GET', 'menus/{menu}', 'mconsole::menus.acl.show'],
+            ['DELETE', 'menus/{menu}', 'mconsole::menus.acl.destroy'],
         ], 'menus');
         
         app('API')->acl->register([

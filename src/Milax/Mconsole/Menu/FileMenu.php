@@ -33,15 +33,7 @@ class FileMenu implements Menu
                 'name' => 'mconsole::menu.tools.name',
                 'visible' => true,
                 'enabled' => true,
-                'menus' => [
-                    'files' => [
-                        'name' => 'mconsole::menu.tools.files.name',
-                        'url' => 'uploads',
-                        'visible' => true,
-                        'enabled' => true,
-                        'menus' => [],
-                    ],
-                ],
+                'menus' => [],
             ],
             'users' => [
                 'name' => 'mconsole::menu.users.name',
