@@ -24,7 +24,7 @@ class MconsoleOption extends Model
     public static function getByKey($key)
     {
         if ($option = self::getCached()->where('key', $key)->first()) {
-            if (count($option->options) >= 2) {
+            if (is_array($option->options) && count($option->options) >= 2) {
                 if (isset($option->options[0]) && isset($option->options[1])) {
                     switch ($option->value) {
                         case '1':
