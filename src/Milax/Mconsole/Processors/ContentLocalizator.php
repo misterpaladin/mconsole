@@ -26,7 +26,7 @@ class ContentLocalizator implements Repository
                 case 'string':
                     $value = json_decode($value, true);
                     if (json_last_error() === JSON_ERROR_NONE) {
-                        if (array_has($value, $lang)) {
+                        if (array_has(is_array($value) ? $value : [$value], $lang)) {
                             $hasLanguages = true;
                         }
                     }
