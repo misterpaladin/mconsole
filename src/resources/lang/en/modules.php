@@ -7,8 +7,6 @@ return [
     ],
     'table' => [
         'title' => 'Modues list',
-        'suggested' => 'Additional modules on Packagist',
-        'nosuggested' => 'All additional modules already installed in the system',
         'info' => 'Information',
         'authors' => 'Authors',
         'uninstall' => [

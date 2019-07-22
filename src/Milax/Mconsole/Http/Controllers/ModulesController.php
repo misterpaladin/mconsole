@@ -43,7 +43,6 @@ class ModulesController extends Controller
         
         return view('mconsole::modules.list', [
             'items' => app('API')->modules->get('all')->sortByDesc('name')->sortByDesc('installed'),
-            'suggested' => $this->getSuggested($modules),
         ]);
     }
     
@@ -87,32 +86,5 @@ class ModulesController extends Controller
         app('API')->modules->extend($module);
         
         return ['status' => 'ok'];
-    }
-    
-    /**
-     * Get packages list from packagist.org
-     * Cache response for 10 minutes
-     * 
-     * @param Collection $modules [System modules list]
-     * @return array
-     */
-    protected function getSuggested($modules)
-    {
-        if (!Cache::has('modules.suggested')) {
-            $client = new Client();
-            $suggested = [];
-            $response = $client->request('GET', 'https://packagist.org/search.json?q=mconsole-');
-            $results = json_decode($response->getBody()->getContents());
-            
-            foreach ($results->results as $package) {
-                if ($package->name != 'milax/mconsole' && $modules->where('package.name', $package->name)->count() == 0) {
-                    array_push($suggested, $package);
-                }
-            }
-            
-            Cache::put('modules.suggested', $suggested, \Carbon\Carbon::now()->addMinutes(10));
-        }
-        
-        return Cache::get('modules.suggested');
     }
 }
