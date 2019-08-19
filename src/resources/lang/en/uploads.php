@@ -23,6 +23,9 @@ return [
         'update' => 'Uploads: updating',
         'show' => 'Uploads: view',
         'destroy' => 'Uploads: delete',
+        'uploadlist' => 'Uploads API: list',
+        'upload' => 'Uploads API: upload',
+        'uploaddelete' => 'Uploads API: delete',
     ],
     'form' => [
         'name' => 'Upload files',
