@@ -8,6 +8,7 @@ return [
     'delete' => 'Удалить',
     'back' => 'Назад',
     'id' => '#',
+    'cover' => 'cover',
     'state' => '',
     'deletemodal' => [
         'title' => 'Удаление элемента',

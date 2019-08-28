@@ -24,7 +24,7 @@
                                         @if ($key == trans('mconsole::tables.state') || $key == trans('mconsole::tables.id'))
                                             <th style="width: 1%">{{ $key }}</th>
                                         @else
-										    <th>{{ $key }}</th>
+										    <th>{{ $key != trans('mconsole::tables.cover') ? $key : '' }}</th>
                                         @endif
 									@endforeach
 									<th>{{ trans('mconsole::tables.actions') }}</th>
@@ -33,8 +33,12 @@
 							<tbody>
 								@foreach ($items as $item)
 									<tr>
-										@foreach ($item as $key => $value)
-											<td>{!! $value !!}</td>
+                                        @foreach ($item as $key => $value)
+                                            @if($key != 'cover')
+                                                <td>{!! $value !!}</td>
+                                            @else
+                                                <td><img src="{{ $value }}" alt="" />
+                                            @endif
 										@endforeach
 										<td>
 											{!! Form::open(['method' => 'DELETE', 'url' => Request::url() . '/' . $item->get('#')]) !!}

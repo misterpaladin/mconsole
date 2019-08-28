@@ -8,6 +8,7 @@ return [
     'delete' => 'Delete',
     'back' => 'Back',
     'id' => '#',
+    'cover' => 'cover',
     'state' => '',
     'deletemodal' => [
         'title' => 'Delete item',
