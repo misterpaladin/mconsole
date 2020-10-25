@@ -6,7 +6,7 @@
 				<div class="col-sm-6">
 					<input name="{{ $filter['key'] }}" class="form-control" placeholder="" type="text" value="{{ Request::query($filter['key']) }}">
 				</div>
-			@elseif ($filter['type'] == 'select')
+            @elseif ($filter['type'] == 'select')
 				<div class="col-sm-6">
 					<select name="{{ $filter['key'] }}" class="form-control">
                         @if (!Request::has($filter['key']))
@@ -14,13 +14,15 @@
                         @else
                             <option value="-1">{{ trans('mconsole::forms.filters.notselected') }}</option>
                         @endif
-                        @foreach ($filter['options'] as $key => $name)
-							@if (Request::has($filter['key']) && Request::query($filter['key']) == $key)
-								<option value="{{ $key }}" selected="selected">{{ $name }}</option>
-							@else
-								<option value="{{ $key }}">{{ $name }}</option>
-							@endif
-						@endforeach
+                        @if(isset($filter['options']))
+                            @foreach ($filter['options'] as $key => $name)
+                                @if (Request::has($filter['key']) && Request::query($filter['key']) == $key)
+                                    <option value="{{ $key }}" selected="selected">{{ $name }}</option>
+                                @else
+                                    <option value="{{ $key }}">{{ $name }}</option>
+                                @endif
+                            @endforeach
+                        @endif
 					</select>
 				</div>
             @elseif ($filter['type'] == 'date')
