@@ -11,6 +11,7 @@ return [
     'help' => 'Изображение для загрузки: :width x :height px.',
     'title' => 'Заголовок',
     'description' => 'Описание',
+    'link' => 'Ссылка',
     'all' => 'Все языки',
     'errors' => [
         'nopresets' => [

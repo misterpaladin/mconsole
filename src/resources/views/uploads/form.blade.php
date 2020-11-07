@@ -22,6 +22,10 @@
     				@include('mconsole::forms.text', [
     					'label' => trans('mconsole::uploads.form.title'),
     					'name' => 'title',
+                    ])
+                    @include('mconsole::forms.text', [
+    					'label' => trans('mconsole::uploads.form.link'),
+    					'name' => 'link',
     				])
                     @include('mconsole::forms.textarea', [
                         'label' => trans('mconsole::uploads.form.description'),

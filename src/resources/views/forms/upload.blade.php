@@ -118,6 +118,9 @@
                         <input type="text" class="form-control input-sm" name="{{ sprintf('uploads[%s][%s][title][]', $type, $group) }}" value="{%=file.title%}" placeholder="{{ trans('mconsole::uploader.title') }}">
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control input-sm" name="{{ sprintf('uploads[%s][%s][link][]', $type, $group) }}" value="{%=file.link%}" placeholder="{{ trans('mconsole::uploader.link') }}">
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control input-sm" name="{{ sprintf('uploads[%s][%s][description][]', $type, $group) }}" value="{%=file.description%}" placeholder="{{ trans('mconsole::uploader.description') }}">
                     </div>
                 </div>

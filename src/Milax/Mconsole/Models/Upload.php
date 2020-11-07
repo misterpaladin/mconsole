@@ -8,7 +8,7 @@ class Upload extends Model
 {
     use \HasTags;
     
-    protected $fillable = ['type', 'path', 'preset_id', 'filename', 'copies', 'related_id', 'related_class', 'group', 'order', 'unique', 'language_id', 'title', 'description'];
+    protected $fillable = ['type', 'path', 'preset_id', 'filename', 'copies', 'related_id', 'related_class', 'group', 'order', 'unique', 'language_id', 'title', 'description', 'link'];
     
     protected $casts = [
         'copies' => 'array',

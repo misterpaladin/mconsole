@@ -155,6 +155,7 @@ class Uploads implements GenericAPI
                         'type' => $file->type,
                         'language_id' => $file->language_id,
                         'title' => $file->title,
+                        'link' => $file->link,
                         'description' => $file->description,
                         'size' => File::size(sprintf('%s/%s/%s%s', $this->uploadsPath, $file->path, $suffix, $file->filename)),
                         'url' => sprintf('/%s/%s/%s%s', trim($url, '/'), trim($file->path, '/'), $suffix, $file->filename),
@@ -296,6 +297,7 @@ class Uploads implements GenericAPI
                         
                         $language = $input['language_id'][$key];
                         $title = $input['title'][$key];
+                        $link = $input['link'][$key];
                         $description = $input['description'][$key];
                         
                         File::makeDirectory($path, 0755, true, true);
@@ -317,6 +319,7 @@ class Uploads implements GenericAPI
                                 'preset_id' => $preset->id,
                                 'language_id' => $language,
                                 'title' => $title,
+                                'link' => $link,
                                 'description' => $description,
                                 'group' => $group,
                                 'path' => $preset->path,
@@ -332,6 +335,7 @@ class Uploads implements GenericAPI
                             $upload->update([
                                 'language_id' => $language,
                                 'title' => $title,
+                                'link' => $link,
                                 'description' => $description,
                                 'type' => $type,
                             ]);

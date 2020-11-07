@@ -11,6 +11,7 @@ return [
     'help' => 'Image size to load: :width x :height px.',
     'title' => 'Title',
     'description' => 'Description',
+    'link' => 'Link',
     'all' => 'All languages',
     'errors' => [
         'nopresets' => [

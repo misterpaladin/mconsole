@@ -29,6 +29,10 @@ return [
     ],
     'form' => [
         'name' => 'Upload files',
+        'language' => 'Language',
+        'title' => 'Title',
+        'description' => 'Description',
+        'link' => 'Link',
         'help' => [
             'name' => 'Help',
             'text' => '',
