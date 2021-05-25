@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xs-12">
+        {{-- <div class="col-xs-12">
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
@@ -24,7 +24,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
-    
 @endsection
