@@ -50,7 +50,7 @@
         <link href="/massets/css/mconsole.css" rel="stylesheet" type="text/css" />
         <link href="/massets/css/blade-helper.css" rel="stylesheet" type="text/css" />
 
-		@if (app('API')->options->getByKey('textareatype') == 'codemirror')
+		@if (app('API')->options->getByKey('textareatype') == 'codemirror' && Auth::user()->editor == 1)
 			<link href="/massets/components/codemirror/lib/codemirror.css" rel="stylesheet" type="text/css" />
 			<style type="text/css">
 				.CodeMirror {
@@ -276,7 +276,7 @@
 		<!-- BEGIN THEME LAYOUT SCRIPTS -->
 		<script src="/massets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
 		<script src="/massets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
-		@if (app('API')->options->getByKey('textareatype') == 'codemirror')
+		@if (app('API')->options->getByKey('textareatype') == 'codemirror' && Auth::user()->editor == 1)
 			<script src="/massets/components/codemirror/lib/codemirror.js" type="text/javascript"></script>
 			<script src="/massets/components/codemirror/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
 			<script src="/massets/components/codemirror/mode/css/css.js" type="text/javascript"></script>
