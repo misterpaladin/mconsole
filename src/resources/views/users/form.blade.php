@@ -53,6 +53,11 @@
         						'placeholder' => trans('mconsole::users.form.placeholder.changepassword'),
         					])
         				@endif
+						@include('mconsole::forms.select', [
+							'label' => trans('mconsole::users.form.update_own'),
+							'name' => 'update_own',
+							'type' => MconsoleFormSelectType::YesNo,
+						])
             			<div class="form-actions">
             				@include('mconsole::forms.submit')
             			</div>

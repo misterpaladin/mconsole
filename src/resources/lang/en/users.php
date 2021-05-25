@@ -19,6 +19,7 @@ return [
         'email' => 'E-mail',
         'password' => 'Password',
         'changepassword' => 'Change password',
+        'update_own' => 'Edit only own records',
         'placeholder' => [
             'name' => 'John Appleseed',
             'email' => 'example@milax.com',

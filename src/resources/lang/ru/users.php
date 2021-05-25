@@ -19,6 +19,7 @@ return [
         'email' => 'Эл. почта',
         'password' => 'Пароль',
         'changepassword' => 'Поменять пароль',
+        'update_own' => 'Редактировать только собственные записи',
         'placeholder' => [
             'name' => 'Иван Апельсинов',
             'email' => 'example@milax.com',

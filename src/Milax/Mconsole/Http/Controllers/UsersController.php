@@ -80,6 +80,7 @@ class UsersController extends Controller
         $user->email = $request->input('email');
         $user->lang = $request->input('lang');
         $user->password = bcrypt($request->input('password'));
+        $user->update_own = $request->input('update_own');
         $user->save();
         $this->redirect();
     }
@@ -111,6 +112,7 @@ class UsersController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->lang = $request->input('lang');
+        $user->update_own = $request->input('update_own');
         
         if ($request->input('role_id')) {
             $user->role_id = $request->input('role_id');
