@@ -17,7 +17,7 @@ class MconsoleUser extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'lang', 'menus', 'editor'
+        'name', 'email', 'password', 'lang', 'menus', 'editor', 'update_own'
     ];
 
     /**
