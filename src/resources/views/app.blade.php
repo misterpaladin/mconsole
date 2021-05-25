@@ -14,6 +14,7 @@
 		<title>{{ (isset($pageTitle)) ? sprintf('%s / Mconsole', $pageTitle, app('API')->options->getByKey('project_name')) : sprintf('%s / Mconsole', app('API')->options->getByKey('project_name')) }}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <meta name="_token" content="{{ csrf_token() }}" />
         <meta name="_mconsole_url" content="{{ config('mconsole.url') }}" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
