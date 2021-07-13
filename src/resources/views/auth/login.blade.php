@@ -17,7 +17,7 @@
 		<meta content="" name="description" />
 		<meta content="" name="author" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -139,7 +139,7 @@
 		<script src="/massets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 		<!-- END PAGE LEVEL PLUGINS -->
 		<!-- BEGIN THEME GLOBAL SCRIPTS -->
-		<script src="/massets/global/scripts/app.min.js" type="text/javascript"></script>
+		<script src="/massets/global/scripts/app.js" type="text/javascript"></script>
 		<!-- END THEME GLOBAL SCRIPTS -->
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<script src="/massets/pages/scripts/login.min.js" type="text/javascript"></script>
