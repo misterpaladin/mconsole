@@ -485,7 +485,7 @@ class UploadHandler
     protected function get_unique_filename($file_path, $name, $size, $type, $error,
             $index, $content_range)
     {
-        return sprintf('%s-%s.%s', str_slug(pathinfo($name, PATHINFO_FILENAME)), md5(str_random(10) . time()), pathinfo($name, PATHINFO_EXTENSION));
+        return sprintf('%s~%s.%s', str_slug(pathinfo($name, PATHINFO_FILENAME)), md5(str_random(10) . time()), pathinfo($name, PATHINFO_EXTENSION));
     }
 
     protected function fix_file_extension($file_path, $name, $size, $type, $error,
@@ -1087,6 +1087,7 @@ class UploadHandler
             $index = null, $content_range = null)
     {
         $file = new \stdClass();
+        $file->title = pathinfo($name, PATHINFO_FILENAME);
         $file->name = $this->get_file_name($uploaded_file, $name, $size, $type, $error,
             $index, $content_range);
         $file->size = $this->fix_integer_overflow((int)$size);

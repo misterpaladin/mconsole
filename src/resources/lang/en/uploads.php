@@ -8,6 +8,7 @@ return [
         'type' => 'Type',
         'path' => 'Path',
         'filename' => 'File name',
+        'title' => 'Title',
         'copies' => 'Copies',
         'related' => 'Related object',
     ],

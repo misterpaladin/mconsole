@@ -57,7 +57,8 @@ class UploadsController extends Controller
                 trans('mconsole::tables.id') => $item->id,
                 trans('mconsole::uploads.table.type') => $item->type,
                 trans('mconsole::uploads.table.path') => $item->path,
-                trans('mconsole::uploads.table.filename') => file_get_original_name($item->filename),
+                trans('mconsole::uploads.table.filename') => pathinfo($item->filename)['filename'],
+                trans('mconsole::uploads.table.title') => $item->title,
                 trans('mconsole::uploads.table.copies') => $copies,
                 trans('mconsole::uploads.table.related') => strlen($item->related_class) > 0 ? sprintf('%s #%s', class_basename($item->related_class), $item->related_id) : '',
             ];

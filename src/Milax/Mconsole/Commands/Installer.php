@@ -123,6 +123,7 @@ class Installer extends Command
         $this->info(Seeds\MconsoleLanguaugeSeeder::run());
         $this->info(Seeds\MconsoleMenusSeeder::run());
         $this->info(Seeds\MconsoleVariablesSeeder::run());
+        $this->info(Seeds\MconsoleUploadsPresetsSeeder::run());
         
         $this->info('Done!');
         $this->comment(null);

@@ -33,6 +33,7 @@ class ContentLocalizator implements Repository
                     break;
                 default:
                     continue;
+                    break;
             }
             
             if ($hasLanguages) {
