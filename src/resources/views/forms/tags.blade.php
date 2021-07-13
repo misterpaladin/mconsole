@@ -3,11 +3,15 @@
     <select name="tags[]" class="form-control tags-select" multiple data-lang-placeholder="{{ trans('mconsole::forms.tags.placeholder') }}">
         @foreach ($allTags as $tag)
             @if (!isset($categories) || isset($categories) && in_array($tag->category, $categories))
-                @if (isset($tags) && $tags->where('id', $tag->id)->count() > 0)
-                    <option data-color="{{ $tag->color }}" value="{{ $tag->id }}" selected="selected">{{ $tag->name }}</option>
-                @else
-                    <option data-color="{{ $tag->color }}" value="{{ $tag->id }}">{{ $tag->name }}</option>
-                @endif
+                <option data-color="{{ $tag->color }}" value="{{ $tag->id }}"
+                    @if (
+                        (isset($tags) && $tags->where('id', $tag->id)->count() > 0)
+                        ||
+                        old('tags') !== null && in_array($tag->id, old('tags'))
+                    )
+                     selected="selected"
+                    @endif
+                >{{ $tag->name }}</option>
             @endif
         @endforeach
     </select>
