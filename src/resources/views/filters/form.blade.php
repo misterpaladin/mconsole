@@ -37,13 +37,13 @@
 			@elseif ($filter['type'] == 'daterange')
                 <div class="col-sm-6">
                     <div class='input-group datepicker'>
-                        <input name="{{ $filter['key'] }}[from]" class="form-control" placeholder="" type="text" value="{{ array_get(Request::query($filter['key']), 'from') }}">
+                        <input name="{{ $filter['key'] }}[from]" class="form-control" placeholder="" type="text" value="{{ Arr::get(Request::query($filter['key']), 'from') }}">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
                     <div class='input-group datepicker'>
-                        <input name="{{ $filter['key'] }}[to]" class="form-control" placeholder="" type="text" value="{{ array_get(Request::query($filter['key']), 'to') }}">
+                        <input name="{{ $filter['key'] }}[to]" class="form-control" placeholder="" type="text" value="{{ Arr::get(Request::query($filter['key']), 'to') }}">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>

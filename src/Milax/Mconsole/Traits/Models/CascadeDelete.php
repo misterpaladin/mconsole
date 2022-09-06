@@ -12,7 +12,7 @@ trait CascadeDelete
         parent::__construct($attributes);
         $methods = get_class_methods(__CLASS__);
         $methods = array_walk($methods, function ($method) {
-            if (starts_with($method, 'cascadeDelete')) {
+            if (\Illuminate\Support\Str::startsWith($method, 'cascadeDelete')) {
                 self::deleting(function ($object) use ($method) {
                     $object->$method();
                 });

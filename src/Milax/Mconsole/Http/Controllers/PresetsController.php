@@ -44,7 +44,7 @@ class PresetsController extends Controller
                 trans('mconsole::presets.table.id') => $item->id,
                 trans('mconsole::presets.table.name') => $item->name,
                 trans('mconsole::presets.table.type') => trans(sprintf('mconsole::presets.types.%s', $item->type)),
-                trans('mconsole::presets.table.operations') => count($item->operations),
+                trans('mconsole::presets.table.operations') => is_array($item->operations) ? count($item->operations) : null,
             ];
         });
     }

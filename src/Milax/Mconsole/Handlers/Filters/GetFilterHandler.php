@@ -29,7 +29,7 @@ class GetFilterHandler implements FilterHandler
                         break;
                     
                     case 'daterange':
-                        $query = $query->where($filter['key'], '>=', array_get(Request::query($filter['key']), 'from'))->where($filter['key'], '<=', array_get(Request::query($filter['key']), 'to'));
+                        $query = $query->where($filter['key'], '>=', Arr::get(Request::query($filter['key']), 'from'))->where($filter['key'], '<=', Arr::get(Request::query($filter['key']), 'to'));
                         break;
                     
                     default:

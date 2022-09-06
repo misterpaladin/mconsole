@@ -4,6 +4,7 @@ namespace Milax\Mconsole\Processors;
 
 use Milax\Mconsole\Contracts\ContentLocalizator as Repository;
 use Milax\Mconsole\Models\Compiled;
+use Arr;
 
 class ContentLocalizator implements Repository
 {
@@ -19,20 +20,19 @@ class ContentLocalizator implements Repository
             
             switch (gettype($value)) {
                 case 'array':
-                    if (array_has($value, $lang)) {
+                    if (Arr::has($value, $lang)) {
                         $hasLanguages = true;
                     }
                     break;
                 case 'string':
                     $value = json_decode($value, true);
                     if (json_last_error() === JSON_ERROR_NONE) {
-                        if (array_has(is_array($value) ? $value : [$value], $lang)) {
+                        if (Arr::has(is_array($value) ? $value : [$value], $lang)) {
                             $hasLanguages = true;
                         }
                     }
                     break;
                 default:
-                    continue;
                     break;
             }
             

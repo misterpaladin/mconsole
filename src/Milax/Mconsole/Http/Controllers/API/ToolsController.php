@@ -4,11 +4,12 @@ namespace Milax\Mconsole\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Str;
 
 class ToolsController extends Controller
 {
     public function slug(Request $request)
     {
-        return str_slug($request->input('text'));
+        return Str::slug($request->input('text'));
     }
 }

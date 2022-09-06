@@ -115,9 +115,9 @@ class FileMenu implements Menu
     {
         if (str_contains($category, '.')) {
             $category = str_replace('.', '.menus.', $category) . '.menus';
-            if (is_array($existed = array_get($this->menu, $category))) {
+            if (is_array($existed = Arr::get($this->menu, $category))) {
                 $existed[$key] = $menu;
-                array_set($this->menu, $category, $existed);
+                Arr::set($this->menu, $category, $existed);
             }
         } else {
             if (isset($this->menu[$category])) {

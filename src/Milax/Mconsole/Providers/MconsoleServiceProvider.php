@@ -33,6 +33,8 @@ class MconsoleServiceProvider extends ServiceProvider
             'Image' => \Intervention\Image\Facades\Image::class,
             'Form' => \Collective\Html\FormFacade::class,
             'Html' => \Collective\Html\HtmlFacade::class,
+            'Arr' => \Illuminate\Support\Arr::class,
+            'Str' => \Illuminate\Support\Str::class,
             
             // Traits
             'Cacheable' => \MisterPaladin\Cacheable::class,

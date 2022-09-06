@@ -3,6 +3,7 @@
 namespace Milax\Mconsole\Traits\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Milax\Mconsole\Models\Link;
 
 trait HasLinks
 {
@@ -13,7 +14,7 @@ trait HasLinks
      */
     public function links()
     {
-        return $this->morphToMany('Milax\Mconsole\Models\Link', 'linkable')->orderBy('order');
+        return $this->morphToMany(Link::class, 'linkable')->orderBy('order');
     }
     
     /**

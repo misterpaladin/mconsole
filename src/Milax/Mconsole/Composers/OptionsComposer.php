@@ -16,7 +16,7 @@ class OptionsComposer
      */
     public function compose(View $view)
     {
-        $options = new \ stdClass();
+        $options = new \stdClass();
         MconsoleOption::getCached()->each(function ($option) use (&$options) {
             $options->{$option->key} = $option->value;
         });

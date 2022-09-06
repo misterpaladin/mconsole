@@ -74,7 +74,7 @@ if (!function_exists('mconsole_url')) {
         if (!is_null($url)) {
             $url = trim($url, '/');
             
-            if (starts_with($url, 'mconsole')) {
+            if (\Illuminate\Support\Str::startsWith($url, 'mconsole')) {
                 str_replace('mconsole', $url);
             }
             

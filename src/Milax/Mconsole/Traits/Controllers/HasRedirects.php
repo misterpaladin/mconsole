@@ -54,14 +54,14 @@ trait HasRedirects
         switch (Request::method()) {
             case 'POST':
                 Session::flash('status', trans('mconsole::mconsole.status.created'));
-                return abort(302, null, ['Location' => $this->redirects[0]]);
+                return abort(302, '', ['Location' => $this->redirects[0]]);
             case 'PUT':
             case 'UPDATE':
                 Session::flash('status', trans('mconsole::mconsole.status.updated'));
-                return abort(302, null, ['Location' => $this->redirects[1]]);
+                return abort(302, '', ['Location' => $this->redirects[1]]);
             case 'DELETE':
                 Session::flash('status', trans('mconsole::mconsole.status.deleted'));
-                return abort(302, null, ['Location' => $this->redirects[2]]);
+                return abort(302, '', ['Location' => $this->redirects[2]]);
         }
     }
     
