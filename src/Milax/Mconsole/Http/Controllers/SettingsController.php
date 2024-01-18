@@ -59,6 +59,7 @@ class SettingsController extends Controller
                 $option['options'] = json_encode($option['options']);
             }
             
+            unset($option['created_at']);
             $option['updated_at'] = \Carbon\Carbon::now();
             
             array_push($toSave, $option);
