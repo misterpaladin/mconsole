@@ -39,14 +39,11 @@ class SettingsController extends Controller
     public function save(SettingsRequest $request)
     {
         $toSave = [];
+        
         $this->repository->get()->each(function ($option) use (&$request, &$toSave) {
             $option = $option->toArray();
             if ($option['type'] == 'checkbox') {
-                if ($request->input($option['key'])) {
-                    $option['value'] = 1;
-                } else {
-                    $option['value'] = 0;
-                }
+                $option['value'] = $request->input($option['key']) ? 1 : 0;
             } else {
                 $option['value'] = $request->input($option['key']);
             }
@@ -60,7 +57,7 @@ class SettingsController extends Controller
             }
             
             unset($option['created_at']);
-            $option['updated_at'] = \Carbon\Carbon::now();
+            $option['updated_at'] = today();
             
             array_push($toSave, $option);
         });

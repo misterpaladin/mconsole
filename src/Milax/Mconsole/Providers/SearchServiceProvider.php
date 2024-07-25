@@ -24,7 +24,7 @@ class SearchServiceProvider extends ServiceProvider
     public function register()
     {
         app('API')->search->register(function ($text) {
-            return \App\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($result) {
+            return \App\Models\User::select('id', 'name', 'email')->where('email', 'like', sprintf('%%%s%%', $text))->orWhere('name', 'like', sprintf('%%%s%%', $text))->get()->transform(function ($result) {
                 return [
                     'title' => $result->name,
                     'description' => $result->email,

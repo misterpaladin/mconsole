@@ -7,5 +7,5 @@ use Milax\Mconsole\Contracts\Repositories\UsersRepository as Repository;
 
 class UsersRepository extends EloquentRepository implements Repository
 {
-    public $model = \App\User::class;
+    public $model = \App\Models\User::class;
 }

@@ -5,7 +5,7 @@ namespace Milax\Mconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Milax\Mconsole\Http\Requests\UserRequest;
-use App\User;
+use App\Models\User;
 use Milax\Mconsole\Models\MconsoleRole;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
@@ -16,7 +16,7 @@ class UsersController extends Controller
 {
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
-    protected $model = 'App\User';
+    protected $model = 'App\Models\User';
     
     /**
      * Create new class instance
