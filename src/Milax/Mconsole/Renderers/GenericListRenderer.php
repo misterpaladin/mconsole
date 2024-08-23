@@ -27,6 +27,9 @@ class GenericListRenderer implements ListRenderer
     protected $before;
     protected $after;
     protected $processor;
+
+    protected $pagingHandler;
+    protected $items;
     
     public function __construct(GetFilterHandler $filterHandler, PagingHandler $pagingHandler, TableProcessor $processor)
     {

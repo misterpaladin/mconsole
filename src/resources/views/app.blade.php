@@ -18,7 +18,7 @@
         <meta name="_token" content="{{ csrf_token() }}" />
         <meta name="_mconsole_url" content="{{ config('mconsole.url') }}" />
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=all' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=all' rel='stylesheet' type='text/css'>
 		<link href="/massets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 		<link href="/massets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -216,7 +216,7 @@
 		<!-- BEGIN INNER FOOTER -->
 		<div class="page-footer">
 			<div class="container">@datetime('Y') &copy; <a href="http://www.milax.com/" target="_blank">Milax</a>
-                <div class="pull-right"><a href="https://github.com/milaxcom/mconsole/releases/tag/{{ app('API')->info->version }}" target="_blank">mconsole {{ app('API')->info->version }}</a></div>
+                <div class="pull-right"><a href="//github.com/milaxcom/mconsole/releases/tag/{{ app('API')->info->version }}" target="_blank">mconsole {{ app('API')->info->version }}</a></div>
             </div>
 		</div>
 		<div class="scroll-to-top">

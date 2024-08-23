@@ -17,7 +17,7 @@ class MconsoleRole extends Model
      */
     public function getRoutesAttribute($value)
     {
-        return json_decode($value);
+        return !is_null($value) ? json_decode($value) : null;
     }
     
     /**

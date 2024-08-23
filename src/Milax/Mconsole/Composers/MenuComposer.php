@@ -62,7 +62,7 @@ class MenuComposer
                 }
             }
             
-            if (strlen($menu->url) == 0 && count($menu->menus) == 0) {
+            if ((!is_null($menu->url) && strlen($menu->url) == 0) && count($menu->menus) == 0) {
                 $all->forget($key);
             }
             
