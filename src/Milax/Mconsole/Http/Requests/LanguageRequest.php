@@ -34,14 +34,14 @@ class LanguageRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'PUT':
-                $language = $this->repository->find($this->route('languages'));
+            case 'UPDATE': {
+                $language = $this->repository->find($this->language);
                 return [
                     'name' => 'required',
                     'key' => 'required|unique:languages,key,' . $language->id,
                 ];
-                break;
-            
-            case 'POST':
+            } break;
+            default:
                 return [
                     'name' => 'required',
                     'key' => 'required|unique:languages',
