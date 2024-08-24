@@ -1,4 +1,4 @@
-# Milax Mconsole for Laravel 10
+# Milax Mconsole for Laravel 11
 
 [![Latest Stable Version](https://poser.pugx.org/milax/mconsole/v/stable)](https://packagist.org/packages/milax/mconsole) [![Latest Unstable Version](https://poser.pugx.org/milax/mconsole/v/unstable)](https://packagist.org/packages/milax/mconsole) [![Total Downloads](https://poser.pugx.org/milax/mconsole/downloads)](https://packagist.org/packages/milax/mconsole)
 
