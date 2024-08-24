@@ -8,7 +8,7 @@ class Menu extends Model
 {
     use \HasState;
     
-    protected $fillable = ['key', 'name', 'tree', 'state', 'system'];
+    protected $fillable = ['key', 'name', 'tree', 'enabled', 'system'];
     
     protected $casts = [
         'tree' => 'array',
