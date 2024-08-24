@@ -13,6 +13,8 @@ use Milax\Mconsole\Contracts\Repositories\ModulesRepository;
 class ModulesController extends Controller
 {
     use \UseLayout;
+
+    protected $repository;
     
     public function __construct(ModulesRepository $repository)
     {

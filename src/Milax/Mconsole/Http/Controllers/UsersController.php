@@ -17,6 +17,8 @@ class UsersController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $model = 'App\Models\User';
+
+    protected $list, $form, $repository, $redirectTo, $roles;
     
     /**
      * Create new class instance

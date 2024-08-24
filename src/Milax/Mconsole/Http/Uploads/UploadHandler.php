@@ -43,6 +43,8 @@ class UploadHandler
 
     protected $image_objects = [];
 
+    protected $response;
+
     public function __construct($options = null, $initialize = true, $error_messages = null)
     {
         $this->response = [];

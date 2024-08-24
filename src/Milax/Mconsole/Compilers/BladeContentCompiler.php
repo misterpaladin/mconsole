@@ -11,6 +11,7 @@ class BladeContentCompiler implements ContentCompiler
 {
     protected $instance;
     protected $lang;
+    protected $localizator;
     
     public function __construct(ContentLocalizator $localizator)
     {

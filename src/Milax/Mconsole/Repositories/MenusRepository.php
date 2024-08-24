@@ -9,6 +9,8 @@ use Milax\Mconsole\Contracts\ContentLocalizator;
 class MenusRepository extends EloquentRepository implements Repository
 {
     public $model = \Milax\Mconsole\Models\Menu::class;
+
+    protected $localizator;
     
     public function __construct(ContentLocalizator $localizator)
     {

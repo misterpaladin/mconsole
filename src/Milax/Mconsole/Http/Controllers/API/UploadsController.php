@@ -12,6 +12,7 @@ class UploadsController extends Controller
     protected $uploadDir;
     protected $uploadUrl;
     protected $scriptUrl;
+    protected $previewUrl;
     
     public function __construct(Request $request)
     {

@@ -4,7 +4,6 @@ namespace Milax\Mconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Milax\Mconsole\Http\Requests\MenuRequest;
-use Milax\Mconsole\Models\Menu;
 use Milax\Mconsole\Contracts\ListRenderer;
 use Milax\Mconsole\Contracts\FormRenderer;
 use Milax\Mconsole\Contracts\Repositories\MenusRepository;
@@ -14,6 +13,8 @@ class MenusController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $model = 'Milax\Mconsole\Models\Menu';
+
+    protected $list, $form, $redirectTo, $repository;
     /**
      * Create new class instance
      */

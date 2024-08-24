@@ -14,6 +14,8 @@ class TagsController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $model = 'Milax\Mconsole\Models\Tag';
+
+    protected $list, $form, $redirectTo, $repository;
     
     /**
      * Create new class instance

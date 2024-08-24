@@ -13,6 +13,8 @@ class LanguagesController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
     
     protected $model = 'Milax\Mconsole\Models\Language';
+
+    protected $list, $form, $redirectTo, $repository;
     
     /**
      * Create new class instance

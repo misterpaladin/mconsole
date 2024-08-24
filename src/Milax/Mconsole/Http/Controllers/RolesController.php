@@ -14,6 +14,8 @@ class RolesController extends Controller
     use \HasRedirects, \DoesNotHaveShow, \UseLayout;
 
     protected $model = 'Milax\Mconsole\Models\MconsoleRole';
+
+    protected $list, $form, $repository, $redirectTo;
     /**
      * Create new class instance
      */

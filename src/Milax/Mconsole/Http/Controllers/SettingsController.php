@@ -11,6 +11,8 @@ use Milax\Mconsole\Contracts\Repositories\SettingsRepository;
 class SettingsController extends Controller
 {
     use \UseLayout;
+
+    protected $repository;
     
     public function __construct(SettingsRepository $repository)
     {

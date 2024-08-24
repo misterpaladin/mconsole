@@ -10,6 +10,8 @@ use Milax\Mconsole\Contracts\Repositories\VariablesRepository;
 class VariablesController extends Controller
 {
     use \UseLayout;
+
+    protected $repository;
     
     public function __construct(VariablesRepository $repository)
     {
