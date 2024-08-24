@@ -29,7 +29,7 @@ class UploadsController extends Controller
     public function get(Request $request)
     {
         $input = $request->all();
-        $input['related_class'] = urldecode($input['related_class']);
+        $input['related_class'] = !is_null($input['related_class']) ? urldecode($input['related_class']) : null;
         return app('API')->uploads->get($input['type'], $input['group'], $input['related_class'], $input['related_id'], $this->previewUrl, $this->scriptUrl);
     }
     

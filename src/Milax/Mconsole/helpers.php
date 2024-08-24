@@ -85,7 +85,7 @@ if (!function_exists('mconsole_url')) {
             $result = sprintf('/%s', $url);
         } else {
             $base = trim($base, '/');
-            if (strlen($url) > 0) {
+            if (!is_null($url) && strlen($url) > 0) {
                 $url = '/' . $url;
             }
             $result = sprintf('/%s%s', $base, $url);
