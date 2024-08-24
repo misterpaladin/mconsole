@@ -1,1 +1,1 @@
-{!! Form::submit((isset($text)) ? $text : trans('mconsole::forms.submit'), ['class' => 'btn btn-success form-control']) !!}
+<input type="submit" class="btn btn-success form-control" value="{{ isset($text) ? $text : trans('mconsole::forms.submit') }}">

@@ -14,7 +14,6 @@ class MconsoleServiceProvider extends ServiceProvider
         
         'providers' => [
             \Intervention\Image\ImageServiceProvider::class,
-            \Collective\Html\HtmlServiceProvider::class,
             \MisterPaladin\Cleaner\CleanerServiceProvider::class,
             \MisterPaladin\JSTrans\JSTransServiceProvider::class,
             \Milax\Mconsole\Providers\ACLServiceProvider::class,
@@ -31,8 +30,6 @@ class MconsoleServiceProvider extends ServiceProvider
             // Third party packages
             'Gravatar' => \MisterPaladin\Gravatar::class,
             'Image' => \Intervention\Image\Facades\Image::class,
-            'Form' => \Collective\Html\FormFacade::class,
-            'Html' => \Collective\Html\HtmlFacade::class,
             'Arr' => \Illuminate\Support\Arr::class,
             'Str' => \Illuminate\Support\Str::class,
             

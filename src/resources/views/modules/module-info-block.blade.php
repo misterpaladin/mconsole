@@ -3,7 +3,7 @@
         <ul>
             @foreach ($item->models as $path)
                 @foreach (File::allFiles($path) as $file)
-                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, '', $file->getRealPath()), '/') }} </li>
                 @endforeach
             @endforeach
         </ul>
@@ -15,7 +15,7 @@
         <ul>
             @foreach ($item->controllers as $path)
                 @foreach (File::allFiles($path) as $file)
-                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, '', $file->getRealPath()), '/') }} </li>
                 @endforeach
             @endforeach
         </ul>
@@ -27,7 +27,7 @@
         <ul>
             @foreach ($item->requests as $path)
                 @foreach (File::allFiles($path) as $file)
-                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, '', $file->getRealPath()), '/') }} </li>
                 @endforeach
             @endforeach
         </ul>
@@ -38,7 +38,7 @@
     <li> {{ trans('mconsole::modules.table.migrations') }}
         <ul>
             @foreach ($item->migrations as $migration)
-                <li data-jstree='{ "type" : "file" }'> {{ basename($migration) }} </li>
+                {{-- <li data-jstree='{ "type" : "file" }'> {{ basename($migration) }} </li> --}}
             @endforeach
         </ul>
     </li>
@@ -49,7 +49,7 @@
         <ul>
             @foreach ($item->views as $path)
                 @foreach (File::allFiles($path) as $file)
-                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, '', $file->getRealPath()), '/') }} </li>
                 @endforeach
             @endforeach
         </ul>
@@ -61,7 +61,7 @@
         <ul>
             @foreach ($item->translations as $path)
                 @foreach (File::allFiles($path) as $file)
-                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, null, $file->getRealPath()), '/') }} </li>
+                    <li data-jstree='{ "type" : "file" }'> {{ trim(str_replace($path, '', $file->getRealPath()), '/') }} </li>
                 @endforeach
             @endforeach
         </ul>

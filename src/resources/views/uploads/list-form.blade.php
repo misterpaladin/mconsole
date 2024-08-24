@@ -6,7 +6,8 @@
             </div>
         </div>
         <div class="portlet-body form">
-            {!! Form::open(['method' => 'POST', 'url' => mconsole_url('uploads')]) !!}
+            <form method="POST" action="{{ mconsole_url('uploads') }}">
+                @csrf
                 <div class="form-body">
                     @if (isset($item))
                         @include('mconsole::forms.tags', [
@@ -31,7 +32,7 @@
                 <div class="form-actions">
                     @include('mconsole::forms.submit')
                 </div>
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 </div>

@@ -1,6 +1,10 @@
 <div class="form-group">
     <input type="hidden" name="{{ $name }}" value="0" />
     <div class="checkbox-list">
-        <label class="checkbox">{!! Form::checkbox($name, 1, !is_null(Form::getValueAttribute($name)) ? (int) Form::getValueAttribute($name) : (int) (isset($checked) && $checked == true)) !!} {!! $label !!}</label>
+        @php
+            $isChecked = !is_null($value) ? ($value == true ? true : false)
+                : (!is_null($checked) && $checked == true ? true : false);
+        @endphp
+        <label class="checkbox"><input {{ $isChecked == true ? 'checked="checked"' : '' }} name="{{ $name }}" type="checkbox" value="1"> {{ $label }}</label>
     </div>
 </div>

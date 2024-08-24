@@ -1,3 +1,3 @@
 <div class="form-group hide">
-	{!! Form::hidden($name, isset($value) ? $value : null, ['placeholder' => (isset($placeholder)) ? $placeholder : null, 'class' => (isset($class)) ? $class : null]) !!}
+	<input type="hidden" name="{{ $name }}" {{ isset($class) ? sprintf('class="%s"', $class) : '' }} value="{{ $value ?? null }}">
 </div>

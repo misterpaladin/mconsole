@@ -1,8 +1,6 @@
-@if (isset($item))
-	{!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('presets/%s', $item->id))]) !!}
-@else
-	{!! Form::open(['method' => 'POST', 'url' => mconsole_url('presets')]) !!}
-@endif
+<form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('presets/%s', $item->id) : 'presets') }}">
+    @if (isset($item))@method('PUT')@endif
+    @csrf
 <div class="row">
     <div class="col-md-4 col-sm-6">
 		<div class="portlet light">
@@ -20,31 +18,35 @@
                         'image' => trans('mconsole::presets.types.image'),
                         'document' => trans('mconsole::presets.types.document'),
                     ],
+                    'value' => $item->type ?? null,
                 ])
                 @include('mconsole::forms.text', [
                     'label' => trans('mconsole::presets.form.name'),
                     'name' => 'name',
+                    'value' => $item->name ?? null,
                 ])
                 @include('mconsole::forms.text', [
                     'label' => trans('mconsole::presets.form.extensions'),
                     'name' => 'extensions',
+                    'value' => $item->extensions ?? null,
                 ])
                 <span data-only="image">
                     @include('mconsole::forms.text', [
                         'label' => trans('mconsole::presets.form.minwidth'),
                         'name' => 'min_width',
-                        'value' => '0',
+                        'value' => $item->min_width ?? 0,
                     ])
                     @include('mconsole::forms.text', [
                         'label' => trans('mconsole::presets.form.minheight'),
                         'name' => 'min_height',
-                        'value' => '0',
+                        'value' => $item->min_height ?? 0,
                     ])
                 </span>
                 @include('mconsole::forms.text', [
                     'label' => trans('mconsole::presets.form.path'),
                     'name' => 'path',
                     'placeholder' => 'images/etc',
+                    'value' => $item->path ?? null,
                 ])
                 <div class="form-actions">
     				@include('mconsole::forms.submit')
@@ -68,14 +70,14 @@
                 <div class="btn btn-sm blue preset-add-operation">{{ trans('mconsole::presets.operations.add') }}</div>
                 @include('mconsole::forms.hidden', [
                     'name' => 'operations',
-                    'value' => isset($item) ? $item->operations : '[]',
+                    'value' => $item->operations ?? '[]',
                 ])
 			</div>
 		</div>
 	</div>
 </div>
 
-{!! Form::close() !!}
+</form>
 
 <div class="preset-operation-template hide">
     

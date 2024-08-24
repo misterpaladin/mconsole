@@ -41,10 +41,14 @@
                                             @endif
 										@endforeach
 										<td>
-											{!! Form::open(['method' => 'DELETE', 'url' => Request::url() . '/' . $item->get('#')]) !!}
-											@if ($edit) <a href="{{ Request::url() }}/{{ $item->get('#') }}/edit" class="btn btn-xs blue">{{ trans('mconsole::tables.edit') }}</a> @endif
-											@if ($delete) {!! Form::submit(trans('mconsole::tables.delete'), ['class' => 'btn btn-xs btn-danger delete-confirm']) !!} @endif
-											{!! Form::close() !!}
+                                            <form method="POST" action="{{ sprintf('%s/%s', Request::url(), $item->get('#')) }}">
+                                                @csrf
+											    @if ($edit) <a href="{{ Request::url() }}/{{ $item->get('#') }}/edit" class="btn btn-xs blue">{{ trans('mconsole::tables.edit') }}</a> @endif
+											    @if ($delete)
+                                                    @if (isset($item))@method('DELETE')@endif
+                                                    <input type="submit" class="btn btn-xs btn-danger delete-confirm" value="{{ trans('mconsole::tables.delete') }}">
+                                                @endif
+											</form>
 										</td>
 									</tr>
 								@endforeach

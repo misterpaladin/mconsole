@@ -1,8 +1,6 @@
-@if (isset($item))
-    {!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('users/%s', $item->id))]) !!}
-@else
-    {!! Form::open(['method' => 'POST', 'url' => mconsole_url('users')]) !!}
-@endif
+<form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('users/%s', $item->id) : 'users') }}">
+	@if (isset($item))@method('PUT')@endif
+	@csrf
     <div class="row">
     	<div class="col-md-4 col-sm-6">
             <div class="portlet light">
@@ -14,12 +12,14 @@
         				@include('mconsole::forms.text', [
         					'label' => trans('mconsole::users.form.name'),
         					'name' => 'name',
-        					'placeholder' => trans('mconsole::users.form.placeholder.name')
+        					'placeholder' => trans('mconsole::users.form.placeholder.name'),
+							'value' => $item->name ?? null,
         				])
         				@include('mconsole::forms.text', [
         					'label' => trans('mconsole::users.form.email'),
         					'name' => 'email',
-        					'placeholder' => trans('mconsole::users.form.placeholder.email')
+        					'placeholder' => trans('mconsole::users.form.placeholder.email'),
+							'value' => $item->email ?? null,
         				])
         				@include('mconsole::forms.select', [
         					'label' => trans('mconsole::users.form.language'),
@@ -28,6 +28,7 @@
         						'ru' => 'ru',
         						'en' => 'en',
         					],
+							'value' => $item->language_id ?? null,
         				])
         				
                         @if (Auth::user()->role->key == 'root')
@@ -36,6 +37,7 @@
                 					'label' => trans('mconsole::users.form.role'),
                 					'name' => 'role_id',
                 					'options' => $roles->toArray(),
+									'value' => $item->role_id ?? null,
                 				])
                             @endif
                         @endif
@@ -57,6 +59,7 @@
 							'label' => trans('mconsole::users.form.update_own'),
 							'name' => 'update_own',
 							'type' => MconsoleFormSelectType::YesNo,
+							'value' => $item->update_own ?? null,
 						])
             			<div class="form-actions">
             				@include('mconsole::forms.submit')
@@ -78,4 +81,4 @@
             @endif
     	</div>
     </div>
-{!! Form::close() !!}
+</form>

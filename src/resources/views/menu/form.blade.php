@@ -7,17 +7,16 @@
             ])
             <div class="portlet-body form">
         		<div class="form-body">
-                    @if (isset($item))
-            			{!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('menus/%s', $item->id))]) !!}
-            		@else
-            			{!! Form::open(['method' => 'POST', 'url' => mconsole_url('menus')]) !!}
-            		@endif
-    				@include('mconsole::forms.text', [
-    					'label' => trans('mconsole::menus.form.name'),
-    					'name' => 'name',
-    					'placeholder' => trans('mconsole::menus.form.placeholder')
-    				])
-                    @include('mconsole::forms.state', isset($item) ? $item : [])
+                    <form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('menus/%s', $item->id) : 'menus') }}">
+                        @if (isset($item))@method('PUT')@endif
+                        @csrf
+                        @include('mconsole::forms.text', [
+                            'label' => trans('mconsole::menus.form.name'),
+                            'name' => 'name',
+                            'placeholder' => trans('mconsole::menus.form.placeholder'),
+                            'value' => $item->name ?? null,
+                        ])
+                        @include('mconsole::forms.state', isset($item) ? $item : [])
                 </div>
                 
     			<div class="form-actions">
@@ -36,6 +35,7 @@
         		<div class="form-body">
     				@include('mconsole::forms.hidden', [
     					'name' => 'tree',
+                        'value' => $item->tree ?? null,
     				])
                     @jstrans([
                         'menu-editor-text' => trans('mconsole::menus.form.text'),
@@ -64,5 +64,5 @@
             </div>
         </div>
     </div>
-	{!! Form::close() !!}
+	</form>
 </div>

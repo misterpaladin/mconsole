@@ -49,7 +49,8 @@
 		<!-- BEGIN LOGIN -->
 		<div class="content">
 			<!-- BEGIN LOGIN FORM -->
-			{!! Form::open(['method' => 'POST', 'url' => mconsole_url('login'), 'class' => 'login-form']) !!}
+			<form method="POST" action="{{ mconsole_url('login') }}" class="login-form">
+				@csrf
 				<h3 class="form-title font-green">{{ trans('mconsole::login.headings.signin') }}</h3>
 				
                 @if (env('APP_DEMO'))
@@ -94,7 +95,7 @@
 					<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="{{ trans('mconsole::login.inputs.password') }}" name="password" /> 
 				</div>
 				<div class="form-actions">
-					{!! Form::submit(trans('mconsole::login.buttons.login'), ['class' => 'btn green uppercase col-xs-12']) !!}
+					<input type="submit" class="btn green uppercase col-xs-12" value="{{ trans('mconsole::login.buttons.login') }}">
                     <div class="checkbox-list col-xs-12">
 					<label class="rememberme check checkbox-inline"><input type="checkbox" name="remember" value="1" />{{ trans('mconsole::login.inputs.remember') }}</label>
                     <a href="javascript:;" id="forget-password" class="forget-password">{{ trans('mconsole::login.links.forgot') }}</a>
@@ -105,7 +106,7 @@
 			<!-- END LOGIN FORM -->
 			<!-- BEGIN FORGOT PASSWORD FORM -->
 			<form class="forget-form" action="/password/email" method="post">
-                {!! csrf_field() !!}
+                @csrf
 				<h3 class="font-green">{{ trans('mconsole::login.headings.forgot') }}</h3>
 				<p> {{ trans('mconsole::login.text.forgot_enter_email') }} </p>
                 <div class="form-group">
@@ -113,9 +114,9 @@
 				</div>
 				<div class="form-actions">
 					<button type="button" id="back-btn" class="btn btn-default">{{ trans('mconsole::login.buttons.back') }}</button>
-					{!! Form::submit(trans('mconsole::login.buttons.restore'), ['class' => 'btn btn-success uppercase pull-right']) !!}
+					<input type="submit" class="btn btn-success uppercase pull-right" value="{{ trans('mconsole::login.buttons.restore') }}">
 				</div>
-			{!! Form::close() !!}
+			</form>
 			<!-- END FORGOT PASSWORD FORM -->
 		</div>
 		<div class="copyright"> @datetime('Y') © <a href="http://www.milax.com/" target="_blank">Milax</a> </div>

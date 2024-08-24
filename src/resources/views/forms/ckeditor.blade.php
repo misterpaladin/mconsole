@@ -1,4 +1,4 @@
 <div class="form-group">
 	<label>{!! $label !!}</label>
-	{!! Form::textarea($name, null, ['placeholder' => (isset($placeholder)) ? $placeholder : null, 'class' => 'form-control ckeditor']) !!}
+	<textarea class="form-control ckeditor" name="{{ $name }}">{{ isset($value) ? $value : (is_null(old($name)) ? null : old($name)) }}</textarea>
 </div>

@@ -1,8 +1,6 @@
-@if (isset($item))
-    {!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('languages/%s', $item->id))]) !!}
-@else
-    {!! Form::open(['method' => 'POST', 'url' => mconsole_url('languages')]) !!}
-@endif
+<form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('languages/%s', $item->id) : 'languages') }}">
+    @if (isset($item))@method('PUT')@endif
+	@csrf
     <div class="row">
     	<div class="col-md-4 col-sm-6">
             <div class="portlet light">
@@ -15,12 +13,14 @@
         				@include('mconsole::forms.text', [
         					'label' => trans('mconsole::languages.form.name'),
         					'name' => 'name',
-        					'placeholder' => trans('mconsole::languages.form.placeholders.name')
+        					'placeholder' => trans('mconsole::languages.form.placeholders.name'),
+							'value' => $item->name ?? null,
         				])
                         @include('mconsole::forms.text', [
         					'label' => trans('mconsole::languages.form.key'),
         					'name' => 'key',
-        					'placeholder' => trans('mconsole::languages.form.placeholders.key')
+        					'placeholder' => trans('mconsole::languages.form.placeholders.key'),
+							'value' => $item->key ?? null,
         				])
                     </div>
         			<div class="form-actions">
@@ -30,4 +30,4 @@
             </div>
     	</div>
     </div>
-{!! Form::close() !!}
+</form>

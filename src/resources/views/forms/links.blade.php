@@ -11,10 +11,10 @@
         return is_null($instance);
     })->pluck($attribute, 'id')->prepend(trans('mconsole::forms.options.notselected'), '0')->toArray(),
 ])
-
+{{-- {{ dump($item->links) }} --}}
 @include('mconsole::forms.hidden', [
     'name' => 'links',
-    'value' => $item ? $item->links : null,
+    'value' => $item->links ?? null,
     'class' => 'links-editor',
 ])
 

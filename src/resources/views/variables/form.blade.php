@@ -4,7 +4,8 @@
 
 <div class="row">
 	<div class="col-xs-12">
-        {!! Form::open(['method' => 'POST', 'url' => mconsole_url('variables')]) !!}
+        <form method="POST" action="{{ mconsole_url('variables') }}">
+            @csrf
 		<div class="form-body">
 			<div class="row">
                 <div class="col-xs-12">
@@ -96,7 +97,7 @@
                 </div>
             </div>
 		</div>
-		{!! Form::close() !!}
+		</form>
 	</div>
 </div>
 

@@ -7,27 +7,28 @@
                 ])
             <div class="portlet-body form">
             		<div class="form-body">
-                        @if (isset($item))
-                			{!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('tags/%s', $item->id))]) !!}
-                		@else
-                			{!! Form::open(['method' => 'POST', 'url' => mconsole_url('tags')]) !!}
-                		@endif
-        				@include('mconsole::forms.text', [
-        					'label' => trans('mconsole::tags.form.name'),
-        					'name' => 'name',
-        					'placeholder' => trans('mconsole::tags.form.placeholder')
-        				])
-                        
-                        @include('mconsole::forms.colorpicker', [
-                            'label' => trans('mconsole::tags.form.color'),
-                            'name' => 'color',
-                        ])
+						<form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('tags/%s', $item->id) : 'tags') }}">
+							@if (isset($item))@method('PUT')@endif
+							@csrf
+							@include('mconsole::forms.text', [
+								'label' => trans('mconsole::tags.form.name'),
+								'name' => 'name',
+								'placeholder' => trans('mconsole::tags.form.placeholder'),
+								'value' => $item->name ?? null,
+							])
+							
+							@include('mconsole::forms.colorpicker', [
+								'label' => trans('mconsole::tags.form.color'),
+								'name' => 'color',
+								'value' => $item->color ?? null,
+							])
 
-						@include('mconsole::forms.select', [
-							'label' => trans('mconsole::tags.form.category'),
-							'name' => 'category',
-							'options' => app('API')->tags->getCategories(),
-						])
+							@include('mconsole::forms.select', [
+								'label' => trans('mconsole::tags.form.category'),
+								'name' => 'category',
+								'options' => app('API')->tags->getCategories(),
+								'value' => $item->category ?? null,
+							])
                         
                     </div>
                     
@@ -37,6 +38,6 @@
                 </div>
             </div>
         </div>
-		{!! Form::close() !!}
+		</form>
 	</div>
 </div>

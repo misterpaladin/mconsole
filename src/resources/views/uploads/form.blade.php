@@ -1,8 +1,6 @@
-@if (isset($item))
-    {!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('uploads/%s', $item->id))]) !!}
-@else
-    {!! Form::open(['method' => 'POST', 'url' => mconsole_url('uploads')]) !!}
-@endif
+<form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('uploads/%s', $item->id) : 'uploads') }}" enctype="multipart/form-data">
+    @if (isset($item))@method('PUT')@endif
+    @csrf
 
 <div class="row">
 	<div class="col-lg-7 col-md-6">
@@ -18,19 +16,23 @@
                         'label' => trans('mconsole::uploads.form.language'),
                         'name' => 'language_id',
                         'options' => $languages,
+                        'value' => $item->language_id ?? null,
                     ])
     				@include('mconsole::forms.text', [
     					'label' => trans('mconsole::uploads.form.title'),
     					'name' => 'title',
+                        'value' => $item->title ?? null,
                     ])
                     @include('mconsole::forms.text', [
     					'label' => trans('mconsole::uploads.form.link'),
     					'name' => 'link',
+                        'value' => $item->link ?? null,
     				])
                     @include('mconsole::forms.textarea', [
                         'label' => trans('mconsole::uploads.form.description'),
                         'name' => 'description',
                         'size' => '50x4',
+                        'value' => $item->description ?? null,
                     ])
     			</div>
                 <div class="form-actions">
@@ -99,7 +101,7 @@
     
 </div>
 
-{!! Form::close() !!}
+</form>
 
 @section('page.scripts')
     <script>

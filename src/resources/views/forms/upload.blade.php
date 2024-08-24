@@ -112,7 +112,11 @@
                 <span class="label label-danger">Error</span> {%=file.error%}</div> {% } %}
                 <div class="description hide">
                     <div class="form-group">
-                        {!! Form::select(sprintf('uploads[%s][%s][language_id][]', $type, $group), $languages, null, ['class' => 'form-control input-sm']) !!}
+                        <select class="form-control form-control input-sm" name="{{ sprintf('uploads[%s][%s][language_id][]', $type, $group) }}">
+                            @foreach($languages as $key => $language)
+                                <option value="{{ $key }}">{{ $language }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control input-sm" name="{{ sprintf('uploads[%s][%s][title][]', $type, $group) }}" value="{%=file.title%}" placeholder="{{ trans('mconsole::uploader.title') }}">

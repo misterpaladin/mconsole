@@ -1,10 +1,8 @@
 <div class="row">
 	<div class="col-xs-12">
-        @if (isset($item))
-            {!! Form::model($item, ['method' => 'PUT', 'url' => mconsole_url(sprintf('roles/%s', $item->id))]) !!}
-        @else
-            {!! Form::open(['method' => 'POST', 'url' => mconsole_url('roles')]) !!}
-        @endif
+        <form method="POST" action="{{ mconsole_url(isset($item) ? sprintf('roles/%s', $item->id) : 'roles') }}">
+            @if (isset($item))@method('PUT')@endif
+            @csrf
 		<div class="form-body">
 			<div class="row">
                 <div class="col-md-4">
@@ -17,17 +15,20 @@
                             @include('mconsole::forms.text', [
                                 'label' => trans('mconsole::roles.form.name'),
                                 'name' => 'name',
-                                'placeholder' => trans('mconsole::roles.form.placeholder')
+                                'placeholder' => trans('mconsole::roles.form.placeholder'),
+                                'value' => $item->name ?? null,
                             ])
                             @include('mconsole::forms.select', [
                                 'label' => trans('mconsole::roles.form.widget'),
                                 'name' => 'widget',
                                 'type' => MconsoleFormSelectType::OnOff,
+                                'value' => $item->widget ?? null,
                             ])
                             @include('mconsole::forms.select', [
                                 'label' => trans('mconsole::roles.form.search'),
                                 'name' => 'search',
                                 'type' => MconsoleFormSelectType::OnOff,
+                                'value' => $item->search ?? null,
                             ])
         				</div>
         			</div>
@@ -61,6 +62,6 @@
                 </div>
             </div>
 		</div>
-		{!! Form::close() !!}
+		</form>
 	</div>
 </div>
