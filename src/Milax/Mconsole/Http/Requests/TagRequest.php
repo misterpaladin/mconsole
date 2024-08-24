@@ -24,16 +24,15 @@ class TagRequest extends FormRequest
      */
     public function rules()
     {
-        $tag = Tag::find($this->tag);
-        
         switch ($this->method()) {
             case 'PUT':
-            case 'UPDATE':
+            case 'UPDATE': {
+                $tag = Tag::find($this->tag);
                 return [
                     'name' => 'required|unique:tags,name,' . $tag->id,
                     'color' => 'required',
                 ];
-                break;
+            } break;
             
             default:
                 return [
