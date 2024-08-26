@@ -19,9 +19,11 @@ class MconsoleMenusSeeder implements MconsoleSeeder
             'key' => 'main_menu',
             'name' => 'Main menu',
             'tree' => [
-                [
-                    'text' => 'Home',
-                    'link' => 'http://localhost',
+                'en' => [
+                    [
+                        'text' => 'Home',
+                        'link' => 'http://localhost',
+                    ],
                 ],
             ],
             'system' => true,
