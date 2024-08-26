@@ -12,7 +12,7 @@
         "intervention/image": "^2.3",
 		"misterpaladin/gravatar": "^1.0",
         "misterpaladin/cacheable": "^1.0",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^6.5",
         "erusev/parsedown": "^1.6",
         "misterpaladin/cleaner": "^1.0",
         "misterpaladin/jstrans": "^1.3"
